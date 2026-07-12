@@ -1,0 +1,27 @@
+{
+  "name": "ХайпХаб — Маркетплейс аккаунтов",
+  "short_name": "ХайпХаб",
+  "description": "Купить аккаунты TikTok, YouTube, VK с живыми подписчиками. Оплата криптой или QIWI. Мгновенная выдача.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["shopping", "business", "social"],
+  "lang": "ru-RU",
+  "dir": "ltr"
+}

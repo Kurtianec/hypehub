@@ -1,0 +1,14 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A0A0A"/>
+      <stop offset="1" stop-color="#1A1A1A"/>
+    </linearGradient>
+  </defs>
+  <!-- Background with clipped corners -->
+  <path d="M8 0 L56 0 L64 8 L64 56 L56 64 L8 64 L0 56 L0 8 Z" fill="url(#bgGrad)" stroke="#BFFF00" stroke-width="2"/>
+  <!-- Lightning bolt (Z) in acid green -->
+  <path d="M36 12 L20 36 L30 36 L26 52 L44 28 L34 28 L38 12 Z" fill="#BFFF00" stroke="#0A0A0A" stroke-width="1"/>
+  <!-- Accent dot -->
+  <circle cx="48" cy="48" r="3" fill="#FF2D87"/>
+</svg>

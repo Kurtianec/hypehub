@@ -1,0 +1,170 @@
+// ХайпХаб — интернет-магазин аккаунтов TikTok / VK / YouTube
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  icon        String   // lucide icon name
+  color       String   // hex color for platform branding
+  platform    String   // tiktok | vk | youtube | other
+  description String?
+  order       Int      @default(0)
+  products    Product[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Product {
+  id           String   @id @default(cuid())
+  categoryId   String
+  category     Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  title        String
+  description  String
+  price        Float
+  oldPrice     Float?
+  currency     String   @default("RUB")
+  image        String?
+  badges       String?  // comma-separated: hot, verified, top, premium
+  followers    String?  // e.g. "10K подписчиков"
+  metadata     String?  // JSON string with extra info (subscribers, country, monetization)
+  login        String   // account credentials - delivered to buyer
+  password     String
+  deliveryNote String?  // extra delivery instructions
+  status       String   @default("available") // available | sold | reserved | archived
+  featured     Boolean  @default(false)
+  views        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  orders       Order[]
+}
+
+model Order {
+  id             String   @id @default(cuid())
+  productId      String
+  product        Product  @relation(fields: [productId], references: [id])
+  buyerEmail     String
+  buyerContact   String
+  paymentMethod  String   // crypto | qiwi
+  paymentAddress String?  // crypto wallet or qiwi number
+  amount         Float
+  currency       String   @default("RUB")
+  txnHash        String?  // transaction hash / proof
+  status         String   @default("pending") // pending | paid | delivered | cancelled
+  deliveryLogin  String?
+  deliveryPass   String?
+  deliveryNote   String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model SupportMessage {
+  id        String   @id @default(cuid())
+  name      String
+  contact   String
+  message   String
+  reply     String?
+  status    String   @default("new") // new | replied | closed
+  sessionId String?  // for user-side polling without auth
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FaqItem {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Setting {
+  id    String @id
+  key   String @unique
+  value String
+}
+
+model Visitor {
+  id        String   @id @default(cuid())
+  ip        String
+  userAgent String?
+  referer   String?
+  path      String
+  country   String?
+  city      String?
+  sessionId String?
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  name      String
+  rating    Int      // 1-5
+  text      String
+  product   String?  // product title or category
+  status    String   @default("pending") // pending | approved | rejected
+  reply     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String
+  content     String
+  tags        String?  // comma-separated
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Referral {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  email       String?
+  createdAt   DateTime @default(now())
+  clicks      Int      @default(0)
+  orders      Int      @default(0)
+  earnings    Float    @default(0)
+}
+
+model PromoCode {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  discount    Float    // percentage
+  maxUses     Int      @default(0) // 0 = unlimited
+  uses        Int      @default(0)
+  active      Boolean  @default(true)
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+}
+
+model AdminLog {
+  id        String   @id @default(cuid())
+  action    String   // create | update | delete | login | settings | reply
+  entity    String   // product | category | order | support | review | blog | settings
+  entityId  String?
+  details   String?  // JSON string with changes
+  ip        String?
+  createdAt DateTime @default(now())
+}
+
+model UserAccount {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  points    Int      @default(0)
+  totalSpent Float   @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

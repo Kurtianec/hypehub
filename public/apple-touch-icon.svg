@@ -1,0 +1,12 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A0A0A"/>
+      <stop offset="1" stop-color="#1A1A1A"/>
+    </linearGradient>
+  </defs>
+  <path d="M22 0 L158 0 L180 22 L180 158 L158 180 L22 180 L0 158 L0 22 Z" fill="url(#bgGrad)" stroke="#BFFF00" stroke-width="3"/>
+  <path d="M105 30 L55 100 L80 100 L70 150 L125 75 L100 75 L110 30 Z" fill="#BFFF00" stroke="#0A0A0A" stroke-width="2"/>
+  <circle cx="138" cy="138" r="9" fill="#FF2D87"/>
+  <text x="90" y="172" font-family="monospace" font-size="11" font-weight="900" fill="#888" text-anchor="upper">ХАЙПХАБ</text>
+</svg>
