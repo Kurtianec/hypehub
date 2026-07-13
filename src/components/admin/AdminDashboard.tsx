@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Package, ShoppingCart, Users, MessageSquare, TrendingUp,
-  DollarSign, Star, Activity, Download, Eye, RefreshCw, ArrowUp,
+  DollarSign, Star, Activity, Download, Eye, RefreshCw, ArrowUp, Target, Flame,
 } from "lucide-react";
 import type { Category, Product, FaqItem } from "@/lib/types";
 import { formatPrice } from "@/lib/types";
@@ -21,8 +21,10 @@ interface Analytics {
   orders: { total: number; pending: number; delivered: number; last30d: number; last7d: number; last24h: number };
   revenue: { last30d: number; last7d: number; last24h: number };
   visitors: { total30d: number; unique30d: number };
+  conversion?: { rate: number; orders: number; visitors: number };
   support: { newMessages: number };
   topProducts: { productId: string; title: string; count: number; revenue: number }[];
+  topProductsByViews?: { productId: string; title: string; views: number; price: number; status: string }[];
   daily: { date: string; orders: number; revenue: number }[];
 }
 
@@ -125,6 +127,30 @@ export function AdminDashboard({ data }: { data: AdminData }) {
             />
           </div>
 
+          {/* Conversion rate banner */}
+          {analytics.conversion && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-[#121212] border-2 border-[#FF2D87]/40 p-4 mb-6 flex items-center gap-4"
+              style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
+            >
+              <div className="w-12 h-12 bg-[#FF2D87]/20 border-2 border-[#FF2D87] flex items-center justify-center flex-shrink-0">
+                <Target className="w-6 h-6 text-[#FF2D87]" strokeWidth={2.5} />
+              </div>
+              <div className="flex-1">
+                <div className="text-[10px] font-mono uppercase text-[#888] tracking-widest">КОНВЕРСИЯ · 30 ДНЕЙ</div>
+                <div className="text-2xl font-black font-mono text-[#FF2D87]">
+                  {analytics.conversion.rate}%
+                </div>
+              </div>
+              <div className="text-right text-xs font-mono text-[#888] uppercase">
+                <div>{analytics.conversion.orders} заказов</div>
+                <div>/ {analytics.conversion.visitors} уник. посетителей</div>
+              </div>
+            </motion.div>
+          )}
+
           {/* Daily chart */}
           <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5 mb-6"
             style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
@@ -188,6 +214,36 @@ export function AdminDashboard({ data }: { data: AdminData }) {
               </div>
             </div>
           )}
+
+          {/* Top products by views */}
+          {analytics.topProductsByViews && analytics.topProductsByViews.length > 0 && (
+            <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5 mb-6"
+              style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
+            >
+              <h3 className="font-black mb-4 flex items-center gap-2 uppercase tracking-tight">
+                <Flame className="w-4 h-4 text-[#FF7A00]" strokeWidth={2.5} />
+                <span className="text-[#FF7A00] font-mono text-xs">{"// ТОП_ПО_ПРОСМОТРАМ"}</span>
+              </h3>
+              <div className="space-y-2">
+                {analytics.topProductsByViews.map((p, i) => (
+                  <div key={p.productId} className="flex items-center gap-3 py-2 border-b border-[#1F1F1F] last:border-0">
+                    <span className="w-6 h-6 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-xs font-bold font-mono text-[#FF7A00]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-bold truncate uppercase tracking-tight">{p.title}</div>
+                      <div className="text-[10px] text-[#888] font-mono uppercase">
+                        {p.views} просмотров · {p.status === "available" ? "в продаже" : p.status === "sold" ? "продан" : p.status}
+                      </div>
+                    </div>
+                    <div className="text-sm font-black text-[#BFFF00] font-mono">
+                      {formatPrice(p.price)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </>
       )}
 
@@ -196,7 +252,7 @@ export function AdminDashboard({ data }: { data: AdminData }) {
         <StatCard icon={Package} label="ТОВАРОВ" value={data.products.length} color="#BFFF00" />
         <StatCard icon={Users} label="КАТЕГОРИЙ" value={data.categories.length} color="#00F0FF" />
         <StatCard icon={Star} label="FEATURED" value={featured} color="#FFE600" />
-        <StatCard icon={DollarSign} label="ОБЪЁМ" value={formatPrice(totalValue)} color="#FF2D87" />
+        <StatCard icon={DollarSign} label="ОБЪЁМ" value={typeof totalValue === "string" ? 0 : totalValue} color="#FF2D87" />
       </div>
 
       {/* Quick export buttons */}
@@ -295,7 +351,7 @@ function MetricCard({
   color,
   trend,
 }: {
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties; strokeWidth?: number }>;
   label: string;
   value: string;
   sub?: string;
@@ -335,7 +391,7 @@ function MetricCard({
   );
 }
 
-function StatCard({ icon: Icon, label, value, color }: { icon: React.ComponentType<{ className?: string }>; label: string; value: number; color: string }) {
+function StatCard({ icon: Icon, label, value, color }: { icon: React.ComponentType<{ className?: string; style?: React.CSSProperties; strokeWidth?: number }>; label: string; value: number; color: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

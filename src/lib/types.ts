@@ -24,13 +24,35 @@ export interface Product {
   oldPrice?: number | null;
   currency: string;
   image?: string | null;
+  images?: string | null; // JSON array string
   badges?: string | null;
   followers?: string | null;
   metadata?: string | null;
+  login: string;
+  password: string;
+  deliveryNote?: string | null;
   status: string;
   featured: boolean;
+  views: number;
   createdAt: string;
   updatedAt: string;
+}
+
+// Parse images JSON string → string[]
+export function getProductImages(product: Product): string[] {
+  if (!product.images) return [];
+  try {
+    const arr = JSON.parse(product.images);
+    return Array.isArray(arr) ? arr.filter(Boolean) : [];
+  } catch {
+    return [];
+  }
+}
+
+// Get hover image (second image, or first from images array)
+export function getHoverImage(product: Product): string | null {
+  const images = getProductImages(product);
+  return images[0] || product.image || null;
 }
 
 export interface Order {

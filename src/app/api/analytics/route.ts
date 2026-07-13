@@ -32,6 +32,7 @@ export async function GET(req: NextRequest) {
     totalVisitors30d,
     uniqueVisitors30d,
     topProducts,
+    topProductsByViews,
   ] = await Promise.all([
     db.product.count(),
     db.product.count({ where: { status: "available" } }),
@@ -70,6 +71,12 @@ export async function GET(req: NextRequest) {
       orderBy: { _count: { productId: "desc" } },
       take: 5,
     }),
+    // Top products by VIEWS (new — item 26)
+    db.product.findMany({
+      orderBy: { views: "desc" },
+      take: 5,
+      select: { id: true, title: true, views: true, price: true, status: true },
+    }),
   ]);
 
   // Enrich top products with names
@@ -84,6 +91,15 @@ export async function GET(req: NextRequest) {
     title: productMap.get(t.productId) || "Unknown",
     count: t._count,
     revenue: t._sum.amount || 0,
+  }));
+
+  // Top products by views (mapped for frontend)
+  const topProductsByViewsWithNames = topProductsByViews.map((p) => ({
+    productId: p.id,
+    title: p.title,
+    views: p.views || 0,
+    price: p.price,
+    status: p.status,
   }));
 
   // Daily orders chart (last 14 days)
@@ -105,6 +121,12 @@ export async function GET(req: NextRequest) {
         .reduce((sum, o) => sum + o.amount, 0),
     };
   });
+
+  // Conversion rate = orders / unique visitors (last 30 days)
+  const uniqueVisitors30dCount = uniqueVisitors30d.length;
+  const conversionRate = uniqueVisitors30dCount > 0
+    ? (orders30d / uniqueVisitors30dCount) * 100
+    : 0;
 
   return NextResponse.json({
     products: {
@@ -128,12 +150,18 @@ export async function GET(req: NextRequest) {
     },
     visitors: {
       total30d: totalVisitors30d,
-      unique30d: uniqueVisitors30d.length,
+      unique30d: uniqueVisitors30dCount,
+    },
+    conversion: {
+      rate: Number(conversionRate.toFixed(2)),
+      orders: orders30d,
+      visitors: uniqueVisitors30dCount,
     },
     support: {
       newMessages,
     },
     topProducts: topProductsWithNames,
+    topProductsByViews: topProductsByViewsWithNames,
     daily,
   });
 }

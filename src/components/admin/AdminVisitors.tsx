@@ -365,7 +365,7 @@ export function AdminVisitors() {
   );
 }
 
-function StatCard({ icon: Icon, label, value, color }: { icon: React.ComponentType<{ className?: string }>; label: string; value: number; color: string }) {
+function StatCard({ icon: Icon, label, value, color }: { icon: React.ComponentType<{ className?: string; style?: React.CSSProperties; strokeWidth?: number }>; label: string; value: number; color: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

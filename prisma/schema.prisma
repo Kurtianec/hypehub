@@ -33,6 +33,7 @@ model Product {
   oldPrice     Float?
   currency     String   @default("RUB")
   image        String?
+  images       String?  // JSON array of additional image URLs for hover/gallery
   badges       String?  // comma-separated: hot, verified, top, premium
   followers    String?  // e.g. "10K подписчиков"
   metadata     String?  // JSON string with extra info (subscribers, country, monetization)

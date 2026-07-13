@@ -3,16 +3,16 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  ShoppingCart, Loader2, Mail, Phone, Bitcoin, Wallet, Check, X, Eye,
+  ShoppingCart, Loader2, Mail, Phone, Bitcoin, Eye, Archive,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import type { Order } from "@/lib/types";
 import { formatPrice } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 const TOKEN = "hypehub-admin-2024";
 
@@ -23,16 +23,20 @@ const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
   cancelled: { label: "Отменён", color: "#EF4444" },
 };
 
+type View = "active" | "archived";
+
 export function AdminOrders() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const [view, setView] = useState<View>("active");
   const [viewOrder, setViewOrder] = useState<Order | null>(null);
   const { toast } = useToast();
 
   const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/orders", { headers: { "x-admin-token": TOKEN } });
+      const endpoint = view === "archived" ? "/api/orders/archived" : "/api/orders";
+      const res = await fetch(endpoint, { headers: { "x-admin-token": TOKEN } });
       const data = await res.json();
       setOrders(data.orders);
     } catch {
@@ -44,12 +48,15 @@ export function AdminOrders() {
 
   useEffect(() => {
     load();
-  }, []);
+  }, [view]);
+
+  const archivedCount = orders.filter((o) => o.status === "delivered" || o.status === "cancelled").length;
+  const activeCount = orders.filter((o) => o.status === "pending" || o.status === "paid").length;
 
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-[#FF0050]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#00F0FF]" />
       </div>
     );
   }
@@ -65,10 +72,54 @@ export function AdminOrders() {
         <p className="text-sm text-[#888] font-mono">&gt; Всего: {orders.length}</p>
       </div>
 
+      {/* Active / Archive toggle */}
+      <div className="flex gap-2 mb-4">
+        <button
+          onClick={() => setView("active")}
+          className={cn(
+            "px-4 py-2 text-xs font-mono uppercase border-2 transition-all flex items-center gap-2",
+            view === "active"
+              ? "bg-[#00F0FF]/10 text-[#00F0FF] border-[#00F0FF]"
+              : "bg-[#121212] text-[#888] border-[#2A2A2A] hover:border-[#00F0FF]/50"
+          )}
+        >
+          <ShoppingCart className="w-3.5 h-3.5" />
+          Активные
+          {view !== "active" && activeCount > 0 && (
+            <span className="ml-1 bg-[#FF2D87] text-white text-[9px] px-1.5 py-0.5 font-black">
+              {activeCount}
+            </span>
+          )}
+        </button>
+        <button
+          onClick={() => setView("archived")}
+          className={cn(
+            "px-4 py-2 text-xs font-mono uppercase border-2 transition-all flex items-center gap-2",
+            view === "archived"
+              ? "bg-[#A855F7]/10 text-[#A855F7] border-[#A855F7]"
+              : "bg-[#121212] text-[#888] border-[#2A2A2A] hover:border-[#A855F7]/50"
+          )}
+        >
+          <Archive className="w-3.5 h-3.5" />
+          Архив
+          {view !== "archived" && archivedCount > 0 && (
+            <span className="ml-1 bg-[#888] text-white text-[9px] px-1.5 py-0.5 font-black">
+              {archivedCount}
+            </span>
+          )}
+        </button>
+      </div>
+
       {orders.length === 0 ? (
         <div className="text-center py-16 text-[#888] font-mono">
-          <ShoppingCart className="w-12 h-12 mx-auto mb-3 opacity-30" />
-          <p className="uppercase">&gt; Пока нет заказов</p>
+          {view === "archived" ? (
+            <Archive className="w-12 h-12 mx-auto mb-3 opacity-30" />
+          ) : (
+            <ShoppingCart className="w-12 h-12 mx-auto mb-3 opacity-30" />
+          )}
+          <p className="uppercase">
+            &gt; {view === "archived" ? "Архив пуст" : "Пока нет активных заказов"}
+          </p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -79,7 +130,10 @@ export function AdminOrders() {
                 key={o.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#00F0FF] p-4 flex flex-col md:flex-row md:items-center gap-3 transition-colors"
+                className={cn(
+                  "bg-[#121212] border-2 p-4 flex flex-col md:flex-row md:items-center gap-3 transition-colors",
+                  view === "archived" ? "border-[#2A2A2A] opacity-70" : "border-[#2A2A2A] hover:border-[#00F0FF]"
+                )}
                 style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
               >
                 <div className="flex-1 min-w-0">

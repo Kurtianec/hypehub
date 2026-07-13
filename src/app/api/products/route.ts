@@ -6,14 +6,16 @@ export async function GET(req: NextRequest) {
   const category = searchParams.get("category");
   const featured = searchParams.get("featured") === "true";
   const search = searchParams.get("q");
+  const limit = parseInt(searchParams.get("limit") || "0", 10);
 
   const where: Record<string, unknown> = { status: "available" };
   if (category) where.categoryId = category;
   if (featured) where.featured = true;
   if (search) {
+    // Case-insensitive search
     where.OR = [
-      { title: { contains: search } },
-      { description: { contains: search } },
+      { title: { contains: search, mode: "insensitive" } },
+      { description: { contains: search, mode: "insensitive" } },
     ];
   }
 
@@ -21,11 +23,11 @@ export async function GET(req: NextRequest) {
     where,
     include: { category: true },
     orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
+    ...(limit > 0 ? { take: limit } : {}),
   });
 
   // Strip credentials from public list
   const safe = products.map(({ login, password, deliveryNote, ...rest }) => rest);
-
   return NextResponse.json({ products: safe });
 }
 

@@ -1,19 +1,23 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Music2, Youtube, Users, Instagram, Send, Tag,
   Flame, BadgeCheck, Trophy, Crown, Check, Heart,
+  ChevronLeft, ChevronRight,
 } from "lucide-react";
 import type { Category, Product, Settings } from "@/lib/types";
 import { PLATFORM_COLORS, formatPrice, parseBadges, BADGE_LABELS } from "@/lib/types";
 import { ProductModal } from "./ProductModal";
 import { ProductImage } from "./ProductImage";
+import { PlatformLogos } from "./PlatformLogos";
 import { CompareBar, CompareModal, useCompare } from "./Compare";
 import { FiltersBar, type SortOption, type FilterState } from "./FiltersBar";
 import { CurrencyToggle } from "./CurrencyToggle";
+import { CatalogSkeleton } from "./Skeletons";
 import { useFavorites } from "@/hooks/use-favorites";
+import { useToast } from "@/hooks/use-toast";
 import type { Currency } from "@/hooks/use-currency";
 
 const BADGE_ICONS: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
@@ -38,6 +42,7 @@ export function Catalog({
   onToggleCurrency?: () => void;
 }) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const { toast } = useToast();
   const {
     compareList,
     showCompare,
@@ -56,10 +61,28 @@ export function Catalog({
     hasMonetization: false,
     hasDiscount: false,
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  // Items per page: 12 = 3 rows × 4 cols (desktop) or 6 = 3 rows × 2 cols (mobile)
+  const PAGE_SIZE_DESKTOP = 12;
+  const PAGE_SIZE_MOBILE = 6;
+  const [pageSize, setPageSize] = useState(PAGE_SIZE_DESKTOP);
+
+  // Detect viewport for responsive page size
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const update = () => setPageSize(window.innerWidth >= 640 ? PAGE_SIZE_DESKTOP : PAGE_SIZE_MOBILE);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   const handleAddToCompare = (p: Product) => {
     const result = addToCompare(p);
-    if (result.error) alert(result.error);
+    if (result.error) {
+      toast({ title: "Максимум 4 товара", description: result.error, variant: "destructive" });
+    } else {
+      toast({ title: "Добавлено к сравнению", description: p.title });
+    }
   };
 
   // Apply filters + sort
@@ -127,6 +150,18 @@ export function Catalog({
     return result;
   }, [products, categories, filters, sort]);
 
+  // Reset to page 1 when filters/sort change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters, sort]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredAndSorted.length / pageSize));
+  const safePage = Math.min(currentPage, totalPages);
+  const pagedProducts = filteredAndSorted.slice(
+    (safePage - 1) * pageSize,
+    safePage * pageSize
+  );
+
   return (
     <section
       id="catalog"
@@ -134,81 +169,152 @@ export function Catalog({
       aria-label="Каталог аккаунтов"
     >
       <div className="container mx-auto px-4">
+        {/* Заголовок */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mb-6 md:mb-8"
         >
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#BFFF00]" />
-            <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_01"}</span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
-            <span className="text-foreground">Каталог </span>
-            <span className="text-gradient-neon">аккаунтов</span>
-          </h2>
-          <p className="text-[#888] text-sm md:text-base mt-2 font-mono">
-            &gt; Готовые аккаунты с живыми подписчиками. Все проверены.
-          </p>
+          <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-1.5">Каталог аккаунтов</h2>
+          <p className="text-sm text-[var(--muted-foreground)]">Готовые аккаунты с живыми подписчиками. Все проверены.</p>
         </motion.div>
 
-        {/* Currency toggle + found count */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="text-xs font-mono uppercase text-[#888]">
-            {"// НАЙДЕНО: "}<span className="text-[#BFFF00] font-black">{filteredAndSorted.length}</span> ИЗ {products.length}
-          </div>
-        </div>
-
-        {/* Filters + Sort + Currency bar */}
-        <div className="flex flex-wrap items-center gap-2 mb-6 relative">
-          <FiltersBar
-            categories={categories}
-            filters={filters}
-            onFiltersChange={setFilters}
-            sort={sort}
-            onSortChange={setSort}
-          />
-          {currency && onToggleCurrency && (
-            <div className="flex items-center gap-2 ml-auto">
-              <span className="text-[10px] font-mono uppercase text-[#888]">Валюта:</span>
-              <CurrencyToggle currency={currency} onToggle={onToggleCurrency} />
+        {/* Скелетоны при загрузке */}
+        {products.length === 0 ? (
+          <CatalogSkeleton count={8} />
+        ) : (
+          <>
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[13px] text-[var(--muted-foreground)]">Найдено: <span className="font-semibold text-[var(--foreground)]">{filteredAndSorted.length}</span> из {products.length}</span>
+              {totalPages > 1 && (
+                <span className="text-[11px] text-[var(--muted-foreground)] font-mono">
+                  Стр. {safePage} / {totalPages}
+                </span>
+              )}
             </div>
-          )}
-        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5"
-        >
-          {filteredAndSorted.map((product, i) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              index={i}
-              onClick={() => setSelectedProduct(product)}
-              onAddToCompare={handleAddToCompare}
-              isInCompare={isInCompare(product.id)}
-              isFavorite={favoritesHook?.isFavorite(product.id) || false}
-              onToggleFavorite={(p) => favoritesHook?.toggleFavorite(p)}
-              convertPrice={convertPrice}
-            />
-          ))}
-        </motion.div>
+            <div className="flex flex-wrap items-center gap-2 mb-6 relative">
+              <FiltersBar categories={categories} filters={filters} onFiltersChange={setFilters} sort={sort} onSortChange={setSort} />
+              {currency && onToggleCurrency && (
+                <div className="flex items-center gap-2 ml-auto">
+                  <span className="text-xs text-[var(--muted-foreground)]">Валюта:</span>
+                  <CurrencyToggle currency={currency} onToggle={onToggleCurrency} />
+                </div>
+              )}
+            </div>
 
-        {filteredAndSorted.length === 0 && (
-          <div className="text-center py-16 text-[#888] font-mono">
-            <Tag className="w-12 h-12 mx-auto mb-3 opacity-30" />
-            <p>&gt; Нет товаров по выбранным фильтрам</p>
-            <button
-              onClick={() => setFilters({ categories: new Set(), minPrice: "", maxPrice: "", hasMonetization: false, hasDiscount: false })}
-              className="mt-3 text-[#BFFF00] text-xs font-mono uppercase hover:underline"
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5"
             >
-              Сбросить фильтры
-            </button>
-          </div>
+              {pagedProducts.map((product, i) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  index={(safePage - 1) * pageSize + i}
+                  onClick={() => setSelectedProduct(product)}
+                  onAddToCompare={handleAddToCompare}
+                  isInCompare={isInCompare(product.id)}
+                  isFavorite={favoritesHook?.isFavorite(product.id) || false}
+                  onToggleFavorite={(p) => {
+                    const wasFav = favoritesHook?.isFavorite(p.id) ?? false;
+                    favoritesHook?.toggleFavorite(p);
+                    toast({
+                      title: wasFav ? "Удалено из избранного" : "Добавлено в избранное",
+                      description: p.title,
+                    });
+                  }}
+                  convertPrice={convertPrice}
+                />
+              ))}
+            </motion.div>
+
+            {/* Pagination controls */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-8 mb-4">
+                <button
+                  onClick={() => {
+                    setCurrentPage((p) => Math.max(1, p - 1));
+                    if (typeof window !== "undefined") {
+                      document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                  }}
+                  disabled={safePage <= 1}
+                  className="w-10 h-10 flex items-center justify-center border-2 border-[var(--border)] hover:border-[#BFFF00] disabled:opacity-30 disabled:hover:border-[var(--border)] transition-colors rounded-lg"
+                  aria-label="Предыдущая страница"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+
+                <div className="flex items-center gap-1.5">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                    // Show first, last, current, and neighbors
+                    const isNearCurrent = Math.abs(page - safePage) <= 1;
+                    const isFirstOrLast = page === 1 || page === totalPages;
+                    if (!isNearCurrent && !isFirstOrLast) {
+                      // Show ellipsis only once per gap
+                      if (page === 2 || page === totalPages - 1) return null;
+                      if (page > 2 && page < safePage - 1) {
+                        return page === safePage - 2 ? <span key={`gap1-${page}`} className="text-[var(--muted-foreground)] px-1">…</span> : null;
+                      }
+                      if (page < totalPages - 1 && page > safePage + 1) {
+                        return page === safePage + 2 ? <span key={`gap2-${page}`} className="text-[var(--muted-foreground)] px-1">…</span> : null;
+                      }
+                      return null;
+                    }
+                    return (
+                      <button
+                        key={page}
+                        onClick={() => {
+                          setCurrentPage(page);
+                          if (typeof window !== "undefined") {
+                            document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                          }
+                        }}
+                        className={
+                          "w-10 h-10 flex items-center justify-center font-bold text-sm border-2 transition-colors rounded-lg " +
+                          (page === safePage
+                            ? "bg-[#BFFF00] text-black border-[#BFFF00]"
+                            : "border-[var(--border)] hover:border-[#BFFF00]")
+                        }
+                      >
+                        {page}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <button
+                  onClick={() => {
+                    setCurrentPage((p) => Math.min(totalPages, p + 1));
+                    if (typeof window !== "undefined") {
+                      document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                  }}
+                  disabled={safePage >= totalPages}
+                  className="w-10 h-10 flex items-center justify-center border-2 border-[var(--border)] hover:border-[#BFFF00] disabled:opacity-30 disabled:hover:border-[var(--border)] transition-colors rounded-lg"
+                  aria-label="Следующая страница"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            )}
+
+            {filteredAndSorted.length === 0 && (
+              <div className="text-center py-16 text-[var(--muted-foreground)]">
+                <Tag className="w-12 h-12 mx-auto mb-3 opacity-30" />
+                <p>Нет товаров по выбранным фильтрам</p>
+                <button
+                  onClick={() => setFilters({ categories: new Set(), minPrice: "", maxPrice: "", hasMonetization: false, hasDiscount: false })}
+                  className="mt-3 text-[var(--primary)] text-sm hover:underline"
+                >
+                  Сбросить фильтры
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
 
@@ -277,61 +383,117 @@ function ProductCard({
       }}
       aria-label={`Купить ${product.title}`}
     >
-      {/* Image — fixed aspect ratio, always fills container */}
-      <div className="relative w-full aspect-[16/9] overflow-hidden border-b-2 border-[#2A2A2A] group-hover:border-[#BFFF00] transition-colors bg-[#1A1A1A]">
-        {product.category ? (
-          <ProductImage
-            platform={product.category.platform}
-            className="group-hover:scale-105 transition-transform duration-500"
+      {/* Image — photo in circle with decorative background */}
+      <div className="relative w-full aspect-[16/9] overflow-hidden border-b-2 border-[#2A2A2A] group-hover:border-[#BFFF00] transition-colors">
+        {/* Background — blurred photo as backdrop */}
+        {product.image ? (
+          <img
+            src={product.image}
+            alt=""
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-40"
           />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#1A1A1A]">
+        ) : null}
+
+        {/* Decorative gradient overlay */}
+        <div
+          className="absolute inset-0"
+          style={{ background: `radial-gradient(circle at center, ${accentColor}15, transparent 70%)` }}
+        />
+
+        {/* Dotted pattern */}
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `radial-gradient(circle, ${accentColor} 1px, transparent 1px)`,
+            backgroundSize: "16px 16px",
+          }}
+        />
+
+        {/* Circular photo — centered, scales on hover */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          {product.image ? (
+            <div className="relative group-hover:scale-110 transition-transform duration-300">
+              {/* Photo circle */}
+              <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2" style={{ borderColor: accentColor }}>
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
+            </div>
+          ) : product.category ? (
+            <ProductImage platform={product.category.platform} className="group-hover:scale-105 transition-transform duration-500" />
+          ) : (
             <Music2 className="w-12 h-12 text-[#888]/30" />
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Favorite button — top-right */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             onToggleFavorite(product);
+            // Flying heart animation
+            const btn = e.currentTarget;
+            const heart = document.createElement('div');
+            heart.innerHTML = '♥';
+            heart.style.cssText = `position:fixed;left:${btn.getBoundingClientRect().left+12}px;top:${btn.getBoundingClientRect().top}px;font-size:20px;color:#FF2D87;pointer-events:none;z-index:9999;transition:all 0.8s cubic-bezier(0.16,1,0.3,1);`;
+            document.body.appendChild(heart);
+            requestAnimationFrame(() => {
+              const target = document.querySelector('[aria-label="Избранное"]') as HTMLElement;
+              if (target) {
+                const rect = target.getBoundingClientRect();
+                heart.style.left = rect.left + 12 + 'px';
+                heart.style.top = rect.top + 4 + 'px';
+                heart.style.opacity = '0';
+                heart.style.transform = 'scale(0.3)';
+              }
+            });
+            setTimeout(() => heart.remove(), 800);
           }}
-          className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-all hover:scale-110"
+          className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-all hover:scale-110 rounded-full"
           aria-label="В избранное"
         >
           <Heart
-            className="w-4 h-4"
+            className="w-4 h-4 transition-transform"
             fill={isFavorite ? "#FF2D87" : "none"}
             stroke={isFavorite ? "#FF2D87" : "#888"}
             strokeWidth={2.5}
+            style={isFavorite ? { transform: 'scale(1.2)' } : {}}
           />
         </button>
 
-        {/* Discount */}
+        {/* Discount — top-left */}
         {discount > 0 && (
           <div className="absolute top-2 left-2 bg-[#FF2D87] text-white text-xs font-black px-2 py-1 font-mono">
             −{discount}%
           </div>
         )}
 
-        {/* Badges */}
-        <div className="absolute bottom-2 left-2 flex flex-wrap gap-1">
-          {badges.map((b) => {
-            const badge = BADGE_LABELS[b];
-            if (!badge) return null;
-            const Icon = BADGE_ICONS[badge.icon] || BadgeCheck;
-            return (
-              <span
-                key={b}
-                className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[9px] font-black uppercase border bg-black/80 backdrop-blur-sm font-mono"
-                style={{ color: badge.color, borderColor: badge.color }}
-              >
-                <Icon className="w-2.5 h-2.5" style={{ color: badge.color }} />
-                {badge.label}
-              </span>
-            );
-          })}
-        </div>
+        {/* Platform logo — bottom-left, original SVG */}
+        {product.category && (() => {
+          const Logo = PlatformLogos[product.category.platform];
+          return Logo ? (
+            <div className="absolute bottom-2 left-2 w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: accentColor }}>
+              <Logo size={18} className="text-white" />
+            </div>
+          ) : null;
+        })()}
+
+        {/* New / Hit badge — bottom-right */}
+        {badges.includes("new") && (
+          <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-[#0969DA] text-white text-[10px] font-bold">
+            New
+          </div>
+        )}
+        {badges.includes("hit") && (
+          <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-[#FF2D87] text-white text-[10px] font-bold">
+            Хит
+          </div>
+        )}
       </div>
 
       {/* Content */}
@@ -349,6 +511,11 @@ function ProductCard({
 
         {/* Meta chips */}
         <div className="flex flex-wrap gap-1.5 mb-3">
+          {meta.theme && (
+            <span className="px-1.5 py-0.5 text-[10px] bg-[#1A1A1A] border border-[#2A2A2A] text-[#888] font-mono">
+              {meta.theme}
+            </span>
+          )}
           {meta.country && (
             <span className="px-1.5 py-0.5 text-[10px] bg-[#1A1A1A] border border-[#2A2A2A] text-[#888] font-mono">
               {meta.country}

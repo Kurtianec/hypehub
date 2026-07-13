@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: false,
+  allowedDevOrigins: [
+    "*.space-z.ai",
+    "*.preview-*.space-z.ai",
+    "localhost",
+    "127.0.0.1",
+  ],
   images: {
     remotePatterns: [
       {

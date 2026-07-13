@@ -64,21 +64,14 @@ export const metadata: Metadata = {
     siteName: "ХайпХаб",
     locale: "ru_RU",
     type: "website",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "ХайпХаб — маркетплейс аккаунтов",
-      },
-    ],
+    // OG image auto-injected from src/app/opengraph-image.tsx
   },
   twitter: {
     card: "summary_large_image",
     title: "ХайпХаб — Купить аккаунты TikTok, YouTube, VK",
     description:
       "Готовые аккаунты соцсетей с живыми подписчиками. Оплата криптой. Мгновенная выдача.",
-    images: ["/og.png"],
+    // Twitter image auto-injected from src/app/opengraph-image.tsx
   },
   category: "e-commerce",
   formatDetection: { telephone: false, address: false, email: false },

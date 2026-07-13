@@ -107,11 +107,11 @@ export function Header({
             )}
           >
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0" aria-label={`${siteName} — на главную`}>
-              <div className="relative w-9 h-9 bg-[#BFFF00] flex items-center justify-center border-2 border-[#BFFF00] group-hover:bg-[#FF2D87] group-hover:border-[#FF2D87] transition-colors">
+            <Link href="/" className="flex items-center gap-2 md:gap-2.5 group flex-shrink-0" aria-label={`${siteName} — на главную`}>
+              <div className="relative w-9 h-9 bg-[#BFFF00] flex items-center justify-center border-2 border-[#BFFF00] group-hover:bg-[#FF2D87] group-hover:border-[#FF2D87] transition-colors flex-shrink-0 glow-pulse">
                 <Zap className="w-5 h-5 text-black" strokeWidth={3} fill="black" />
               </div>
-              <div className="flex flex-col leading-none">
+              <div className="hidden sm:flex flex-col leading-none">
                 <span className="text-lg md:text-xl font-black tracking-tighter uppercase">
                   <span className="text-[#BFFF00]">Хайп</span>
                   <span className="text-foreground">Хаб</span>
@@ -141,14 +141,14 @@ export function Header({
               ))}
             </nav>
 
-            {/* Right side: small toggles (left) + account/search (far right) */}
-            <div className="flex items-center gap-2">
-              {/* Small toggles — theme + language */}
-              <div className="flex items-center gap-1">
+            {/* Right side */}
+            <div className="flex items-center gap-1 md:gap-2">
+              {/* Theme + Language — desktop only */}
+              <div className="hidden md:flex items-center gap-1">
                 {theme && onToggleTheme && (
                   <button
                     onClick={onToggleTheme}
-                    className="w-8 h-8 border border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#BFFF00] flex items-center justify-center transition-colors"
+                    className="w-8 h-8 border border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#BFFF00] flex items-center justify-center transition-colors flex-shrink-0"
                     aria-label={theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"}
                   >
                     {theme === "dark" ? (
@@ -161,7 +161,7 @@ export function Header({
                 {locale && onToggleLocale && (
                   <button
                     onClick={onToggleLocale}
-                    className="w-8 h-8 border border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#BFFF00] flex items-center justify-center transition-colors font-mono text-[10px] font-black"
+                    className="w-8 h-8 border border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#BFFF00] flex items-center justify-center transition-colors font-mono text-[10px] font-black flex-shrink-0"
                     aria-label="Switch language"
                   >
                     <span className={locale === "ru" ? "text-[#BFFF00]" : "text-[#00F0FF]"}>{locale.toUpperCase()}</span>
@@ -169,11 +169,11 @@ export function Header({
                 )}
               </div>
 
-              {/* Favorites */}
+              {/* Favorites — desktop only */}
               {onOpenFavorites !== undefined && (
                 <button
                   onClick={onOpenFavorites}
-                  className="relative w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#FF2D87] flex items-center justify-center transition-colors group"
+                  className="hidden md:flex relative w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#FF2D87] items-center justify-center transition-colors group flex-shrink-0"
                   aria-label="Избранное"
                 >
                   <Heart
@@ -190,20 +190,22 @@ export function Header({
                 </button>
               )}
 
-              {/* Account */}
+              {/* Account — desktop only */}
               <a
                 href="/account"
-                className="w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#BFFF00] flex items-center justify-center transition-colors group"
+                className="hidden md:flex w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#BFFF00] items-center justify-center transition-colors group flex-shrink-0"
                 aria-label="Личный кабинет"
                 title="Личный кабинет"
               >
                 <User className="w-4 h-4 text-[#888] group-hover:text-[#BFFF00]" strokeWidth={2.5} />
               </a>
 
-              {/* Search */}
-              {onProductClick && products.length > 0 && (
-                <SearchBar products={products} categories={categories} onProductClick={onProductClick} />
-              )}
+              {/* Search — always visible, uses server-side search if no preloaded products */}
+              <SearchBar
+                products={products.length > 0 ? products : undefined}
+                categories={categories}
+                onProductClick={onProductClick}
+              />
 
               {/* Mobile menu toggle */}
               <button
@@ -268,6 +270,32 @@ export function Header({
                 <Link href="/otzyvy" onClick={() => setMobileOpen(false)} className="flex-1 px-3 py-2 text-xs font-black uppercase tracking-wide border-2 border-[#2A2A2A] text-[#888] hover:text-foreground hover:border-[#BFFF00] text-center font-mono">{locale === "en" ? "Reviews" : "Отзывы"}</Link>
                 <Link href="/blog" onClick={() => setMobileOpen(false)} className="flex-1 px-3 py-2 text-xs font-black uppercase tracking-wide border-2 border-[#2A2A2A] text-[#888] hover:text-foreground hover:border-[#BFFF00] text-center font-mono">{locale === "en" ? "Blog" : "Блог"}</Link>
               </motion.div>
+
+              {/* Mobile-only: theme + language */}
+              <div className="md:hidden flex items-center gap-2 px-4 py-3 border-b border-[#1F1F1F]">
+                {theme && onToggleTheme && (
+                  <button onClick={onToggleTheme} className="flex-1 py-2.5 text-xs font-bold uppercase border-2 border-[#2A2A2A] text-[#888] hover:border-[#BFFF00] hover:text-foreground transition-colors">
+                    {theme === "dark" ? "☀ Светлая" : "🌙 Тёмная"}
+                  </button>
+                )}
+                {locale && onToggleLocale && (
+                  <button onClick={onToggleLocale} className="flex-1 py-2.5 text-xs font-bold uppercase border-2 border-[#2A2A2A] text-[#888] hover:border-[#BFFF00] hover:text-foreground transition-colors font-mono">
+                    {locale === "ru" ? "EN" : "RU"}
+                  </button>
+                )}
+              </div>
+
+              {/* Mobile-only: favorites + account */}
+              <div className="md:hidden flex gap-2 px-4 py-3 border-b border-[#1F1F1F]">
+                {onOpenFavorites !== undefined && (
+                  <button onClick={() => { onOpenFavorites(); setMobileOpen(false); }} className="flex-1 py-2.5 text-xs font-bold uppercase border-2 border-[#2A2A2A] text-[#888] hover:border-[#FF2D87] hover:text-foreground transition-colors flex items-center justify-center gap-1.5">
+                    <Heart className="w-3.5 h-3.5" /> Избранное
+                  </button>
+                )}
+                <a href="/account" className="flex-1 py-2.5 text-xs font-bold uppercase border-2 border-[#2A2A2A] text-[#888] hover:border-[#BFFF00] hover:text-foreground transition-colors flex items-center justify-center gap-1.5">
+                  <User className="w-3.5 h-3.5" /> Кабинет
+                </a>
+              </div>
 
               <div className="mt-6 pt-6 border-t-2 border-[#BFFF00]/30 space-y-3">
                 <button

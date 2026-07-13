@@ -59,6 +59,10 @@ export function AdminProducts({
   const [deleting, setDeleting] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [bulkAction, setBulkAction] = useState<string>("");
+  const [bulkPriceOpen, setBulkPriceOpen] = useState(false);
+  const [bulkPriceMode, setBulkPriceMode] = useState<"percent" | "fixed" | "add">("percent");
+  const [bulkPriceValue, setBulkPriceValue] = useState("");
+  const [bulkPriceLoading, setBulkPriceLoading] = useState(false);
   const { toast } = useToast();
 
   const filtered = products.filter((p) => {
@@ -136,6 +140,37 @@ export function AdminProducts({
       onChange();
     } catch {
       toast({ title: "Ошибка", variant: "destructive" });
+    }
+  };
+
+  const applyBulkPrice = async () => {
+    if (!bulkPriceValue || selected.size === 0) return;
+    setBulkPriceLoading(true);
+    try {
+      const res = await fetch("/api/products/bulk-price", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        body: JSON.stringify({
+          ids: Array.from(selected),
+          mode: bulkPriceMode,
+          value: parseFloat(bulkPriceValue),
+        }),
+      });
+      if (!res.ok) throw new Error("Ошибка");
+      const data = await res.json();
+      const modeLabel = bulkPriceMode === "percent" ? `% (${parseFloat(bulkPriceValue) > 0 ? "+" : ""}${bulkPriceValue}%)` : bulkPriceMode === "fixed" ? `= ${bulkPriceValue} ₽` : `${parseFloat(bulkPriceValue) > 0 ? "+" : ""}${bulkPriceValue} ₽`;
+      toast({
+        title: `Цены обновлены у ${data.updated} товаров`,
+        description: `Режим: ${modeLabel}`,
+      });
+      setBulkPriceOpen(false);
+      setBulkPriceValue("");
+      setSelected(new Set());
+      onChange();
+    } catch {
+      toast({ title: "Ошибка обновления цен", variant: "destructive" });
+    } finally {
+      setBulkPriceLoading(false);
     }
   };
 
@@ -217,11 +252,19 @@ export function AdminProducts({
             {"// "}{selected.size} ВЫБРАНО
           </span>
           <div className="flex-1" />
-          <Select value={bulkAction} onValueChange={setBulkAction}>
+          <Select value={bulkAction} onValueChange={(v) => {
+            if (v === "price") {
+              setBulkPriceOpen(true);
+              setBulkAction("");
+            } else {
+              setBulkAction(v);
+            }
+          }}>
             <SelectTrigger className="w-48 bg-[#0A0A0A] border-2 border-[#2A2A2A] font-mono text-xs">
               <SelectValue placeholder="Действие..." />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="price">💰 Изменить цены</SelectItem>
               <SelectItem value="archive">📥 В архив</SelectItem>
               <SelectItem value="restore">📤 Восстановить</SelectItem>
               <SelectItem value="delete">🗑 Удалить</SelectItem>
@@ -417,6 +460,86 @@ export function AdminProducts({
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Bulk price editing modal */}
+      <Dialog open={bulkPriceOpen} onOpenChange={(o) => !o && setBulkPriceOpen(false)}>
+        <DialogContent className="max-w-md glass-strong border-white/10">
+          <DialogHeader>
+            <DialogTitle>Изменить цены — {selected.size} товаров</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-3">
+            <div>
+              <Label className="text-xs uppercase font-mono">Режим изменения</Label>
+              <Select value={bulkPriceMode} onValueChange={(v) => setBulkPriceMode(v as "percent" | "fixed" | "add")}>
+                <SelectTrigger className="bg-[#0A0A0A] border-2 border-[#2A2A2A] font-mono mt-1">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="percent">Процент (%) — например +10 или -15</SelectItem>
+                  <SelectItem value="fixed">Фиксированная цена (₽) — например 5000</SelectItem>
+                  <SelectItem value="add">Прибавить (₽) — например +500 или -200</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="text-xs uppercase font-mono">
+                {bulkPriceMode === "percent"
+                  ? "Изменение в % (можно отрицательное)"
+                  : bulkPriceMode === "fixed"
+                  ? "Новая цена в ₽"
+                  : "Прибавка в ₽ (можно отрицательную)"}
+              </Label>
+              <Input
+                type="number"
+                value={bulkPriceValue}
+                onChange={(e) => setBulkPriceValue(e.target.value)}
+                placeholder={bulkPriceMode === "percent" ? "10" : bulkPriceMode === "fixed" ? "5000" : "500"}
+                className="bg-[#0A0A0A] border-2 border-[#2A2A2A] font-mono mt-1"
+              />
+            </div>
+            {/* Preview */}
+            {bulkPriceValue && selected.size > 0 && (
+              <div className="bg-[#121212] border border-[#2A2A2A] p-3 text-xs font-mono">
+                <div className="text-[#888] uppercase mb-2">// ПРЕВЬЮ</div>
+                {products
+                  .filter((p) => selected.has(p.id))
+                  .slice(0, 3)
+                  .map((p) => {
+                    let newPrice = p.price;
+                    const v = parseFloat(bulkPriceValue);
+                    if (bulkPriceMode === "percent") newPrice = Math.round(p.price * (1 + v / 100));
+                    else if (bulkPriceMode === "fixed") newPrice = v;
+                    else if (bulkPriceMode === "add") newPrice = p.price + v;
+                    if (newPrice < 0) newPrice = 0;
+                    return (
+                      <div key={p.id} className="flex justify-between py-0.5">
+                        <span className="truncate text-foreground flex-1 pr-2">{p.title}</span>
+                        <span className="text-[#888] line-through">{p.price} ₽</span>
+                        <span className="text-[#BFFF00] ml-2">→ {newPrice} ₽</span>
+                      </div>
+                    );
+                  })}
+                {selected.size > 3 && (
+                  <div className="text-[#888] mt-1">... и ещё {selected.size - 3}</div>
+                )}
+              </div>
+            )}
+            <div className="flex gap-2 pt-2">
+              <Button
+                onClick={applyBulkPrice}
+                disabled={!bulkPriceValue || bulkPriceLoading}
+                className="flex-1 bg-[#BFFF00] text-black hover:bg-[#FF2D87] hover:text-white font-black uppercase font-mono"
+              >
+                {bulkPriceLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+                Применить к {selected.size}
+              </Button>
+              <Button onClick={() => setBulkPriceOpen(false)} variant="outline" className="font-mono uppercase">
+                Отмена
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

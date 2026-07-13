@@ -45,19 +45,34 @@ export function AccountClient({ settings }: { settings: Record<string, string> }
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [bonus, setBonus] = useState<BonusInfo | null>(null);
+  const [statusFilter, setStatusFilter] = useState<string>("all");
   const { toast } = useToast();
 
-  const search = async () => {
-    if (!email) {
+  // Restore email from localStorage on mount + auto-search
+  useEffect(() => {
+    const saved = localStorage.getItem("hypehub_account_email");
+    if (saved) {
+      setEmail(saved);
+      // Auto-search after a tick to let state settle
+      queueMicrotask(() => {
+        searchWith(saved);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const searchWith = async (emailVal: string) => {
+    if (!emailVal) {
       toast({ title: "Введите email", variant: "destructive" });
       return;
     }
     setLoading(true);
     setSearched(true);
+    localStorage.setItem("hypehub_account_email", emailVal);
     try {
       const [ordersRes, bonusRes] = await Promise.all([
-        fetch(`/api/orders/by-email?email=${encodeURIComponent(email)}`),
-        fetch(`/api/bonus?email=${encodeURIComponent(email)}`),
+        fetch(`/api/orders/by-email?email=${encodeURIComponent(emailVal)}`),
+        fetch(`/api/bonus?email=${encodeURIComponent(emailVal)}`),
       ]);
       const ordersData = await ordersRes.json();
       const bonusData = await bonusRes.json();
@@ -69,6 +84,21 @@ export function AccountClient({ settings }: { settings: Record<string, string> }
       setLoading(false);
     }
   };
+
+  const search = () => searchWith(email);
+
+  const clearEmail = () => {
+    localStorage.removeItem("hypehub_account_email");
+    setEmail("");
+    setOrders([]);
+    setSearched(false);
+    setBonus(null);
+  };
+
+  // Filter orders by status
+  const filteredOrders = statusFilter === "all"
+    ? orders
+    : orders.filter((o) => o.status === statusFilter);
 
   const copyText = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -197,14 +227,36 @@ ${settings.support_email || "support@hypehub.shop"}
               </div>
             ) : (
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-1 h-6 bg-[#BFFF00]" />
-                  <span className="font-mono text-xs text-[#888] uppercase tracking-widest">
-                    {"// НАЙДЕНО_ЗАКАЗОВ: "}<span className="text-[#BFFF00] font-black">{orders.length}</span>
-                  </span>
+                <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-1 h-6 bg-[#BFFF00]" />
+                    <span className="font-mono text-xs text-[#888] uppercase tracking-widest">
+                      {"// НАЙДЕНО_ЗАКАЗОВ: "}<span className="text-[#BFFF00] font-black">{orders.length}</span>
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {/* Status filter */}
+                    <select
+                      value={statusFilter}
+                      onChange={(e) => setStatusFilter(e.target.value)}
+                      className="bg-[#0A0A0A] border-2 border-[#2A2A2A] hover:border-[#BFFF00] text-xs font-mono px-2 py-1.5 uppercase tracking-wide cursor-pointer"
+                    >
+                      <option value="all">Все статусы</option>
+                      <option value="pending">Ожидают оплаты</option>
+                      <option value="paid">Оплачены</option>
+                      <option value="delivered">Доставлены</option>
+                      <option value="cancelled">Отменены</option>
+                    </select>
+                    <button
+                      onClick={clearEmail}
+                      className="text-[10px] font-mono uppercase text-[#888] hover:text-[#FF3333] px-2 py-1.5 border border-[#2A2A2A] hover:border-[#FF3333]/50 transition-colors"
+                    >
+                      Выйти
+                    </button>
+                  </div>
                 </div>
                 <div className="space-y-3">
-                  {orders.map((o, i) => {
+                  {filteredOrders.map((o, i) => {
                     const status = STATUS_CONFIG[o.status] || STATUS_CONFIG.pending;
                     return (
                       <motion.div
