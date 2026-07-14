@@ -25,12 +25,12 @@ export const metadata: Metadata = {
     "купить вк 100000",
     "купить группу вк с монетизацией",
   ],
-  alternates: { canonical: "https://hypehub.shop/kupit-gruppu-vk" },
+  alternates: { canonical: "https://hypehub.vercel.app/kupit-gruppu-vk" },
   openGraph: {
     title: "Купить группу VK с участниками | ХайпХаб",
     description:
       "Готовые VK группы от 1K до 100K+ участников. Живая аудитория, монетизация, гарантия. Оплата криптой.",
-    url: "https://hypehub.shop/kupit-gruppu-vk",
+    url: "https://hypehub.vercel.app/kupit-gruppu-vk",
     images: ["/og.png"],
   },
 };

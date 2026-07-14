@@ -24,11 +24,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${post.title} | Блог ХайпХаб`,
     description: post.excerpt,
     keywords: post.tags?.split(",").map((t) => t.trim()).filter(Boolean) || [],
-    alternates: { canonical: `https://hypehub.shop/blog/${post.slug}` },
+    alternates: { canonical: `https://hypehub.vercel.app/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `https://hypehub.shop/blog/${post.slug}`,
+      url: `https://hypehub.vercel.app/blog/${post.slug}`,
       type: "article",
       publishedTime: post.createdAt.toISOString(),
       modifiedTime: post.updatedAt.toISOString(),
@@ -84,19 +84,19 @@ export default async function BlogPostPage({ params }: PageProps) {
     author: {
       "@type": "Organization",
       name: "ХайпХаб",
-      url: "https://hypehub.shop",
+      url: "https://hypehub.vercel.app",
     },
     publisher: {
       "@type": "Organization",
       name: "ХайпХаб",
       logo: {
         "@type": "ImageObject",
-        url: "https://hypehub.shop/logo.svg",
+        url: "https://hypehub.vercel.app/logo.svg",
       },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://hypehub.shop/blog/${post.slug}`,
+      "@id": `https://hypehub.vercel.app/blog/${post.slug}`,
     },
     keywords: post.tags || "",
   };

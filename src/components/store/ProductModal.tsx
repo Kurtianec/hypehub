@@ -44,7 +44,34 @@ export function ProductModal({
   const [delivery, setDelivery] = useState<{ login: string; password: string; deliveryNote?: string | null; productTitle: string } | null>(null);
   const [related, setRelated] = useState<Product[]>([]);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [cryptoRates, setCryptoRates] = useState<{ btc: number; usdt: number; ton: number } | null>(null);
   const { toast } = useToast();
+
+  // Fetch crypto rates when modal opens
+  useEffect(() => {
+    if (product) {
+      fetch("/api/crypto-rates")
+        .then((r) => r.json())
+        .then((d) => setCryptoRates(d.rates))
+        .catch(() => setCryptoRates({ btc: 8500000, usdt: 92, ton: 550 }));
+    }
+  }, [product]);
+
+  // Convert RUB price to crypto
+  const priceInCrypto = (rubPrice: number, crypto: "btc" | "usdt" | "ton"): string => {
+    if (!cryptoRates) return "...";
+    const rate = cryptoRates[crypto];
+    const amount = rubPrice / rate;
+    if (crypto === "btc") return amount.toFixed(8);
+    if (crypto === "usdt") return amount.toFixed(2);
+    return amount.toFixed(2); // TON
+  };
+
+  const cryptoLabel = (crypto: "btc" | "usdt" | "ton"): string => {
+    if (crypto === "btc") return "BTC";
+    if (crypto === "usdt") return "USDT";
+    return "TON";
+  };
 
   // Increment views when product changes
   useEffect(() => {
@@ -174,7 +201,7 @@ ${delivery.deliveryNote || ""}
 4. Не передавайте данные третьим лицам
 
 Спасибо за покупку! ХайпХаб
-support@hypehub.shop
+support@hypehub.vercel.app
 `;
     const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
@@ -387,22 +414,41 @@ support@hypehub.shop
                           key={c.k}
                           onClick={() => setCryptoType(c.k)}
                           className={cn(
-                            "py-2 rounded-md text-xs font-bold transition-all",
+                            "py-2 px-1 rounded-md text-xs font-bold transition-all flex flex-col items-center gap-0.5",
                             cryptoType === c.k ? "text-white" : "glass text-muted-foreground"
                           )}
                           style={cryptoType === c.k ? { background: c.color } : {}}
                         >
-                          {c.label}
+                          <span>{c.label}</span>
+                          <span className={cn(
+                            "text-[9px] font-mono",
+                            cryptoType === c.k ? "text-white/80" : "text-[#888]"
+                          )}>
+                            {priceInCrypto(product.price, c.k)} {c.label}
+                          </span>
                         </button>
                       ))}
                     </div>
                   </div>
 
-                <div className="glass rounded-lg p-2.5 flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">К оплате:</span>
-                  <span className="text-xl font-black gradient-text">
-                    {formatPrice(product.price, product.currency)}
-                  </span>
+                <div className="glass rounded-lg p-2.5 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground">Сумма в рублях:</span>
+                    <span className="text-sm font-bold text-muted-foreground">
+                      {formatPrice(product.price, product.currency)}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground">К оплате ({cryptoLabel(cryptoType)}):</span>
+                    <span className="text-xl font-black gradient-text">
+                      {priceInCrypto(product.price, cryptoType)} {cryptoLabel(cryptoType)}
+                    </span>
+                  </div>
+                  {cryptoRates && (
+                    <div className="text-[9px] text-[#888] text-right font-mono">
+                      1 {cryptoLabel(cryptoType)} ≈ {cryptoRates[cryptoType].toLocaleString("ru-RU")} ₽
+                    </div>
+                  )}
                 </div>
 
                 <Button
@@ -432,7 +478,7 @@ support@hypehub.shop
             >
               <h2 className="text-xl font-black mb-0.5">Оплата заказа</h2>
               <p className="text-xs text-muted-foreground mb-4">
-                {`Переведите точную сумму на ${cryptoType.toUpperCase()} адрес`}
+                {`Переведите точную сумму на ${cryptoLabel(cryptoType)} адрес`}
               </p>
 
               <div className="glass rounded-lg p-3 mb-3 space-y-3">
@@ -455,14 +501,31 @@ support@hypehub.shop
 
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-0.5">Сумма</div>
-                    <div className="text-base font-black gradient-text">{formatPrice(product.price, product.currency)}</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-0.5">Сумма к переводу</div>
+                    <button
+                      onClick={() => copyToClipboard(priceInCrypto(product.price, cryptoType), "Сумма скопирована")}
+                      className="text-left group"
+                      title="Нажмите чтобы скопировать"
+                    >
+                      <div className="text-base font-black gradient-text group-hover:opacity-80 transition-opacity">
+                        {priceInCrypto(product.price, cryptoType)} {cryptoLabel(cryptoType)}
+                      </div>
+                      <div className="text-[9px] text-[#888] font-mono flex items-center gap-1">
+                        ≈ {formatPrice(product.price, product.currency)}
+                        <Copy className="w-2.5 h-2.5" />
+                      </div>
+                    </button>
                   </div>
                   <div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-0.5">Способ</div>
                     <div className="text-sm font-bold">
-                      {`${cryptoType.toUpperCase()}`}
+                      {cryptoLabel(cryptoType)}
                     </div>
+                    {cryptoRates && (
+                      <div className="text-[9px] text-[#888] font-mono">
+                        1 {cryptoLabel(cryptoType)} ≈ {cryptoRates[cryptoType].toLocaleString("ru-RU")} ₽
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

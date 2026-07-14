@@ -20,13 +20,12 @@ export const metadata: Metadata = {
     "как выбрать группу вк",
     "безопасность аккаунтов",
     "оплата криптовалютой",
-    "qiwi оплата",
   ],
-  alternates: { canonical: "https://hypehub.shop/blog" },
+  alternates: { canonical: "https://hypehub.vercel.app/blog" },
   openGraph: {
     title: "Блог ХайпХаб — руководства по покупке аккаунтов",
     description: "Полезные статьи о покупке и монетизации аккаунтов соцсетей.",
-    url: "https://hypehub.shop/blog",
+    url: "https://hypehub.vercel.app/blog",
     images: ["/og.png"],
   },
 };
@@ -48,14 +47,14 @@ export default async function BlogPage() {
     "@type": "Blog",
     name: "Блог ХайпХаб",
     description: "Руководства по покупке аккаунтов соцсетей",
-    url: "https://hypehub.shop/blog",
+    url: "https://hypehub.vercel.app/blog",
     blogPost: posts.map((p) => ({
       "@type": "BlogPosting",
       headline: p.title,
       description: p.excerpt,
       datePublished: p.createdAt.toISOString(),
       dateModified: p.updatedAt.toISOString(),
-      url: `https://hypehub.shop/blog/${p.slug}`,
+      url: `https://hypehub.vercel.app/blog/${p.slug}`,
       keywords: p.tags || "",
     })),
   };

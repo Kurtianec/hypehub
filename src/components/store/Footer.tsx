@@ -88,10 +88,10 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
             <h3 className="font-black text-sm mb-3 uppercase tracking-widest font-mono text-[#FF2D87]">{"// Контакты"}</h3>
             <ul className="space-y-3 text-sm font-mono">
               <li>
-                <a href={`mailto:${settings.support_email || "support@hypehub.shop"}`}
+                <a href={`mailto:${settings.support_email || "support@hypehub.vercel.app"}`}
                    className="flex items-center gap-2 text-[#888] hover:text-[#BFFF00] transition-colors">
                   <Mail className="w-4 h-4" />
-                  {settings.support_email || "support@hypehub.shop"}
+                  {settings.support_email || "support@hypehub.vercel.app"}
                 </a>
               </li>
               <li>

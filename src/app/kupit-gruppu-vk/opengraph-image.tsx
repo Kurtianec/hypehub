@@ -20,7 +20,7 @@ export default function OgImage() {
           <div style={{ display: "flex", fontSize: "22px", color: "#888", fontFamily: "monospace" }}>Verified / Instant delivery / Crypto payment</div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <div style={{ display: "flex", padding: "16px 32px", background: "#BFFF00", color: "#000", fontSize: "20px", fontWeight: 900, borderRadius: "4px" }}>hypehub.shop</div>
+          <div style={{ display: "flex", padding: "16px 32px", background: "#BFFF00", color: "#000", fontSize: "20px", fontWeight: 900, borderRadius: "4px" }}>hypehub.vercel.app</div>
           <div style={{ display: "flex", fontSize: "18px", color: "#888", fontFamily: "monospace" }}>from 1999 RUB</div>
         </div>
       </div>

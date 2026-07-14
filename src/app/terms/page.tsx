@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Условия использования — ХайпХаб",
   description: "Условия использования сервиса ХайпХаб. Правила покупки аккаунтов, оплаты, возврата, гарантии. Обязательства сторон.",
-  alternates: { canonical: "https://hypehub.shop/terms" },
+  alternates: { canonical: "https://hypehub.vercel.app/terms" },
 };
 
 export default async function TermsPage() {
@@ -118,7 +118,7 @@ export default async function TermsPage() {
     {
       title: "10. РЕКВИЗИТЫ",
       content: `10.1. Сервис: ХайпХаб (HypeHub)
-10.2. Email: ${settingsMap.support_email || "support@hypehub.shop"}
+10.2. Email: ${settingsMap.support_email || "support@hypehub.vercel.app"}
 10.3. Telegram: ${settingsMap.support_telegram || "@hypehub_support"}
 10.4. Режим работы: 24/7
 

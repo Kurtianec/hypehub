@@ -302,13 +302,13 @@ async function main() {
     {
       id: "faq_1",
       question: "Как купить аккаунт на ХайпХаб?",
-      answer: "Выберите подходящий аккаунт в каталоге, нажмите «Купить», укажите контакт и выберите способ оплаты (криптовалюта или QIWI). После подтверждения оплаты вы мгновенно получите файл с логином и паролем на почту и в личном кабинете.",
+      answer: "Выберите подходящий аккаунт в каталоге, нажмите «Купить», укажите контакт и выберите криптовалюту для оплаты (BTC, USDT, TON). После подтверждения оплаты вы мгновенно получите файл с логином и паролем на почту и в личном кабинете.",
       order: 1,
     },
     {
       id: "faq_2",
       question: "Какие способы оплаты доступны?",
-      answer: "Мы принимаем оплату криптовалютой (BTC, ETH, USDT TRC-20, TON) и через QIWI-кошелёк. Все способы — анонимны, без проверки личности. Крипто-платежи проходят за 5–15 минут, QIWI — мгновенно.",
+      answer: "Мы принимаем оплату криптовалютой: BTC, USDT TRC-20, TON. Все способы — анонимны, без проверки личности. Крипто-платежи проходят за 1–15 минут в зависимости от монеты (TON — самый быстрый, BTC — самый надёжный).",
       order: 2,
     },
     {
@@ -358,9 +358,8 @@ async function main() {
     { id: "set_crypto_btc", key: "crypto_btc", value: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" },
     { id: "set_crypto_usdt", key: "crypto_usdt", value: "TXkNQ6MeYF3G7kC7p2eQ8fY2rZyW5kJ9hN" },
     { id: "set_crypto_ton", key: "crypto_ton", value: "EQDrjaLahLkMB-hMCmkzOyBuHJ139QHbPPHu2qWQ4g2v5k2H" },
-    { id: "set_qiwi", key: "qiwi_number", value: "+79991234567" },
     { id: "set_admin_pass", key: "admin_pass", value: "hypehub2024" },
-    { id: "set_email", key: "support_email", value: "support@hypehub.shop" },
+    { id: "set_email", key: "support_email", value: "support@hypehub.vercel.app" },
     { id: "set_telegram", key: "support_telegram", value: "@hypehub_support" },
     { id: "set_stats_accounts", key: "stats_accounts", value: "5 200+" },
     { id: "set_stats_clients", key: "stats_clients", value: "12 800+" },

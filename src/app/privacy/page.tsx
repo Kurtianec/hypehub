@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Политика конфиденциальности — ХайпХаб",
   description: "Политика конфиденциальности сервиса ХайпХаб. Сбор, обработка и защита персональных данных пользователей.",
-  alternates: { canonical: "https://hypehub.shop/privacy" },
+  alternates: { canonical: "https://hypehub.vercel.app/privacy" },
 };
 
 export default async function PrivacyPage() {
@@ -100,7 +100,7 @@ export default async function PrivacyPage() {
 — Запросить удаление своих данных (кроме данных, обязательных для хранения по закону)
 — Отозвать согласие на обработку данных
 
-7.2. Для реализации прав необходимо обратиться в поддержку: ${settingsMap.support_email || "support@hypehub.shop"}`,
+7.2. Для реализации прав необходимо обратиться в поддержку: ${settingsMap.support_email || "support@hypehub.vercel.app"}`,
     },
     {
       title: "8. COOKIES",
@@ -124,7 +124,7 @@ export default async function PrivacyPage() {
     {
       title: "10. КОНТАКТЫ",
       content: `10.1. По вопросам конфиденциальности обращайтесь:
-— Email: ${settingsMap.support_email || "support@hypehub.shop"}
+— Email: ${settingsMap.support_email || "support@hypehub.vercel.app"}
 — Telegram: ${settingsMap.support_telegram || "@hypehub_support"}
 
 10.2. Режим работы: 24/7`,

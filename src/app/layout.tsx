@@ -8,7 +8,7 @@ const geistSans = Geist({
   subsets: ["latin", "cyrillic"],
 });
 
-const SITE_URL = "https://hypehub.shop";
+const SITE_URL = "https://hypehub.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -122,7 +122,7 @@ const jsonLd = {
         "@type": "ContactPoint",
         contactType: "customer support",
         availableLanguage: ["Russian"],
-        email: "support@hypehub.shop",
+        email: "support@hypehub.vercel.app",
       },
     },
     {

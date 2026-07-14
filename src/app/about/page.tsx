@@ -15,11 +15,11 @@ export const metadata: Metadata = {
   description:
     "ХайпХаб — современный маркетплейс готовых аккаунтов социальных сетей. Узнайте о нашем сервисе, гарантиях, команде и миссии. Более 12 800 довольных клиентов.",
   keywords: ["о нас хайпхаб", "о компании", "маркетплейс аккаунтов", "hypehub about"],
-  alternates: { canonical: "https://hypehub.shop/about" },
+  alternates: { canonical: "https://hypehub.vercel.app/about" },
   openGraph: {
     title: "О нас — ХайпХаб",
     description: "Маркетплейс готовых аккаунтов социальных сетей с живой аудиторией.",
-    url: "https://hypehub.shop/about",
+    url: "https://hypehub.vercel.app/about",
     images: ["/og.png"],
   },
 };

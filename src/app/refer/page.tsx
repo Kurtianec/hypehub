@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Реферальная программа — получайте бонусы за приглашения | ХайпХаб",
   description: "Приглашайте друзей в ХайпХаб и получайте 10% от каждой их покупки. Реферальная ссылка, статистика кликов и заработка.",
-  alternates: { canonical: "https://hypehub.shop/refer" },
+  alternates: { canonical: "https://hypehub.vercel.app/refer" },
 };
 
 export default async function ReferPage() {

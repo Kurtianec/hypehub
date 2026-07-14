@@ -25,12 +25,12 @@ export const metadata: Metadata = {
     "купить тикток 100k",
     "продажа тикток аккаунтов",
   ],
-  alternates: { canonical: "https://hypehub.shop/kupit-akkaunt-tiktok" },
+  alternates: { canonical: "https://hypehub.vercel.app/kupit-akkaunt-tiktok" },
   openGraph: {
     title: "Купить аккаунт TikTok с подписчиками | ХайпХаб",
     description:
       "Готовые TikTok аккаунты от 1K до 100K+ подписчиков. Живая аудитория, гарантия, мгновенная выдача. Оплата криптой.",
-    url: "https://hypehub.shop/kupit-akkaunt-tiktok",
+    url: "https://hypehub.vercel.app/kupit-akkaunt-tiktok",
     images: ["/og.png"],
   },
 };

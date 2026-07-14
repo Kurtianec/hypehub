@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     "hypehub отзывы",
     "отзывы маркетплейс аккаунтов",
   ],
-  alternates: { canonical: "https://hypehub.shop/otzyvy" },
+  alternates: { canonical: "https://hypehub.vercel.app/otzyvy" },
   openGraph: {
     title: "Отзывы покупателей ХайпХаб",
     description: "Реальные отзывы о покупке аккаунтов TikTok, YouTube, VK. Более 12 800 довольных клиентов.",
-    url: "https://hypehub.shop/otzyvy",
+    url: "https://hypehub.vercel.app/otzyvy",
     images: ["/og.png"],
   },
 };

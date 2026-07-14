@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Личный кабинет — мои заказы | ХайпХаб",
   description: "Личный кабинет покупателя. История заказов, скачивание данных аккаунтов, статусы гарантии.",
-  alternates: { canonical: "https://hypehub.shop/account" },
+  alternates: { canonical: "https://hypehub.vercel.app/account" },
 };
 
 export default async function AccountPage() {

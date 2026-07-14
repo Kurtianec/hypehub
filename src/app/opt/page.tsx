@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "Оптовые покупки аккаунтов — скидки до 30% | ХайпХаб",
   description: "Оптовые покупки аккаунтов TikTok, YouTube, VK. Скидки от 10% до 30% при покупке от 3 товаров. Резервирование на 24 часа с предоплатой 10%.",
   keywords: ["опт аккаунты", "оптовые скидки", "резервирование аккаунтов", "оптовые покупки"],
-  alternates: { canonical: "https://hypehub.shop/opt" },
+  alternates: { canonical: "https://hypehub.vercel.app/opt" },
 };
 
 export default async function OptPage() {

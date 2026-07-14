@@ -54,7 +54,7 @@ export function ReferClient() {
     }
   };
 
-  const refLink = refCode ? `${typeof window !== "undefined" ? window.location.origin : "https://hypehub.shop"}/ref/${refCode}` : "";
+  const refLink = refCode ? `${typeof window !== "undefined" ? window.location.origin : "https://hypehub.vercel.app"}/ref/${refCode}` : "";
 
   const copyLink = () => {
     navigator.clipboard.writeText(refLink);

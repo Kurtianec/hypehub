@@ -25,12 +25,12 @@ export const metadata: Metadata = {
     "продажа youtube каналов",
     "купить ютуб с adsense",
   ],
-  alternates: { canonical: "https://hypehub.shop/kupit-kanal-youtube" },
+  alternates: { canonical: "https://hypehub.vercel.app/kupit-kanal-youtube" },
   openGraph: {
     title: "Купить YouTube канал с подписчиками | ХайпХаб",
     description:
       "Готовые YouTube каналы от 1K до 100K+ подписчиков. Монетизация, без страйков, гарантия. Оплата криптой.",
-    url: "https://hypehub.shop/kupit-kanal-youtube",
+    url: "https://hypehub.vercel.app/kupit-kanal-youtube",
     images: ["/og.png"],
   },
 };
