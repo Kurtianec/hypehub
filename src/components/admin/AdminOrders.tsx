@@ -195,8 +195,8 @@ export function AdminOrders() {
                   <div className="text-right">
                     <div className="font-black text-[#BFFF00] font-mono">{formatPrice(o.amount, o.currency)}</div>
                   </div>
-                  {/* Restore product to catalog — shows for delivered/cancelled orders */}
-                  {(o.status === "delivered" || o.status === "cancelled") && (
+                  {/* Restore product to catalog — shows for any non-pending order OR pending too */}
+                  {(o.status === "delivered" || o.status === "cancelled" || o.status === "pending" || o.status === "paid") && (
                     restoredIds.has(o.id) ? (
                       <span className="flex items-center gap-1 px-2 py-1.5 text-[10px] font-mono uppercase text-[#BFFF00] bg-[#BFFF00]/10 border border-[#BFFF00]/30">
                         <Check className="w-3 h-3" />
@@ -281,7 +281,7 @@ export function AdminOrders() {
               )}
 
               {/* Restore to catalog button in modal */}
-              {(viewOrder.status === "delivered" || viewOrder.status === "cancelled") && (
+              {(viewOrder.status === "delivered" || viewOrder.status === "cancelled" || viewOrder.status === "pending" || viewOrder.status === "paid") && (
                 <div className="pt-2">
                   {restoredIds.has(viewOrder.id) ? (
                     <div className="flex items-center justify-center gap-2 p-3 bg-[#BFFF00]/10 border border-[#BFFF00]/30 rounded-xl">
