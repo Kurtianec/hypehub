@@ -18,7 +18,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: "https://hypehub.vercel.app/sitemap.xml",
-    host: "https://hypehub.vercel.app",
+    sitemap: "https://hypehub.shop/sitemap.xml",
+    host: "https://hypehub.shop",
   };
 }

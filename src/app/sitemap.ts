@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://hypehub.vercel.app";
+  const baseUrl = "https://hypehub.shop";
   const now = new Date();
 
   const [categories, products, blogPosts] = await Promise.all([

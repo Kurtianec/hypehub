@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  ShoppingCart, Loader2, Mail, Phone, Bitcoin, Eye, Archive,
+  ShoppingCart, Loader2, Mail, Phone, Bitcoin, Eye, Archive, RotateCcw, Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,6 +30,8 @@ export function AdminOrders() {
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<View>("active");
   const [viewOrder, setViewOrder] = useState<Order | null>(null);
+  const [restoringId, setRestoringId] = useState<string | null>(null);
+  const [restoredIds, setRestoredIds] = useState<Set<string>>(new Set());
   const { toast } = useToast();
 
   const load = async () => {
@@ -49,6 +51,28 @@ export function AdminOrders() {
   useEffect(() => {
     load();
   }, [view]);
+
+  // Restore product to catalog (change status sold → available)
+  const restoreProduct = async (order: Order) => {
+    setRestoringId(order.id);
+    try {
+      const res = await fetch(`/api/products/${order.productId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        body: JSON.stringify({ status: "available" }),
+      });
+      if (!res.ok) throw new Error("Ошибка");
+      toast({
+        title: "Товар возвращён в каталог",
+        description: order.product?.title,
+      });
+      setRestoredIds((prev) => new Set(prev).add(order.id));
+    } catch {
+      toast({ title: "Ошибка возврата товара", variant: "destructive" });
+    } finally {
+      setRestoringId(null);
+    }
+  };
 
   const archivedCount = orders.filter((o) => o.status === "delivered" || o.status === "cancelled").length;
   const activeCount = orders.filter((o) => o.status === "pending" || o.status === "paid").length;
@@ -167,10 +191,35 @@ export function AdminOrders() {
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                   <div className="text-right">
                     <div className="font-black text-[#BFFF00] font-mono">{formatPrice(o.amount, o.currency)}</div>
                   </div>
+                  {/* Restore product to catalog — shows for delivered/cancelled orders */}
+                  {(o.status === "delivered" || o.status === "cancelled") && (
+                    restoredIds.has(o.id) ? (
+                      <span className="flex items-center gap-1 px-2 py-1.5 text-[10px] font-mono uppercase text-[#BFFF00] bg-[#BFFF00]/10 border border-[#BFFF00]/30">
+                        <Check className="w-3 h-3" />
+                        В каталоге
+                      </span>
+                    ) : (
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => restoreProduct(o)}
+                        disabled={restoringId === o.id}
+                        className="text-[10px] text-[#BFFF00] hover:bg-[#BFFF00]/10 font-mono uppercase px-2"
+                        title="Вернуть товар в каталог"
+                      >
+                        {restoringId === o.id ? (
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        ) : (
+                          <RotateCcw className="w-3.5 h-3.5" />
+                        )}
+                        <span className="hidden md:inline ml-1">В каталог</span>
+                      </Button>
+                    )
+                  )}
                   <Button
                     size="sm"
                     variant="ghost"
@@ -228,6 +277,34 @@ export function AdminOrders() {
                     <div>Логин: <span className="text-foreground">{viewOrder.deliveryLogin}</span></div>
                     <div>Пароль: <span className="text-foreground">{viewOrder.deliveryPass}</span></div>
                   </div>
+                </div>
+              )}
+
+              {/* Restore to catalog button in modal */}
+              {(viewOrder.status === "delivered" || viewOrder.status === "cancelled") && (
+                <div className="pt-2">
+                  {restoredIds.has(viewOrder.id) ? (
+                    <div className="flex items-center justify-center gap-2 p-3 bg-[#BFFF00]/10 border border-[#BFFF00]/30 rounded-xl">
+                      <Check className="w-4 h-4 text-[#BFFF00]" />
+                      <span className="text-xs font-mono uppercase text-[#BFFF00]">Товар в каталоге</span>
+                    </div>
+                  ) : (
+                    <Button
+                      onClick={() => restoreProduct(viewOrder)}
+                      disabled={restoringId === viewOrder.id}
+                      className="w-full bg-[#BFFF00] text-black hover:bg-[#FF2D87] hover:text-white font-black uppercase font-mono"
+                    >
+                      {restoringId === viewOrder.id ? (
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      ) : (
+                        <RotateCcw className="w-4 h-4 mr-2" />
+                      )}
+                      Вернуть товар в каталог
+                    </Button>
+                  )}
+                  <p className="text-[10px] text-[#888] text-center mt-2 font-mono">
+                    &gt; Товар снова появится в каталоге со статусом «В продаже»
+                  </p>
                 </div>
               )}
             </div>
