@@ -1,0 +1,4 @@
+import { NextRequest, NextResponse } from "next/server";
+import { db } from "@/lib/db";
+import { requireAdmin } from "@/lib/security";
+export async function POST(req:NextRequest,{params}:{params:Promise<{id:string}>}){const denied=await requireAdmin(req);if(denied)return denied;const {id}=await params;const source=await db.product.findUnique({where:{id}});if(!source)return NextResponse.json({error:"Not found"},{status:404});const {id:_id,createdAt:_created,updatedAt:_updated,reservedUntil:_reserved,...copy}=source;const product=await db.product.create({data:{...copy,title:`${source.title} — копия`,status:"archived",featured:false,publishedAt:null}});await db.adminLog.create({data:{action:"product_duplicated",entity:"product",entityId:product.id,details:JSON.stringify({sourceId:id})}});return NextResponse.json({product});}

@@ -100,24 +100,24 @@ export function Header({
           {/* NO clip-path on this container — so search dropdown isn't clipped */}
           <div
             className={cn(
-              "flex items-center justify-between px-3 md:px-5 py-2.5 border-2 transition-all rounded-lg",
+              "flex items-center justify-between px-3 md:px-5 py-2.5 border transition-all rounded-2xl backdrop-blur-xl",
               scrolled
-                ? "bg-[#0A0A0A] border-[#BFFF00]/40 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.5)]"
-                : "bg-[#0E0E0E] border-[#2A2A2A]"
+                ? "bg-[#0A0A0A]/90 border-white/10 shadow-[0_12px_40px_-18px_rgba(0,0,0,0.8)]"
+                : "bg-[#0E0E0E]/75 border-white/[.07]"
             )}
           >
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 md:gap-2.5 group flex-shrink-0" aria-label={`${siteName} — на главную`}>
-              <div className="relative w-9 h-9 bg-[#BFFF00] flex items-center justify-center border-2 border-[#BFFF00] group-hover:bg-[#FF2D87] group-hover:border-[#FF2D87] transition-colors flex-shrink-0 glow-pulse">
+              <div className="relative w-9 h-9 rounded-xl bg-[#BFFF00] flex items-center justify-center transition-colors flex-shrink-0">
                 <Zap className="w-5 h-5 text-black" strokeWidth={3} fill="black" />
               </div>
               <div className="hidden sm:flex flex-col leading-none">
                 <span className="text-lg md:text-xl font-black tracking-tighter uppercase">
-                  <span className="text-[#BFFF00]">Хайп</span>
-                  <span className="text-foreground">Хаб</span>
+                  <span className="text-[#BFFF00]">{siteName.slice(0, 4)}</span>
+                  <span className="text-foreground">{siteName.slice(4)}</span>
                 </span>
                 <span className="text-[9px] md:text-[10px] text-[#888] font-mono uppercase tracking-widest">
-                  {"// v.2026"}
+                  Маркетплейс аккаунтов
                 </span>
               </div>
             </Link>
@@ -135,7 +135,6 @@ export function Header({
                       : "text-[#888] hover:text-foreground hover:bg-white/5"
                   )}
                 >
-                  <span className="text-[10px] mr-1.5 font-mono opacity-60">{item.num}</span>
                   {item.label}
                 </button>
               ))}
@@ -210,7 +209,7 @@ export function Header({
               {/* Mobile menu toggle */}
               <button
                 onClick={() => setMobileOpen((v) => !v)}
-                className="lg:hidden w-10 h-10 border-2 border-[#BFFF00] bg-[#BFFF00] text-black flex items-center justify-center touch-manipulation hover:bg-[#FF2D87] hover:border-[#FF2D87] hover:text-white transition-colors"
+                className="lg:hidden w-10 h-10 rounded-xl border border-[#BFFF00] bg-[#BFFF00] text-black flex items-center justify-center touch-manipulation transition-colors"
                 aria-label="Открыть меню"
                 aria-expanded={mobileOpen}
               >

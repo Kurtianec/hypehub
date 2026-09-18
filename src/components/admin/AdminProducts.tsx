@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Plus, Pencil, Trash2, Save, Loader2, Search, Package,
-  Archive, ArchiveRestore, CheckSquare, Square, X, Star,
+  Archive, ArchiveRestore, CheckSquare, Square, X, Star, Copy,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -144,6 +144,12 @@ export function AdminProducts({
     }
   };
 
+  const duplicateProduct = async (id: string) => {
+    const res = await fetch(`/api/products/${id}/duplicate`, { method: "POST" });
+    if (res.ok) { toast({ title: "Копия товара создана" }); onChange(); }
+    else toast({ title: "Не удалось дублировать", variant: "destructive" });
+  };
+
   const applyBulkPrice = async () => {
     if (!bulkPriceValue || selected.size === 0) return;
     setBulkPriceLoading(true);
@@ -196,6 +202,11 @@ export function AdminProducts({
 
   return (
     <div>
+      {products.filter((p) => p.status === "available").length < 5 && (
+        <div className="mb-4 rounded-xl border border-[#FFE600]/30 bg-[#FFE600]/5 p-3 text-sm text-[#FFE600]">
+          Низкий остаток: в продаже осталось {products.filter((p) => p.status === "available").length} товаров. Добавьте или восстановите позиции.
+        </div>
+      )}
       <div className="flex flex-col sm:flex-row justify-between gap-3 mb-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
@@ -400,6 +411,9 @@ export function AdminProducts({
                     <Pencil className="w-3.5 h-3.5 mr-1" />
                     Изменить
                   </Button>
+                  <Button size="sm" variant="ghost" onClick={() => duplicateProduct(p.id)} className="text-xs hover:bg-[#00F0FF]/10 hover:text-[#00F0FF] font-mono uppercase px-2">
+                    <Copy className="w-3.5 h-3.5 mr-1" /> Копия
+                  </Button>
                   {p.status === "archived" || p.status === "sold" || p.status === "reserved" ? (
                     <Button
                       size="sm"
@@ -584,6 +598,10 @@ function ProductForm({
         deliveryNote: product.deliveryNote || "",
         status: product.status,
         featured: product.featured,
+        warrantyDays: product.warrantyDays || 14,
+        lastCheckedAt: product.lastCheckedAt ? String(product.lastCheckedAt).slice(0, 10) : "",
+        publishedAt: product.publishedAt ? String(product.publishedAt).slice(0, 16) : "",
+        internalNote: product.internalNote || "",
       });
     } else {
       setForm({
@@ -601,6 +619,10 @@ function ProductForm({
         deliveryNote: "",
         status: "available",
         featured: false,
+        warrantyDays: 14,
+        lastCheckedAt: new Date().toISOString().slice(0, 10),
+        publishedAt: "",
+        internalNote: "",
       });
     }
   }
@@ -619,7 +641,14 @@ function ProductForm({
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          oldPrice: form.oldPrice || null,
+          image: form.image || null,
+          publishedAt: form.publishedAt || null,
+          lastCheckedAt: form.lastCheckedAt || null,
+          internalNote: form.internalNote || null,
+        }),
       });
       if (!res.ok) throw new Error("Ошибка");
       toast({ title: isCreate ? "Товар добавлен" : "Товар обновлён" });
@@ -753,6 +782,23 @@ function ProductForm({
 
           <div className="md:col-span-2 pt-3 border-t border-[#1F1F1F]">
             <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FF2D87]">{"// ДАННЫЕ ДЛЯ ВЫДАЧИ ПОКУПАТЕЛЮ"}</Label>
+          </div>
+
+          <div>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#00F0FF]">Гарантия, дней</Label>
+            <Input type="number" min="0" value={String(form.warrantyDays || 14)} onChange={(e) => set("warrantyDays", e.target.value)} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A]" />
+          </div>
+          <div>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#00F0FF]">Последняя проверка</Label>
+            <Input type="date" value={String(form.lastCheckedAt || "")} onChange={(e) => set("lastCheckedAt", e.target.value)} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A]" />
+          </div>
+          <div className="md:col-span-2">
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#00F0FF]">Опубликовать по расписанию</Label>
+            <Input type="datetime-local" value={String(form.publishedAt || "")} onChange={(e) => set("publishedAt", e.target.value)} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A]" />
+          </div>
+          <div className="md:col-span-2">
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FFE600]">Внутренняя заметка (не видна покупателю)</Label>
+            <Textarea value={String(form.internalNote || "")} onChange={(e) => set("internalNote", e.target.value)} rows={2} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A]" />
           </div>
 
           <div>

@@ -15,12 +15,14 @@ export async function PATCH(
   const allowed = [
     "categoryId", "title", "description", "price", "oldPrice", "image",
     "badges", "followers", "metadata", "login", "password", "deliveryNote",
-    "status", "featured",
+    "status", "featured", "warrantyDays", "lastCheckedAt", "publishedAt", "internalNote",
   ];
   for (const k of allowed) {
     if (body[k] !== undefined) {
-      if (k === "price" || k === "oldPrice") {
+      if (k === "price" || k === "oldPrice" || k === "warrantyDays") {
         data[k] = body[k] !== null ? parseFloat(body[k]) : null;
+      } else if (k === "lastCheckedAt" || k === "publishedAt") {
+        data[k] = body[k] ? new Date(body[k]) : null;
       } else if (k === "featured") {
         data[k] = !!body[k];
       } else {

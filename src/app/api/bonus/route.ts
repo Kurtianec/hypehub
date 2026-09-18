@@ -1,15 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { requireAdmin } from "@/lib/security";
+import { getCustomerSession, requireAdmin } from "@/lib/security";
 
 // GET /api/bonus?email=... — get user's bonus points
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const email = searchParams.get("email");
-
-  if (!email) {
-    return NextResponse.json({ error: "email required" }, { status: 400 });
-  }
+  const session = await getCustomerSession(req);
+  if (!session) return NextResponse.json({ error: "Требуется вход" }, { status: 401 });
+  const email = session.email;
 
   let account = await db.userAccount.findUnique({
     where: { email: email.toLowerCase() },

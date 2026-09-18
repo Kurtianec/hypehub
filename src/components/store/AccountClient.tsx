@@ -1,356 +1,46 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import {
-  Mail, Search, Package, Download, Check, Clock, X, ArrowRight, Copy, Gift, TrendingUp,
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Check, Clock, Copy, Download, KeyRound, LogOut, Mail, Package, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { formatPrice } from "@/lib/types";
-import Link from "next/link";
 
-const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
-  pending: { label: "Ожидает оплаты", color: "#FFE600" },
-  paid: { label: "Оплачен", color: "#00F0FF" },
-  delivered: { label: "Доставлен", color: "#BFFF00" },
-  cancelled: { label: "Отменён", color: "#FF3333" },
-};
+type Event = { id: string; label: string; actor: string; createdAt: string };
+type Claim = { id: string; status: string; reason: string; message: string; adminNote?: string | null; createdAt: string };
+type Order = { id: string; productTitle: string; productCategory?: string; amount: number; currency: string; paymentMethod: string; status: string; createdAt: string; login?: string; password?: string; deliveryNote?: string; events: Event[]; warrantyUntil: string; claims: Claim[] };
 
-interface Order {
-  id: string;
-  productTitle?: string;
-  productCategory?: string;
-  amount: number;
-  currency: string;
-  paymentMethod: string;
-  status: string;
-  createdAt: string;
-  login?: string;
-  password?: string;
-  deliveryNote?: string | null;
-}
-
-interface BonusInfo {
-  points: number;
-  totalSpent: number;
-  canUse: boolean;
-}
+const STATUS: Record<string, string> = { pending: "Ожидает оплаты", paid: "Оплата подтверждена", delivered: "Данные выданы", cancelled: "Отменён", archived: "Завершён" };
+const REASONS = { login: "Не получается войти", password: "Неверный пароль", verification: "Запрашивается подтверждение", mismatch: "Не соответствует описанию", blocked: "Аккаунт заблокирован", other: "Другая проблема" };
 
 export function AccountClient({ settings }: { settings: Record<string, string> }) {
-  const [email, setEmail] = useState("");
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [searched, setSearched] = useState(false);
-  const [bonus, setBonus] = useState<BonusInfo | null>(null);
-  const [statusFilter, setStatusFilter] = useState<string>("all");
-  const { toast } = useToast();
+  const [email, setEmail] = useState(""); const [code, setCode] = useState(""); const [orderId, setOrderId] = useState("");
+  const [authenticated, setAuthenticated] = useState(false); const [emailConfigured, setEmailConfigured] = useState<boolean | null>(null);
+  const [orders, setOrders] = useState<Order[]>([]); const [loading, setLoading] = useState(true); const [claimOrder, setClaimOrder] = useState<string | null>(null);
+  const [reason, setReason] = useState<keyof typeof REASONS>("login"); const [message, setMessage] = useState(""); const { toast } = useToast();
 
-  // Restore email from localStorage on mount + auto-search
-  useEffect(() => {
-    const saved = localStorage.getItem("hypehub_account_email");
-    if (saved) {
-      setEmail(saved);
-      // Auto-search after a tick to let state settle
-      queueMicrotask(() => {
-        searchWith(saved);
-      });
-    }
-  }, []);
+  const loadOrders = async () => { const res = await fetch("/api/orders/by-email"); if (!res.ok) return; const data = await res.json(); setOrders(data.orders || []); setAuthenticated(true); };
+  useEffect(() => { fetch("/api/customer-auth/session").then(async r => { if (r.ok) { const d = await r.json(); setEmail(d.email); await loadOrders(); } }).finally(() => setLoading(false)); }, []);
+  const requestCode = async () => { setLoading(true); const res = await fetch("/api/customer-auth/request-code", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) }); const data = await res.json(); setLoading(false); if (!res.ok) return toast({ title: "Ошибка", description: data.error, variant: "destructive" }); setEmailConfigured(data.emailConfigured); toast({ title: data.emailConfigured ? "Код отправлен" : "Вход по номеру заказа", description: data.emailConfigured ? "Проверьте почту" : "Почтовая отправка пока не подключена" }); };
+  const login = async () => { setLoading(true); const res = await fetch("/api/customer-auth/verify", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, code: code || undefined, orderId: orderId || undefined }) }); const data = await res.json(); if (res.ok) await loadOrders(); else toast({ title: "Вход не выполнен", description: data.error, variant: "destructive" }); setLoading(false); };
+  const logout = async () => { await fetch("/api/customer-auth/session", { method: "DELETE" }); setAuthenticated(false); setOrders([]); setCode(""); setOrderId(""); };
+  const copy = (value: string) => navigator.clipboard.writeText(value).then(() => toast({ title: "Скопировано" }));
+  const download = (o: Order) => { const text = `HypeHub — данные заказа ${o.id}\nТовар: ${o.productTitle}\nЛогин: ${o.login}\nПароль: ${o.password}\n${o.deliveryNote || ""}\n\nСразу смените пароль, контакты и включите двухфакторную защиту.`; const url = URL.createObjectURL(new Blob([text], { type: "text/plain;charset=utf-8" })); const a = document.createElement("a"); a.href = url; a.download = `hypehub_${o.id}.txt`; a.click(); URL.revokeObjectURL(url); };
+  const sendClaim = async () => { if (!claimOrder) return; const res = await fetch("/api/warranty", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orderId: claimOrder, reason, message }) }); const data = await res.json(); if (!res.ok) return toast({ title: "Не отправлено", description: data.error, variant: "destructive" }); setClaimOrder(null); setMessage(""); await loadOrders(); toast({ title: "Обращение создано", description: "Поддержка увидит его вместе с заказом" }); };
 
-  const searchWith = async (emailVal: string) => {
-    if (!emailVal) {
-      toast({ title: "Введите email", variant: "destructive" });
-      return;
-    }
-    setLoading(true);
-    setSearched(true);
-    localStorage.setItem("hypehub_account_email", emailVal);
-    try {
-      const [ordersRes, bonusRes] = await Promise.all([
-        fetch(`/api/orders/by-email?email=${encodeURIComponent(emailVal)}`),
-        fetch(`/api/bonus?email=${encodeURIComponent(emailVal)}`),
-      ]);
-      const ordersData = await ordersRes.json();
-      const bonusData = await bonusRes.json();
-      setOrders(ordersData.orders || []);
-      if (!bonusData.error) setBonus(bonusData);
-    } catch {
-      toast({ title: "Ошибка", variant: "destructive" });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const search = () => searchWith(email);
-
-  const clearEmail = () => {
-    localStorage.removeItem("hypehub_account_email");
-    setEmail("");
-    setOrders([]);
-    setSearched(false);
-    setBonus(null);
-  };
-
-  // Filter orders by status
-  const filteredOrders = statusFilter === "all"
-    ? orders
-    : orders.filter((o) => o.status === statusFilter);
-
-  const copyText = (text: string, label: string) => {
-    navigator.clipboard.writeText(text);
-    toast({ title: "Скопировано", description: label });
-  };
-
-  const downloadCredentials = (order: Order) => {
-    const content = `ХайпХаб — Данные аккаунта
-============================
-Товар: ${order.productTitle}
-Дата: ${new Date(order.createdAt).toLocaleString("ru-RU")}
-Заказ: ${order.id}
-
-ЛОГИН: ${order.login}
-ПАРОЛЬ: ${order.password}
-
-${order.deliveryNote || ""}
-
-============================
-Инструкция по безопасности:
-1. Сразу смените пароль после входа
-2. Привяжите свои контакты (телефон/email)
-3. Включите двухфакторную аутентификацию
-4. Не передавайте данные третьим лицам
-
-ХайпХаб
-${settings.support_email || "support@hypehub.vercel.app"}
-`;
-    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `hypehub_${order.id}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  return (
-    <main className="flex-1 pt-28 md:pt-32 pb-12">
-      <div className="container mx-auto px-4 max-w-3xl">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs text-[#888] font-mono uppercase mb-6">
-          <Link href="/" className="hover:text-[#BFFF00]">ГЛАВНАЯ</Link>
-          <span className="text-[#BFFF00]">/</span>
-          <span className="text-foreground">КАБИНЕТ</span>
-        </div>
-
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-1 h-8 bg-[#00F0FF]" />
-          <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// ACCOUNT"}</span>
-        </div>
-        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-3">
-          <span className="text-gradient-neon">Личный кабинет</span>
-        </h1>
-        <p className="text-[#888] text-sm font-mono mb-8">
-          &gt; Введите email, указанный при заказе, чтобы увидеть историю покупок
-        </p>
-
-        {/* Search form */}
-        <div className="bg-[#0E0E0E] border-2 border-[#00F0FF] p-5 md:p-6 mb-8"
-          style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}>
-          <Label className="text-[10px] uppercase tracking-widest font-mono text-[#00F0FF] mb-2 block">{"// EMAIL_ДЛЯ_ПОИСКА_ЗАКАЗОВ"}</Label>
-          <div className="flex flex-col sm:flex-row gap-2">
-            <div className="relative flex-1">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888]" />
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && search()}
-                placeholder="your@email.com"
-                className="pl-10 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#00F0FF] font-mono"
-              />
-            </div>
-            <Button
-              onClick={search}
-              disabled={loading}
-              className="bg-[#00F0FF] text-black hover:bg-[#BFFF00] font-black uppercase border-2 border-[#00F0FF] hover:border-[#BFFF00] font-mono tracking-wide"
-            >
-              {loading ? "..." : <><Search className="w-4 h-4 mr-1.5" strokeWidth={3} /> Найти</>}
-            </Button>
-          </div>
-        </div>
-
-        {/* Results */}
-        {searched && !loading && (
-          <>
-            {/* Bonus card — always show after search */}
-            {bonus && (
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                <div className="bg-[#121212] border-2 border-[#FFE600]/40 p-4"
-                  style={{ clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))" }}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <Gift className="w-4 h-4 text-[#FFE600]" strokeWidth={2.5} />
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#888]">Бонусы</span>
-                  </div>
-                  <div className="text-xl font-black text-[#FFE600] font-mono">{bonus.points} ₽</div>
-                  <div className="text-[10px] text-[#888] font-mono mt-1">
-                    {bonus.canUse ? "Можно списать при оплате" : "Минимум 100 ₽ для списания"}
-                  </div>
-                </div>
-                <div className="bg-[#121212] border-2 border-[#BFFF00]/40 p-4"
-                  style={{ clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))" }}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <TrendingUp className="w-4 h-4 text-[#BFFF00]" strokeWidth={2.5} />
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#888]">Всего потрачено</span>
-                  </div>
-                  <div className="text-xl font-black text-[#BFFF00] font-mono">{formatPrice(bonus.totalSpent)}</div>
-                  <div className="text-[10px] text-[#888] font-mono mt-1">1 ₽ = 1 бонусный балл</div>
-                </div>
-              </div>
-            )}
-
-            {orders.length === 0 ? (
-              <div className="bg-[#121212] border-2 border-[#2A2A2A] p-8 text-center"
-                style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}>
-                <Package className="w-10 h-10 mx-auto mb-3 text-[#888]/30" />
-                <p className="text-[#888] font-mono uppercase text-sm">&gt; Заказов не найдено</p>
-                <p className="text-xs text-[#888] mt-2 font-mono">Проверьте, что ввели правильный email</p>
-                <Link
-                  href="/"
-                  className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 bg-[#BFFF00] text-black font-black uppercase border-2 border-[#BFFF00] hover:bg-[#FF2D87] hover:border-[#FF2D87] hover:text-white transition-colors font-mono text-xs"
-                >
-                  В каталог <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
-                </Link>
-              </div>
-            ) : (
-              <div>
-                <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-1 h-6 bg-[#BFFF00]" />
-                    <span className="font-mono text-xs text-[#888] uppercase tracking-widest">
-                      {"// НАЙДЕНО_ЗАКАЗОВ: "}<span className="text-[#BFFF00] font-black">{orders.length}</span>
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {/* Status filter */}
-                    <select
-                      value={statusFilter}
-                      onChange={(e) => setStatusFilter(e.target.value)}
-                      className="bg-[#0A0A0A] border-2 border-[#2A2A2A] hover:border-[#BFFF00] text-xs font-mono px-2 py-1.5 uppercase tracking-wide cursor-pointer"
-                    >
-                      <option value="all">Все статусы</option>
-                      <option value="pending">Ожидают оплаты</option>
-                      <option value="paid">Оплачены</option>
-                      <option value="delivered">Доставлены</option>
-                      <option value="cancelled">Отменены</option>
-                    </select>
-                    <button
-                      onClick={clearEmail}
-                      className="text-[10px] font-mono uppercase text-[#888] hover:text-[#FF3333] px-2 py-1.5 border border-[#2A2A2A] hover:border-[#FF3333]/50 transition-colors"
-                    >
-                      Выйти
-                    </button>
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  {filteredOrders.map((o, i) => {
-                    const status = STATUS_CONFIG[o.status] || STATUS_CONFIG.pending;
-                    return (
-                      <motion.div
-                        key={o.id}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.05 }}
-                        className="bg-[#121212] border-2 p-4"
-                        style={{
-                          borderColor: `${status.color}40`,
-                          clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))",
-                        }}
-                      >
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="px-2 py-0.5 text-[9px] font-black border font-mono uppercase"
-                                style={{ background: `${status.color}15`, color: status.color, borderColor: `${status.color}40` }}>
-                                {status.label}
-                              </span>
-                              <span className="text-[10px] text-[#888] font-mono uppercase">
-                                {new Date(o.createdAt).toLocaleString("ru-RU")}
-                              </span>
-                            </div>
-                            <h3 className="font-black text-sm uppercase tracking-tight mb-0.5 truncate">{o.productTitle}</h3>
-                            {o.productCategory && (
-                              <div className="text-[10px] text-[#888] font-mono uppercase">{o.productCategory}</div>
-                            )}
-                          </div>
-                          <div className="text-right flex-shrink-0">
-                            <div className="font-black text-[#BFFF00] font-mono">{formatPrice(o.amount, o.currency)}</div>
-                            <div className="text-[10px] text-[#888] font-mono uppercase">{o.paymentMethod}</div>
-                          </div>
-                        </div>
-
-                        {/* Credentials (if delivered) */}
-                        {o.status === "delivered" && o.login && (
-                          <div className="bg-[#0A0A0A] border-l-2 border-[#BFFF00] p-3 mt-3">
-                            <div className="text-[10px] text-[#BFFF00] font-mono uppercase mb-2 flex items-center gap-1.5">
-                              <Check className="w-3 h-3" strokeWidth={3} />
-                              ДАННЫЕ АККАУНТА
-                            </div>
-                            <div className="space-y-2">
-                              <div className="flex items-center gap-2">
-                                <span className="text-[10px] text-[#888] font-mono uppercase w-12">Логин:</span>
-                                <code className="flex-1 text-xs font-mono bg-[#121212] px-2 py-1 break-all">{o.login}</code>
-                                <button onClick={() => copyText(o.login!, "Логин")} className="text-[#888] hover:text-[#BFFF00]" aria-label="Копировать">
-                                  <Copy className="w-3.5 h-3.5" />
-                                </button>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <span className="text-[10px] text-[#888] font-mono uppercase w-12">Пароль:</span>
-                                <code className="flex-1 text-xs font-mono bg-[#121212] px-2 py-1 break-all">{o.password}</code>
-                                <button onClick={() => copyText(o.password!, "Пароль")} className="text-[#888] hover:text-[#BFFF00]" aria-label="Копировать">
-                                  <Copy className="w-3.5 h-3.5" />
-                                </button>
-                              </div>
-                            </div>
-                            {o.deliveryNote && (
-                              <p className="text-[10px] text-[#888] font-mono mt-2">{o.deliveryNote}</p>
-                            )}
-                            <Button
-                              onClick={() => downloadCredentials(o)}
-                              size="sm"
-                              className="mt-3 bg-[#BFFF00] text-black hover:bg-[#FF2D87] hover:text-white font-black uppercase border-2 border-[#BFFF00] hover:border-[#FF2D87] font-mono text-xs w-full"
-                            >
-                              <Download className="w-3.5 h-3.5 mr-1.5" strokeWidth={3} />
-                              Скачать .txt
-                            </Button>
-                          </div>
-                        )}
-
-                        {o.status === "pending" && (
-                          <div className="flex items-center gap-2 text-[10px] text-[#FFE600] font-mono uppercase mt-2">
-                            <Clock className="w-3 h-3" /> Ожидает оплаты
-                          </div>
-                        )}
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </>
-        )}
-
-        {!searched && (
-          <div className="bg-[#121212] border-2 border-[#2A2A2A] p-8 text-center"
-            style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}>
-            <Package className="w-10 h-10 mx-auto mb-3 text-[#888]/30" />
-            <p className="text-[#888] font-mono uppercase text-sm">&gt; Введите email для просмотра заказов</p>
-            <p className="text-xs text-[#888] mt-2 font-mono">Все ваши покупки в одном месте</p>
-          </div>
-        )}
-      </div>
-    </main>
-  );
+  if (loading) return <main className="min-h-[70vh] pt-32 text-center text-muted-foreground">Загрузка…</main>;
+  return <main className="flex-1 pt-28 pb-16"><div className="container mx-auto max-w-4xl px-4">
+    <div className="mb-8 flex items-end justify-between gap-4"><div><div className="text-xs uppercase tracking-[.2em] text-[#BFFF00]">Личный кабинет</div><h1 className="mt-2 text-3xl md:text-5xl font-black">Ваши покупки</h1><p className="mt-2 text-sm text-muted-foreground">Заказы, выданные данные и гарантийные обращения в одном месте.</p></div>{authenticated && <Button variant="outline" onClick={logout}><LogOut className="mr-2 h-4 w-4"/>Выйти</Button>}</div>
+    {!authenticated ? <section className="mx-auto max-w-xl rounded-2xl border border-white/10 bg-white/[.035] p-5 md:p-7"><div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#BFFF00]/10 text-[#BFFF00]"><KeyRound/></div><h2 className="text-xl font-bold">Безопасный вход без пароля</h2><p className="mb-5 mt-1 text-sm text-muted-foreground">Получите одноразовый код. Если почта ещё не подключена — используйте номер любого своего заказа.</p><div className="space-y-3"><div className="relative"><Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground"/><Input className="pl-10" type="email" placeholder="Email из заказа" value={email} onChange={e=>setEmail(e.target.value)}/></div>{emailConfigured !== null && <><Input placeholder="Код из письма" value={code} onChange={e=>setCode(e.target.value)}/><div className="text-center text-xs text-muted-foreground">или</div><Input placeholder="Номер вашего заказа" value={orderId} onChange={e=>setOrderId(e.target.value)}/></>}<div className="flex gap-2">{emailConfigured === null ? <Button className="w-full bg-[#BFFF00] text-black" onClick={requestCode}>Продолжить</Button> : <><Button variant="outline" onClick={requestCode}>Отправить снова</Button><Button className="flex-1 bg-[#BFFF00] text-black" onClick={login}>Войти</Button></>}</div></div></section> :
+    <div className="space-y-4">{orders.length === 0 ? <div className="rounded-2xl border border-white/10 p-10 text-center"><Package className="mx-auto mb-3 text-muted-foreground"/><p>Заказов пока нет</p><Link className="mt-4 inline-block text-[#BFFF00]" href="/">Перейти в каталог</Link></div> : orders.map(o => <article key={o.id} className="rounded-2xl border border-white/10 bg-white/[.025] p-5 md:p-6"><div className="flex flex-wrap items-start justify-between gap-3"><div><div className="mb-2 flex flex-wrap gap-2 text-xs"><span className="rounded-full bg-[#BFFF00]/10 px-2.5 py-1 text-[#BFFF00]">{STATUS[o.status] || o.status}</span><span className="px-2.5 py-1 text-muted-foreground">№ {o.id}</span></div><h2 className="text-lg font-bold">{o.productTitle}</h2><p className="text-xs text-muted-foreground">{new Date(o.createdAt).toLocaleString("ru-RU")}</p></div><strong className="text-xl text-[#BFFF00]">{formatPrice(o.amount, o.currency)}</strong></div>
+      <div className="my-5 grid gap-2 md:grid-cols-5">{o.events.map(e=><div key={e.id} className="rounded-xl border border-white/10 p-3"><div className="mb-1 flex items-center gap-2 text-xs font-semibold"><Check className="h-3.5 w-3.5 text-[#BFFF00]"/>{e.label}</div><div className="text-[10px] text-muted-foreground">{new Date(e.createdAt).toLocaleString("ru-RU")} · {e.actor}</div></div>)}</div>
+      {o.status === "delivered" && o.login && <div className="rounded-xl border border-[#BFFF00]/20 bg-[#BFFF00]/[.04] p-4"><div className="mb-3 flex items-center gap-2 text-sm font-bold text-[#BFFF00]"><Check className="h-4 w-4"/>Данные выданы</div>{[["Логин",o.login],["Пароль",o.password || ""]].map(([k,v])=><div className="mb-2 flex items-center gap-2" key={k}><span className="w-16 text-xs text-muted-foreground">{k}</span><code className="flex-1 break-all rounded bg-black/30 p-2 text-xs">{v}</code><button onClick={()=>copy(v)}><Copy className="h-4 w-4"/></button></div>)}<div className="mt-3 flex flex-wrap gap-2"><Button size="sm" onClick={()=>download(o)}><Download className="mr-2 h-4 w-4"/>Скачать инструкцию</Button>{new Date(o.warrantyUntil)>new Date() && <Button size="sm" variant="outline" onClick={()=>setClaimOrder(o.id)}><ShieldAlert className="mr-2 h-4 w-4"/>Проблема с товаром</Button>}</div><p className="mt-3 text-xs text-muted-foreground">Гарантия до {new Date(o.warrantyUntil).toLocaleDateString("ru-RU")}. После входа сразу смените пароль и контакты.</p></div>}
+      {o.claims?.map(c=><div key={c.id} className="mt-3 rounded-xl border border-yellow-400/20 p-3 text-xs"><b>Гарантийное обращение:</b> {REASONS[c.reason as keyof typeof REASONS] || c.reason} · {c.status}{c.adminNote && <p className="mt-1 text-muted-foreground">Ответ: {c.adminNote}</p>}</div>)}
+      {claimOrder===o.id && <div className="mt-4 space-y-3 rounded-xl border border-white/10 p-4"><select className="w-full rounded-md border border-white/10 bg-black p-2 text-sm" value={reason} onChange={e=>setReason(e.target.value as keyof typeof REASONS)}>{Object.entries(REASONS).map(([v,l])=><option key={v} value={v}>{l}</option>)}</select><Textarea placeholder="Подробно опишите проблему (не менее 10 символов)" value={message} onChange={e=>setMessage(e.target.value)}/><div className="flex gap-2"><Button onClick={sendClaim}>Отправить</Button><Button variant="ghost" onClick={()=>setClaimOrder(null)}>Отмена</Button></div></div>}
+    </article>)}</div>}
+    <div className="mt-8 flex items-center gap-2 text-xs text-muted-foreground"><Clock className="h-4 w-4"/>Нужна помощь? Откройте чат поддержки — оператор увидит историю обращения. {settings.support_email}</div>
+  </div></main>;
 }

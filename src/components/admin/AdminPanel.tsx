@@ -6,7 +6,7 @@ import {
   LayoutDashboard, Package, Tags, ShoppingCart, MessageSquare,
   Settings as SettingsIcon, LogOut, Sparkles, Menu, X, ExternalLink, Eye, Star, FileText, ScrollText,
   Users, Ticket, ShieldBan,
-  MonitorSmartphone, DatabaseBackup,
+  MonitorSmartphone, DatabaseBackup, ShieldCheck, HeartPulse,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,6 +29,8 @@ import { AdminPromo } from "./AdminPromo";
 import { AdminBlacklist } from "./AdminBlacklist";
 import { AdminSessions } from "./AdminSessions";
 import { AdminBackups } from "./AdminBackups";
+import { AdminWarranty } from "./AdminWarranty";
+import { AdminHealth } from "./AdminHealth";
 import { cn } from "@/lib/utils";
 import type { Category, Product, FaqItem } from "@/lib/types";
 
@@ -39,7 +41,7 @@ interface AdminData {
   settings: Record<string, string>;
 }
 
-type Tab = "dashboard" | "products" | "categories" | "orders" | "support" | "visitors" | "reviews" | "blog" | "logs" | "referral" | "promo" | "blacklist" | "sessions" | "backups" | "settings";
+type Tab = "dashboard" | "products" | "categories" | "orders" | "support" | "visitors" | "reviews" | "blog" | "logs" | "referral" | "promo" | "blacklist" | "sessions" | "backups" | "warranty" | "health" | "settings";
 
 interface TabDef {
   id: Tab;
@@ -65,7 +67,9 @@ const TABS: TabDef[] = [
   { id: "blacklist", label: "Чёрный список", icon: ShieldBan, num: "12", color: "#FF3333" },
   { id: "sessions", label: "Сессии", icon: MonitorSmartphone, num: "13", color: "#00F0FF" },
   { id: "backups", label: "Резервные копии", icon: DatabaseBackup, num: "14", color: "#A855F7" },
-  { id: "settings", label: "Настройки", icon: SettingsIcon, num: "15", color: "#22D3EE" },
+  { id: "warranty", label: "Гарантии", icon: ShieldCheck, num: "15", color: "#FFE600" },
+  { id: "health", label: "Система", icon: HeartPulse, num: "16", color: "#10B981" },
+  { id: "settings", label: "Настройки", icon: SettingsIcon, num: "17", color: "#22D3EE" },
 ];
 
 interface NotificationItem {
@@ -196,7 +200,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
   const refresh = useCallback(async () => {
     const [cats, prods] = await Promise.all([
       fetch("/api/categories").then((r) => r.json()),
-      fetch("/api/products").then((r) => r.json()),
+      fetch("/api/products?admin=1").then((r) => r.json()),
     ]);
     setData((d) => ({
       ...d,
@@ -204,6 +208,10 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
       products: prods.products,
     }));
   }, []);
+
+  useEffect(() => {
+    if (authenticated) void refresh();
+  }, [authenticated, refresh]);
 
   const clearNotifications = () => {
     setNotifications([]);
@@ -221,7 +229,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
 
   if (authenticated === null) return null;
   if (!authenticated) {
-    return <AdminLogin onLogin={onLogin} />;
+    return <div className="admin-v2"><AdminLogin onLogin={onLogin} /></div>;
   }
 
   const renderBadge = (badgeKey?: "orders" | "support" | "reviews") => {
@@ -236,7 +244,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#0A0A0A]">
+    <div className="admin-v2 min-h-screen flex bg-[#0A0A0A]">
       {/* Sidebar — desktop */}
       <aside className="hidden lg:flex w-64 flex-shrink-0 bg-[#0E0E0E] border-r-2 border-[#BFFF00]/40 flex-col">
         <div className="p-6 border-b-2 border-[#1F1F1F]">
@@ -417,6 +425,8 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
           {tab === "blacklist" && <AdminBlacklist />}
           {tab === "sessions" && <AdminSessions />}
           {tab === "backups" && <AdminBackups />}
+          {tab === "warranty" && <AdminWarranty />}
+          {tab === "health" && <AdminHealth />}
           {tab === "settings" && <AdminSettings settings={data.settings} />}
         </div>
       </main>

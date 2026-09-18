@@ -293,6 +293,17 @@ support@hypehub.vercel.app
                 {product.description}
               </p>
 
+              <div className="mb-4 grid grid-cols-2 gap-2 text-xs">
+                <div className="rounded-lg border border-white/10 bg-white/[.025] p-3">
+                  <div className="text-muted-foreground">Последняя проверка</div>
+                  <div className="mt-1 font-semibold">{product.lastCheckedAt ? new Date(product.lastCheckedAt).toLocaleDateString("ru-RU") : "Перед публикацией"}</div>
+                </div>
+                <div className="rounded-lg border border-white/10 bg-white/[.025] p-3">
+                  <div className="text-muted-foreground">Гарантия</div>
+                  <div className="mt-1 font-semibold">{product.warrantyDays || 14} дней</div>
+                </div>
+              </div>
+
               {/* Meta grid — compact */}
               {Object.keys(meta).length > 0 && (
                 <div className="grid grid-cols-2 gap-2 mb-3">
@@ -327,6 +338,10 @@ support@hypehub.vercel.app
                   <Eye className="w-3 h-3" />
                   {product.views || 0}
                 </div>
+              </div>
+
+              <div className="mb-4 rounded-xl border border-white/10 bg-black/20 p-3 text-[11px] leading-relaxed text-muted-foreground">
+                <b className="text-foreground">После покупки:</b> вы получите логин, пароль и инструкцию. Сразу смените пароль, привяжите свои контакты и включите защиту входа.
               </div>
 
               {/* Price + CTA */}
@@ -529,6 +544,7 @@ support@hypehub.vercel.app
                   Товар зарезервирован ещё на {String(Math.floor(secondsLeft / 60)).padStart(2, "0")}:{String(secondsLeft % 60).padStart(2, "0")}
                 </div>
               )}
+              {orderId && <a href={`/order/${orderId}`} className="mb-3 block text-center text-xs text-[#00F0FF] hover:underline">Открыть постоянную страницу заказа</a>}
 
               <div className="glass rounded-lg p-3 mb-3 space-y-3">
                 <div>

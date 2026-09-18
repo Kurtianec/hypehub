@@ -13,7 +13,6 @@ import { SupportChat } from "./SupportChat";
 import { VisitorTracker } from "./VisitorTracker";
 import { CookieBanner } from "./CookieBanner";
 import { Analytics } from "./Analytics";
-import { PageLoader } from "./PageLoader";
 import { FavoritesBar } from "./FavoritesBar";
 import { ProductModal } from "./ProductModal";
 import { useFavorites } from "@/hooks/use-favorites";
@@ -74,8 +73,7 @@ export function Storefront({
   }, []);
 
   return (
-    <>
-      <PageLoader />
+    <div className="storefront-v2 min-h-screen flex flex-col">
       <VisitorTracker />
       <Header
         siteName={settings.site_name}
@@ -136,6 +134,6 @@ export function Storefront({
         settings={settingsObj}
         onSwitchProduct={(p) => setSearchProduct(p)}
       />
-    </>
+    </div>
   );
 }

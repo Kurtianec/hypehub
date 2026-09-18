@@ -42,6 +42,10 @@ model Product {
   deliveryNote String?  // extra delivery instructions
   status       String   @default("available") // available | sold | reserved | archived
   reservedUntil DateTime?
+  publishedAt   DateTime?
+  lastCheckedAt DateTime?
+  warrantyDays  Int      @default(14)
+  internalNote  String?
   featured     Boolean  @default(false)
   views        Int      @default(0)
   createdAt    DateTime @default(now())
@@ -91,6 +95,42 @@ model Order {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   events         OrderEvent[]
+  warrantyClaims WarrantyClaim[]
+}
+
+model CustomerAccessCode {
+  id        String   @id @default(cuid())
+  email     String
+  codeHash  String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([email, expiresAt])
+}
+
+model CustomerSession {
+  id        String   @id @default(cuid())
+  email     String
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([email, expiresAt])
+}
+
+model WarrantyClaim {
+  id          String   @id @default(cuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  reason      String
+  message     String
+  status      String   @default("new")
+  adminNote   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([orderId, createdAt])
 }
 
 model OrderEvent {

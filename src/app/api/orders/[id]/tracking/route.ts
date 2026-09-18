@@ -1,0 +1,5 @@
+import { NextRequest, NextResponse } from "next/server";
+import { db } from "@/lib/db";
+import { decryptSecret, getCustomerSession } from "@/lib/security";
+import { releaseExpiredReservations } from "@/lib/reservations";
+export async function GET(req:NextRequest,{params}:{params:Promise<{id:string}>}){const session=await getCustomerSession(req);if(!session)return NextResponse.json({error:"Требуется вход"},{status:401});await releaseExpiredReservations();const {id}=await params;const o=await db.order.findFirst({where:{id,buyerEmail:session.email},include:{product:{select:{title:true,reservedUntil:true,warrantyDays:true}},events:{orderBy:{createdAt:"asc"}},warrantyClaims:{orderBy:{createdAt:"desc"}}}});if(!o)return NextResponse.json({error:"Заказ не найден"},{status:404});return NextResponse.json({order:{...o,deliveryLogin:o.status==="delivered"?decryptSecret(o.deliveryLogin):null,deliveryPass:o.status==="delivered"?decryptSecret(o.deliveryPass):null,deliveryNote:o.status==="delivered"?decryptSecret(o.deliveryNote):null}})}

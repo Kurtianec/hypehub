@@ -34,6 +34,10 @@ export interface Product {
   status: string;
   featured: boolean;
   views: number;
+  warrantyDays?: number;
+  lastCheckedAt?: string | null;
+  publishedAt?: string | null;
+  internalNote?: string | null;
   createdAt: string;
   updatedAt: string;
 }

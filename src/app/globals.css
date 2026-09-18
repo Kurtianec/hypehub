@@ -501,3 +501,90 @@
 .animate-slide-in-bottom {
   animation: slide-in-bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* Спокойный режим HypeHub: движение показывает событие, а не отвлекает постоянно. */
+.glow-pulse, .animate-float-y, .animate-gradient, .marquee-fast { animation-iteration-count: 1 !important; }
+.hover-press { transition-duration: 220ms; }
+.hover-press:hover { transform: translateY(-2px); }
+.glass, .glass-strong { box-shadow: none !important; }
+body { letter-spacing: -0.005em; }
+
+/* === HYPEHUB 2026 — calm premium storefront === */
+.storefront-v2 {
+  --soft-surface: rgba(255,255,255,.025);
+  --soft-border: rgba(255,255,255,.08);
+  background:
+    radial-gradient(900px 520px at 50% -180px, rgba(191,255,0,.075), transparent 65%),
+    #090a09;
+}
+.storefront-v2 .font-mono { font-family: inherit !important; }
+.storefront-v2 .uppercase { text-transform: none !important; }
+.storefront-v2 [style*="clip-path"] { clip-path: none !important; }
+.storefront-v2 [class*="border-2"] { border-width: 1px !important; }
+.storefront-v2 .scanlines::after { display: none; }
+.storefront-v2 .glitch::before,
+.storefront-v2 .glitch::after { display: none; }
+.storefront-v2 .text-gradient-neon,
+.storefront-v2 .gradient-text {
+  background: none;
+  color: #BFFF00;
+  -webkit-text-fill-color: currentColor;
+}
+.storefront-v2 section { position: relative; }
+.storefront-v2 section h2 {
+  letter-spacing: -.035em !important;
+  line-height: 1.08;
+}
+.storefront-v2 section p { line-height: 1.65; }
+.storefront-v2 [class*="bg-[#121212]"],
+.storefront-v2 [class*="bg-[#0E0E0E]"] {
+  background-color: rgba(255,255,255,.026) !important;
+}
+.storefront-v2 [class*="border-[#2A2A2A]"] {
+  border-color: var(--soft-border) !important;
+}
+.storefront-v2 .hover-press {
+  border-radius: 18px;
+  transition: transform .22s ease, border-color .22s ease, background-color .22s ease;
+}
+.storefront-v2 .hover-press:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 50px -32px rgba(191,255,0,.42) !important;
+}
+.storefront-v2 button,
+.storefront-v2 input,
+.storefront-v2 textarea,
+.storefront-v2 select { border-radius: 10px; }
+.storefront-v2 footer {
+  border-top: 1px solid var(--soft-border) !important;
+  background: rgba(255,255,255,.015);
+}
+.storefront-v2 footer [class*="border-t-2"] { border-top-width: 1px !important; }
+.storefront-v2 footer h3 { color: #f5f5f5 !important; letter-spacing: -.01em !important; }
+.storefront-v2 footer a,
+.storefront-v2 footer button { text-transform: none !important; }
+.storefront-v2 ::-webkit-scrollbar { width: 8px; }
+
+/* Admin keeps the brand but uses one consistent restrained surface system. */
+.admin-v2 { background: #090a09 !important; }
+.admin-v2 .font-mono { font-family: inherit !important; }
+.admin-v2 [style*="clip-path"] { clip-path: none !important; }
+.admin-v2 [class*="border-2"] { border-width: 1px !important; }
+.admin-v2 [class*="bg-[#121212]"],
+.admin-v2 [class*="bg-[#0E0E0E]"] { background-color: #101210 !important; }
+.admin-v2 [class*="border-[#2A2A2A]"] { border-color: rgba(255,255,255,.08) !important; }
+.admin-v2 button,
+.admin-v2 input,
+.admin-v2 textarea,
+.admin-v2 select,
+.admin-v2 [role="dialog"] { border-radius: 10px; }
+.admin-v2 h1,
+.admin-v2 h2,
+.admin-v2 h3 { letter-spacing: -.025em !important; }
+
+@media (max-width: 767px) {
+  .storefront-v2 section { padding-left: 0; padding-right: 0; }
+  .storefront-v2 section h2 { font-size: 2rem; }
+  .storefront-v2 .hover-press:hover { transform: none; }
+  .storefront-v2 footer { padding-top: 2.5rem; }
+}

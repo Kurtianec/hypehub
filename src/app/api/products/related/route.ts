@@ -25,12 +25,13 @@ export async function GET(req: NextRequest) {
       categoryId: product.categoryId,
       status: "available",
       id: { not: product.id },
+      OR: [{ publishedAt: null }, { publishedAt: { lte: new Date() } }],
     },
     include: { category: true },
     take: limit,
     orderBy: [{ featured: "desc" }, { views: "desc" }],
   });
 
-  const safe = related.map(({ login, password, deliveryNote, ...rest }) => rest);
+  const safe = related.map(({ login, password, deliveryNote, internalNote, ...rest }) => { void login; void password; void deliveryNote; void internalNote; return rest; });
   return NextResponse.json({ products: safe });
 }

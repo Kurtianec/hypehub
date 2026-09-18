@@ -13,7 +13,7 @@ async function getData() {
       include: { _count: { select: { products: { where: { status: "available" } } } } },
     }),
     db.product.findMany({
-      where: { status: { in: ["available", "coming_soon"] } },
+      where: { status: { in: ["available", "coming_soon"] }, OR: [{ publishedAt: null }, { publishedAt: { lte: new Date() } }] },
       include: { category: true },
       orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
     }),
@@ -25,7 +25,7 @@ async function getData() {
   for (const s of settings) if (s.key !== "admin_pass") settingsMap[s.key] = s.value;
 
   // Strip credentials
-  const safeProducts = products.map(({ login, password, deliveryNote, ...rest }) => rest);
+  const safeProducts = products.map(({ login, password, deliveryNote, internalNote, ...rest }) => { void login; void password; void deliveryNote; void internalNote; return rest; });
 
   return {
     categories: JSON.parse(JSON.stringify(categories)),

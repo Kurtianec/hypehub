@@ -26,14 +26,14 @@ export function FAQ({ faqs }: { faqs: FaqItem[] }) {
         >
           <div className="flex items-center gap-3 mb-2">
             <div className="w-1 h-8 bg-[#00F0FF]" />
-            <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_04"}</span>
+            <span className="text-xs text-[#BFFF00] font-semibold">Помощь покупателю</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
             <span className="text-foreground">Частые </span>
-            <span className="text-gradient-neon">вопросы</span>
+            <span className="text-[#BFFF00]">вопросы</span>
           </h2>
           <p className="text-[#888] text-sm md:text-base mt-2 font-mono">
-            &gt; Не нашли ответ? Напишите в чат поддержки.
+            Коротко отвечаем на вопросы о покупке, оплате, выдаче и гарантии.
           </p>
         </motion.div>
 
@@ -73,13 +73,13 @@ export function FAQ({ faqs }: { faqs: FaqItem[] }) {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-10 text-center bg-[#0E0E0E] border-2 border-[#FF2D87] p-6 md:p-8"
+          className="mt-10 text-center rounded-2xl bg-white/[.025] border border-white/10 p-6 md:p-8"
           style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}
         >
-          <MessageCircle className="w-10 h-10 mx-auto mb-3 text-[#FF2D87]" strokeWidth={2.5} />
+          <MessageCircle className="w-10 h-10 mx-auto mb-3 text-[#BFFF00]" strokeWidth={2.5} />
           <h3 className="text-xl font-black mb-2 uppercase tracking-tight">Остались вопросы?</h3>
           <p className="text-sm text-[#888] mb-4 font-mono">
-            &gt; AI-ассистент ответит мгновенно. Для сложных — живой чат 24/7.
+            Сначала можно спросить AI-ассистента, а сложный вопрос передать живому оператору.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button

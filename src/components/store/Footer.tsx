@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles, Mail, Send, Shield, Zap, ShieldCheck, Award, Eye } from "lucide-react";
+import { Sparkles, Mail, Send, Shield, Zap, ShieldCheck, Eye } from "lucide-react";
 import type { Settings } from "@/lib/types";
 
 interface FooterProps {
@@ -28,14 +28,14 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
                   <span className="text-[#BFFF00]">Хайп</span><span className="text-foreground">Хаб</span>
                 </div>
                 <div className="text-[10px] text-[#888] font-mono uppercase tracking-widest">
-                  {"// "}{settings.tagline || "Маркетплейс аккаунтов"}
+                  {settings.tagline || "Маркетплейс аккаунтов"}
                 </div>
               </div>
             </div>
             <p className="text-sm text-[#888] leading-relaxed max-w-md mb-4 font-mono">
-              &gt; Маркетплейс готовых аккаунтов соцсетей с живой аудиторией.
+              Маркетплейс готовых аккаунтов соцсетей с живой аудиторией.
               <br />
-              &gt; Мгновенная выдача. Гарантия. Оплата: <span className="text-[#F7931A]">BTC</span>, <span className="text-[#26A17B]">USDT</span>, <span className="text-[#0098EA]">TON</span>.
+              Проверка, гарантия и поддержка после покупки. Оплата: <span className="text-[#F7931A]">BTC</span>, <span className="text-[#26A17B]">USDT</span>, <span className="text-[#0098EA]">TON</span>.
             </p>
             <div className="flex flex-wrap gap-1.5">
               {["TikTok", "YouTube", "VK", "Instagram", "Telegram"].map((p) => (
@@ -48,7 +48,7 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
 
           {/* Nav */}
           <div>
-            <h3 className="font-black text-sm mb-3 uppercase tracking-widest font-mono text-[#BFFF00]">{"// Навигация"}</h3>
+            <h3 className="font-bold text-sm mb-3">Навигация</h3>
             <ul className="space-y-2 text-sm font-mono">
               {[
                 { label: "Каталог", href: "#catalog" },
@@ -68,14 +68,14 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
                       href={l.href}
                       className="text-[#888] hover:text-[#BFFF00] transition-colors uppercase"
                     >
-                      &gt; {l.label}
+                      {l.label}
                     </a>
                   ) : (
                     <button
                       onClick={() => document.querySelector(l.href)?.scrollIntoView({ behavior: "smooth" })}
                       className="text-[#888] hover:text-[#BFFF00] transition-colors uppercase"
                     >
-                      &gt; {l.label}
+                      {l.label}
                     </button>
                   )}
                 </li>
@@ -85,7 +85,7 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
 
           {/* Contacts */}
           <div>
-            <h3 className="font-black text-sm mb-3 uppercase tracking-widest font-mono text-[#FF2D87]">{"// Контакты"}</h3>
+            <h3 className="font-bold text-sm mb-3">Контакты</h3>
             <ul className="space-y-3 text-sm font-mono">
               <li>
                 <a href={`mailto:${settings.support_email || "support@hypehub.vercel.app"}`}
@@ -135,9 +135,9 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
 
         {/* Compact trust badges row */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-4 pt-4">
-          <TrustChip icon={Eye} color="#BFFF00" title="VISITORS" value={visitorsToday > 0 ? visitorsToday.toLocaleString("ru-RU") : "238"} sub={`TOTAL: ${visitorsTotal > 0 ? visitorsTotal.toLocaleString("ru-RU") : "47 812"}`} />
-          <TrustChip icon={ShieldCheck} color="#10B981" title="SECURE" value="100%" sub="SSL · NORTON" />
-          <TrustChip icon={Award} color="#FFE600" title="TRUSTPILOT" value="4.9/5" sub="12.8K REVIEWS" />
+          {visitorsTotal > 0 && <TrustChip icon={Eye} color="#BFFF00" title="Посетители" value={visitorsToday.toLocaleString("ru-RU")} sub={`Всего: ${visitorsTotal.toLocaleString("ru-RU")}`} />}
+          <TrustChip icon={ShieldCheck} color="#10B981" title="Защита" value="SSL" sub="Шифрование соединения" />
+          <TrustChip icon={Shield} color="#BFFF00" title="Гарантия" value="14 дней" sub="Обращение из кабинета" />
         </div>
 
         {/* Bottom row */}

@@ -30,7 +30,7 @@ const STEPS = [
   {
     icon: Download,
     title: "ДОСТАВКА",
-    description: "Мгновенно получаете .txt с логином, паролем и инструкцией. Файл в модалке и на email.",
+    description: "После подтверждения получаете логин, пароль и инструкцию на странице заказа и в личном кабинете.",
     color: "#00F0FF",
     code: "04",
   },
@@ -52,14 +52,14 @@ export function HowToBuy() {
         >
           <div className="flex items-center gap-3 mb-2">
             <div className="w-1 h-8 bg-[#FF2D87]" />
-            <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_02"}</span>
+            <span className="text-xs text-[#BFFF00] font-semibold">Простой процесс</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
             <span className="text-foreground">Как </span>
-            <span className="text-gradient-neon">купить</span>
+            <span className="text-[#BFFF00]">купить</span>
           </h2>
           <p className="text-[#888] text-sm md:text-base mt-2 font-mono">
-            &gt; От выбора до получения — менее 2 минут. Всё автоматизировано.
+            Четыре понятных шага от выбора товара до безопасного получения данных.
           </p>
         </motion.div>
 
@@ -98,7 +98,7 @@ export function HowToBuy() {
 
                 {/* Step label */}
                 <div className="text-[10px] font-mono uppercase tracking-widest mb-1" style={{ color: step.color }}>
-                  STEP_{step.code}
+                  Шаг {step.code}
                 </div>
 
                 <h3 className="font-black text-lg md:text-xl mb-2 uppercase tracking-tight">{step.title}</h3>

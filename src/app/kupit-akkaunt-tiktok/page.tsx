@@ -51,7 +51,7 @@ export default async function TikTokPage() {
   const settingsMap: Record<string, string> = {};
   for (const s of settings) settingsMap[s.key] = s.value;
 
-  const safeProducts = products.map(({ login, password, deliveryNote, ...rest }) => rest);
+  const safeProducts = products.map(({ login, password, deliveryNote, internalNote, ...rest }) => { void login; void password; void deliveryNote; void internalNote; return rest; });
 
   return (
     <>

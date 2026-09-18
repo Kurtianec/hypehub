@@ -33,14 +33,14 @@ export function Advantages({ settings }: { settings?: { stats_clients?: string; 
         >
           <div className="flex items-center gap-3 mb-2">
             <div className="w-1 h-8 bg-[#FFE600]" />
-            <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_03"}</span>
+            <span className="text-xs text-[#BFFF00] font-semibold">Почему HypeHub</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
             <span className="text-foreground">Наши </span>
-            <span className="text-gradient-neon">преимущества</span>
+            <span className="text-[#BFFF00]">преимущества</span>
           </h2>
           <p className="text-[#888] text-sm md:text-base mt-2 font-mono">
-            &gt; Современный сервис уровня TikTok, YouTube и VK.
+            Всё необходимое для понятной, безопасной покупки и дальнейшей работы с аккаунтом.
           </p>
         </motion.div>
 

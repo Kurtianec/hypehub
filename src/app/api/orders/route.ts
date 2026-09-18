@@ -1,4 +1,4 @@
-import { consumeRateLimit, decryptSecret, requestIp, requireAdmin } from "@/lib/security";
+import { consumeRateLimit, createCustomerSession, CUSTOMER_SESSION_COOKIE, decryptSecret, requestIp, requireAdmin } from "@/lib/security";
 import { releaseExpiredReservations, RESERVATION_MS } from "@/lib/reservations";
 import { z } from "zod";
 import { NextRequest, NextResponse } from "next/server";
@@ -38,5 +38,8 @@ export async function POST(req: NextRequest) {
   }).catch((e) => e instanceof Error && e.message === "UNAVAILABLE" ? null : Promise.reject(e));
   if (!order) return NextResponse.json({ error: "Product unavailable" }, { status: 409 });
 
-  return NextResponse.json({ order, reservedUntil });
+  const session = await createCustomerSession(order.buyerEmail);
+  const response = NextResponse.json({ order, reservedUntil });
+  response.cookies.set(CUSTOMER_SESSION_COOKIE, session.token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax", path: "/", expires: session.expiresAt });
+  return response;
 }

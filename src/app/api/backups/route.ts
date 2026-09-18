@@ -10,9 +10,9 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const denied = await requireAdmin(req); if (denied) return denied;
-  const [categories, products, orders, settings, faqs, posts] = await Promise.all([db.category.findMany(), db.product.findMany(), db.order.findMany(), db.setting.findMany(), db.faqItem.findMany(), db.blogPost.findMany()]);
-  const data = JSON.stringify({ version: 1, createdAt: new Date(), categories, products, orders, settings, faqs, posts });
-  const counts = JSON.stringify({ categories: categories.length, products: products.length, orders: orders.length, settings: settings.length, faqs: faqs.length, posts: posts.length });
+  const [categories, products, orders, events, claims, settings, faqs, posts, support, reviews, accounts] = await Promise.all([db.category.findMany(), db.product.findMany(), db.order.findMany(), db.orderEvent.findMany(), db.warrantyClaim.findMany(), db.setting.findMany(), db.faqItem.findMany(), db.blogPost.findMany(), db.supportMessage.findMany(), db.review.findMany(), db.userAccount.findMany()]);
+  const data = JSON.stringify({ version: 2, createdAt: new Date(), categories, products, orders, events, claims, settings, faqs, posts, support, reviews, accounts });
+  const counts = JSON.stringify({ categories: categories.length, products: products.length, orders: orders.length, events: events.length, claims: claims.length, settings: settings.length, faqs: faqs.length, posts: posts.length, support: support.length, reviews: reviews.length, accounts: accounts.length });
   const backup = await db.backupSnapshot.create({ data: { name: `Автокопия ${new Date().toLocaleString("ru-RU")}`, data, counts } });
   await db.adminLog.create({ data: { action: "backup_created", entity: "backup", entityId: backup.id, details: counts } });
   return NextResponse.json({ ok: true, backup: { id: backup.id, name: backup.name, counts: backup.counts, createdAt: backup.createdAt } });
@@ -29,6 +29,8 @@ export async function PATCH(req: NextRequest) {
     for (const c of snap.categories || []) await tx.category.upsert({ where: { id: c.id }, create: c, update: c });
     for (const p of snap.products || []) { const { category, orders, ...data } = p; void category; void orders; await tx.product.upsert({ where: { id: data.id }, create: data, update: data }); }
     for (const o of snap.orders || []) { const { product, events, ...data } = o; void product; void events; await tx.order.upsert({ where: { id: data.id }, create: data, update: data }); }
+    for (const e of snap.events || []) await tx.orderEvent.upsert({ where: { id: e.id }, create: e, update: e });
+    for (const c of snap.claims || []) await tx.warrantyClaim.upsert({ where: { id: c.id }, create: c, update: c });
     for (const s of snap.settings || []) await tx.setting.upsert({ where: { key: s.key }, create: s, update: { value: s.value } });
   });
   await db.adminLog.create({ data: { action: "backup_restored", entity: "backup", entityId: backup.id, details: backup.counts } });

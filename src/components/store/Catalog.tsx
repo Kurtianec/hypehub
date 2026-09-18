@@ -377,14 +377,14 @@ function ProductCard({
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.4) }}
       onClick={onClick}
-      className="group relative text-left bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#BFFF00] hover-press transition-all overflow-hidden"
+      className="group relative text-left bg-[#121212] border border-white/[.08] hover:border-[#BFFF00]/40 hover-press transition-all overflow-hidden rounded-2xl"
       style={{
         clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))",
       }}
       aria-label={`Купить ${product.title}`}
     >
       {/* Image — photo in circle with decorative background */}
-      <div className="relative w-full aspect-[16/9] overflow-hidden border-b-2 border-[#2A2A2A] group-hover:border-[#BFFF00] transition-colors">
+      <div className="relative w-full aspect-[16/9] overflow-hidden border-b border-white/[.07] transition-colors">
         {/* Background — blurred photo as backdrop */}
         {product.image ? (
           <img
@@ -413,7 +413,7 @@ function ProductCard({
         {/* Circular photo — centered, scales on hover */}
         <div className="absolute inset-0 flex items-center justify-center">
           {product.image ? (
-            <div className="relative group-hover:scale-110 transition-transform duration-300">
+            <div className="relative group-hover:scale-105 transition-transform duration-300">
               {/* Photo circle */}
               <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2" style={{ borderColor: accentColor }}>
                 <img
@@ -567,7 +567,7 @@ function ProductCard({
                 <path d="M4 17h12"/>
               </svg>
             </button>
-            <div className="px-4 py-2 bg-[#BFFF00] text-black text-xs font-bold uppercase flex items-center gap-1.5 group-hover:bg-[#FF2D87] group-hover:text-white transition-colors font-mono">
+          <div className="rounded-lg px-4 py-2 bg-[#BFFF00] text-black text-xs font-bold flex items-center gap-1.5 group-hover:bg-[#D0FF42] transition-colors">
               Купить
             </div>
           </div>

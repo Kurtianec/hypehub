@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
 export const SESSION_COOKIE = "hypehub_admin_session";
+export const CUSTOMER_SESSION_COOKIE = "hypehub_customer_session";
 const SESSION_TTL_MS = 8 * 60 * 60 * 1000;
 
 export function requestIp(req: NextRequest) {
@@ -100,6 +101,26 @@ export async function requireAdmin(req: NextRequest) {
     if (!origin || origin !== expected) return NextResponse.json({ error: "CSRF check failed" }, { status: 403 });
   }
   return null;
+}
+
+export async function createCustomerSession(email: string) {
+  const token = randomBytes(32).toString("base64url");
+  const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60_000);
+  await db.customerSession.create({ data: { email: email.toLowerCase(), tokenHash: sha256(token), expiresAt } });
+  return { token, expiresAt };
+}
+
+export async function getCustomerSession(req: NextRequest) {
+  const token = req.cookies.get(CUSTOMER_SESSION_COOKIE)?.value;
+  if (!token) return null;
+  const session = await db.customerSession.findUnique({ where: { tokenHash: sha256(token) } });
+  if (!session || session.expiresAt <= new Date()) return null;
+  return session;
+}
+
+export async function requireCustomer(req: NextRequest) {
+  const session = await getCustomerSession(req);
+  return session || NextResponse.json({ error: "Требуется вход" }, { status: 401 });
 }
 
 export async function consumeRateLimit(key: string, limit: number, windowMs: number, blockMs = windowMs) {
