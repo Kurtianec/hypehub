@@ -20,6 +20,7 @@ const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
   paid: { label: "Оплачен", color: "#00F2EA" },
   delivered: { label: "Доставлен", color: "#10B981" },
   cancelled: { label: "Отменён", color: "#EF4444" },
+  archived: { label: "В архиве", color: "#888888" },
 };
 
 type View = "active" | "archived";
@@ -31,6 +32,7 @@ export function AdminOrders() {
   const [viewOrder, setViewOrder] = useState<Order | null>(null);
   const [restoringId, setRestoringId] = useState<string | null>(null);
   const [restoredIds, setRestoredIds] = useState<Set<string>>(new Set());
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
   const { toast } = useToast();
 
   const load = async () => {
@@ -51,14 +53,26 @@ export function AdminOrders() {
     load();
   }, [view]);
 
-  // Restore product to catalog (change status sold → available)
+  const updateOrder = async (order: Order, status: "pending" | "paid" | "delivered" | "cancelled" | "archived", restoreProduct = false) => {
+    setUpdatingId(order.id);
+    try {
+      const res = await fetch(`/api/orders/${order.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status, restoreProduct }) });
+      if (!res.ok) throw new Error("Ошибка");
+      toast({ title: status === "paid" ? "Заказ отмечен оплаченным" : status === "delivered" ? "Данные выданы покупателю" : status === "archived" ? "Заказ перемещён в архив" : "Заказ отменён" });
+      setViewOrder(null);
+      await load();
+    } catch { toast({ title: "Не удалось изменить заказ", variant: "destructive" }); }
+    finally { setUpdatingId(null); }
+  };
+
+  // Возврат товара одновременно отменяет заказ, поэтому он исчезает из активных и из счётчика.
   const restoreProduct = async (order: Order) => {
     setRestoringId(order.id);
     try {
-      const res = await fetch(`/api/products/${order.productId}`, {
+      const res = await fetch(`/api/orders/${order.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "available" }),
+        body: JSON.stringify({ status: "cancelled", restoreProduct: true }),
       });
       if (!res.ok) throw new Error("Ошибка");
       toast({
@@ -66,6 +80,8 @@ export function AdminOrders() {
         description: order.product?.title,
       });
       setRestoredIds((prev) => new Set(prev).add(order.id));
+      setViewOrder(null);
+      await load();
     } catch {
       toast({ title: "Ошибка возврата товара", variant: "destructive" });
     } finally {
@@ -194,6 +210,15 @@ export function AdminOrders() {
                   <div className="text-right">
                     <div className="font-black text-[#BFFF00] font-mono">{formatPrice(o.amount, o.currency)}</div>
                   </div>
+                  {view === "active" && o.status === "pending" && (
+                    <Button size="sm" onClick={() => updateOrder(o, "paid")} disabled={updatingId === o.id} className="bg-[#00F0FF] text-black hover:bg-[#00D0DD] text-[10px] font-mono uppercase">Оплачено</Button>
+                  )}
+                  {view === "active" && o.status === "paid" && (
+                    <Button size="sm" onClick={() => updateOrder(o, "delivered")} disabled={updatingId === o.id} className="bg-[#10B981] text-white hover:bg-[#0D9669] text-[10px] font-mono uppercase">Выдать</Button>
+                  )}
+                  {view === "archived" && o.status !== "archived" && (
+                    <Button size="sm" variant="ghost" onClick={() => updateOrder(o, "archived")} disabled={updatingId === o.id} className="text-[10px] font-mono uppercase"><Archive className="w-3.5 h-3.5 mr-1" />В архив</Button>
+                  )}
                   {/* Restore product to catalog — shows for any non-pending order OR pending too */}
                   {(o.status === "delivered" || o.status === "cancelled" || o.status === "pending" || o.status === "paid") && (
                     restoredIds.has(o.id) ? (
@@ -278,6 +303,13 @@ export function AdminOrders() {
                   </div>
                 </div>
               )}
+
+              <div className="grid grid-cols-2 gap-2 pt-2">
+                {viewOrder.status === "pending" && <Button onClick={() => updateOrder(viewOrder, "paid")} disabled={updatingId === viewOrder.id} className="bg-[#00F0FF] text-black hover:bg-[#00D0DD] font-bold">Оплачено</Button>}
+                {viewOrder.status === "paid" && <Button onClick={() => updateOrder(viewOrder, "delivered")} disabled={updatingId === viewOrder.id} className="bg-[#10B981] text-white hover:bg-[#0D9669] font-bold">Выдать данные</Button>}
+                {(viewOrder.status === "delivered" || viewOrder.status === "cancelled") && <Button onClick={() => updateOrder(viewOrder, "archived")} disabled={updatingId === viewOrder.id} variant="outline"><Archive className="w-4 h-4 mr-2" />В архив</Button>}
+                {(viewOrder.status === "pending" || viewOrder.status === "paid") && <Button onClick={() => updateOrder(viewOrder, "cancelled", true)} disabled={updatingId === viewOrder.id} variant="destructive">Отменить</Button>}
+              </div>
 
               {/* Restore to catalog button in modal */}
               {(viewOrder.status === "delivered" || viewOrder.status === "cancelled" || viewOrder.status === "pending" || viewOrder.status === "paid") && (

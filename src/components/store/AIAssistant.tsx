@@ -124,14 +124,11 @@ export function AIAssistant() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={() => setOpen(true)}
-            className="fixed bottom-6 right-6 z-40 w-14 h-14 md:w-16 md:h-16 bg-[#BFFF00] text-black border-2 border-[#BFFF00] hover:bg-[#FF2D87] hover:text-white hover:border-[#FF2D87] flex items-center justify-center group transition-colors animate-float-y"
+            className="fixed bottom-24 right-8 z-40 w-11 h-11 bg-[#171717] text-[#888] border border-[#444] hover:text-[#BFFF00] hover:border-[#BFFF00] flex items-center justify-center group transition-colors"
             style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
             aria-label="Открыть AI-ассистент"
           >
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#FF2D87] border-2 border-black flex items-center justify-center">
-              <span className="w-1.5 h-1.5 bg-white blink" />
-            </span>
-            <Bot className="w-6 h-6 md:w-7 md:h-7" strokeWidth={2.5} />
+            <Bot className="w-5 h-5" strokeWidth={2} />
           </motion.button>
         )}
       </AnimatePresence>
@@ -143,7 +140,7 @@ export function AIAssistant() {
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className="fixed bottom-24 right-6 z-40 max-w-[260px] bg-[#0E0E0E] border-2 border-[#BFFF00] p-3 pr-9"
+            className="fixed bottom-40 right-6 z-40 max-w-[260px] bg-[#0E0E0E] border border-[#555] p-3 pr-9"
             style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
           >
             <button

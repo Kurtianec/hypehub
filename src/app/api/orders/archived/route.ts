@@ -1,4 +1,4 @@
-import { requireAdmin } from "@/lib/security";
+import { decryptSecret, requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
@@ -9,11 +9,11 @@ export async function GET(req: NextRequest) {
   if (denied) return denied;
 
   const orders = await db.order.findMany({
-    where: { status: { in: ["delivered", "cancelled"] } },
+    where: { status: { in: ["delivered", "cancelled", "archived"] } },
     include: { product: { include: { category: true } } },
     orderBy: { createdAt: "desc" },
     take: 200,
   });
 
-  return NextResponse.json({ orders });
+  return NextResponse.json({ orders: orders.map((o) => ({ ...o, deliveryLogin: decryptSecret(o.deliveryLogin), deliveryPass: decryptSecret(o.deliveryPass), deliveryNote: decryptSecret(o.deliveryNote) })) });
 }

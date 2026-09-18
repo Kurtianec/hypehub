@@ -8,7 +8,11 @@ import { db } from "@/lib/db";
 export async function GET(req: NextRequest) {
   const denied = await requireAdmin(req);
   if (denied) return denied;
+  // Исправляет старые заказы: если товар уже вручную вернули в каталог,
+  // заказ больше не должен оставаться активным и попадать в счётчик.
+  await db.order.updateMany({ where: { status: "pending", product: { status: "available" } }, data: { status: "cancelled" } });
   const orders = await db.order.findMany({
+    where: { status: { in: ["pending", "paid"] } },
     include: { product: { include: { category: true } } },
     orderBy: { createdAt: "desc" },
     take: 200,
