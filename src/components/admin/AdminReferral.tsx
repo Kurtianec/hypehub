@@ -7,7 +7,6 @@ import {
 } from "lucide-react";
 import { formatPrice } from "@/lib/types";
 
-const TOKEN = "hypehub-admin-2024";
 
 interface TopReferrer {
   code: string;
@@ -34,7 +33,7 @@ export function AdminReferral() {
   const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/referral/stats", { headers: { "x-admin-token": TOKEN } });
+      const res = await fetch("/api/referral/stats", { headers: {} });
       const data = await res.json();
       setStats(data);
     } catch (e) {

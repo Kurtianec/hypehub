@@ -14,7 +14,6 @@ import type { Order } from "@/lib/types";
 import { formatPrice } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-const TOKEN = "hypehub-admin-2024";
 
 const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
   pending: { label: "Ожидает оплаты", color: "#FFD700" },
@@ -38,7 +37,7 @@ export function AdminOrders() {
     setLoading(true);
     try {
       const endpoint = view === "archived" ? "/api/orders/archived" : "/api/orders";
-      const res = await fetch(endpoint, { headers: { "x-admin-token": TOKEN } });
+      const res = await fetch(endpoint, { headers: {} });
       const data = await res.json();
       setOrders(data.orders);
     } catch {
@@ -58,7 +57,7 @@ export function AdminOrders() {
     try {
       const res = await fetch(`/api/products/${order.productId}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: "available" }),
       });
       if (!res.ok) throw new Error("Ошибка");

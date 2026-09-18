@@ -1,7 +1,7 @@
+import { requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-const TOKEN = "hypehub-admin-2024";
 
 // Helper to log admin actions
 export async function logAdminAction(
@@ -28,10 +28,8 @@ export async function logAdminAction(
 
 // GET — list admin logs (admin only)
 export async function GET(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== process.env.ADMIN_TOKEN && auth !== TOKEN) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const { searchParams } = new URL(req.url);
   const limit = parseInt(searchParams.get("limit") || "100");

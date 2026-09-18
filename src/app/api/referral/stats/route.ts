@@ -1,12 +1,12 @@
+import { requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-const TOKEN = "hypehub-admin-2024";
 
 // GET /api/referral/stats — referral statistics for admin
 export async function GET(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== TOKEN) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const referrals = await db.referral.findMany({
     orderBy: { createdAt: "desc" },

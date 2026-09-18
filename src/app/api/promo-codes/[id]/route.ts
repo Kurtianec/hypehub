@@ -1,12 +1,12 @@
+import { requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-const TOKEN = "hypehub-admin-2024";
 
 // PATCH — update promo code
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== TOKEN) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
   const { id } = await params;
   const body = await req.json();
   const data: Record<string, unknown> = {};
@@ -21,8 +21,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
 // DELETE — delete promo code
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== TOKEN) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
   const { id } = await params;
   await db.promoCode.delete({ where: { id } });
   return NextResponse.json({ ok: true });

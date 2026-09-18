@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, Lock, ArrowRight, Eye, EyeOff, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,14 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [captchaQuestion, setCaptchaQuestion] = useState("");
+  const [captchaAnswer, setCaptchaAnswer] = useState("");
   const { toast } = useToast();
+
+  useEffect(() => {
+    fetch("/api/admin/captcha").then((r) => r.json()).then((data) => { setCaptchaToken(data.token); setCaptchaQuestion(data.question); });
+  }, []);
 
   const submit = async () => {
     if (!password) {
@@ -24,7 +31,7 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
       const res = await fetch("/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ password, captchaToken, captchaAnswer }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
@@ -58,6 +65,7 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
             >
               <Sparkles className="w-8 h-8 text-black" strokeWidth={2.5} />
             </div>
+
             <h1 className="text-2xl font-black mb-1 uppercase tracking-tighter">
               <span className="text-[#BFFF00]">Хайп</span>Хаб
             </h1>
@@ -94,6 +102,11 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
               </div>
             </div>
 
+            <div>
+              <Label className="text-[10px] uppercase tracking-widest font-mono text-[#BFFF00]">Проверка: {captchaQuestion}</Label>
+              <Input value={captchaAnswer} onChange={(e) => setCaptchaAnswer(e.target.value)} inputMode="numeric" placeholder="Ответ" className="mt-1.5 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono" />
+            </div>
+
             <Button
               onClick={submit}
               disabled={loading}
@@ -111,10 +124,6 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
                 </>
               )}
             </Button>
-          </div>
-
-          <div className="mt-6 p-3 border border-[#2A2A2A] bg-[#0A0A0A] text-xs text-[#888] text-center font-mono uppercase">
-            {"// DEMO_KEY: "}<span className="text-[#BFFF00] font-bold">hypehub2024</span>
           </div>
 
           <div className="mt-4 text-center">

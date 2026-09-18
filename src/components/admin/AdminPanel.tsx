@@ -63,11 +63,6 @@ const TABS: TabDef[] = [
   { id: "settings", label: "Настройки", icon: SettingsIcon, num: "13", color: "#22D3EE" },
 ];
 
-const ADMIN_TOKEN_KEY = "hypehub_admin_token";
-const ADMIN_TOKEN_VALUE = "hypehub-admin-2024";
-
-const TOKEN = "hypehub-admin-2024";
-
 interface NotificationItem {
   id: string;
   type: "order" | "support" | "review";
@@ -83,7 +78,7 @@ interface AdminCounts {
 }
 
 export function AdminPanel({ initialData }: { initialData: AdminData }) {
-  const [token, setToken] = useState<string | null>(null);
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const [tab, setTab] = useState<Tab>("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [data, setData] = useState<AdminData>(initialData);
@@ -95,21 +90,17 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
   const { toast } = useToast();
 
   useEffect(() => {
-    const saved = localStorage.getItem(ADMIN_TOKEN_KEY);
-    if (saved === ADMIN_TOKEN_VALUE) {
-      queueMicrotask(() => setToken(saved));
-    }
+    fetch("/api/admin/session").then((r) => setAuthenticated(r.ok)).catch(() => setAuthenticated(false));
   }, []);
 
   // === Real-time via SSE (Server-Sent Events) — replaces 15s polling ===
   useEffect(() => {
-    if (!token) return;
+    if (!authenticated) return;
 
     // Create audio element for notification sound
     audioRef.current = new Audio("data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1dJ7rKdbqSgq+Uc7+6cUFBQUM+IFCBcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCRcUFBQUCR");
 
-    // EventSource can't set custom headers, so pass token via query param
-    const es = new EventSource(`/api/admin/events?token=${TOKEN}`);
+    const es = new EventSource("/api/admin/events");
 
     es.onmessage = (event) => {
       try {
@@ -179,17 +170,16 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
     return () => {
       es.close();
     };
-  }, [token]);
+  }, [authenticated]);
 
   const onLogin = () => {
-    localStorage.setItem(ADMIN_TOKEN_KEY, ADMIN_TOKEN_VALUE);
-    setToken(ADMIN_TOKEN_VALUE);
+    setAuthenticated(true);
     toast({ title: "ACCESS_GRANTED", description: "Добро пожаловать в систему" });
   };
 
-  const onLogout = () => {
-    localStorage.removeItem(ADMIN_TOKEN_KEY);
-    setToken(null);
+  const onLogout = async () => {
+    await fetch("/api/admin/session", { method: "DELETE" }).catch(() => {});
+    setAuthenticated(false);
     setTab("dashboard");
   };
 
@@ -219,7 +209,8 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
     setUnreadCount(0);
   };
 
-  if (!token) {
+  if (authenticated === null) return null;
+  if (!authenticated) {
     return <AdminLogin onLogin={onLogin} />;
   }
 

@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 
-const TOKEN = "hypehub-admin-2024";
 
 interface BlacklistEntry {
   id: string;
@@ -38,7 +37,7 @@ export function AdminBlacklist() {
   const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/blacklist", { headers: { "x-admin-token": TOKEN } });
+      const res = await fetch("/api/blacklist", { headers: {} });
       const data = await res.json();
       setEntries(data.blacklist);
     } catch {
@@ -60,7 +59,7 @@ export function AdminBlacklist() {
     try {
       const res = await fetch("/api/blacklist", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: form.type, value: form.value.trim() }),
       });
       if (!res.ok) {
@@ -89,7 +88,7 @@ export function AdminBlacklist() {
     try {
       const res = await fetch(`/api/blacklist?id=${deleteId}`, {
         method: "DELETE",
-        headers: { "x-admin-token": TOKEN },
+        headers: {},
       });
       if (!res.ok) throw new Error("Ошибка");
       toast({ title: "Удалено из чёрного списка" });

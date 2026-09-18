@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
@@ -10,10 +11,8 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== process.env.ADMIN_TOKEN && auth !== "hypehub-admin-2024") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
   const body = await req.json();
   const category = await db.category.create({
     data: {

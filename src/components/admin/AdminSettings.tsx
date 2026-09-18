@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
-const TOKEN = "hypehub-admin-2024";
 
 const FIELDS = [
   { group: "Основное", icon: SettingsIcon, fields: [
@@ -42,7 +41,7 @@ const FIELDS = [
 ];
 
 export function AdminSettings({ settings }: { settings: Record<string, string> }) {
-  const [form, setForm] = useState<Record<string, string>>(settings);
+  const [form, setForm] = useState<Record<string, string>>({ ...settings, admin_pass: "" });
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
 
@@ -53,7 +52,7 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
     try {
       const res = await fetch("/api/settings", {
         method: "PUT",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error("Ошибка");

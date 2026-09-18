@@ -15,7 +15,6 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
-const TOKEN = "hypehub-admin-2024";
 
 const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
   pending: { label: "Ожидает", color: "#FFE600" },
@@ -47,7 +46,7 @@ export function AdminReviews() {
   const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/reviews?status=all", { headers: { "x-admin-token": TOKEN } });
+      const res = await fetch("/api/reviews?status=all", { headers: {} });
       const data = await res.json();
       setReviews(data.reviews);
     } catch {
@@ -65,7 +64,7 @@ export function AdminReviews() {
     try {
       const res = await fetch(`/api/reviews/${id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
       });
       if (!res.ok) throw new Error("Ошибка");
@@ -81,7 +80,7 @@ export function AdminReviews() {
     try {
       const res = await fetch(`/api/reviews/${id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ reply: replyText, status: "approved" }),
       });
       if (!res.ok) throw new Error("Ошибка");
@@ -99,7 +98,7 @@ export function AdminReviews() {
     try {
       await fetch(`/api/reviews/${id}`, {
         method: "DELETE",
-        headers: { "x-admin-token": TOKEN },
+        headers: {},
       });
       toast({ title: "Отзыв удалён" });
       load();
@@ -340,7 +339,7 @@ function EditReviewDialog({
     try {
       const res = await fetch(`/api/reviews/${review.id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: form.name,
           rating: parseInt(String(form.rating)),

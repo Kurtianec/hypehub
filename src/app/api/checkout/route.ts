@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { decryptSecret, encryptSecret, requireAdmin } from "@/lib/security";
 
 // POST /api/checkout — confirm payment and deliver credentials
 export async function POST(req: NextRequest) {
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
   const body = await req.json();
   const { orderId, txnHash } = body;
 
@@ -23,9 +26,9 @@ export async function POST(req: NextRequest) {
     // Already paid — re-deliver
     return NextResponse.json({
       status: "delivered",
-      login: order.deliveryLogin,
-      password: order.deliveryPass,
-      deliveryNote: order.deliveryNote,
+      login: decryptSecret(order.deliveryLogin),
+      password: decryptSecret(order.deliveryPass),
+      deliveryNote: decryptSecret(order.deliveryNote),
       productTitle: order.product.title,
     });
   }
@@ -36,9 +39,9 @@ export async function POST(req: NextRequest) {
     data: {
       status: "delivered",
       txnHash: txnHash || null,
-      deliveryLogin: order.product.login,
-      deliveryPass: order.product.password,
-      deliveryNote: order.product.deliveryNote,
+      deliveryLogin: encryptSecret(decryptSecret(order.product.login)),
+      deliveryPass: encryptSecret(decryptSecret(order.product.password)),
+      deliveryNote: order.product.deliveryNote ? encryptSecret(decryptSecret(order.product.deliveryNote)) : null,
     },
   });
 
@@ -49,9 +52,9 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({
     status: "delivered",
-    login: updated.deliveryLogin,
-    password: updated.deliveryPass,
-    deliveryNote: updated.deliveryNote,
+    login: decryptSecret(updated.deliveryLogin),
+    password: decryptSecret(updated.deliveryPass),
+    deliveryNote: decryptSecret(updated.deliveryNote),
     productTitle: order.product.title,
   });
 }
@@ -81,5 +84,5 @@ export async function GET(req: NextRequest) {
   if (!order) {
     return NextResponse.json({ error: "Order not found" }, { status: 404 });
   }
-  return NextResponse.json({ order });
+  return NextResponse.json({ order: { ...order, deliveryLogin: order.deliveryLogin ? decryptSecret(order.deliveryLogin) : null, deliveryPass: order.deliveryPass ? decryptSecret(order.deliveryPass) : null, deliveryNote: order.deliveryNote ? decryptSecret(order.deliveryNote) : null } });
 }

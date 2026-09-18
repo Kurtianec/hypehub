@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { consumeRateLimit, requestIp, requireAdmin } from "@/lib/security";
+import { z } from "zod";
 
 // GET — public: list approved reviews
 export async function GET(req: NextRequest) {
@@ -12,10 +14,8 @@ export async function GET(req: NextRequest) {
 
   // If admin token provided and status=all — return all
   if (status === "all") {
-    const auth = req.headers.get("x-admin-token");
-    if (auth !== process.env.ADMIN_TOKEN && auth !== "hypehub-admin-2024") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const denied = await requireAdmin(req);
+    if (denied) return denied;
   }
 
   const reviews = await db.review.findMany({
@@ -28,23 +28,15 @@ export async function GET(req: NextRequest) {
 
 // POST — public: submit new review (pending approval)
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { name, rating, text, product } = body;
-
-  if (!name || !rating || !text) {
-    return NextResponse.json({ error: "Missing fields" }, { status: 400 });
-  }
-
-  if (rating < 1 || rating > 5) {
-    return NextResponse.json({ error: "Rating must be 1-5" }, { status: 400 });
-  }
+  const ip = requestIp(req);
+  if (!(await consumeRateLimit(`review:${ip}`, 3, 60 * 60_000)).allowed) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  const parsed = z.object({ name: z.string().trim().min(2).max(100), rating: z.coerce.number().int().min(1).max(5), text: z.string().trim().min(3).max(2000), product: z.string().max(200).optional() }).safeParse(await req.json().catch(() => null));
+  if (!parsed.success) return NextResponse.json({ error: "Invalid data" }, { status: 400 });
+  const { name, rating, text, product } = parsed.data;
 
   const review = await db.review.create({
     data: {
-      name: String(name).slice(0, 100),
-      rating: parseInt(rating),
-      text: String(text).slice(0, 2000),
-      product: product ? String(product).slice(0, 200) : null,
+      name, rating, text, product: product || null,
       status: "pending",
     },
   });

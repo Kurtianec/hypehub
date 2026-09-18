@@ -41,11 +41,36 @@ model Product {
   password     String
   deliveryNote String?  // extra delivery instructions
   status       String   @default("available") // available | sold | reserved | archived
+  reservedUntil DateTime?
   featured     Boolean  @default(false)
   views        Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   orders       Order[]
+}
+
+model AdminSession {
+  id           String   @id @default(cuid())
+  tokenHash    String   @unique
+  csrfHash     String
+  ip           String?
+  userAgent    String?
+  lastSeenAt   DateTime @default(now())
+  expiresAt    DateTime
+  revokedAt    DateTime?
+  createdAt    DateTime @default(now())
+
+  @@index([expiresAt])
+}
+
+model RateLimitBucket {
+  id          String   @id
+  count       Int      @default(0)
+  windowStart DateTime @default(now())
+  blockedUntil DateTime?
+  updatedAt   DateTime @updatedAt
+
+  @@index([updatedAt])
 }
 
 model Order {

@@ -3,8 +3,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Bell, X, ShoppingCart, MessageSquare, Star } from "lucide-react";
 
-const TOKEN = "hypehub-admin-2024";
-void TOKEN; // (kept for parity with admin modules; not used directly here anymore)
 
 export interface NotificationItem {
   id: string;

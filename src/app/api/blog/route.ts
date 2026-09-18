@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
@@ -7,10 +8,8 @@ export async function GET(req: NextRequest) {
   const all = searchParams.get("all") === "1";
 
   if (all) {
-    const auth = req.headers.get("x-admin-token");
-    if (auth !== process.env.ADMIN_TOKEN && auth !== "hypehub-admin-2024") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const denied = await requireAdmin(req);
+    if (denied) return denied;
     const posts = await db.blogPost.findMany({ orderBy: { createdAt: "desc" } });
     return NextResponse.json({ posts });
   }
@@ -32,10 +31,8 @@ export async function GET(req: NextRequest) {
 
 // POST — admin: create new blog post
 export async function POST(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== process.env.ADMIN_TOKEN && auth !== "hypehub-admin-2024") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
   const body = await req.json();
   const post = await db.blogPost.create({
     data: {

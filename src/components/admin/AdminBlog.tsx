@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
 
-const TOKEN = "hypehub-admin-2024";
 
 interface BlogPost {
   id: string;
@@ -44,7 +43,7 @@ export function AdminBlog() {
   const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/blog?all=1", { headers: { "x-admin-token": TOKEN } });
+      const res = await fetch("/api/blog?all=1", { headers: {} });
       const data = await res.json();
       setPosts(data.posts);
     } catch {
@@ -62,7 +61,7 @@ export function AdminBlog() {
     try {
       const res = await fetch(`/api/blog/${post.slug}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ published: !post.published }),
       });
       if (!res.ok) throw new Error("Ошибка");
@@ -80,7 +79,7 @@ export function AdminBlog() {
     try {
       await fetch(`/api/blog/${post.slug}`, {
         method: "DELETE",
-        headers: { "x-admin-token": TOKEN },
+        headers: {},
       });
       toast({ title: "Статья удалена" });
       setDeleteId(null);
@@ -240,7 +239,7 @@ function BlogForm({
       const method = isCreate ? "POST" : "PATCH";
       const res = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error("Ошибка");

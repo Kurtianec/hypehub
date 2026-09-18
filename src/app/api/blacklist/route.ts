@@ -1,12 +1,12 @@
+import { requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-const TOKEN = "hypehub-admin-2024";
 
 // GET — list blacklisted emails/IPs (stored as Settings with prefix "bl_")
 export async function GET(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== TOKEN) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const settings = await db.setting.findMany({ where: { key: { startsWith: "bl_" } } });
   return NextResponse.json({
@@ -16,8 +16,8 @@ export async function GET(req: NextRequest) {
 
 // POST — add to blacklist (pending admin confirmation)
 export async function POST(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== TOKEN) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const { type, value } = await req.json();
   if (!type || !value) return NextResponse.json({ error: "type and value required" }, { status: 400 });
@@ -32,8 +32,8 @@ export async function POST(req: NextRequest) {
 
 // DELETE — remove from blacklist
 export async function DELETE(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== TOKEN) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");

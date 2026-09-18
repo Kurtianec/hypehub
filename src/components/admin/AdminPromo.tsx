@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 
-const TOKEN = "hypehub-admin-2024";
 
 interface PromoCode {
   id: string;
@@ -45,7 +44,7 @@ export function AdminPromo() {
   const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/promo-codes", { headers: { "x-admin-token": TOKEN } });
+      const res = await fetch("/api/promo-codes", { headers: {} });
       const data = await res.json();
       setCodes(data.codes);
     } catch {
@@ -72,7 +71,7 @@ export function AdminPromo() {
     try {
       const res = await fetch("/api/promo-codes", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           code: form.code,
           discount,
@@ -99,7 +98,7 @@ export function AdminPromo() {
     try {
       const res = await fetch(`/api/promo-codes/${deleteId}`, {
         method: "DELETE",
-        headers: { "x-admin-token": TOKEN },
+        headers: {},
       });
       if (!res.ok) throw new Error("Ошибка");
       toast({ title: "Промокод удалён" });

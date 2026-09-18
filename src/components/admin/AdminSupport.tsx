@@ -14,7 +14,6 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
-const TOKEN = "hypehub-admin-2024";
 
 const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
   new: { label: "Новое", color: "#FF2D87" },
@@ -46,7 +45,7 @@ export function AdminSupport() {
   const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/support", { headers: { "x-admin-token": TOKEN } });
+      const res = await fetch("/api/support", { headers: {} });
       const data = await res.json();
       setMessages(data.messages);
     } catch {
@@ -66,7 +65,7 @@ export function AdminSupport() {
     try {
       const res = await fetch(`/api/support/${viewMsg.id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ reply, status: "replied" }),
       });
       if (!res.ok) throw new Error("Ошибка");
@@ -85,7 +84,7 @@ export function AdminSupport() {
     try {
       await fetch(`/api/support/${id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
       });
       toast({ title: `Статус: ${STATUS_CONFIG[status]?.label || status}` });
@@ -100,7 +99,7 @@ export function AdminSupport() {
     try {
       await fetch(`/api/support/${id}`, {
         method: "DELETE",
-        headers: { "x-admin-token": TOKEN },
+        headers: {},
       });
       toast({ title: "Удалено" });
       setViewMsg(null);

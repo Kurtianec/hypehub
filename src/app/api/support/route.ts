@@ -1,12 +1,12 @@
+import { consumeRateLimit, requestIp, requireAdmin } from "@/lib/security";
+import { z } from "zod";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
 // GET — list support messages (admin only)
 export async function GET(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== process.env.ADMIN_TOKEN && auth !== "hypehub-admin-2024") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
   const messages = await db.supportMessage.findMany({
     orderBy: { createdAt: "desc" },
     take: 200,
@@ -16,11 +16,11 @@ export async function GET(req: NextRequest) {
 
 // POST — public user sends support message
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { name, contact, message, sessionId } = body;
-  if (!name || !contact || !message) {
-    return NextResponse.json({ error: "Missing fields" }, { status: 400 });
-  }
+  const ip = requestIp(req);
+  if (!(await consumeRateLimit(`support:${ip}`, 5, 10 * 60_000)).allowed) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  const parsed = z.object({ name: z.string().trim().min(2).max(100), contact: z.string().trim().min(3).max(200), message: z.string().trim().min(2).max(3000), sessionId: z.string().max(100).optional() }).safeParse(await req.json().catch(() => null));
+  if (!parsed.success) return NextResponse.json({ error: "Invalid data" }, { status: 400 });
+  const { name, contact, message, sessionId } = parsed.data;
   const msg = await db.supportMessage.create({
     data: {
       name,

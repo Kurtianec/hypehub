@@ -21,7 +21,6 @@ import { useToast } from "@/hooks/use-toast";
 import type { Category, Platform } from "@/lib/types";
 import { PLATFORM_COLORS, PLATFORM_GRADIENTS } from "@/lib/types";
 
-const TOKEN = "hypehub-admin-2024";
 
 const PLATFORMS: { value: Platform; label: string }[] = [
   { value: "tiktok", label: "TikTok" },
@@ -53,7 +52,7 @@ export function AdminCategories({
     try {
       const res = await fetch(`/api/categories/${deleteId}`, {
         method: "DELETE",
-        headers: { "x-admin-token": TOKEN },
+        headers: {},
       });
       if (!res.ok) throw new Error("Ошибка");
       toast({ title: "Категория удалена" });
@@ -208,7 +207,7 @@ function CategoryForm({
       const method = isCreate ? "POST" : "PATCH";
       const res = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error("Ошибка");

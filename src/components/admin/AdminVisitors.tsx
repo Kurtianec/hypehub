@@ -33,7 +33,6 @@ interface VisitorData {
   }[];
 }
 
-const TOKEN = "hypehub-admin-2024";
 const RANGES = [
   { value: "24h", label: "24 часа" },
   { value: "7d", label: "7 дней" },
@@ -50,7 +49,7 @@ export function AdminVisitors() {
     setLoading(true);
     try {
       const res = await fetch(`/api/visitors?range=${range}`, {
-        headers: { "x-admin-token": TOKEN },
+        headers: {},
       });
       const d = await res.json();
       setData(d);

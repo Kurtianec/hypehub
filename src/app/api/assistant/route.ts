@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import ZAI from "z-ai-web-dev-sdk";
+import { consumeRateLimit, requestIp } from "@/lib/security";
+import { z } from "zod";
 
 export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { question, context } = body as { question: string; context?: string };
-
-  if (!question) {
-    return NextResponse.json({ error: "question required" }, { status: 400 });
-  }
+  const ip = requestIp(req);
+  if (!(await consumeRateLimit(`assistant:${ip}`, 10, 10 * 60_000)).allowed) return NextResponse.json({ error: "Слишком много запросов" }, { status: 429 });
+  const parsed = z.object({ question: z.string().trim().min(2).max(800), context: z.string().max(100).optional(), captchaToken: z.string().optional() }).safeParse(await req.json().catch(() => null));
+  if (!parsed.success) return NextResponse.json({ error: "Некорректный запрос" }, { status: 400 });
+  const { question, context } = parsed.data;
 
   const systemPrompt = `Ты — AI-ассистент сайта ХайпХаб, современного маркетплейса готовых аккаунтов TikTok, YouTube, VK, Instagram и Telegram.
 

@@ -22,7 +22,7 @@ async function getData() {
   ]);
 
   const settingsMap: Record<string, string> = {};
-  for (const s of settings) settingsMap[s.key] = s.value;
+  for (const s of settings) if (s.key !== "admin_pass") settingsMap[s.key] = s.value;
 
   // Strip credentials
   const safeProducts = products.map(({ login, password, deliveryNote, ...rest }) => rest);

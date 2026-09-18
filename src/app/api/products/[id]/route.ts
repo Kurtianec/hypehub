@@ -1,3 +1,4 @@
+import { encryptSecret, requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
@@ -5,10 +6,8 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== process.env.ADMIN_TOKEN && auth !== "hypehub-admin-2024") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
   const { id } = await params;
   const body = await req.json();
 
@@ -25,7 +24,7 @@ export async function PATCH(
       } else if (k === "featured") {
         data[k] = !!body[k];
       } else {
-        data[k] = body[k];
+        data[k] = ["login", "password", "deliveryNote"].includes(k) && body[k] ? encryptSecret(String(body[k])) : body[k];
       }
     }
   }
@@ -38,10 +37,8 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== process.env.ADMIN_TOKEN && auth !== "hypehub-admin-2024") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
   const { id } = await params;
   await db.product.delete({ where: { id } });
   return NextResponse.json({ ok: true });

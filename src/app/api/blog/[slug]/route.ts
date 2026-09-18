@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
@@ -8,8 +9,12 @@ export async function GET(
 ) {
   const { slug } = await params;
   const post = await db.blogPost.findUnique({ where: { slug } });
-  if (!post || (!post.published && req.headers.get("x-admin-token") !== "hypehub-admin-2024")) {
+  if (!post) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+  if (!post.published) {
+    const denied = await requireAdmin(req);
+    if (denied) return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
   return NextResponse.json({ post });
 }
@@ -19,10 +24,8 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== process.env.ADMIN_TOKEN && auth !== "hypehub-admin-2024") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
   const { slug } = await params;
   const body = await req.json();
   const post = await db.blogPost.findUnique({ where: { slug } });
@@ -47,10 +50,8 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== process.env.ADMIN_TOKEN && auth !== "hypehub-admin-2024") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
   const { slug } = await params;
   const post = await db.blogPost.findUnique({ where: { slug } });
   if (!post) return NextResponse.json({ error: "Not found" }, { status: 404 });

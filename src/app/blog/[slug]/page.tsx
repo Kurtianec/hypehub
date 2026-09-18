@@ -103,12 +103,13 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   // Convert simple markdown to HTML
   const renderContent = (content: string) => {
+    const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[char] || char));
     const lines = content.split("\n");
     const html: string[] = [];
     let inList = false;
 
     for (const line of lines) {
-      const trimmed = line.trim();
+      const trimmed = escapeHtml(line.trim());
       if (trimmed.startsWith("# ")) {
         if (inList) { html.push("</ul>"); inList = false; }
         html.push(`<h2 class="text-2xl font-black uppercase tracking-tight mt-6 mb-3 text-[#BFFF00] font-mono">${trimmed.slice(2)}</h2>`);

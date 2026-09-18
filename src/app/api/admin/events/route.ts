@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { db } from "@/lib/db";
+import { requireAdmin } from "@/lib/security";
 
-const TOKEN = "hypehub-admin-2024";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -9,13 +9,8 @@ export const runtime = "nodejs";
 // SSE endpoint for real-time admin notifications
 // Client subscribes via EventSource; server polls DB every 3s and pushes changes
 export async function GET(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  // For EventSource, we can't set custom headers, so also accept token via query param
-  const url = new URL(req.url);
-  const tokenParam = url.searchParams.get("token");
-  if (auth !== TOKEN && tokenParam !== TOKEN) {
-    return new Response("Unauthorized", { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream({

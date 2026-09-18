@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { requireAdmin } from "@/lib/security";
 
 // GET /api/bonus?email=... — get user's bonus points
 export async function GET(req: NextRequest) {
@@ -32,6 +33,8 @@ export async function GET(req: NextRequest) {
 
 // POST /api/bonus — add points after purchase (called internally after order)
 export async function POST(req: NextRequest) {
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
   const body = await req.json();
   const { email, amount } = body;
 

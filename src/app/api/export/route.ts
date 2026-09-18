@@ -1,7 +1,7 @@
+import { decryptSecret, requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-const TOKEN = "hypehub-admin-2024";
 
 function escapeCsv(value: string): string {
   if (value.includes(",") || value.includes('"') || value.includes("\n")) {
@@ -11,10 +11,8 @@ function escapeCsv(value: string): string {
 }
 
 export async function GET(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== process.env.ADMIN_TOKEN && auth !== TOKEN) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const { searchParams } = new URL(req.url);
   const type = searchParams.get("type") || "products";
@@ -35,8 +33,8 @@ export async function GET(req: NextRequest) {
       p.followers || "",
       p.badges || "",
       p.featured ? "yes" : "no",
-      p.login,
-      p.password,
+      decryptSecret(p.login),
+      decryptSecret(p.password),
       p.createdAt.toISOString(),
     ]);
     const csv = [headers, ...rows].map((r) => r.map(escapeCsv).join(",")).join("\n");

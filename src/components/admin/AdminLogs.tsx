@@ -7,7 +7,6 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const TOKEN = "hypehub-admin-2024";
 
 const ACTION_COLORS: Record<string, string> = {
   create: "#BFFF00",
@@ -48,7 +47,7 @@ export function AdminLogs() {
     setLoading(true);
     try {
       const res = await fetch(`/api/admin-logs?limit=200${filter !== "all" ? `&entity=${filter}` : ""}`, {
-        headers: { "x-admin-token": TOKEN },
+        headers: {},
       });
       const data = await res.json();
       setLogs(data.logs || []);

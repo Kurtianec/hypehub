@@ -28,7 +28,6 @@ interface Analytics {
   daily: { date: string; orders: number; revenue: number }[];
 }
 
-const TOKEN = "hypehub-admin-2024";
 
 export function AdminDashboard({ data }: { data: AdminData }) {
   const [analytics, setAnalytics] = useState<Analytics | null>(null);
@@ -37,7 +36,7 @@ export function AdminDashboard({ data }: { data: AdminData }) {
   const loadAnalytics = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/analytics", { headers: { "x-admin-token": TOKEN } });
+      const res = await fetch("/api/analytics", { headers: {} });
       const d = await res.json();
       setAnalytics(d);
     } catch (e) {

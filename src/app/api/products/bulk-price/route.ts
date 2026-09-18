@@ -1,12 +1,12 @@
+import { requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-const TOKEN = "hypehub-admin-2024";
 
 // POST /api/products/bulk-price — mass update prices
 export async function POST(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== TOKEN) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const { ids, mode, value } = await req.json();
   if (!ids || !Array.isArray(ids) || ids.length === 0 || !mode || value === undefined) {

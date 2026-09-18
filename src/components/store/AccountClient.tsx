@@ -58,7 +58,6 @@ export function AccountClient({ settings }: { settings: Record<string, string> }
         searchWith(saved);
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const searchWith = async (emailVal: string) => {

@@ -358,7 +358,7 @@ async function main() {
     { id: "set_crypto_btc", key: "crypto_btc", value: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" },
     { id: "set_crypto_usdt", key: "crypto_usdt", value: "TXkNQ6MeYF3G7kC7p2eQ8fY2rZyW5kJ9hN" },
     { id: "set_crypto_ton", key: "crypto_ton", value: "EQDrjaLahLkMB-hMCmkzOyBuHJ139QHbPPHu2qWQ4g2v5k2H" },
-    { id: "set_admin_pass", key: "admin_pass", value: "hypehub2024" },
+    { id: "set_admin_pass", key: "admin_pass", value: process.env.ADMIN_PASSWORD_HASH || "" },
     { id: "set_email", key: "support_email", value: "support@hypehub.vercel.app" },
     { id: "set_telegram", key: "support_telegram", value: "@hypehub_support" },
     { id: "set_stats_accounts", key: "stats_accounts", value: "5 200+" },

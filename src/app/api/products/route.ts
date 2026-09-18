@@ -1,7 +1,11 @@
+import { encryptSecret, requireAdmin } from "@/lib/security";
+import { releaseExpiredReservations } from "@/lib/reservations";
+import { z } from "zod";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
 export async function GET(req: NextRequest) {
+  await releaseExpiredReservations();
   const { searchParams } = new URL(req.url);
   const category = searchParams.get("category");
   const featured = searchParams.get("featured") === "true";
@@ -33,25 +37,25 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   // Admin-only
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== process.env.ADMIN_TOKEN && auth !== "hypehub-admin-2024") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-  const body = await req.json();
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
+  const parsed = z.object({ categoryId: z.string().min(1), title: z.string().min(1).max(200), description: z.string().max(10_000).optional(), price: z.coerce.number().positive(), oldPrice: z.coerce.number().positive().nullable().optional(), image: z.string().url().nullable().optional(), badges: z.string().max(500).nullable().optional(), followers: z.string().max(100).nullable().optional(), metadata: z.string().max(10_000).nullable().optional(), login: z.string().min(1).max(1000), password: z.string().min(1).max(1000), deliveryNote: z.string().max(5000).nullable().optional(), status: z.enum(["available", "sold", "reserved", "archived"]).optional(), featured: z.boolean().optional() }).safeParse(await req.json().catch(() => null));
+  if (!parsed.success) return NextResponse.json({ error: "Invalid data", details: parsed.error.flatten() }, { status: 400 });
+  const body = parsed.data;
   const product = await db.product.create({
     data: {
       categoryId: body.categoryId,
       title: body.title,
       description: body.description || "",
-      price: parseFloat(body.price),
-      oldPrice: body.oldPrice ? parseFloat(body.oldPrice) : null,
+      price: body.price,
+      oldPrice: body.oldPrice || null,
       image: body.image || null,
       badges: body.badges || null,
       followers: body.followers || null,
       metadata: body.metadata || null,
-      login: body.login,
-      password: body.password,
-      deliveryNote: body.deliveryNote || null,
+      login: encryptSecret(body.login),
+      password: encryptSecret(body.password),
+      deliveryNote: body.deliveryNote ? encryptSecret(body.deliveryNote) : null,
       status: body.status || "available",
       featured: !!body.featured,
     },

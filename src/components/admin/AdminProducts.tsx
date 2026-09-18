@@ -26,7 +26,6 @@ import type { Category, Product } from "@/lib/types";
 import { formatPrice, parseBadges, BADGE_LABELS } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-const TOKEN = "hypehub-admin-2024";
 
 const STATUS_LABELS: Record<string, string> = {
   available: "В продаже",
@@ -104,7 +103,7 @@ export function AdminProducts({
         else if (bulkAction === "delete") {
           await fetch(`/api/products/${id}`, {
             method: "DELETE",
-            headers: { "x-admin-token": TOKEN },
+            headers: {},
           });
           successCount++;
           continue;
@@ -112,7 +111,7 @@ export function AdminProducts({
 
         const res = await fetch(`/api/products/${id}`, {
           method: "PATCH",
-          headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         });
         if (res.ok) successCount++;
@@ -132,7 +131,7 @@ export function AdminProducts({
     try {
       const res = await fetch(`/api/products/${id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
       });
       if (!res.ok) throw new Error("Ошибка");
@@ -149,7 +148,7 @@ export function AdminProducts({
     try {
       const res = await fetch("/api/products/bulk-price", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ids: Array.from(selected),
           mode: bulkPriceMode,
@@ -180,7 +179,7 @@ export function AdminProducts({
     try {
       const res = await fetch(`/api/products/${deleteId}`, {
         method: "DELETE",
-        headers: { "x-admin-token": TOKEN },
+        headers: {},
       });
       if (!res.ok) throw new Error("Ошибка");
       toast({ title: "Товар удалён" });
@@ -616,7 +615,7 @@ function ProductForm({
       const method = isCreate ? "POST" : "PATCH";
       const res = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json", "x-admin-token": TOKEN },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error("Ошибка");

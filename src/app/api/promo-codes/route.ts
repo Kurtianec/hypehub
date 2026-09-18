@@ -1,12 +1,12 @@
+import { requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-const TOKEN = "hypehub-admin-2024";
 
 // GET — list all promo codes (admin)
 export async function GET(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== TOKEN) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const codes = await db.promoCode.findMany({ orderBy: { createdAt: "desc" } });
   return NextResponse.json({ codes });
@@ -14,8 +14,8 @@ export async function GET(req: NextRequest) {
 
 // POST — create new promo code
 export async function POST(req: NextRequest) {
-  const auth = req.headers.get("x-admin-token");
-  if (auth !== TOKEN) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const denied = await requireAdmin(req);
+  if (denied) return denied;
 
   const { code, discount, maxUses, expiresAt } = await req.json();
   if (!code || !discount) return NextResponse.json({ error: "code and discount required" }, { status: 400 });
