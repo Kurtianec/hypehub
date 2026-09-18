@@ -73,7 +73,7 @@ export function Storefront({
   }, []);
 
   return (
-    <div className="storefront-v2 min-h-screen flex flex-col">
+    <div className="storefront-v3 min-h-screen flex flex-col">
       <VisitorTracker />
       <Header
         siteName={settings.site_name}

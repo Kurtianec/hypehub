@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   LayoutDashboard, Package, Tags, ShoppingCart, MessageSquare,
-  Settings as SettingsIcon, LogOut, Sparkles, Menu, X, ExternalLink, Eye, Star, FileText, ScrollText,
+  Settings as SettingsIcon, LogOut, Layers3, Menu, X, ExternalLink, Eye, Star, FileText, ScrollText,
   Users, Ticket, ShieldBan,
   MonitorSmartphone, DatabaseBackup, ShieldCheck, HeartPulse,
 } from "lucide-react";
@@ -53,23 +53,23 @@ interface TabDef {
 }
 
 const TABS: TabDef[] = [
-  { id: "dashboard", label: "Дашборд", icon: LayoutDashboard, num: "01", color: "#BFFF00" },
-  { id: "products", label: "Товары", icon: Package, num: "02", color: "#FF2D87" },
-  { id: "categories", label: "Категории", icon: Tags, num: "03", color: "#FFE600" },
-  { id: "orders", label: "Заказы", icon: ShoppingCart, num: "04", color: "#00F0FF", badgeKey: "orders" },
-  { id: "support", label: "Поддержка", icon: MessageSquare, num: "05", color: "#A855F7", badgeKey: "support" },
-  { id: "visitors", label: "Посетители", icon: Eye, num: "06", color: "#10B981" },
-  { id: "reviews", label: "Отзывы", icon: Star, num: "07", color: "#FFD700", badgeKey: "reviews" },
-  { id: "blog", label: "Блог", icon: FileText, num: "08", color: "#EC4899" },
-  { id: "logs", label: "Журнал", icon: ScrollText, num: "09", color: "#FF7A00" },
-  { id: "referral", label: "Рефералы", icon: Users, num: "10", color: "#22D3EE" },
-  { id: "promo", label: "Промокоды", icon: Ticket, num: "11", color: "#10B981" },
-  { id: "blacklist", label: "Чёрный список", icon: ShieldBan, num: "12", color: "#FF3333" },
-  { id: "sessions", label: "Сессии", icon: MonitorSmartphone, num: "13", color: "#00F0FF" },
-  { id: "backups", label: "Резервные копии", icon: DatabaseBackup, num: "14", color: "#A855F7" },
-  { id: "warranty", label: "Гарантии", icon: ShieldCheck, num: "15", color: "#FFE600" },
-  { id: "health", label: "Система", icon: HeartPulse, num: "16", color: "#10B981" },
-  { id: "settings", label: "Настройки", icon: SettingsIcon, num: "17", color: "#22D3EE" },
+  { id: "dashboard", label: "Дашборд", icon: LayoutDashboard, num: "01", color: "#7180FF" },
+  { id: "products", label: "Товары", icon: Package, num: "02", color: "#A77FFF" },
+  { id: "categories", label: "Категории", icon: Tags, num: "03", color: "#FFAD66" },
+  { id: "orders", label: "Заказы", icon: ShoppingCart, num: "04", color: "#25BFD2", badgeKey: "orders" },
+  { id: "support", label: "Поддержка", icon: MessageSquare, num: "05", color: "#9A7DFF", badgeKey: "support" },
+  { id: "visitors", label: "Посетители", icon: Eye, num: "06", color: "#55D69E" },
+  { id: "reviews", label: "Отзывы", icon: Star, num: "07", color: "#FFB66E", badgeKey: "reviews" },
+  { id: "blog", label: "Блог", icon: FileText, num: "08", color: "#D477C8" },
+  { id: "logs", label: "Журнал", icon: ScrollText, num: "09", color: "#FF9D66" },
+  { id: "referral", label: "Рефералы", icon: Users, num: "10", color: "#42CBDC" },
+  { id: "promo", label: "Промокоды", icon: Ticket, num: "11", color: "#55D69E" },
+  { id: "blacklist", label: "Чёрный список", icon: ShieldBan, num: "12", color: "#F05D78" },
+  { id: "sessions", label: "Сессии", icon: MonitorSmartphone, num: "13", color: "#42CBDC" },
+  { id: "backups", label: "Резервные копии", icon: DatabaseBackup, num: "14", color: "#A77FFF" },
+  { id: "warranty", label: "Гарантии", icon: ShieldCheck, num: "15", color: "#FFB66E" },
+  { id: "health", label: "Система", icon: HeartPulse, num: "16", color: "#55D69E" },
+  { id: "settings", label: "Настройки", icon: SettingsIcon, num: "17", color: "#7180FF" },
 ];
 
 interface NotificationItem {
@@ -229,7 +229,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
 
   if (authenticated === null) return null;
   if (!authenticated) {
-    return <div className="admin-v2"><AdminLogin onLogin={onLogin} /></div>;
+    return <div className="admin-v3"><AdminLogin onLogin={onLogin} /></div>;
   }
 
   const renderBadge = (badgeKey?: "orders" | "support" | "reviews") => {
@@ -244,13 +244,13 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
   };
 
   return (
-    <div className="admin-v2 min-h-screen flex bg-[#0A0A0A]">
+    <div className="admin-v3 min-h-screen flex">
       {/* Sidebar — desktop */}
       <aside className="hidden lg:flex w-64 flex-shrink-0 bg-[#0E0E0E] border-r-2 border-[#BFFF00]/40 flex-col">
         <div className="p-6 border-b-2 border-[#1F1F1F]">
           <div className="flex items-center gap-2.5">
             <div className="w-10 h-10 bg-[#BFFF00] flex items-center justify-center border-2 border-[#BFFF00]">
-              <Sparkles className="w-5 h-5 text-black" strokeWidth={2.5} />
+              <Layers3 className="w-5 h-5 text-white" strokeWidth={2.2} />
             </div>
             <div>
               <div className="font-black uppercase tracking-tighter">
@@ -314,7 +314,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
             <div className="p-6 border-b-2 border-[#1F1F1F] flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div className="w-9 h-9 bg-[#BFFF00] flex items-center justify-center border-2 border-[#BFFF00]">
-                  <Sparkles className="w-4 h-4 text-black" strokeWidth={2.5} />
+                  <Layers3 className="w-4 h-4 text-white" strokeWidth={2.2} />
                 </div>
                 <div className="font-black uppercase tracking-tighter">
                   <span className="text-[#BFFF00]">Хайп</span>Хаб

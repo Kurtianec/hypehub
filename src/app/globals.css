@@ -588,3 +588,306 @@ body { letter-spacing: -0.005em; }
   .storefront-v2 .hover-press:hover { transform: none; }
   .storefront-v2 footer { padding-top: 2.5rem; }
 }
+
+:root:not(.dark) {
+  --background: #f5f7fc;
+  --foreground: #172039;
+  --card: #ffffff;
+  --card-foreground: #172039;
+  --popover: #ffffff;
+  --popover-foreground: #172039;
+  --primary: #5f6fe8;
+  --primary-foreground: #ffffff;
+  --secondary: #e9edf8;
+  --secondary-foreground: #202b48;
+  --muted: #eef1f8;
+  --muted-foreground: #68738e;
+  --accent: #1aaabd;
+  --accent-foreground: #ffffff;
+  --border: #dfe4f0;
+  --input: #e4e8f2;
+  --ring: #5f6fe8;
+}
+:root:not(.dark) body {
+  background: #f5f7fc !important;
+  background-image: radial-gradient(800px 420px at 8% -8%, rgba(95,111,232,.10), transparent 65%) !important;
+  color: #172039;
+}
+:root:not(.dark) .storefront-v3 { color: #172039; }
+:root:not(.dark) .storefront-v3 header > div > div { background: rgba(255,255,255,.84) !important; border-color: #e2e6f0 !important; }
+:root:not(.dark) .product-card { background: #fff !important; border-color: #e1e5ef !important; }
+:root:not(.dark) .trust-card { background: rgba(255,255,255,.72); border-color: #e2e6ef; }
+:root:not(.dark) .btn-secondary { background: #fff; border-color: #dfe4ef; color: #28344f; }
+:root:not(.dark) .storefront-v3 section h2 { color: #172039; }
+:root:not(.dark) .storefront-v3 [class*="bg-[#121212]"],
+:root:not(.dark) .storefront-v3 [class*="bg-[#0E0E0E]"],
+:root:not(.dark) .storefront-v3 [class*="bg-[#0A0A0A]"],
+:root:not(.dark) .storefront-v3 [class*="bg-[#1A1A1A]"] { background-color: #fff !important; }
+:root:not(.dark) .storefront-v3 [class*="border-[#2A2A2A]"],
+:root:not(.dark) .storefront-v3 [class*="border-[#1F1F1F]"] { border-color: #e1e5ef !important; }
+:root:not(.dark) .storefront-v3 input,
+:root:not(.dark) .storefront-v3 textarea,
+:root:not(.dark) .storefront-v3 select { background: #fff !important; color: #172039; }
+:root:not(.dark) .storefront-v3 footer { background: #edf1f8; }
+
+/* Legacy utility neutralization across secondary pages, dialogs and auth screens. */
+body [class*="text-[#BFFF00]"] { color: #8793ff !important; }
+body [class*="bg-[#BFFF00]"] { background-color: #7180ff !important; color: #fff !important; }
+body [class*="border-[#BFFF00]"] { border-color: rgba(113,128,255,.5) !important; }
+body [class*="text-[#FF2D87]"] { color: #a77fff !important; }
+body [class*="bg-[#FF2D87]"] { background-color: #8d65dd !important; }
+body [class*="border-[#FF2D87]"] { border-color: rgba(167,127,255,.5) !important; }
+body [class*="text-[#00F0FF]"] { color: #42cbdc !important; }
+body [class*="bg-[#00F0FF]"] { background-color: #25bfd2 !important; }
+body [class*="border-[#00F0FF]"] { border-color: rgba(37,191,210,.5) !important; }
+body [class*="text-[#FFE600]"] { color: #ffb66e !important; }
+body [class*="bg-[#FFE600]"] { background-color: #d99050 !important; }
+body [class*="text-[#A855F7]"] { color: #a77fff !important; }
+body [class*="bg-[#A855F7]"] { background-color: #8564d8 !important; }
+body [class*="border-[#A855F7]"] { border-color: rgba(167,127,255,.5) !important; }
+body [class*="text-[#FF0050]"] { color: #a77fff !important; }
+body [class*="bg-[#FF0050]"] { background-color: #795fe0 !important; }
+body [class*="border-[#FF0050]"] { border-color: rgba(121,95,224,.55) !important; }
+body [class*="from-[#FF0050]"] { --tw-gradient-from: #6675f6 !important; --tw-gradient-to: rgba(102,117,246,0) !important; }
+body [class*="to-[#FF0000]"] { --tw-gradient-to: #785ed5 !important; }
+body [class*="bg-[#0A0A0A]"],
+body [class*="bg-[#0E0E0E]"],
+body [class*="bg-[#121212]"],
+body [class*="bg-[#1A1A1A]"] { background-color: #0e1629 !important; }
+body [class*="border-[#2A2A2A]"],
+body [class*="border-[#1F1F1F]"] { border-color: #202c47 !important; }
+body [style*="clip-path"] { clip-path: none !important; border-radius: 16px; }
+
+/* ========================================================================== 
+   HYPEHUB NOVA — full visual reset
+   ========================================================================== */
+:root,
+.dark {
+  --background: #070b16;
+  --foreground: #f4f7ff;
+  --card: #0e1527;
+  --card-foreground: #f4f7ff;
+  --popover: #111a30;
+  --popover-foreground: #f4f7ff;
+  --primary: #7180ff;
+  --primary-foreground: #ffffff;
+  --secondary: #151f36;
+  --secondary-foreground: #e9edff;
+  --muted: #121b30;
+  --muted-foreground: #8f9ab5;
+  --accent: #25bfd2;
+  --accent-foreground: #041014;
+  --destructive: #f05d78;
+  --border: #202b45;
+  --input: #17223a;
+  --ring: #7180ff;
+  --chart-1: #7180ff;
+  --chart-2: #25bfd2;
+  --chart-3: #a67cff;
+  --chart-4: #ff9d66;
+  --chart-5: #55d69e;
+  --sidebar: #0a1020;
+  --sidebar-foreground: #eaf0ff;
+  --sidebar-primary: #7180ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #141e34;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #1d2942;
+  --sidebar-ring: #7180ff;
+}
+
+body {
+  background: #070b16;
+  background-image:
+    radial-gradient(900px 520px at 8% -8%, rgba(113,128,255,.10), transparent 65%),
+    radial-gradient(700px 440px at 96% 8%, rgba(37,191,210,.07), transparent 68%);
+  color: #f4f7ff;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.storefront-v3 {
+  min-height: 100vh;
+  background: transparent;
+  color: #f4f7ff;
+}
+.storefront-v3 .font-mono,
+.admin-v3 .font-mono { font-family: inherit !important; }
+.storefront-v3 .uppercase,
+.admin-v3 .uppercase { text-transform: none !important; }
+.storefront-v3 [style*="clip-path"],
+.admin-v3 [style*="clip-path"] { clip-path: none !important; }
+.storefront-v3 .scanlines::after,
+.storefront-v3 .glitch::before,
+.storefront-v3 .glitch::after { display: none !important; }
+
+.hero-kicker {
+  border: 1px solid rgba(124,140,255,.25);
+  border-radius: 999px;
+  color: #aab4ff;
+  background: rgba(113,128,255,.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+}
+.hero-gradient {
+  background: linear-gradient(110deg, #8e9aff 10%, #48d6e6 58%, #a98aff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.btn-primary {
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 13px;
+  color: white;
+  background: linear-gradient(135deg, #6675f6, #7e66e8);
+  box-shadow: 0 14px 34px -18px rgba(113,128,255,.9), inset 0 1px 0 rgba(255,255,255,.18);
+  transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+}
+.btn-primary:hover { transform: translateY(-2px); filter: brightness(1.08); box-shadow: 0 18px 42px -18px rgba(113,128,255,1); }
+.btn-secondary {
+  border: 1px solid rgba(151,166,204,.16);
+  border-radius: 13px;
+  color: #dce3f8;
+  background: rgba(15,24,43,.72);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.btn-secondary:hover { transform: translateY(-2px); background: rgba(25,37,65,.9); border-color: rgba(151,166,204,.28); }
+.trust-card {
+  border: 1px solid rgba(151,166,204,.10);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(18,28,50,.7), rgba(11,18,34,.7));
+}
+.brand-mark {
+  border-radius: 11px;
+  background: linear-gradient(145deg, #7180ff, #785ed5);
+  box-shadow: 0 10px 24px -14px rgba(113,128,255,.9), inset 0 1px 0 rgba(255,255,255,.22);
+}
+.product-card {
+  border-color: rgba(151,166,204,.11) !important;
+  background: linear-gradient(180deg, rgba(17,27,48,.96), rgba(11,18,34,.96)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+}
+.product-card:hover { border-color: rgba(113,128,255,.42) !important; }
+.product-card-media { background: #0b1222; }
+.product-card-media .product-cover { filter: saturate(.82) contrast(.96); transform: scale(1.01); opacity: .88; transition: transform .45s ease, opacity .3s ease; }
+.product-card:hover .product-cover { transform: scale(1.045); opacity: 1; }
+.product-card-media .product-cover-shade {
+  background: linear-gradient(180deg, rgba(5,9,18,.02), rgba(5,9,18,.6)) !important;
+}
+.product-card-media .product-pattern { display: none; }
+.product-card-media:has(.product-cover) .product-avatar { display: none; }
+
+.storefront-v3 header > div > div {
+  border: 1px solid rgba(151,166,204,.12) !important;
+  border-radius: 18px !important;
+  background: rgba(8,13,26,.78) !important;
+  box-shadow: 0 18px 60px -35px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.04) !important;
+  backdrop-filter: blur(22px) saturate(135%);
+}
+.storefront-v3 header nav button { border-color: transparent !important; border-radius: 10px; }
+.storefront-v3 header nav button:hover { background: rgba(113,128,255,.08) !important; }
+
+.storefront-v3 section h2 { color: #f6f8ff; letter-spacing: -.04em !important; line-height: 1.06; }
+.storefront-v3 section p { line-height: 1.65; }
+.storefront-v3 .text-gradient-neon,
+.storefront-v3 .gradient-text {
+  background: linear-gradient(110deg, #8793ff, #3bc8d9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+}
+.storefront-v3 [class*="bg-[#121212]"],
+.storefront-v3 [class*="bg-[#0E0E0E]"],
+.storefront-v3 [class*="bg-[#0A0A0A]"],
+.storefront-v3 [class*="bg-[#1A1A1A]"] {
+  background-color: rgba(14,21,39,.84) !important;
+}
+.storefront-v3 [class*="border-[#2A2A2A]"],
+.storefront-v3 [class*="border-[#1F1F1F]"] { border-color: rgba(151,166,204,.12) !important; }
+.storefront-v3 [class*="border-2"] { border-width: 1px !important; }
+.storefront-v3 [style*="clip-path"] { border-radius: 17px !important; }
+.storefront-v3 .hover-press {
+  border-radius: 17px;
+  transition: transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
+}
+.storefront-v3 .hover-press:hover { transform: translateY(-4px); box-shadow: 0 24px 60px -36px rgba(91,113,255,.7) !important; }
+.storefront-v3 button,
+.storefront-v3 input,
+.storefront-v3 textarea,
+.storefront-v3 select,
+.storefront-v3 [role="dialog"] { border-radius: 11px; }
+.storefront-v3 input,
+.storefront-v3 textarea,
+.storefront-v3 select {
+  border-color: rgba(151,166,204,.14) !important;
+  background: rgba(7,12,24,.7) !important;
+}
+.storefront-v3 input:focus,
+.storefront-v3 textarea:focus,
+.storefront-v3 select:focus { border-color: rgba(113,128,255,.65) !important; box-shadow: 0 0 0 3px rgba(113,128,255,.10); }
+.storefront-v3 footer { background: #080d1a; border-color: rgba(151,166,204,.10) !important; }
+
+/* Remap every legacy brand utility to the Nova palette. */
+.storefront-v3 [class*="text-[#BFFF00]"], .admin-v3 [class*="text-[#BFFF00]"] { color: #8793ff !important; }
+.storefront-v3 [class*="bg-[#BFFF00]"], .admin-v3 [class*="bg-[#BFFF00]"] { background-color: #7180ff !important; color: white !important; }
+.storefront-v3 [class*="border-[#BFFF00]"], .admin-v3 [class*="border-[#BFFF00]"] { border-color: rgba(113,128,255,.55) !important; }
+.storefront-v3 [class*="text-[#FF2D87]"], .admin-v3 [class*="text-[#FF2D87]"] { color: #a77fff !important; }
+.storefront-v3 [class*="bg-[#FF2D87]"], .admin-v3 [class*="bg-[#FF2D87]"] { background-color: #8d65dd !important; }
+.storefront-v3 [class*="border-[#FF2D87]"], .admin-v3 [class*="border-[#FF2D87]"] { border-color: rgba(167,127,255,.55) !important; }
+.storefront-v3 [class*="text-[#00F0FF]"], .admin-v3 [class*="text-[#00F0FF]"] { color: #42cbdc !important; }
+.storefront-v3 [class*="bg-[#00F0FF]"], .admin-v3 [class*="bg-[#00F0FF]"] { background-color: #25bfd2 !important; }
+.storefront-v3 [class*="border-[#00F0FF]"], .admin-v3 [class*="border-[#00F0FF]"] { border-color: rgba(37,191,210,.5) !important; }
+.storefront-v3 [class*="text-[#FFE600]"], .admin-v3 [class*="text-[#FFE600]"] { color: #ffb66e !important; }
+.storefront-v3 [class*="bg-[#FFE600]"], .admin-v3 [class*="bg-[#FFE600]"] { background-color: #de8e48 !important; }
+
+.admin-v3 {
+  background: #070b16 !important;
+  color: #eef2ff;
+}
+.admin-v3 aside { background: #090f1e !important; border-color: #1c2740 !important; }
+.admin-v3 [class*="bg-[#121212]"],
+.admin-v3 [class*="bg-[#0E0E0E]"],
+.admin-v3 [class*="bg-[#0A0A0A]"],
+.admin-v3 [class*="bg-[#1A1A1A]"] { background-color: #0e1629 !important; }
+.admin-v3 [class*="border-[#2A2A2A]"],
+.admin-v3 [class*="border-[#1F1F1F]"] { border-color: #202c47 !important; }
+.admin-v3 [class*="border-2"] { border-width: 1px !important; }
+.admin-v3 button,
+.admin-v3 input,
+.admin-v3 textarea,
+.admin-v3 select,
+.admin-v3 [role="dialog"] { border-radius: 10px; }
+.admin-v3 input,
+.admin-v3 textarea,
+.admin-v3 select { background: #0a1121 !important; border-color: #23304c !important; }
+.admin-v3 h1,
+.admin-v3 h2,
+.admin-v3 h3 { letter-spacing: -.035em !important; }
+
+@media (max-width: 767px) {
+  .storefront-v3 section h2 { font-size: 2rem; }
+  .storefront-v3 .hover-press:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover { transform: none; }
+  .storefront-v3 header { padding-top: .45rem; }
+}
+
+/* Nova light mode overrides must stay after the dark design rules. */
+:root:not(.dark) {
+  --background: #f5f7fc; --foreground: #172039; --card: #ffffff; --card-foreground: #172039;
+  --popover: #ffffff; --popover-foreground: #172039; --primary: #5f6fe8; --primary-foreground: #ffffff;
+  --secondary: #e9edf8; --secondary-foreground: #202b48; --muted: #eef1f8; --muted-foreground: #68738e;
+  --accent: #1aaabd; --accent-foreground: #ffffff; --border: #dfe4f0; --input: #e4e8f2; --ring: #5f6fe8;
+}
+:root:not(.dark) body { background: #f5f7fc !important; background-image: radial-gradient(800px 420px at 8% -8%, rgba(95,111,232,.10), transparent 65%) !important; color: #172039; }
+:root:not(.dark) .storefront-v3 { color: #172039; }
+:root:not(.dark) .storefront-v3 header > div > div { background: rgba(255,255,255,.88) !important; border-color: #e2e6f0 !important; }
+:root:not(.dark) .product-card { background: #fff !important; border-color: #e1e5ef !important; }
+:root:not(.dark) .trust-card { background: rgba(255,255,255,.72); border-color: #e2e6ef; }
+:root:not(.dark) .btn-secondary { background: #fff; border-color: #dfe4ef; color: #28344f; }
+:root:not(.dark) .storefront-v3 section h2 { color: #172039; }
+:root:not(.dark) .storefront-v3 [class*="bg-[#121212]"], :root:not(.dark) .storefront-v3 [class*="bg-[#0E0E0E]"], :root:not(.dark) .storefront-v3 [class*="bg-[#0A0A0A]"], :root:not(.dark) .storefront-v3 [class*="bg-[#1A1A1A]"] { background-color: #fff !important; }
+:root:not(.dark) .storefront-v3 [class*="border-[#2A2A2A]"], :root:not(.dark) .storefront-v3 [class*="border-[#1F1F1F]"] { border-color: #e1e5ef !important; }
+:root:not(.dark) .storefront-v3 input, :root:not(.dark) .storefront-v3 textarea, :root:not(.dark) .storefront-v3 select { background: #fff !important; color: #172039; }
+:root:not(.dark) .storefront-v3 footer { background: #edf1f8; }

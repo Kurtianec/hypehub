@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Menu, X, Zap, Heart, User,
+  Menu, X, Layers3, Heart, User,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Product, Category } from "@/lib/types";
@@ -108,8 +108,8 @@ export function Header({
           >
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 md:gap-2.5 group flex-shrink-0" aria-label={`${siteName} — на главную`}>
-              <div className="relative w-9 h-9 rounded-xl bg-[#BFFF00] flex items-center justify-center transition-colors flex-shrink-0">
-                <Zap className="w-5 h-5 text-black" strokeWidth={3} fill="black" />
+              <div className="brand-mark relative w-9 h-9 flex items-center justify-center transition-colors flex-shrink-0">
+                <Layers3 className="w-5 h-5 text-white" strokeWidth={2.2} />
               </div>
               <div className="hidden sm:flex flex-col leading-none">
                 <span className="text-lg md:text-xl font-black tracking-tighter uppercase">

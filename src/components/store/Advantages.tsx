@@ -7,14 +7,14 @@ import {
 } from "lucide-react";
 
 const ADVANTAGES = [
-  { icon: Zap, title: "Мгновенная выдача", description: "Данные аккаунта приходят сразу после подтверждения оплаты. Без ожиданий, без переписок с менеджером.", color: "#BFFF00" },
+  { icon: Zap, title: "Быстрая выдача", description: "Данные становятся доступны в заказе сразу после подтверждения оплаты.", color: "#7180FF" },
   { icon: Bitcoin, title: "Только крипта", description: "Принимаем BTC, USDT TRC-20, TON. Полная анонимность, без проверки личности.", color: "#FF7A00" },
-  { icon: Shield, title: "Гарантия 14 дней", description: "На каждый аккаунт — гарантия. Если в течение срока проблемы с доступом, заменим или вернём деньги.", color: "#00F0FF" },
-  { icon: Headphones, title: "Поддержка 24/7", description: "Живой чат техподдержки и AI-ассистент. Помогаем с входом, безопасностью и монетизацией.", color: "#FF2D87" },
-  { icon: RefreshCw, title: "Проверенные аккаунты", description: "Все аккаунты проходят проверку. Живые подписчики, реальная активность, без ботов.", color: "#FFE600" },
-  { icon: Lock, title: "Безопасная сделка", description: "Данные передаются в зашифрованном виде. Смените пароль и включите 2FA — инструкция в файле.", color: "#A855F7" },
+  { icon: Shield, title: "Гарантия 14 дней", description: "Если возникнет проблема, обращение создаётся прямо из личного кабинета.", color: "#25BFD2" },
+  { icon: Headphones, title: "Поддержка", description: "Живой чат и AI-ассистент помогают с покупкой, входом и безопасностью.", color: "#A77FFF" },
+  { icon: RefreshCw, title: "Проверка перед продажей", description: "В карточке указывается дата последней проверки и основные характеристики.", color: "#FFAD66" },
+  { icon: Lock, title: "Защищённая передача", description: "Реквизиты хранятся зашифрованно и выдаются только после подтверждения заказа.", color: "#7180FF" },
   { icon: Clock, title: "Экономия времени", description: "Не нужно месяцами накручивать подписчиков. Готовый аккаунт с аудиторией — сразу в работу.", color: "#10B981" },
-  { icon: Globe, title: "Под любые задачи", description: "От 1K до 100K+ подписчиков. Для стримов, рекламы, монетизации, перепродажи.", color: "#EC4899" },
+  { icon: Globe, title: "Разные платформы", description: "TikTok, YouTube, VK, Instagram и Telegram в одном каталоге.", color: "#A77FFF" },
 ];
 
 export function Advantages({ settings }: { settings?: { stats_clients?: string; stats_accounts?: string; stats_rating?: string; stats_support?: string } }) {

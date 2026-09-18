@@ -377,33 +377,33 @@ function ProductCard({
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.4) }}
       onClick={onClick}
-      className="group relative text-left bg-[#121212] border border-white/[.08] hover:border-[#BFFF00]/40 hover-press transition-all overflow-hidden rounded-2xl"
+      className="product-card group relative text-left border hover-press transition-all overflow-hidden rounded-2xl"
       style={{
         clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))",
       }}
       aria-label={`Купить ${product.title}`}
     >
       {/* Image — photo in circle with decorative background */}
-      <div className="relative w-full aspect-[16/9] overflow-hidden border-b border-white/[.07] transition-colors">
+      <div className="product-card-media relative w-full aspect-[16/9] overflow-hidden border-b border-white/[.07] transition-colors">
         {/* Background — blurred photo as backdrop */}
         {product.image ? (
           <img
             src={product.image}
             alt=""
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-40"
+            className="product-cover absolute inset-0 w-full h-full object-cover"
           />
         ) : null}
 
         {/* Decorative gradient overlay */}
         <div
-          className="absolute inset-0"
+          className="product-cover-shade absolute inset-0"
           style={{ background: `radial-gradient(circle at center, ${accentColor}15, transparent 70%)` }}
         />
 
         {/* Dotted pattern */}
         <div
-          className="absolute inset-0 opacity-10"
+          className="product-pattern absolute inset-0 opacity-10"
           style={{
             backgroundImage: `radial-gradient(circle, ${accentColor} 1px, transparent 1px)`,
             backgroundSize: "16px 16px",
@@ -411,7 +411,7 @@ function ProductCard({
         />
 
         {/* Circular photo — centered, scales on hover */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="product-avatar absolute inset-0 flex items-center justify-center">
           {product.image ? (
             <div className="relative group-hover:scale-105 transition-transform duration-300">
               {/* Photo circle */}
