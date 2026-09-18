@@ -69,7 +69,8 @@ export interface Order {
   deliveryLogin?: string | null;
   deliveryPass?: string | null;
   deliveryNote?: string | null;
-  product?: { title: string };
+  product?: { title: string; status?: string; reservedUntil?: string | null };
+  events?: { id?: string; type: string; label: string; actor: string; details?: string | null; createdAt: string }[];
   createdAt: string;
 }
 

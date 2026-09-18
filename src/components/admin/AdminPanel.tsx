@@ -6,6 +6,7 @@ import {
   LayoutDashboard, Package, Tags, ShoppingCart, MessageSquare,
   Settings as SettingsIcon, LogOut, Sparkles, Menu, X, ExternalLink, Eye, Star, FileText, ScrollText,
   Users, Ticket, ShieldBan,
+  MonitorSmartphone, DatabaseBackup,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,6 +27,8 @@ import { AdminNotifications } from "./AdminNotifications";
 import { AdminReferral } from "./AdminReferral";
 import { AdminPromo } from "./AdminPromo";
 import { AdminBlacklist } from "./AdminBlacklist";
+import { AdminSessions } from "./AdminSessions";
+import { AdminBackups } from "./AdminBackups";
 import { cn } from "@/lib/utils";
 import type { Category, Product, FaqItem } from "@/lib/types";
 
@@ -36,7 +39,7 @@ interface AdminData {
   settings: Record<string, string>;
 }
 
-type Tab = "dashboard" | "products" | "categories" | "orders" | "support" | "visitors" | "reviews" | "blog" | "logs" | "referral" | "promo" | "blacklist" | "settings";
+type Tab = "dashboard" | "products" | "categories" | "orders" | "support" | "visitors" | "reviews" | "blog" | "logs" | "referral" | "promo" | "blacklist" | "sessions" | "backups" | "settings";
 
 interface TabDef {
   id: Tab;
@@ -60,7 +63,9 @@ const TABS: TabDef[] = [
   { id: "referral", label: "Рефералы", icon: Users, num: "10", color: "#22D3EE" },
   { id: "promo", label: "Промокоды", icon: Ticket, num: "11", color: "#10B981" },
   { id: "blacklist", label: "Чёрный список", icon: ShieldBan, num: "12", color: "#FF3333" },
-  { id: "settings", label: "Настройки", icon: SettingsIcon, num: "13", color: "#22D3EE" },
+  { id: "sessions", label: "Сессии", icon: MonitorSmartphone, num: "13", color: "#00F0FF" },
+  { id: "backups", label: "Резервные копии", icon: DatabaseBackup, num: "14", color: "#A855F7" },
+  { id: "settings", label: "Настройки", icon: SettingsIcon, num: "15", color: "#22D3EE" },
 ];
 
 interface NotificationItem {
@@ -155,6 +160,10 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
             audioRef.current.volume = 0.3;
             audioRef.current.play().catch(() => {});
           }
+          if ("Notification" in window && Notification.permission === "granted") {
+            const first = newNotifications[0];
+            new Notification(first.title, { body: first.description, icon: "/favicon.svg", tag: first.type });
+          }
           setNotifications((prev) => [...newNotifications, ...prev].slice(0, 20));
           setUnreadCount((prev) => prev + newNotifications.length);
         }
@@ -174,6 +183,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
 
   const onLogin = () => {
     setAuthenticated(true);
+    if ("Notification" in window && Notification.permission === "default") Notification.requestPermission().catch(() => {});
     toast({ title: "ACCESS_GRANTED", description: "Добро пожаловать в систему" });
   };
 
@@ -219,7 +229,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
     const count = counts[badgeKey];
     if (count === 0) return null;
     return (
-      <span className="ml-auto min-w-[20px] h-5 px-1.5 bg-[#FF2D87] text-white text-[10px] font-black flex items-center justify-center font-mono animate-pulse rounded-sm">
+      <span className="ml-auto min-w-[20px] h-5 px-1.5 bg-[#FF2D87] text-white text-[10px] font-black flex items-center justify-center font-mono rounded-sm">
         {count > 99 ? "99+" : count}
       </span>
     );
@@ -405,6 +415,8 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
           {tab === "referral" && <AdminReferral />}
           {tab === "promo" && <AdminPromo />}
           {tab === "blacklist" && <AdminBlacklist />}
+          {tab === "sessions" && <AdminSessions />}
+          {tab === "backups" && <AdminBackups />}
           {tab === "settings" && <AdminSettings settings={data.settings} />}
         </div>
       </main>

@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
   const search = searchParams.get("q");
   const limit = parseInt(searchParams.get("limit") || "0", 10);
 
-  const where: Record<string, unknown> = { status: "available" };
+  const where: Record<string, unknown> = { status: { in: ["available", "coming_soon"] } };
   if (category) where.categoryId = category;
   if (featured) where.featured = true;
   if (search) {
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
   // Admin-only
   const denied = await requireAdmin(req);
   if (denied) return denied;
-  const parsed = z.object({ categoryId: z.string().min(1), title: z.string().min(1).max(200), description: z.string().max(10_000).optional(), price: z.coerce.number().positive(), oldPrice: z.coerce.number().positive().nullable().optional(), image: z.string().url().nullable().optional(), badges: z.string().max(500).nullable().optional(), followers: z.string().max(100).nullable().optional(), metadata: z.string().max(10_000).nullable().optional(), login: z.string().min(1).max(1000), password: z.string().min(1).max(1000), deliveryNote: z.string().max(5000).nullable().optional(), status: z.enum(["available", "sold", "reserved", "archived"]).optional(), featured: z.boolean().optional() }).safeParse(await req.json().catch(() => null));
+  const parsed = z.object({ categoryId: z.string().min(1), title: z.string().min(1).max(200), description: z.string().max(10_000).optional(), price: z.coerce.number().positive(), oldPrice: z.coerce.number().positive().nullable().optional(), image: z.string().url().nullable().optional(), badges: z.string().max(500).nullable().optional(), followers: z.string().max(100).nullable().optional(), metadata: z.string().max(10_000).nullable().optional(), login: z.string().min(1).max(1000), password: z.string().min(1).max(1000), deliveryNote: z.string().max(5000).nullable().optional(), status: z.enum(["available", "sold", "reserved", "archived", "coming_soon"]).optional(), featured: z.boolean().optional() }).safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Invalid data", details: parsed.error.flatten() }, { status: 400 });
   const body = parsed.data;
   const product = await db.product.create({

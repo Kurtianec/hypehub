@@ -439,7 +439,11 @@
   50%, 100% { opacity: 0; }
 }
 .blink {
-  animation: blink 1s infinite;
+  animation: blink 1.4s ease-in-out 3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
 }
 
 /* === FLOAT === */

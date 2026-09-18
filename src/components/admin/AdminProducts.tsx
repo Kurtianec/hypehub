@@ -32,6 +32,7 @@ const STATUS_LABELS: Record<string, string> = {
   reserved: "Забронирован",
   sold: "Продан",
   archived: "В архиве",
+  coming_soon: "Скоро появится",
 };
 
 const STATUS_COLORS: Record<string, string> = {
@@ -39,6 +40,7 @@ const STATUS_COLORS: Record<string, string> = {
   reserved: "#FFE600",
   sold: "#888",
   archived: "#A855F7",
+  coming_soon: "#00F0FF",
 };
 
 export function AdminProducts({
@@ -233,6 +235,7 @@ export function AdminProducts({
             <SelectItem value="all">Все статусы</SelectItem>
             <SelectItem value="available">В продаже</SelectItem>
             <SelectItem value="reserved">Забронирован</SelectItem>
+            <SelectItem value="coming_soon">Скоро появится</SelectItem>
             <SelectItem value="sold">Продан</SelectItem>
             <SelectItem value="archived">В архиве</SelectItem>
           </SelectContent>
@@ -677,6 +680,7 @@ function ProductForm({
               <SelectContent>
                 <SelectItem value="available">В продаже</SelectItem>
                 <SelectItem value="reserved">Забронирован</SelectItem>
+                <SelectItem value="coming_soon">Скоро появится</SelectItem>
                 <SelectItem value="sold">Продан</SelectItem>
                 <SelectItem value="archived">В архиве</SelectItem>
               </SelectContent>

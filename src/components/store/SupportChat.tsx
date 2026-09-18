@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 interface StoredMessage {
   id: string;
@@ -59,6 +60,7 @@ export function SupportChat() {
   const [messages, setMessages] = useState<StoredMessage[]>([]);
   const [newReply, setNewReply] = useState(false);
   const [sessionId, setSessionId] = useState("");
+  const [operatorOnline, setOperatorOnline] = useState(false);
   const { toast } = useToast();
   const pollRef = useRef<NodeJS.Timeout | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -72,6 +74,7 @@ export function SupportChat() {
       setMessages(stored);
       setStep("chat");
     }
+    fetch("/api/settings").then((r) => r.json()).then((d) => setOperatorOnline(d.settings?.operator_online === "true")).catch(() => {});
   }, []);
 
   // Auto-scroll to bottom on new messages
@@ -225,8 +228,9 @@ export function SupportChat() {
             aria-label="Открыть чат техподдержки"
           >
             <Headphones className="w-7 h-7" strokeWidth={2.5} />
-            <span className="absolute -top-1 -right-1 px-1.5 py-0.5 bg-[#FF2D87] text-white text-[9px] font-black border-2 border-black font-mono">
-              24/7
+            <span className="sr-only">{operatorOnline ? "Оператор онлайн" : "Оператор офлайн"}</span>
+            <span className={cn("absolute -top-1 -right-1 px-1.5 py-0.5 text-white text-[9px] font-black border-2 border-black font-mono", operatorOnline ? "bg-[#10B981]" : "bg-[#666]")}>
+              {operatorOnline ? "ONLINE" : "OFFLINE"}
             </span>
             {newReply && (
               <span className="absolute -top-2 -left-2 w-5 h-5 bg-[#BFFF00] text-black text-[10px] font-black border-2 border-black flex items-center justify-center font-mono">
@@ -252,18 +256,13 @@ export function SupportChat() {
               <div className="flex items-center gap-3">
                 <div className="relative w-10 h-10 bg-[#00F0FF] flex items-center justify-center border-2 border-[#00F0FF]">
                   <Headphones className="w-5 h-5 text-black" strokeWidth={2.5} />
-                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[#BFFF00] border-2 border-[#0E0E0E]">
-                    <span className="block w-full h-full bg-[#BFFF00] blink" />
-                  </span>
+                  <span className={cn("absolute -bottom-0.5 -right-0.5 w-3 h-3 border-2 border-[#0E0E0E]", operatorOnline ? "bg-[#10B981]" : "bg-[#666]")} />
                 </div>
                 <div>
                   <div className="font-black text-sm uppercase tracking-tight">SUPPORT</div>
                   <div className="text-[10px] text-[#888] font-mono uppercase flex items-center gap-1">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full bg-[#BFFF00] opacity-75 blink"></span>
-                      <span className="relative inline-flex h-1.5 w-1.5 bg-[#BFFF00]"></span>
-                    </span>
-                    ONLINE · ОТВЕТ ЗА 2 МИН
+                    <span className={cn("inline-flex h-1.5 w-1.5 rounded-full", operatorOnline ? "bg-[#10B981]" : "bg-[#666]")} />
+                    {operatorOnline ? "Онлайн — ответим за несколько минут" : "Офлайн — ответим в рабочее время"}
                   </div>
                 </div>
               </div>

@@ -34,6 +34,7 @@ export function AdminOrders() {
   const [restoredIds, setRestoredIds] = useState<Set<string>>(new Set());
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const { toast } = useToast();
+  const openOrder = async (order: Order) => { const r = await fetch(`/api/orders/${order.id}`); const d = await r.json(); setViewOrder({ ...order, events: d.events || order.events }); };
 
   const load = async () => {
     setLoading(true);
@@ -54,6 +55,8 @@ export function AdminOrders() {
   }, [view]);
 
   const updateOrder = async (order: Order, status: "pending" | "paid" | "delivered" | "cancelled" | "archived", restoreProduct = false) => {
+    if (status === "delivered" && !window.confirm("Выдать покупателю логин и пароль? Это действие будет записано в историю заказа.")) return;
+    if (status === "cancelled" && !window.confirm("Отменить заказ и вернуть товар в каталог?")) return;
     setUpdatingId(order.id);
     try {
       const res = await fetch(`/api/orders/${order.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status, restoreProduct }) });
@@ -67,6 +70,7 @@ export function AdminOrders() {
 
   // Возврат товара одновременно отменяет заказ, поэтому он исчезает из активных и из счётчика.
   const restoreProduct = async (order: Order) => {
+    if (!window.confirm("Вернуть товар в каталог и отменить этот заказ?")) return;
     setRestoringId(order.id);
     try {
       const res = await fetch(`/api/orders/${order.id}`, {
@@ -247,7 +251,7 @@ export function AdminOrders() {
                   <Button
                     size="sm"
                     variant="ghost"
-                    onClick={() => setViewOrder(o)}
+                    onClick={() => openOrder(o)}
                     className="hover:bg-[#00F0FF]/10 hover:text-[#00F0FF]"
                   >
                     <Eye className="w-4 h-4" />
@@ -270,6 +274,18 @@ export function AdminOrders() {
               <div className="glass rounded-xl p-3">
                 <div className="text-xs text-muted-foreground mb-0.5">Товар</div>
                 <div className="font-bold">{viewOrder.product?.title}</div>
+              </div>
+
+              <div className="glass rounded-xl p-3">
+                <div className="text-xs text-muted-foreground mb-3">История заказа</div>
+                <div className="space-y-3">
+                  {(viewOrder.events?.length ? viewOrder.events : [{ type: "created", label: "Заказ создан", actor: "Система", createdAt: viewOrder.createdAt }]).map((event, index) => (
+                    <div key={`${event.type}-${index}`} className="flex gap-3 text-xs">
+                      <div className="flex flex-col items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#00F0FF]" />{index < (viewOrder.events?.length || 1) - 1 && <span className="w-px flex-1 bg-[#2A2A2A] mt-1" />}</div>
+                      <div className="pb-2"><div className="font-bold text-foreground">{event.label}</div><div className="text-[#888] font-mono">{new Date(event.createdAt).toLocaleString("ru-RU")} · {event.actor}</div></div>
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div className="glass rounded-xl p-3">

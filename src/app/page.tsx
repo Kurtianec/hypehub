@@ -13,7 +13,7 @@ async function getData() {
       include: { _count: { select: { products: { where: { status: "available" } } } } },
     }),
     db.product.findMany({
-      where: { status: "available" },
+      where: { status: { in: ["available", "coming_soon"] } },
       include: { category: true },
       orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
     }),

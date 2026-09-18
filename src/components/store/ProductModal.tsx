@@ -40,6 +40,8 @@ export function ProductModal({
   const [paymentMethod, setPaymentMethod] = useState<"crypto">("crypto");
   const [cryptoType, setCryptoType] = useState<"btc" | "usdt" | "ton">("usdt");
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [reservationEndsAt, setReservationEndsAt] = useState<string | null>(null);
+  const [secondsLeft, setSecondsLeft] = useState(0);
   const [txnHash, setTxnHash] = useState("");
   const [delivery, setDelivery] = useState<{ login: string; password: string; deliveryNote?: string | null; productTitle: string } | null>(null);
   const [related, setRelated] = useState<Product[]>([]);
@@ -84,6 +86,16 @@ export function ProductModal({
     }
   }, [product]);
 
+  useEffect(() => {
+    if (!reservationEndsAt) return;
+    const tick = () => {
+      const left = Math.max(0, Math.ceil((new Date(reservationEndsAt).getTime() - Date.now()) / 1000));
+      setSecondsLeft(left);
+      if (left === 0 && step !== "done") { setStep("details"); toast({ title: "Время резерва истекло", description: "Товар снова доступен в каталоге" }); }
+    };
+    tick(); const timer = setInterval(tick, 1000); return () => clearInterval(timer);
+  }, [reservationEndsAt, step, toast]);
+
   if (!product) return null;
 
   const badges = parseBadges(product.badges);
@@ -97,6 +109,7 @@ export function ProductModal({
     setEmail("");
     setContact("");
     setOrderId(null);
+    setReservationEndsAt(null);
     setTxnHash("");
     setDelivery(null);
   };
@@ -130,6 +143,7 @@ export function ProductModal({
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       setOrderId(data.order.id);
+      setReservationEndsAt(data.reservedUntil);
       toast({
         title: "Заказ создан",
         description: "Переведите оплату и подтвердите платёж",
@@ -145,6 +159,24 @@ export function ProductModal({
   };
 
   const confirmPayment = async () => {
+    if (orderId) {
+      try {
+        const response = await fetch(`/api/orders/${orderId}/payment-notice`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ txnHash: txnHash.trim() || undefined }),
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Не удалось отправить уведомление");
+      } catch (error) {
+        toast({
+          title: "Не удалось уведомить об оплате",
+          description: error instanceof Error ? error.message : "Попробуйте ещё раз",
+          variant: "destructive",
+        });
+        return;
+      }
+    }
     setStep("delivering");
     // Show "checking payment" message — don't deliver instantly
     // Real payment verification would happen on the backend
@@ -239,6 +271,17 @@ support@hypehub.vercel.app
               className="p-5 md:p-6 overflow-y-auto"
             >
               <h2 className="text-xl md:text-2xl font-black mb-1 uppercase tracking-tight">{product.title}</h2>
+              <div className="mb-2">
+                <span className={cn(
+                  "inline-flex rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide",
+                  product.status === "available" && "border-green-400/30 bg-green-400/10 text-green-400",
+                  product.status === "reserved" && "border-yellow-400/30 bg-yellow-400/10 text-yellow-300",
+                  product.status === "sold" && "border-red-400/30 bg-red-400/10 text-red-300",
+                  product.status === "coming_soon" && "border-cyan-400/30 bg-cyan-400/10 text-cyan-300",
+                )}>
+                  {product.status === "available" ? "В продаже" : product.status === "reserved" ? "Зарезервирован" : product.status === "sold" ? "Продан" : "Скоро появится"}
+                </span>
+              </div>
 
               {product.followers && (
                 <div className="text-xs text-muted-foreground mb-2 font-mono">
@@ -303,10 +346,11 @@ support@hypehub.vercel.app
                 </div>
                 <Button
                   onClick={() => setStep("checkout")}
+                  disabled={product.status !== "available"}
                   size="lg"
                   className="bg-gradient-to-r from-[#FF0050] to-[#FF0000] text-white font-bold px-6"
                 >
-                  Купить
+                  {product.status === "available" ? "Купить" : product.status === "coming_soon" ? "Скоро появится" : product.status === "reserved" ? "Зарезервирован" : "Продан"}
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -480,6 +524,11 @@ support@hypehub.vercel.app
               <p className="text-xs text-muted-foreground mb-4">
                 {`Переведите точную сумму на ${cryptoLabel(cryptoType)} адрес`}
               </p>
+              {secondsLeft > 0 && (
+                <div className="mb-3 border border-[#FFE600]/40 bg-[#FFE600]/10 px-3 py-2 text-center font-mono text-sm text-[#FFE600]">
+                  Товар зарезервирован ещё на {String(Math.floor(secondsLeft / 60)).padStart(2, "0")}:{String(secondsLeft % 60).padStart(2, "0")}
+                </div>
+              )}
 
               <div className="glass rounded-lg p-3 mb-3 space-y-3">
                 <div>

@@ -41,5 +41,6 @@ export async function DELETE(
   if (denied) return denied;
   const { id } = await params;
   await db.product.delete({ where: { id } });
+  await db.adminLog.create({ data: { action: "product_deleted", entity: "product", entityId: id } });
   return NextResponse.json({ ok: true });
 }

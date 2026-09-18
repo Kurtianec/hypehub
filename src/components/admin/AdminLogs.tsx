@@ -35,6 +35,7 @@ interface LogEntry {
   entityId?: string | null;
   details?: string | null;
   ip?: string | null;
+  actor?: string;
   createdAt: string;
 }
 
@@ -42,11 +43,15 @@ export function AdminLogs() {
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>("all");
+  const [action, setAction] = useState("");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
 
   const load = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin-logs?limit=200${filter !== "all" ? `&entity=${filter}` : ""}`, {
+      const query = new URLSearchParams({ limit: "200" }); if (filter !== "all") query.set("entity", filter); if (action) query.set("action", action); if (from) query.set("from", from); if (to) query.set("to", to);
+      const res = await fetch(`/api/admin-logs?${query}`, {
         headers: {},
       });
       const data = await res.json();
@@ -60,7 +65,7 @@ export function AdminLogs() {
 
   useEffect(() => {
     load();
-  }, [filter]);
+  }, [filter, action, from, to]);
 
   if (loading) {
     return (
@@ -112,6 +117,13 @@ export function AdminLogs() {
             {f.l}
           </button>
         ))}
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-4">
+        <select value={action} onChange={(e) => setAction(e.target.value)} className="bg-[#121212] border border-[#333] px-3 py-2 text-xs"><option value="">Все операции</option><option value="login">Успешные входы</option><option value="login_failed">Неудачные входы</option><option value="payment_settings_changed">Изменения кошельков</option><option value="order_viewed">Просмотр заказа/реквизитов</option><option value="order_status">Выдача и статусы</option><option value="product_deleted">Удаление товара</option><option value="backup_restored">Восстановление копии</option></select>
+        <label className="text-xs text-[#888] flex items-center gap-2">От <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} className="bg-[#121212] border border-[#333] px-2 py-1.5 text-white" /></label>
+        <label className="text-xs text-[#888] flex items-center gap-2">До <input type="date" value={to} onChange={(e) => setTo(e.target.value)} className="bg-[#121212] border border-[#333] px-2 py-1.5 text-white" /></label>
+        <span className="px-3 py-2 text-xs border border-[#333] text-[#888]">Администратор: основной</span>
       </div>
 
       {/* Logs list */}
@@ -166,6 +178,7 @@ export function AdminLogs() {
                   {log.ip && (
                     <div className="text-[10px] text-[#888] font-mono mt-1">IP: {log.ip}</div>
                   )}
+                  <div className="text-[10px] text-[#777] font-mono mt-1">Кто: {log.actor || "Администратор"}</div>
                 </div>
                 <div className="text-[10px] text-[#888] font-mono whitespace-nowrap flex-shrink-0">
                   {new Date(log.createdAt).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}

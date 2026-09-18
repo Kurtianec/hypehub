@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
   await db.order.updateMany({ where: { status: "pending", product: { status: "available" } }, data: { status: "cancelled" } });
   const orders = await db.order.findMany({
     where: { status: { in: ["pending", "paid"] } },
-    include: { product: { include: { category: true } } },
+    include: { product: { include: { category: true } }, events: { orderBy: { createdAt: "asc" } } },
     orderBy: { createdAt: "desc" },
     take: 200,
   });
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     if (!product) throw new Error("UNAVAILABLE");
     const locked = await tx.product.updateMany({ where: { id: productId, status: "available" }, data: { status: "reserved", reservedUntil } });
     if (locked.count !== 1) throw new Error("UNAVAILABLE");
-    return tx.order.create({ data: { productId, buyerEmail: buyerEmail.toLowerCase(), buyerContact, paymentMethod, amount: product.price, currency: product.currency, status: "pending" } });
+    return tx.order.create({ data: { productId, buyerEmail: buyerEmail.toLowerCase(), buyerContact, paymentMethod, amount: product.price, currency: product.currency, status: "pending", events: { create: { type: "created", label: "Заказ создан", actor: "Покупатель" } } }, include: { events: true } });
   }).catch((e) => e instanceof Error && e.message === "UNAVAILABLE" ? null : Promise.reject(e));
   if (!order) return NextResponse.json({ error: "Product unavailable" }, { status: 409 });
 

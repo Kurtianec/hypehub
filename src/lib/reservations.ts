@@ -10,6 +10,7 @@ export async function releaseExpiredReservations() {
   await db.$transaction([
     db.product.updateMany({ where: { id: { in: ids }, status: "reserved" }, data: { status: "available", reservedUntil: null } }),
     db.order.updateMany({ where: { productId: { in: ids }, status: "pending" }, data: { status: "cancelled" } }),
+    db.orderEvent.createMany({ data: (await db.order.findMany({ where: { productId: { in: ids }, status: "pending" }, select: { id: true } })).map((o) => ({ orderId: o.id, type: "expired", label: "Резерв истёк — заказ отменён", actor: "Система" })) }),
   ]);
   return ids.length;
 }

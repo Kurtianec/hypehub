@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     const locked = await tx.product.updateMany({ where: { id: productId, status: "available" }, data: { status: "reserved", reservedUntil: expiresAt } });
     if (locked.count !== 1) throw new Error("UNAVAILABLE");
     const prepaymentAmount = Math.round(product.price * 0.1 * 100) / 100;
-    const order = await tx.order.create({ data: { productId, buyerEmail: email.toLowerCase(), buyerContact: contact, paymentMethod: "reserve", amount: prepaymentAmount, currency: product.currency, status: "pending" } });
+    const order = await tx.order.create({ data: { productId, buyerEmail: email.toLowerCase(), buyerContact: contact, paymentMethod: "reserve", amount: prepaymentAmount, currency: product.currency, status: "pending", events: { create: { type: "created", label: "Товар зарезервирован", actor: "Покупатель", details: JSON.stringify({ expiresAt }) } } }, include: { events: true } });
     return { product, prepaymentAmount, order };
   }).catch((e) => e instanceof Error && e.message === "UNAVAILABLE" ? null : Promise.reject(e));
   if (!result) return NextResponse.json({ error: "Product unavailable" }, { status: 409 });

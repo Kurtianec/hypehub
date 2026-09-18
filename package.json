@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
-    "build": "prisma generate && prisma db push --skip-generate && tsx scripts/encrypt-existing-data.ts && next build",
+    "build": "prisma generate && prisma db push --skip-generate && tsx scripts/auto-backup.ts && tsx scripts/encrypt-existing-data.ts && next build",
     "build:check": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint .",

@@ -78,7 +78,8 @@ export async function GET(req: NextRequest) {
       deliveryLogin: true,
       deliveryPass: true,
       deliveryNote: true,
-      product: { select: { title: true } },
+      product: { select: { title: true, status: true, reservedUntil: true, categoryId: true } },
+      events: { select: { type: true, label: true, actor: true, createdAt: true }, orderBy: { createdAt: "asc" } },
     },
   });
   if (!order) {

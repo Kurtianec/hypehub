@@ -24,8 +24,18 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     }});
     if (status === "delivered") await tx.product.update({ where: { id: current.productId }, data: { status: "sold", reservedUntil: null } });
     if (restoreProduct || status === "cancelled") await tx.product.update({ where: { id: current.productId }, data: { status: "available", reservedUntil: null } });
+    const labels: Record<string, string> = { pending: "Ожидает оплаты", paid: "Оплата подтверждена", delivered: "Данные выданы", cancelled: "Заказ отменён", archived: "Заказ завершён и помещён в архив" };
+    await tx.orderEvent.create({ data: { orderId: id, type: status, label: labels[status], actor: "Администратор", details: restoreProduct ? JSON.stringify({ productReturned: true }) : null } });
     return updated;
   });
   await db.adminLog.create({ data: { action: "order_status", entity: "order", entityId: id, details: JSON.stringify({ from: current.status, to: status, restoreProduct: !!restoreProduct }) } });
-  return NextResponse.json({ ok: true, order });
+  const events = await db.orderEvent.findMany({ where: { orderId: id }, orderBy: { createdAt: "asc" } });
+  return NextResponse.json({ ok: true, order, events });
+}
+
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const denied = await requireAdmin(req); if (denied) return denied;
+  const { id } = await params;
+  await db.adminLog.create({ data: { action: "order_viewed", entity: "order", entityId: id } });
+  return NextResponse.json({ events: await db.orderEvent.findMany({ where: { orderId: id }, orderBy: { createdAt: "asc" } }) });
 }

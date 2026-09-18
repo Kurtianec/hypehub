@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
 
   const orders = await db.order.findMany({
     where: { status: { in: ["delivered", "cancelled", "archived"] } },
-    include: { product: { include: { category: true } } },
+    include: { product: { include: { category: true } }, events: { orderBy: { createdAt: "asc" } } },
     orderBy: { createdAt: "desc" },
     take: 200,
   });

@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 const PUBLIC_KEYS = [
   "site_name", "tagline", "crypto_btc", "crypto_usdt", "crypto_ton",
   "support_email", "support_telegram",
+  "operator_online",
   "stats_accounts", "stats_clients", "stats_rating", "stats_support",
   "yandex_metrika", "google_analytics", "hotjar_id",
 ];
@@ -34,5 +35,7 @@ export async function PUT(req: NextRequest) {
       await db.setting.create({ data: { id: `set_${key}`, key, value: safeValue } });
     }
   }
+  const changedWallets = Object.keys(body).filter((key) => key.startsWith("crypto_") || key === "support_email" || key === "support_telegram");
+  if (changedWallets.length) await db.adminLog.create({ data: { action: "payment_settings_changed", entity: "settings", details: JSON.stringify({ fields: changedWallets }) } });
   return NextResponse.json({ ok: true });
 }
