@@ -49,11 +49,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.svg?v=2", type: "image/svg+xml" },
       { url: "/logo.svg", type: "image/svg+xml" },
     ],
     apple: "/apple-touch-icon.svg",
-    shortcut: "/favicon.svg",
+    shortcut: "/favicon.svg?v=2",
   },
   manifest: "/manifest.webmanifest",
   openGraph: {
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
   category: "e-commerce",
   formatDetection: { telephone: false, address: false, email: false },
   other: {
-    "theme-color": "#0A0A0F",
+    "theme-color": "#F5F7FC",
     "yandex-verification": "hypehub-yandex-verify",
   },
 };
@@ -86,10 +86,10 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0A0A0F" },
-    { media: "(prefers-color-scheme: light)", color: "#0A0A0F" },
+    { media: "(prefers-color-scheme: dark)", color: "#070B16" },
+    { media: "(prefers-color-scheme: light)", color: "#F5F7FC" },
   ],
-  colorScheme: "dark",
+  colorScheme: "light dark",
 };
 
 const jsonLd = {
@@ -195,7 +195,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" suppressHydrationWarning className="dark">
+    <html lang="ru" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

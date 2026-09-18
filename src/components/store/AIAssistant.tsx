@@ -124,7 +124,7 @@ export function AIAssistant() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={() => setOpen(true)}
-            className="fixed bottom-24 right-8 z-40 w-11 h-11 bg-[#171717] text-[#888] border border-[#444] hover:text-[#BFFF00] hover:border-[#BFFF00] flex items-center justify-center group transition-colors"
+            className="ai-fab fixed bottom-24 right-8 z-40 w-11 h-11 flex items-center justify-center group transition-all"
             style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
             aria-label="Открыть AI-ассистент"
           >

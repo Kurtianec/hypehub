@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import {
   Zap, Shield, Bitcoin, Headphones, RefreshCw, Star,
-  Lock, Clock, Globe,
+  Lock, Clock, Globe, Users, ShoppingBag,
 } from "lucide-react";
 
 const ADVANTAGES = [
@@ -18,6 +18,12 @@ const ADVANTAGES = [
 ];
 
 export function Advantages({ settings }: { settings?: { stats_clients?: string; stats_accounts?: string; stats_rating?: string; stats_support?: string } }) {
+  const stats = [
+    { icon: Users, value: settings?.stats_clients || "0", label: "Клиентов" },
+    { icon: ShoppingBag, value: settings?.stats_accounts || "0", label: "Продано" },
+    { icon: Star, value: `${settings?.stats_rating || "0"}/5`, label: "Рейтинг" },
+    { icon: Headphones, value: settings?.stats_support || "24/7", label: "Поддержка" },
+  ];
   return (
     <section
       id="advantages"
@@ -83,20 +89,12 @@ export function Advantages({ settings }: { settings?: { stats_clients?: string; 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-8 md:mt-12 bg-[#0E0E0E] border-2 border-[#BFFF00] p-5 md:p-8 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center"
-          style={{ clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))" }}
+          className="stats-panel mt-8 md:mt-12 p-3 md:p-4 grid grid-cols-2 md:grid-cols-4 gap-2"
         >
-          {[
-            { value: settings?.stats_clients || "12 800+", label: "КЛИЕНТОВ", color: "#BFFF00" },
-            { value: settings?.stats_accounts || "5 200+", label: "ПРОДАНО", color: "#FF2D87" },
-            { value: `${settings?.stats_rating || "4.9"}/5`, label: "РЕЙТИНГ", color: "#FFE600" },
-            { value: settings?.stats_support || "24/7", label: "ПОДДЕРЖКА", color: "#00F0FF" },
-          ].map((s, i) => (
-            <div key={i}>
-              <div className="text-xl md:text-3xl font-black mb-1 font-mono" style={{ color: s.color }}>
-                {s.value}
-              </div>
-              <div className="text-[10px] md:text-xs text-[#888] font-mono uppercase tracking-widest">{s.label}</div>
+          {stats.map((s, i) => (
+            <div key={i} className="stat-tile flex items-center gap-3 p-4 md:p-5 text-left">
+              <div className="stat-icon flex h-10 w-10 shrink-0 items-center justify-center"><s.icon className="h-4.5 w-4.5"/></div>
+              <div><div className="text-xl md:text-2xl font-black leading-none mb-1">{s.value}</div><div className="text-xs text-muted-foreground">{s.label}</div></div>
             </div>
           ))}
         </motion.div>

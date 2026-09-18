@@ -223,11 +223,11 @@ export function SupportChat() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={handleOpen}
-            className="fixed bottom-6 right-6 z-40 w-16 h-16 bg-[#00F0FF] text-black border-2 border-[#00F0FF] shadow-[0_0_28px_rgba(0,240,255,0.35)] hover:bg-white hover:border-white flex items-center justify-center transition-colors"
+            className="support-fab fixed bottom-6 right-6 z-40 w-14 h-14 flex items-center justify-center transition-all"
             style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
             aria-label="Открыть чат техподдержки"
           >
-            <Headphones className="w-7 h-7" strokeWidth={2.5} />
+            <Headphones className="w-6 h-6" strokeWidth={2.2} />
             <span className="sr-only">{operatorOnline ? "Оператор онлайн" : "Оператор офлайн"}</span>
             <span className={cn("absolute -top-1 -right-1 px-1.5 py-0.5 text-white text-[9px] font-black border-2 border-black font-mono", operatorOnline ? "bg-[#10B981]" : "bg-[#666]")}>
               {operatorOnline ? "ONLINE" : "OFFLINE"}

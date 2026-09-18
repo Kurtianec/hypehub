@@ -16,11 +16,13 @@ export function Hero() {
         <div className="mx-auto max-w-5xl text-center">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="hero-kicker mb-7 inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold">
             <Sparkles className="h-3.5 w-3.5" />
-            Digital account marketplace
+            Маркетплейс аккаунтов
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .06 }} className="text-balance text-4xl font-black leading-[1.04] tracking-[-.045em] md:text-7xl lg:text-[82px]">
-            Цифровые активы<br/><span className="hero-gradient">для быстрого старта</span>
-          </motion.h1>
+          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .06 }} className="hero-showcase mx-auto max-w-4xl px-5 py-8 md:px-10 md:py-12">
+            <div className="hero-orb hero-orb-one"/><div className="hero-orb hero-orb-two"/>
+            <h1 className="relative text-balance text-3xl font-black leading-[1.08] tracking-[-.04em] md:text-6xl">Аккаунты социальных платформ<br/><span className="hero-gradient">в одном каталоге</span></h1>
+            <div className="relative mt-6 flex flex-wrap justify-center gap-2 text-xs font-semibold"><span>TikTok</span><span>YouTube</span><span>VK</span><span>Instagram</span><span>Telegram</span></div>
+          </motion.div>
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .12 }} className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
             Подбирайте готовые аккаунты социальных платформ, оплачивайте удобным способом и отслеживайте каждый этап сделки в личном кабинете.
           </motion.p>

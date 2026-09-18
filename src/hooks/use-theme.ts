@@ -6,7 +6,7 @@ export type Theme = "dark" | "light";
 const THEME_KEY = "hypehub_theme";
 
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
     const saved = localStorage.getItem(THEME_KEY) as Theme | null;
@@ -19,7 +19,7 @@ export function useTheme() {
           document.documentElement.classList.add("dark");
         }
       });
-    }
+    } else document.documentElement.classList.remove("dark");
   }, []);
 
   const toggle = useCallback(() => {
