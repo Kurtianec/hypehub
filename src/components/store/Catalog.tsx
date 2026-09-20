@@ -168,7 +168,7 @@ export function Catalog({
       className="prism-catalog relative scroll-mt-20"
       aria-label="Каталог аккаунтов"
     >
-      <div className="container mx-auto max-w-[1480px] px-4 md:px-6">
+      <div className="container mx-auto max-w-[1240px] px-4 md:px-6">
         {/* Заголовок */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -371,12 +371,20 @@ function ProductCard({
   const accentColor = product.category ? PLATFORM_COLORS[product.category.platform] : "#BFFF00";
 
   return (
-    <motion.button
+    <motion.article
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.4) }}
       onClick={onClick}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          onClick();
+        }
+      }}
+      role="button"
+      tabIndex={0}
       className="product-card group relative text-left border hover-press transition-all overflow-hidden rounded-2xl"
       style={{
         clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))",
@@ -573,6 +581,6 @@ function ProductCard({
           </div>
         </div>
       </div>
-    </motion.button>
+    </motion.article>
   );
 }

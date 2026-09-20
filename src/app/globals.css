@@ -446,6 +446,12 @@
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
 }
 
+/* Keep floating help controls outside the desktop catalog content column. */
+@media (min-width: 900px) {
+  .support-fab { right: 12px !important; }
+  .ai-fab { right: 18px !important; }
+}
+
 /* === FLOAT === */
 @keyframes float-y {
   0%, 100% { transform: translateY(0); }
