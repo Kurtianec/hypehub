@@ -2,21 +2,20 @@ export function BrandMark({ className = "" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
-        <linearGradient id="hypehub-facet-a" x1="11" y1="11" x2="51" y2="52" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#5149E8" /><stop offset="1" stopColor="#8A64F7" />
+        <linearGradient id="hypehub-loop-a" x1="7" y1="18" x2="36" y2="46" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#29D3C7" /><stop offset="1" stopColor="#77F2E5" />
         </linearGradient>
-        <linearGradient id="hypehub-facet-b" x1="19" y1="49" x2="53" y2="13" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#23C7C1" /><stop offset="1" stopColor="#91FFF1" />
+        <linearGradient id="hypehub-loop-b" x1="29" y1="18" x2="58" y2="46" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#8C68FF" /><stop offset="1" stopColor="#5149E8" />
         </linearGradient>
-        <filter id="hypehub-shadow" x="3" y="5" width="58" height="57" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="2.5"/></filter>
+        <linearGradient id="hypehub-tile" x1="8" y1="5" x2="57" y2="60" gradientUnits="userSpaceOnUse"><stop stopColor="#202944"/><stop offset="1" stopColor="#111728"/></linearGradient>
       </defs>
-      <path d="M32 9 55 32 32 55 9 32 32 9Z" fill="#5149E8" opacity=".22" filter="url(#hypehub-shadow)"/>
-      <path d="M31.8 7 55 30.2 46.6 38.6 31.8 23.8 17 38.6 8.6 30.2 31.8 7Z" fill="url(#hypehub-facet-a)"/>
-      <path d="m46.6 25.4 8.4 8.4L31.8 57 8.6 33.8l8.4-8.4 14.8 14.8 14.8-14.8Z" fill="url(#hypehub-facet-b)"/>
-      <path d="m31.8 23.8 7.9 7.9-7.9 8.5-7.9-8.5 7.9-7.9Z" fill="#171D31"/>
-      <path d="m17 38.6 14.8 14.8 14.8-14.8" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity=".34"/>
-      <circle cx="52.5" cy="13" r="3.5" fill="#9DFFF2"/>
-      <circle cx="11.5" cy="51" r="2" fill="#716BF1" opacity=".65"/>
+      <path d="M5 17C5 9.82 10.82 4 18 4h28c7.18 0 13 5.82 13 13v30c0 7.18-5.82 13-13 13H18C10.82 60 5 54.18 5 47V17Z" fill="url(#hypehub-tile)"/>
+      <path d="M32 32c-5.4-8.7-10.2-12-15.1-10.6-8.9 2.5-8.9 18.7 0 21.2C21.8 44 26.6 40.7 32 32Z" stroke="url(#hypehub-loop-a)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M32 32c5.4-8.7 10.2-12 15.1-10.6 8.9 2.5 8.9 18.7 0 21.2C42.2 44 37.4 40.7 32 32Z" stroke="url(#hypehub-loop-b)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
+      <circle cx="32" cy="32" r="5" fill="white"/>
+      <circle cx="32" cy="32" r="2.2" fill="#635BF0"/>
+      <circle cx="51.5" cy="14.5" r="2.5" fill="#77F2E5"/>
     </svg>
   );
 }

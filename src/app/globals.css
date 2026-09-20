@@ -639,8 +639,8 @@ body { letter-spacing: -0.005em; }
 /* Soft diamond field on the neutral canvas. */
 :root:not(.dark) body::before {
   content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg width='96' height='96' viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M48 34 62 48 48 62 34 48Z' fill='none' stroke='%237A8398' stroke-width='1' opacity='.13'/%3E%3Cpath d='M6 4 10 8 6 12 2 8Z' fill='%23625DF5' opacity='.055'/%3E%3C/svg%3E");
-  background-size:96px 96px; mask-image:linear-gradient(to bottom,rgba(0,0,0,.75),rgba(0,0,0,.28) 55%,rgba(0,0,0,.5));
+  background-image:url("data:image/svg+xml,%3Csvg width='360' height='240' viewBox='0 0 360 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%237A8398' stroke-width='1' opacity='.115'%3E%3Cpath d='M-20 75C50 12 110 128 184 66s122-28 196 34'/%3E%3Cpath d='M-28 98C47 34 111 151 190 88s126-26 198 36'/%3E%3Cpath d='M-35 121C45 57 116 174 196 111s130-22 199 37'/%3E%3Cpath d='M-42 144C43 80 121 197 202 134s134-18 200 38'/%3E%3C/g%3E%3Cg fill='%23625DF5' opacity='.11'%3E%3Ccircle cx='48' cy='38' r='1.5'/%3E%3Ccircle cx='286' cy='186' r='1.5'/%3E%3Ccircle cx='206' cy='26' r='1'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:360px 240px; mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),rgba(0,0,0,.34) 60%,rgba(0,0,0,.55));
 }
 :root:not(.dark) .storefront-v3 { position:relative; z-index:1; background:rgba(245,247,252,.58); }
 
