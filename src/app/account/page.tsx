@@ -22,13 +22,13 @@ export default async function AccountPage() {
   for (const s of settings) settingsMap[s.key] = s.value;
 
   return (
-    <>
+    <div className="storefront-v3 min-h-screen flex flex-col">
       <VisitorTracker />
       <Header siteName={settingsMap.site_name} />
       <AccountClient settings={settingsMap} />
       <Footer settings={settingsMap} />
       <AIAssistant />
       <SupportChat />
-    </>
+    </div>
   );
 }

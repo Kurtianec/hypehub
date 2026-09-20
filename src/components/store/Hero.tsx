@@ -1,49 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, BadgeCheck, Clock3, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowDownRight, BadgeCheck, Clock3, ShieldCheck, Sparkles } from "lucide-react";
+
+const trust = [
+  { icon: BadgeCheck, text: "Проверено вручную" },
+  { icon: ShieldCheck, text: "Гарантия 14 дней" },
+  { icon: Clock3, text: "Выдача после оплаты" },
+];
 
 export function Hero() {
   const openCatalog = () => document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth" });
   return (
-    <section className="relative overflow-hidden pb-14 pt-32 md:pb-20 md:pt-40">
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-24 top-0 h-[520px] w-[620px] rounded-full bg-[#6675ff]/15 blur-[150px]" />
-        <div className="absolute -right-24 top-20 h-[420px] w-[520px] rounded-full bg-[#25c2d9]/10 blur-[150px]" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      </div>
-      <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-5xl text-center">
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="hero-kicker mb-7 inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold">
-            <Sparkles className="h-3.5 w-3.5" />
-            Маркетплейс аккаунтов
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .06 }} className="hero-showcase mx-auto max-w-4xl px-5 py-8 md:px-10 md:py-12">
-            <div className="hero-orb hero-orb-one"/><div className="hero-orb hero-orb-two"/>
-            <h1 className="relative text-balance text-3xl font-black leading-[1.08] tracking-[-.04em] md:text-6xl">Аккаунты социальных платформ<br/><span className="hero-gradient">в одном каталоге</span></h1>
-            <div className="relative mt-6 flex flex-wrap justify-center gap-2 text-xs font-semibold"><span>TikTok</span><span>YouTube</span><span>VK</span><span>Instagram</span><span>Telegram</span></div>
-          </motion.div>
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .12 }} className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Подбирайте готовые аккаунты социальных платформ, оплачивайте удобным способом и отслеживайте каждый этап сделки в личном кабинете.
-          </motion.p>
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .18 }} className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <button onClick={openCatalog} className="btn-primary inline-flex h-12 items-center justify-center gap-2 px-7 text-sm font-bold">
-              Смотреть каталог <ArrowRight className="h-4 w-4" />
-            </button>
-            <a href="/account" className="btn-secondary inline-flex h-12 items-center justify-center px-7 text-sm font-semibold">Мои заказы</a>
-          </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .28 }} className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-2 md:grid-cols-4">
-            <Trust icon={BadgeCheck} text="Аккаунты проверены" />
-            <Trust icon={ShieldCheck} text="Гарантия 14 дней" />
-            <Trust icon={Clock3} text="Выдача после оплаты" />
-            <Trust icon={Sparkles} text="Поддержка онлайн" />
-          </motion.div>
+    <section className="prism-hero" aria-label="Маркетплейс аккаунтов">
+      <div className="prism-hero-grid" aria-hidden="true" />
+      <motion.div initial={{ opacity: 0, y: 22, scale: .985 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: .65, ease: [0.16, 1, 0.3, 1] }} className="prism-hero-shell">
+        <div className="prism-hero-copy">
+          <div className="prism-eyebrow"><Sparkles className="h-3.5 w-3.5" /> Маркетплейс аккаунтов</div>
+          <h1>Нужный аккаунт.<br/><span>Уже готов.</span></h1>
+          <p>Проверенные аккаунты социальных платформ — с понятной историей сделки и безопасной выдачей.</p>
         </div>
-      </div>
+        <button onClick={openCatalog} className="prism-catalog-jump" aria-label="Перейти к каталогу">
+          <span>Смотреть<br/>ассортимент</span><ArrowDownRight className="h-6 w-6" />
+        </button>
+        <div className="prism-trust-rail">
+          {trust.map(({ icon: Icon, text }, index) => (
+            <motion.div key={text} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: .22 + index * .08 }} className="prism-trust-item">
+              <Icon className="h-4 w-4" /><span>{text}</span>
+            </motion.div>
+          ))}
+        </div>
+        <div className="prism-orbit prism-orbit-a" aria-hidden="true" />
+        <div className="prism-orbit prism-orbit-b" aria-hidden="true" />
+      </motion.div>
     </section>
   );
-}
-
-function Trust({ icon: Icon, text }: { icon: React.ComponentType<{className?: string}>; text: string }) {
-  return <div className="trust-card flex items-center justify-center gap-2 px-3 py-3 text-[11px] text-muted-foreground"><Icon className="h-3.5 w-3.5 text-[#7c8cff]"/><span>{text}</span></div>;
 }

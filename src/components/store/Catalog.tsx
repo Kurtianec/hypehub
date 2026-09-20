@@ -165,19 +165,19 @@ export function Catalog({
   return (
     <section
       id="catalog"
-      className="relative py-10 md:py-14 scroll-mt-20"
+      className="prism-catalog relative scroll-mt-20"
       aria-label="Каталог аккаунтов"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto max-w-[1480px] px-4 md:px-6">
         {/* Заголовок */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-6 md:mb-8"
+          className="prism-catalog-heading"
         >
-          <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-1.5">Каталог аккаунтов</h2>
-          <p className="text-sm text-[var(--muted-foreground)]">Готовые аккаунты с живыми подписчиками. Все проверены.</p>
+          <div><span className="prism-section-index">01 / Витрина</span><h2>Каталог аккаунтов</h2></div>
+          <p>Готовые аккаунты с живыми подписчиками.<br/>Выберите и откройте подробности.</p>
         </motion.div>
 
         {/* Скелетоны при загрузке */}
@@ -207,7 +207,7 @@ export function Catalog({
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5"
+              className="prism-product-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5"
             >
               {pagedProducts.map((product, i) => (
                 <ProductCard
