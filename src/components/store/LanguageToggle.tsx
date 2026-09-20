@@ -13,7 +13,7 @@ export function LanguageToggle({
   return (
     <button
       onClick={onToggle}
-      className="w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#F7A600] flex items-center justify-center transition-colors font-mono text-xs font-black"
+      className="w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#8E1537] flex items-center justify-center transition-colors font-mono text-xs font-black"
       aria-label="Switch language"
       title={locale === "ru" ? "Switch to English" : "Переключить на русский"}
     >
@@ -24,7 +24,7 @@ export function LanguageToggle({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 5 }}
           transition={{ duration: 0.15 }}
-          className={locale === "ru" ? "text-[#F7A600]" : "text-[#F7A600]"}
+          className={locale === "ru" ? "text-[#8E1537]" : "text-[#8E1537]"}
         >
           {locale === "ru" ? "RU" : "EN"}
         </motion.span>

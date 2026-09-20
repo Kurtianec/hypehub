@@ -81,7 +81,7 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
       <div className="flex flex-col sm:flex-row justify-between gap-3 mb-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#F7A600]" />
+            <div className="w-1 h-8 bg-[#8E1537]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_SETTINGS"}</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">Настройки</h1>
@@ -90,7 +90,7 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
         <Button
           onClick={save}
           disabled={saving}
-          className="bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase border-2 border-[#F7A600] hover:border-[#F7A600] font-mono tracking-wide"
+          className="bg-[#8E1537] text-black hover:bg-[#8E1537] hover:text-white font-black uppercase border-2 border-[#8E1537] hover:border-[#8E1537] font-mono tracking-wide"
         >
           {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" strokeWidth={3} />}
           Сохранить
@@ -107,8 +107,8 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
             style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
           >
             <h3 className="font-black mb-4 flex items-center gap-2 uppercase tracking-tight">
-              <group.icon className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
-              <span className="font-mono text-xs text-[#F7A600]">{"// "}{group.group.toUpperCase()}</span>
+              <group.icon className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
+              <span className="font-mono text-xs text-[#8E1537]">{"// "}{group.group.toUpperCase()}</span>
             </h3>
             <div className="space-y-3">
               {group.fields.map((f) => (
@@ -118,7 +118,7 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
                     type={f.type}
                     value={String(form[f.key] || "")}
                     onChange={(e) => set(f.key, e.target.value)}
-                    className={`mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] ${f.mono ? "font-mono text-xs" : ""}`}
+                    className={`mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] ${f.mono ? "font-mono text-xs" : ""}`}
                   />
                 </div>
               ))}
@@ -127,18 +127,18 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
         ))}
       </div>
 
-      <div className="mt-6 bg-[#0E0E0E] border-2 border-[#F7A600] p-5"
+      <div className="mt-6 bg-[#0E0E0E] border-2 border-[#8E1537] p-5"
         style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}
       >
         <h3 className="font-black mb-3 flex items-center gap-2 uppercase tracking-tight">
-          <SettingsIcon className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
-          <span className="font-mono text-xs text-[#F7A600]">{"// INFO"}</span>
+          <SettingsIcon className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
+          <span className="font-mono text-xs text-[#8E1537]">{"// INFO"}</span>
         </h3>
         <div className="text-sm text-[#888] space-y-2 font-mono">
           <p>&gt; Все изменения применяются на сайте мгновенно после сохранения.</p>
           <p>&gt; Крипто-адреса используются в модальном окне оплаты — проверьте перед публикацией.</p>
           <p>&gt; Смена пароля админа вступает в силу при следующем входе.</p>
-          <p>&gt; Доступ к админке: добавьте <code className="text-[#F7A600]">?admin=1</code> к URL сайта.</p>
+          <p>&gt; Доступ к админке: добавьте <code className="text-[#8E1537]">?admin=1</code> к URL сайта.</p>
         </div>
       </div>
     </div>

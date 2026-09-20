@@ -151,13 +151,13 @@ export function AIAssistant() {
               <X className="w-3 h-3" />
             </button>
             <div className="flex items-start gap-2">
-              <Lightbulb className="w-4 h-4 text-[#F7A600] flex-shrink-0 mt-0.5" />
+              <Lightbulb className="w-4 h-4 text-[#8E1537] flex-shrink-0 mt-0.5" />
               <div>
-                <div className="text-xs font-black mb-0.5 uppercase font-mono text-[#F7A600]">AI_ASSIST</div>
+                <div className="text-xs font-black mb-0.5 uppercase font-mono text-[#8E1537]">AI_ASSIST</div>
                 <div className="text-xs text-[#888] font-mono">{hint}</div>
                 <button
                   onClick={() => setOpen(true)}
-                  className="text-xs text-[#F7A600] font-black mt-1.5 hover:underline font-mono uppercase"
+                  className="text-xs text-[#8E1537] font-black mt-1.5 hover:underline font-mono uppercase"
                 >
                   &gt; Спросить
                 </button>
@@ -175,27 +175,27 @@ export function AIAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed bottom-4 right-4 left-4 md:left-auto md:bottom-6 md:right-6 z-50 w-auto md:w-[400px] h-[600px] max-h-[85vh] bg-[#0A0A0A] border-2 border-[#F7A600] flex flex-col overflow-hidden"
+            className="fixed bottom-4 right-4 left-4 md:left-auto md:bottom-6 md:right-6 z-50 w-auto md:w-[400px] h-[600px] max-h-[85vh] bg-[#0A0A0A] border-2 border-[#8E1537] flex flex-col overflow-hidden"
             style={{ clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))" }}
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b-2 border-[#1F1F1F] bg-[#0E0E0E]">
               <div className="flex items-center gap-3">
-                <div className="relative w-10 h-10 bg-[#F7A600] flex items-center justify-center border-2 border-[#F7A600]">
+                <div className="relative w-10 h-10 bg-[#8E1537] flex items-center justify-center border-2 border-[#8E1537]">
                   <Bot className="w-5 h-5 text-black" strokeWidth={2.5} />
-                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[#F7A600] border-2 border-[#0E0E0E]">
-                    <span className="block w-full h-full bg-[#F7A600] blink" />
+                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[#8E1537] border-2 border-[#0E0E0E]">
+                    <span className="block w-full h-full bg-[#8E1537] blink" />
                   </span>
                 </div>
                 <div>
                   <div className="font-black text-sm flex items-center gap-1.5 uppercase tracking-tight">
                     AI_ASSIST
-                    <Sparkles className="w-3 h-3 text-[#F7A600]" />
+                    <Sparkles className="w-3 h-3 text-[#8E1537]" />
                   </div>
                   <div className="text-[10px] text-[#888] font-mono uppercase flex items-center gap-1">
                     <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full bg-[#F7A600] opacity-75 blink"></span>
-                      <span className="relative inline-flex h-1.5 w-1.5 bg-[#F7A600]"></span>
+                      <span className="absolute inline-flex h-full w-full bg-[#8E1537] opacity-75 blink"></span>
+                      <span className="relative inline-flex h-1.5 w-1.5 bg-[#8E1537]"></span>
                     </span>
                     ONLINE · 24/7
                   </div>
@@ -213,7 +213,7 @@ export function AIAssistant() {
             {/* Context badge */}
             {context && (
               <div className="px-4 py-1.5 bg-[#1A1A1A] border-b border-[#1F1F1F] text-[10px] text-[#888] font-mono uppercase">
-                &gt; CTX: <span className="text-[#F7A600]">{context}</span>
+                &gt; CTX: <span className="text-[#8E1537]">{context}</span>
               </div>
             )}
 
@@ -227,7 +227,7 @@ export function AIAssistant() {
                   className={cn("flex gap-2", msg.role === "user" && "justify-end")}
                 >
                   {msg.role === "assistant" && (
-                    <div className="w-8 h-8 bg-[#F7A600] flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-[#8E1537] flex items-center justify-center flex-shrink-0">
                       <Bot className="w-4 h-4 text-black" />
                     </div>
                   )}
@@ -235,7 +235,7 @@ export function AIAssistant() {
                     className={cn(
                       "max-w-[80%] px-4 py-2.5 text-sm font-mono",
                       msg.role === "user"
-                        ? "bg-[#F7A600] text-white border-2 border-[#F7A600]"
+                        ? "bg-[#8E1537] text-white border-2 border-[#8E1537]"
                         : "bg-[#121212] text-foreground border border-[#2A2A2A]"
                     )}
                   >
@@ -251,14 +251,14 @@ export function AIAssistant() {
 
               {loading && (
                 <div className="flex gap-2">
-                  <div className="w-8 h-8 bg-[#F7A600] flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 bg-[#8E1537] flex items-center justify-center flex-shrink-0">
                     <Bot className="w-4 h-4 text-black" />
                   </div>
                   <div className="bg-[#121212] border border-[#2A2A2A] px-4 py-3">
                     <div className="flex gap-1">
-                      <span className="w-1.5 h-1.5 bg-[#F7A600] blink" style={{ animationDelay: "0ms" }} />
-                      <span className="w-1.5 h-1.5 bg-[#F7A600] blink" style={{ animationDelay: "150ms" }} />
-                      <span className="w-1.5 h-1.5 bg-[#F7A600] blink" style={{ animationDelay: "300ms" }} />
+                      <span className="w-1.5 h-1.5 bg-[#8E1537] blink" style={{ animationDelay: "0ms" }} />
+                      <span className="w-1.5 h-1.5 bg-[#8E1537] blink" style={{ animationDelay: "150ms" }} />
+                      <span className="w-1.5 h-1.5 bg-[#8E1537] blink" style={{ animationDelay: "300ms" }} />
                     </div>
                   </div>
                 </div>
@@ -272,7 +272,7 @@ export function AIAssistant() {
                       <button
                         key={s}
                         onClick={() => send(s)}
-                        className="text-xs px-3 py-1.5 border border-[#2A2A2A] bg-[#121212] hover:border-[#F7A600] hover:text-[#F7A600] transition-colors text-foreground font-mono"
+                        className="text-xs px-3 py-1.5 border border-[#2A2A2A] bg-[#121212] hover:border-[#8E1537] hover:text-[#8E1537] transition-colors text-foreground font-mono"
                       >
                         {s}
                       </button>
@@ -290,14 +290,14 @@ export function AIAssistant() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && send()}
                   placeholder="> спросите что-нибудь..."
-                  className="bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono text-sm"
+                  className="bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono text-sm"
                   disabled={loading}
                 />
                 <Button
                   onClick={() => send()}
                   disabled={loading || !input.trim()}
                   size="icon"
-                  className="bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white border-2 border-[#F7A600] hover:border-[#F7A600] flex-shrink-0"
+                  className="bg-[#8E1537] text-black hover:bg-[#8E1537] hover:text-white border-2 border-[#8E1537] hover:border-[#8E1537] flex-shrink-0"
                   aria-label="Отправить"
                 >
                   {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" strokeWidth={2.5} />}

@@ -9,12 +9,12 @@ import { cn } from "@/lib/utils";
 
 
 const ACTION_COLORS: Record<string, string> = {
-  create: "#F7A600",
-  update: "#F7A600",
-  delete: "#F7A600",
-  login: "#F7A600",
-  settings: "#F7A600",
-  reply: "#F7A600",
+  create: "#8E1537",
+  update: "#8E1537",
+  delete: "#8E1537",
+  login: "#8E1537",
+  settings: "#8E1537",
+  reply: "#8E1537",
   archive: "#888",
 };
 
@@ -70,7 +70,7 @@ export function AdminLogs() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-[#F7A600]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#8E1537]" />
       </div>
     );
   }
@@ -87,7 +87,7 @@ export function AdminLogs() {
     <div>
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-1 h-8 bg-[#F7A600]" />
+          <div className="w-1 h-8 bg-[#8E1537]" />
           <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_LOGS"}</span>
         </div>
         <h1 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">Журнал действий</h1>
@@ -111,7 +111,7 @@ export function AdminLogs() {
             onClick={() => setFilter(f.v)}
             className={cn(
               "px-3 py-1.5 text-xs font-black uppercase tracking-wide transition-all font-mono",
-              filter === f.v ? "bg-[#F7A600] text-white" : "text-[#888] hover:text-foreground"
+              filter === f.v ? "bg-[#8E1537] text-white" : "text-[#888] hover:text-foreground"
             )}
           >
             {f.l}

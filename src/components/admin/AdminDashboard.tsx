@@ -61,7 +61,7 @@ export function AdminDashboard({ data }: { data: AdminData }) {
     <div>
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-1 h-8 bg-[#F7A600]" />
+          <div className="w-1 h-8 bg-[#8E1537]" />
           <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// DASHBOARD"}</span>
         </div>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
@@ -72,14 +72,14 @@ export function AdminDashboard({ data }: { data: AdminData }) {
           <div className="flex gap-2">
             <button
               onClick={loadAnalytics}
-              className="px-3 py-2 bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#F7A600] text-xs font-mono uppercase flex items-center gap-2"
+              className="px-3 py-2 bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537] text-xs font-mono uppercase flex items-center gap-2"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
               Обновить
             </button>
             <button
               onClick={() => exportData("products")}
-              className="px-3 py-2 bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#F7A600] text-xs font-mono uppercase flex items-center gap-2"
+              className="px-3 py-2 bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537] text-xs font-mono uppercase flex items-center gap-2"
             >
               <Download className="w-3.5 h-3.5" />
               Экспорт
@@ -97,7 +97,7 @@ export function AdminDashboard({ data }: { data: AdminData }) {
               label="ВЫРУЧКА 30Д"
               value={formatPrice(analytics.revenue.last30d)}
               sub={`7д: ${formatPrice(analytics.revenue.last7d)}`}
-              color="#F7A600"
+              color="#8E1537"
               trend={`+${analytics.orders.last7d} заказов`}
             />
             <MetricCard
@@ -105,7 +105,7 @@ export function AdminDashboard({ data }: { data: AdminData }) {
               label="ЗАКАЗЫ"
               value={String(analytics.orders.total)}
               sub={`24ч: ${analytics.orders.last24h}`}
-              color="#F7A600"
+              color="#8E1537"
               trend={`${analytics.orders.pending} ожидают`}
             />
             <MetricCard
@@ -113,7 +113,7 @@ export function AdminDashboard({ data }: { data: AdminData }) {
               label="ПОСЕТИТЕЛИ 30Д"
               value={String(analytics.visitors.total30d)}
               sub={`Уникальных: ${analytics.visitors.unique30d}`}
-              color="#F7A600"
+              color="#8E1537"
               trend="30 дней"
             />
             <MetricCard
@@ -121,7 +121,7 @@ export function AdminDashboard({ data }: { data: AdminData }) {
               label="НОВЫХ ОБРАЩЕНИЙ"
               value={String(analytics.support.newMessages)}
               sub="в поддержке"
-              color="#F7A600"
+              color="#8E1537"
               trend="требует ответа"
             />
           </div>
@@ -131,15 +131,15 @@ export function AdminDashboard({ data }: { data: AdminData }) {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-[#121212] border-2 border-[#F7A600]/40 p-4 mb-6 flex items-center gap-4"
+              className="bg-[#121212] border-2 border-[#8E1537]/40 p-4 mb-6 flex items-center gap-4"
               style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
             >
-              <div className="w-12 h-12 bg-[#F7A600]/20 border-2 border-[#F7A600] flex items-center justify-center flex-shrink-0">
-                <Target className="w-6 h-6 text-[#F7A600]" strokeWidth={2.5} />
+              <div className="w-12 h-12 bg-[#8E1537]/20 border-2 border-[#8E1537] flex items-center justify-center flex-shrink-0">
+                <Target className="w-6 h-6 text-[#8E1537]" strokeWidth={2.5} />
               </div>
               <div className="flex-1">
                 <div className="text-[10px] font-mono uppercase text-[#888] tracking-widest">КОНВЕРСИЯ · 30 ДНЕЙ</div>
-                <div className="text-2xl font-black font-mono text-[#F7A600]">
+                <div className="text-2xl font-black font-mono text-[#8E1537]">
                   {analytics.conversion.rate}%
                 </div>
               </div>
@@ -155,8 +155,8 @@ export function AdminDashboard({ data }: { data: AdminData }) {
             style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
           >
             <h3 className="font-black mb-4 flex items-center gap-2 uppercase tracking-tight">
-              <TrendingUp className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
-              <span className="text-[#F7A600] font-mono text-xs">{"// ЗАКАЗЫ_ЗА_14_ДНЕЙ"}</span>
+              <TrendingUp className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
+              <span className="text-[#8E1537] font-mono text-xs">{"// ЗАКАЗЫ_ЗА_14_ДНЕЙ"}</span>
             </h3>
             <div className="flex items-end gap-1 h-32">
               {analytics.daily.map((d, i) => {
@@ -170,10 +170,10 @@ export function AdminDashboard({ data }: { data: AdminData }) {
                     className="flex-1 group relative"
                   >
                     <div
-                      className="w-full bg-[#F7A600] hover:bg-[#F7A600] transition-colors cursor-pointer"
+                      className="w-full bg-[#8E1537] hover:bg-[#8E1537] transition-colors cursor-pointer"
                       style={{ minHeight: d.orders > 0 ? "8px" : "2px", opacity: d.orders > 0 ? 1 : 0.2 }}
                     />
-                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-black border border-[#F7A600] text-[10px] font-bold font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-black border border-[#8E1537] text-[10px] font-bold font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                       {d.orders} зак · {formatPrice(d.revenue)}
                     </div>
                   </motion.div>
@@ -192,20 +192,20 @@ export function AdminDashboard({ data }: { data: AdminData }) {
               style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
             >
               <h3 className="font-black mb-4 flex items-center gap-2 uppercase tracking-tight">
-                <Star className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
-                <span className="text-[#F7A600] font-mono text-xs">{"// ТОП_ПРОДАЖ_30Д"}</span>
+                <Star className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
+                <span className="text-[#8E1537] font-mono text-xs">{"// ТОП_ПРОДАЖ_30Д"}</span>
               </h3>
               <div className="space-y-2">
                 {analytics.topProducts.map((p, i) => (
                   <div key={p.productId} className="flex items-center gap-3 py-2 border-b border-[#1F1F1F] last:border-0">
-                    <span className="w-6 h-6 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-xs font-bold font-mono text-[#F7A600]">
+                    <span className="w-6 h-6 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-xs font-bold font-mono text-[#8E1537]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-bold truncate uppercase tracking-tight">{p.title}</div>
                       <div className="text-[10px] text-[#888] font-mono uppercase">{p.count} продаж</div>
                     </div>
-                    <div className="text-sm font-black text-[#F7A600] font-mono">
+                    <div className="text-sm font-black text-[#8E1537] font-mono">
                       {formatPrice(p.revenue)}
                     </div>
                   </div>
@@ -220,13 +220,13 @@ export function AdminDashboard({ data }: { data: AdminData }) {
               style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
             >
               <h3 className="font-black mb-4 flex items-center gap-2 uppercase tracking-tight">
-                <Flame className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
-                <span className="text-[#F7A600] font-mono text-xs">{"// ТОП_ПО_ПРОСМОТРАМ"}</span>
+                <Flame className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
+                <span className="text-[#8E1537] font-mono text-xs">{"// ТОП_ПО_ПРОСМОТРАМ"}</span>
               </h3>
               <div className="space-y-2">
                 {analytics.topProductsByViews.map((p, i) => (
                   <div key={p.productId} className="flex items-center gap-3 py-2 border-b border-[#1F1F1F] last:border-0">
-                    <span className="w-6 h-6 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-xs font-bold font-mono text-[#F7A600]">
+                    <span className="w-6 h-6 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-xs font-bold font-mono text-[#8E1537]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div className="flex-1 min-w-0">
@@ -235,7 +235,7 @@ export function AdminDashboard({ data }: { data: AdminData }) {
                         {p.views} просмотров · {p.status === "available" ? "в продаже" : p.status === "sold" ? "продан" : p.status}
                       </div>
                     </div>
-                    <div className="text-sm font-black text-[#F7A600] font-mono">
+                    <div className="text-sm font-black text-[#8E1537] font-mono">
                       {formatPrice(p.price)}
                     </div>
                   </div>
@@ -248,17 +248,17 @@ export function AdminDashboard({ data }: { data: AdminData }) {
 
       {/* Static stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
-        <StatCard icon={Package} label="ТОВАРОВ" value={data.products.length} color="#F7A600" />
-        <StatCard icon={Users} label="КАТЕГОРИЙ" value={data.categories.length} color="#F7A600" />
-        <StatCard icon={Star} label="FEATURED" value={featured} color="#F7A600" />
-        <StatCard icon={DollarSign} label="ОБЪЁМ" value={typeof totalValue === "string" ? 0 : totalValue} color="#F7A600" />
+        <StatCard icon={Package} label="ТОВАРОВ" value={data.products.length} color="#8E1537" />
+        <StatCard icon={Users} label="КАТЕГОРИЙ" value={data.categories.length} color="#8E1537" />
+        <StatCard icon={Star} label="FEATURED" value={featured} color="#8E1537" />
+        <StatCard icon={DollarSign} label="ОБЪЁМ" value={typeof totalValue === "string" ? 0 : totalValue} color="#8E1537" />
       </div>
 
       {/* Quick export buttons */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
-        <ExportButton label="ЭКСПОРТ ТОВАРОВ" onClick={() => exportData("products")} color="#F7A600" />
-        <ExportButton label="ЭКСПОРТ ЗАКАЗОВ" onClick={() => exportData("orders")} color="#F7A600" />
-        <ExportButton label="ЭКСПОРТ ПОСЕТИТЕЛЕЙ" onClick={() => exportData("visitors")} color="#F7A600" />
+        <ExportButton label="ЭКСПОРТ ТОВАРОВ" onClick={() => exportData("products")} color="#8E1537" />
+        <ExportButton label="ЭКСПОРТ ЗАКАЗОВ" onClick={() => exportData("orders")} color="#8E1537" />
+        <ExportButton label="ЭКСПОРТ ПОСЕТИТЕЛЕЙ" onClick={() => exportData("visitors")} color="#8E1537" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
@@ -266,8 +266,8 @@ export function AdminDashboard({ data }: { data: AdminData }) {
           style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
         >
           <h3 className="font-black mb-4 flex items-center gap-2 uppercase tracking-tight">
-            <Users className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
-            <span className="text-[#F7A600] font-mono text-xs">{"// ПО_КАТЕГОРИЯМ"}</span>
+            <Users className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
+            <span className="text-[#8E1537] font-mono text-xs">{"// ПО_КАТЕГОРИЯМ"}</span>
           </h3>
           <div className="space-y-3">
             {data.categories.map((cat) => {
@@ -298,8 +298,8 @@ export function AdminDashboard({ data }: { data: AdminData }) {
           style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
         >
           <h3 className="font-black mb-4 flex items-center gap-2 uppercase tracking-tight">
-            <TrendingUp className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
-            <span className="text-[#F7A600] font-mono text-xs">{"// ТОП_ПО_ЦЕНЕ"}</span>
+            <TrendingUp className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
+            <span className="text-[#8E1537] font-mono text-xs">{"// ТОП_ПО_ЦЕНЕ"}</span>
           </h3>
           <div className="space-y-2">
             {[...data.products]
@@ -307,14 +307,14 @@ export function AdminDashboard({ data }: { data: AdminData }) {
               .slice(0, 5)
               .map((p, i) => (
                 <div key={p.id} className="flex items-center gap-3 py-2 border-b border-[#1F1F1F] last:border-0">
-                  <span className="w-6 h-6 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-xs font-bold font-mono text-[#F7A600]">
+                  <span className="w-6 h-6 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-xs font-bold font-mono text-[#8E1537]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-bold truncate uppercase tracking-tight">{p.title}</div>
                     <div className="text-[10px] text-[#888] font-mono uppercase">{p.category?.name}</div>
                   </div>
-                  <div className="text-sm font-black text-[#F7A600] font-mono">
+                  <div className="text-sm font-black text-[#8E1537] font-mono">
                     {formatPrice(p.price, p.currency)}
                   </div>
                 </div>
@@ -323,12 +323,12 @@ export function AdminDashboard({ data }: { data: AdminData }) {
         </div>
       </div>
 
-      <div className="mt-6 bg-[#0E0E0E] border-2 border-[#F7A600] p-5 flex items-start gap-3"
+      <div className="mt-6 bg-[#0E0E0E] border-2 border-[#8E1537] p-5 flex items-start gap-3"
         style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}
       >
-        <Activity className="w-5 h-5 text-[#F7A600] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+        <Activity className="w-5 h-5 text-[#8E1537] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
         <div className="text-sm font-mono">
-          <div className="font-black mb-1 uppercase tracking-tight text-[#F7A600]">{"// SYSTEM_READY"}</div>
+          <div className="font-black mb-1 uppercase tracking-tight text-[#8E1537]">{"// SYSTEM_READY"}</div>
           <div className="text-[#888]">
             &gt; Полный доступ к управлению: товары, категории, заказы, поддержка, посетители, настройки.
             <br />

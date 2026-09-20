@@ -229,11 +229,11 @@ export function SupportChat() {
           >
             <Headphones className="w-6 h-6" strokeWidth={2.2} />
             <span className="sr-only">{operatorOnline ? "Оператор онлайн" : "Оператор офлайн"}</span>
-            <span className={cn("absolute -top-1 -right-1 px-1.5 py-0.5 text-white text-[9px] font-black border-2 border-black font-mono", operatorOnline ? "bg-[#F7A600]" : "bg-[#666]")}>
+            <span className={cn("absolute -top-1 -right-1 px-1.5 py-0.5 text-white text-[9px] font-black border-2 border-black font-mono", operatorOnline ? "bg-[#8E1537]" : "bg-[#666]")}>
               {operatorOnline ? "ONLINE" : "OFFLINE"}
             </span>
             {newReply && (
-              <span className="absolute -top-2 -left-2 w-5 h-5 bg-[#F7A600] text-black text-[10px] font-black border-2 border-black flex items-center justify-center font-mono">
+              <span className="absolute -top-2 -left-2 w-5 h-5 bg-[#8E1537] text-black text-[10px] font-black border-2 border-black flex items-center justify-center font-mono">
                 !
               </span>
             )}
@@ -248,20 +248,20 @@ export function SupportChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed bottom-4 right-4 left-4 md:left-auto md:bottom-6 md:right-6 z-50 w-auto md:w-[400px] h-[560px] max-h-[85vh] bg-[#0A0A0A] border-2 border-[#F7A600] flex flex-col overflow-hidden"
+            className="fixed bottom-4 right-4 left-4 md:left-auto md:bottom-6 md:right-6 z-50 w-auto md:w-[400px] h-[560px] max-h-[85vh] bg-[#0A0A0A] border-2 border-[#8E1537] flex flex-col overflow-hidden"
             style={{ clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))" }}
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b-2 border-[#1F1F1F] bg-[#0E0E0E]">
               <div className="flex items-center gap-3">
-                <div className="relative w-10 h-10 bg-[#F7A600] flex items-center justify-center border-2 border-[#F7A600]">
+                <div className="relative w-10 h-10 bg-[#8E1537] flex items-center justify-center border-2 border-[#8E1537]">
                   <Headphones className="w-5 h-5 text-black" strokeWidth={2.5} />
-                  <span className={cn("absolute -bottom-0.5 -right-0.5 w-3 h-3 border-2 border-[#0E0E0E]", operatorOnline ? "bg-[#F7A600]" : "bg-[#666]")} />
+                  <span className={cn("absolute -bottom-0.5 -right-0.5 w-3 h-3 border-2 border-[#0E0E0E]", operatorOnline ? "bg-[#8E1537]" : "bg-[#666]")} />
                 </div>
                 <div>
                   <div className="font-black text-sm uppercase tracking-tight">SUPPORT</div>
                   <div className="text-[10px] text-[#888] font-mono uppercase flex items-center gap-1">
-                    <span className={cn("inline-flex h-1.5 w-1.5 rounded-full", operatorOnline ? "bg-[#F7A600]" : "bg-[#666]")} />
+                    <span className={cn("inline-flex h-1.5 w-1.5 rounded-full", operatorOnline ? "bg-[#8E1537]" : "bg-[#666]")} />
                     {operatorOnline ? "Онлайн — ответим за несколько минут" : "Офлайн — ответим в рабочее время"}
                   </div>
                 </div>
@@ -286,7 +286,7 @@ export function SupportChat() {
                     className="space-y-4"
                   >
                     <div className="text-center mb-4">
-                      <Headphones className="w-10 h-10 mx-auto mb-2 text-[#F7A600]" strokeWidth={2.5} />
+                      <Headphones className="w-10 h-10 mx-auto mb-2 text-[#8E1537]" strokeWidth={2.5} />
                       <h3 className="font-black text-lg uppercase tracking-tight">Напишите нам</h3>
                       <p className="text-sm text-[#888] font-mono">
                         &gt; Опишите вопрос — ответим за пару минут.
@@ -294,40 +294,40 @@ export function SupportChat() {
                     </div>
 
                     <div>
-                      <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ИМЯ"}</Label>
+                      <Label className="text-[10px] uppercase tracking-widest font-mono text-[#8E1537]">{"// ИМЯ"}</Label>
                       <Input
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Имя"
-                        className="mt-1.5 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
+                        className="mt-1.5 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono"
                       />
                     </div>
 
                     <div>
-                      <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// TELEGRAM / ТЕЛЕФОН"}</Label>
+                      <Label className="text-[10px] uppercase tracking-widest font-mono text-[#8E1537]">{"// TELEGRAM / ТЕЛЕФОН"}</Label>
                       <Input
                         value={contact}
                         onChange={(e) => setContact(e.target.value)}
                         placeholder="@telegram или +7..."
-                        className="mt-1.5 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
+                        className="mt-1.5 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono"
                       />
                     </div>
 
                     <div>
-                      <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// СООБЩЕНИЕ"}</Label>
+                      <Label className="text-[10px] uppercase tracking-widest font-mono text-[#8E1537]">{"// СООБЩЕНИЕ"}</Label>
                       <textarea
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Опишите вопрос или проблему..."
                         rows={4}
-                        className="mt-1.5 w-full bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono text-sm px-3 py-2 resize-none focus:outline-none"
+                        className="mt-1.5 w-full bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono text-sm px-3 py-2 resize-none focus:outline-none"
                       />
                     </div>
 
                     <Button
                       onClick={submit}
                       disabled={loading}
-                      className="w-full py-6 bg-[#F7A600] text-black hover:bg-[#F7A600] font-black uppercase border-2 border-[#F7A600] hover:border-[#F7A600] font-mono tracking-wide"
+                      className="w-full py-6 bg-[#8E1537] text-black hover:bg-[#8E1537] font-black uppercase border-2 border-[#8E1537] hover:border-[#8E1537] font-mono tracking-wide"
                     >
                       {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> SENDING...</> : <>Отправить →</>}
                     </Button>
@@ -352,7 +352,7 @@ export function SupportChat() {
                       <div key={m.id}>
                         {/* User message (outgoing) */}
                         <div className="flex gap-2 justify-end mb-2">
-                          <div className="bg-[#F7A600] text-white border-2 border-[#F7A600] px-4 py-2.5 text-sm font-mono max-w-[80%]">
+                          <div className="bg-[#8E1537] text-white border-2 border-[#8E1537] px-4 py-2.5 text-sm font-mono max-w-[80%]">
                             {m.message}
                           </div>
                           <div className="w-8 h-8 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center flex-shrink-0">
@@ -362,8 +362,8 @@ export function SupportChat() {
 
                         {/* Status line */}
                         <div className="text-[10px] text-[#888] font-mono text-right mb-2 uppercase">
-                          {m.status === "new" && <span className="text-[#F7A600]">&gt; ОЖИДАЕТ ОТВЕТА...</span>}
-                          {m.status === "replied" && <span className="text-[#F7A600]">&gt; ОТВЕЧЕНО</span>}
+                          {m.status === "new" && <span className="text-[#8E1537]">&gt; ОЖИДАЕТ ОТВЕТА...</span>}
+                          {m.status === "replied" && <span className="text-[#8E1537]">&gt; ОТВЕЧЕНО</span>}
                           {m.status === "closed" && <span className="text-[#888]">&gt; ЗАКРЫТО</span>}
                         </div>
 
@@ -374,11 +374,11 @@ export function SupportChat() {
                             animate={{ opacity: 1, y: 0 }}
                             className="flex gap-2 mb-4"
                           >
-                            <div className="w-8 h-8 bg-[#F7A600] flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 bg-[#8E1537] flex items-center justify-center flex-shrink-0">
                               <Headphones className="w-4 h-4 text-black" />
                             </div>
                             <div className="bg-[#121212] border border-[#2A2A2A] px-4 py-2.5 text-sm font-mono max-w-[80%]">
-                              <div className="text-[10px] text-[#F7A600] mb-1 uppercase font-bold">{"// SUPPORT_AGENT"}</div>
+                              <div className="text-[10px] text-[#8E1537] mb-1 uppercase font-bold">{"// SUPPORT_AGENT"}</div>
                               {m.reply}
                             </div>
                           </motion.div>
@@ -395,13 +395,13 @@ export function SupportChat() {
                             onChange={(e) => setMessage(e.target.value)}
                             onKeyDown={(e) => e.key === "Enter" && sendFollowUp()}
                             placeholder="Новое сообщение..."
-                            className="bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono text-sm"
+                            className="bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono text-sm"
                           />
                           <Button
                             onClick={sendFollowUp}
                             disabled={loading || !message.trim()}
                             size="icon"
-                            className="bg-[#F7A600] text-black hover:bg-[#F7A600] border-2 border-[#F7A600] hover:border-[#F7A600] flex-shrink-0"
+                            className="bg-[#8E1537] text-black hover:bg-[#8E1537] border-2 border-[#8E1537] hover:border-[#8E1537] flex-shrink-0"
                           >
                             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" strokeWidth={3} />}
                           </Button>

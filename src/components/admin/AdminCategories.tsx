@@ -70,7 +70,7 @@ export function AdminCategories({
       <div className="flex flex-col sm:flex-row justify-between gap-3 mb-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#F7A600]" />
+            <div className="w-1 h-8 bg-[#8E1537]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_CATEGORIES"}</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">Категории</h1>
@@ -80,7 +80,7 @@ export function AdminCategories({
         </div>
         <Button
           onClick={() => setCreating(true)}
-          className="bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase border-2 border-[#F7A600] hover:border-[#F7A600] font-mono tracking-wide"
+          className="bg-[#8E1537] text-black hover:bg-[#8E1537] hover:text-white font-black uppercase border-2 border-[#8E1537] hover:border-[#8E1537] font-mono tracking-wide"
         >
           <Plus className="w-4 h-4 mr-1.5" strokeWidth={3} />
           Добавить
@@ -115,7 +115,7 @@ export function AdminCategories({
               <p className="text-xs text-[#888] mb-3 line-clamp-2 font-mono">{cat.description}</p>
             )}
             <div className="flex gap-2">
-              <Button size="sm" variant="ghost" onClick={() => setEditing(cat)} className="flex-1 text-xs hover:bg-[#F7A600]/10 hover:text-[#F7A600] font-mono uppercase">
+              <Button size="sm" variant="ghost" onClick={() => setEditing(cat)} className="flex-1 text-xs hover:bg-[#8E1537]/10 hover:text-[#8E1537] font-mono uppercase">
                 <Pencil className="w-3.5 h-3.5 mr-1" />
                 Изменить
               </Button>
@@ -123,7 +123,7 @@ export function AdminCategories({
                 size="sm"
                 variant="ghost"
                 onClick={() => setDeleteId(cat.id)}
-                className="text-[#F7A600] hover:text-[#F7A600] hover:bg-[#F7A600]/10"
+                className="text-[#8E1537] hover:text-[#8E1537] hover:bg-[#8E1537]/10"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </Button>
@@ -152,7 +152,7 @@ export function AdminCategories({
             <AlertDialogAction
               onClick={onDelete}
               disabled={deleting}
-              className="bg-[#F7A600]0 hover:bg-[#F7A600] text-white"
+              className="bg-[#8E1537]0 hover:bg-[#8E1537] text-white"
             >
               {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Удалить"}
             </AlertDialogAction>
@@ -187,7 +187,7 @@ function CategoryForm({
       name: category?.name || "",
       slug: category?.slug || "",
       icon: category?.icon || "Tag",
-      color: category?.color || "#F7A600",
+      color: category?.color || "#8E1537",
       platform: category?.platform || "tiktok",
       description: category?.description || "",
       order: category?.order || 0,
@@ -283,7 +283,7 @@ function CategoryForm({
             <div className="flex items-center gap-2 mt-1">
               <input
                 type="color"
-                value={String(form.color || "#F7A600")}
+                value={String(form.color || "#8E1537")}
                 onChange={(e) => set("color", e.target.value)}
                 className="w-12 h-10 rounded-lg cursor-pointer bg-transparent border border-white/10"
               />
@@ -321,7 +321,7 @@ function CategoryForm({
           <Button
             onClick={save}
             disabled={saving}
-            className="flex-1 bg-gradient-to-r from-[#F7A600] to-[#F7A600] text-white font-bold"
+            className="flex-1 bg-gradient-to-r from-[#8E1537] to-[#8E1537] text-white font-bold"
           >
             {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
             {isCreate ? "Создать" : "Сохранить"}

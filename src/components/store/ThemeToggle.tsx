@@ -14,7 +14,7 @@ export function ThemeToggle({
   return (
     <button
       onClick={onToggle}
-      className="w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#F7A600] flex items-center justify-center transition-colors"
+      className="w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#8E1537] flex items-center justify-center transition-colors"
       aria-label={theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"}
       title={theme === "dark" ? "Светлая тема" : "Тёмная тема"}
     >
@@ -27,7 +27,7 @@ export function ThemeToggle({
             exit={{ rotate: 90, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <Sun className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
+            <Sun className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
           </motion.div>
         ) : (
           <motion.div
@@ -37,7 +37,7 @@ export function ThemeToggle({
             exit={{ rotate: -90, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <Moon className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
+            <Moon className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
           </motion.div>
         )}
       </AnimatePresence>

@@ -121,7 +121,7 @@ export function AdminPromo() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-[#F7A600]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#8E1537]" />
       </div>
     );
   }
@@ -131,7 +131,7 @@ export function AdminPromo() {
       <div className="flex flex-col sm:flex-row justify-between gap-3 mb-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#F7A600]" />
+            <div className="w-1 h-8 bg-[#8E1537]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_PROMO"}</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">Промокоды</h1>
@@ -141,7 +141,7 @@ export function AdminPromo() {
         </div>
         <Button
           onClick={() => setCreating(true)}
-          className="bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase border-2 border-[#F7A600] hover:border-[#F7A600] font-mono tracking-wide"
+          className="bg-[#8E1537] text-black hover:bg-[#8E1537] hover:text-white font-black uppercase border-2 border-[#8E1537] hover:border-[#8E1537] font-mono tracking-wide"
         >
           <Plus className="w-4 h-4 mr-1.5" strokeWidth={3} />
           Создать промокод
@@ -164,25 +164,25 @@ export function AdminPromo() {
                 key={c.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#F7A600] p-4 transition-colors"
+                className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537] p-4 transition-colors"
                 style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <div className="font-black text-lg font-mono tracking-wider text-[#F7A600]">{c.code}</div>
-                    <div className="text-2xl font-black text-[#F7A600] font-mono">{c.discount}%</div>
+                    <div className="font-black text-lg font-mono tracking-wider text-[#8E1537]">{c.code}</div>
+                    <div className="text-2xl font-black text-[#8E1537] font-mono">{c.discount}%</div>
                   </div>
                   <div className="flex flex-col items-end gap-1">
                     {isUsable ? (
-                      <span className="px-2 py-0.5 text-[9px] font-black border font-mono uppercase bg-[#F7A600]/15 text-[#F7A600] border-[#F7A600]/40 flex items-center gap-1">
+                      <span className="px-2 py-0.5 text-[9px] font-black border font-mono uppercase bg-[#8E1537]/15 text-[#8E1537] border-[#8E1537]/40 flex items-center gap-1">
                         <CheckCircle2 className="w-2.5 h-2.5" /> Активен
                       </span>
                     ) : isExpired ? (
-                      <span className="px-2 py-0.5 text-[9px] font-black border font-mono uppercase bg-[#F7A600]/15 text-[#F7A600] border-[#F7A600]/40 flex items-center gap-1">
+                      <span className="px-2 py-0.5 text-[9px] font-black border font-mono uppercase bg-[#8E1537]/15 text-[#8E1537] border-[#8E1537]/40 flex items-center gap-1">
                         <AlertCircle className="w-2.5 h-2.5" /> Истёк
                       </span>
                     ) : isExhausted ? (
-                      <span className="px-2 py-0.5 text-[9px] font-black border font-mono uppercase bg-[#F7A600]/15 text-[#F7A600] border-[#F7A600]/40">
+                      <span className="px-2 py-0.5 text-[9px] font-black border font-mono uppercase bg-[#8E1537]/15 text-[#8E1537] border-[#8E1537]/40">
                         Исчерпан
                       </span>
                     ) : (
@@ -192,7 +192,7 @@ export function AdminPromo() {
                     )}
                     <button
                       onClick={() => setDeleteId(c.id)}
-                      className="text-[#888] hover:text-[#F7A600] transition-colors"
+                      className="text-[#888] hover:text-[#8E1537] transition-colors"
                       aria-label="Удалить"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -290,7 +290,7 @@ export function AdminPromo() {
             <div className="flex gap-2 pt-2">
               <Button
                 onClick={createPromo}
-                className="flex-1 bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase font-mono"
+                className="flex-1 bg-[#8E1537] text-black hover:bg-[#8E1537] hover:text-white font-black uppercase font-mono"
               >
                 Создать
               </Button>
@@ -319,7 +319,7 @@ export function AdminPromo() {
             <Button
               onClick={onDelete}
               disabled={deleting}
-              className="flex-1 bg-[#F7A600] hover:bg-[#F7A600]/80 text-white font-black uppercase font-mono"
+              className="flex-1 bg-[#8E1537] hover:bg-[#8E1537]/80 text-white font-black uppercase font-mono"
             >
               {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Удалить"}
             </Button>

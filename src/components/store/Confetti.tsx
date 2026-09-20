@@ -12,7 +12,7 @@ interface ConfettiPiece {
   size: number;
 }
 
-const COLORS = ["#F7A600", "#F7A600", "#F7A600", "#F7A600", "#F7A600", "#F7A600"];
+const COLORS = ["#8E1537", "#8E1537", "#8E1537", "#8E1537", "#8E1537", "#8E1537"];
 
 export function Confetti({ trigger }: { trigger: boolean }) {
   const [pieces, setPieces] = useState<ConfettiPiece[]>([]);

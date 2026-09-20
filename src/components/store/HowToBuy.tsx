@@ -10,7 +10,7 @@ const STEPS = [
     icon: Search,
     title: "ВЫБОР",
     description: "Просмотрите каталог, выберите аккаунт по платформе, подписчикам и цене. Все проверены и готовы к передаче.",
-    color: "#F7A600",
+    color: "#8E1537",
     code: "01",
   },
   {
@@ -24,7 +24,7 @@ const STEPS = [
     icon: CreditCard,
     title: "ОПЛАТА",
     description: "Переведите сумму на криптокошелёк (BTC/USDT/TON). Анонимно, без проверок.",
-    color: "#E58B00",
+    color: "#71102B",
     code: "03",
   },
   {
@@ -51,12 +51,12 @@ export function HowToBuy() {
           className="mb-8 md:mb-12"
         >
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#F7A600]" />
-            <span className="text-xs text-[#F7A600] font-semibold">Простой процесс</span>
+            <div className="w-1 h-8 bg-[#8E1537]" />
+            <span className="text-xs text-[#8E1537] font-semibold">Простой процесс</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
             <span className="text-foreground">Как </span>
-            <span className="text-[#F7A600]">купить</span>
+            <span className="text-[#8E1537]">купить</span>
           </h2>
           <p className="text-[#888] text-sm md:text-base mt-2 font-mono">
             Четыре понятных шага от выбора товара до безопасного получения данных.
@@ -125,7 +125,7 @@ export function HowToBuy() {
         >
           <button
             onClick={() => document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#F7A600] text-black font-black uppercase border-2 border-[#F7A600] hover:bg-[#F7A600] hover:border-[#F7A600] hover:text-white transition-colors hover-press font-mono tracking-wide"
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#8E1537] text-black font-black uppercase border-2 border-[#8E1537] hover:bg-[#8E1537] hover:border-[#8E1537] hover:text-white transition-colors hover-press font-mono tracking-wide"
           >
             Выбрать аккаунт
             <ArrowRight className="w-4 h-4" strokeWidth={3} />

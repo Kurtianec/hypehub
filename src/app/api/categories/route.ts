@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
       name: body.name,
       slug: body.slug,
       icon: body.icon || "Tag",
-      color: body.color || "#F7A600",
+      color: body.color || "#8E1537",
       platform: body.platform || "other",
       description: body.description || null,
       order: body.order || 0,

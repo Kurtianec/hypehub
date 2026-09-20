@@ -56,19 +56,19 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
         className="w-full max-w-md"
       >
         <div
-          className="admin-login-card bg-[#0E0E0E] border-2 border-[#F7A600] p-8 md:p-10"
+          className="admin-login-card bg-[#0E0E0E] border-2 border-[#8E1537] p-8 md:p-10"
           style={{ clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))" }}
         >
           {/* Logo */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-[#F7A600] border-2 border-[#F7A600] mb-4"
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-[#8E1537] border-2 border-[#8E1537] mb-4"
               style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
             >
               <BrandMark className="w-full h-full" />
             </div>
 
             <h1 className="text-2xl font-black mb-1 uppercase tracking-tighter">
-              <span className="text-[#F7A600]">Хайп</span>Хаб
+              <span className="text-[#8E1537]">Хайп</span>Хаб
             </h1>
             <p className="text-xs text-[#888] font-mono uppercase tracking-widest flex items-center justify-center gap-1">
               <Terminal className="w-3 h-3" />
@@ -78,7 +78,7 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
 
           <div className="space-y-4">
             <div>
-              <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">
+              <Label className="text-[10px] uppercase tracking-widest font-mono text-[#8E1537]">
                 {"// ПАРОЛЬ_АДМИНИСТРАТОРА"}
               </Label>
               <div className="relative mt-1.5">
@@ -89,12 +89,12 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && submit()}
                   placeholder="••••••••"
-                  className="pl-10 pr-10 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
+                  className="pl-10 pr-10 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono"
                   autoFocus
                 />
                 <button
                   onClick={() => setShowPass((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#888] hover:text-[#F7A600]"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#888] hover:text-[#8E1537]"
                   type="button"
                   aria-label={showPass ? "Скрыть" : "Показать"}
                 >
@@ -104,14 +104,14 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
             </div>
 
             <div>
-              <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">Проверка: {captchaQuestion}</Label>
-              <Input value={captchaAnswer} onChange={(e) => setCaptchaAnswer(e.target.value)} inputMode="numeric" placeholder="Ответ" className="mt-1.5 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono" />
+              <Label className="text-[10px] uppercase tracking-widest font-mono text-[#8E1537]">Проверка: {captchaQuestion}</Label>
+              <Input value={captchaAnswer} onChange={(e) => setCaptchaAnswer(e.target.value)} inputMode="numeric" placeholder="Ответ" className="mt-1.5 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono" />
             </div>
 
             <Button
               onClick={submit}
               disabled={loading}
-              className="w-full bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase py-6 border-2 border-[#F7A600] hover:border-[#F7A600] font-mono tracking-wide"
+              className="w-full bg-[#8E1537] text-black hover:bg-[#8E1537] hover:text-white font-black uppercase py-6 border-2 border-[#8E1537] hover:border-[#8E1537] font-mono tracking-wide"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
@@ -128,7 +128,7 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
           </div>
 
           <div className="mt-4 text-center">
-            <a href="/" className="text-xs text-[#888] hover:text-[#F7A600] font-mono uppercase">
+            <a href="/" className="text-xs text-[#888] hover:text-[#8E1537] font-mono uppercase">
               &lt; Назад на сайт
             </a>
           </div>

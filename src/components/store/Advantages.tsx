@@ -7,21 +7,21 @@ import {
 } from "lucide-react";
 
 const ADVANTAGES = [
-  { icon: Zap, title: "Быстрая выдача", description: "Данные становятся доступны в заказе сразу после подтверждения оплаты.", color: "#F7A600" },
+  { icon: Zap, title: "Быстрая выдача", description: "Данные становятся доступны в заказе сразу после подтверждения оплаты.", color: "#8E1537" },
   { icon: Bitcoin, title: "Только крипта", description: "Принимаем BTC, USDT TRC-20, TON. Полная анонимность, без проверки личности.", color: "#111318" },
-  { icon: Shield, title: "Гарантия 14 дней", description: "Если возникнет проблема, обращение создаётся прямо из личного кабинета.", color: "#E58B00" },
+  { icon: Shield, title: "Гарантия 14 дней", description: "Если возникнет проблема, обращение создаётся прямо из личного кабинета.", color: "#71102B" },
   { icon: Headphones, title: "Поддержка", description: "Живой чат и AI-ассистент помогают с покупкой, входом и безопасностью.", color: "#666666" },
-  { icon: RefreshCw, title: "Проверка перед продажей", description: "В карточке указывается дата последней проверки и основные характеристики.", color: "#D27E00" },
+  { icon: RefreshCw, title: "Проверка перед продажей", description: "В карточке указывается дата последней проверки и основные характеристики.", color: "#71102B" },
   { icon: Lock, title: "Защищённая передача", description: "Реквизиты хранятся зашифрованно и выдаются только после подтверждения заказа.", color: "#242424" },
-  { icon: Clock, title: "Экономия времени", description: "Не нужно месяцами накручивать подписчиков. Готовый аккаунт с аудиторией — сразу в работу.", color: "#F7A600" },
+  { icon: Clock, title: "Экономия времени", description: "Не нужно месяцами накручивать подписчиков. Готовый аккаунт с аудиторией — сразу в работу.", color: "#8E1537" },
   { icon: Globe, title: "Разные платформы", description: "TikTok, YouTube, VK, Instagram и Telegram в одном каталоге.", color: "#666666" },
 ];
 
 export function Advantages({ settings }: { settings?: { stats_clients?: string; stats_accounts?: string; stats_rating?: string; stats_support?: string } }) {
   const stats = [
-    { icon: Users, value: settings?.stats_clients || "0", label: "Клиентов", accent: "#F7A600" },
+    { icon: Users, value: settings?.stats_clients || "0", label: "Клиентов", accent: "#8E1537" },
     { icon: ShoppingBag, value: settings?.stats_accounts || "0", label: "Продано", accent: "#111318" },
-    { icon: Star, value: `${settings?.stats_rating || "0"}/5`, label: "Рейтинг", accent: "#E58B00" },
+    { icon: Star, value: `${settings?.stats_rating || "0"}/5`, label: "Рейтинг", accent: "#71102B" },
     { icon: Headphones, value: settings?.stats_support || "24/7", label: "Поддержка", accent: "#666666" },
   ];
   return (
@@ -38,12 +38,12 @@ export function Advantages({ settings }: { settings?: { stats_clients?: string; 
           className="mb-8 md:mb-12"
         >
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#F7A600]" />
-            <span className="text-xs text-[#F7A600] font-semibold">Почему HypeHub</span>
+            <div className="w-1 h-8 bg-[#8E1537]" />
+            <span className="text-xs text-[#8E1537] font-semibold">Почему HypeHub</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
             <span className="text-foreground">Наши </span>
-            <span className="text-[#F7A600]">преимущества</span>
+            <span className="text-[#8E1537]">преимущества</span>
           </h2>
           <p className="text-[#888] text-sm md:text-base mt-2 font-mono">
             Всё необходимое для понятной, безопасной покупки и дальнейшей работы с аккаунтом.

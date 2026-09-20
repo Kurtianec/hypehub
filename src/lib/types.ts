@@ -113,21 +113,21 @@ export interface Settings {
 }
 
 export const PLATFORM_COLORS: Record<Platform, string> = {
-  tiktok: "#F7A600",
-  youtube: "#F7A600",
-  vk: "#F7A600",
-  instagram: "#F7A600",
-  telegram: "#F7A600",
-  other: "#F7A600",
+  tiktok: "#111111",
+  youtube: "#FF0033",
+  vk: "#0077FF",
+  instagram: "#C13584",
+  telegram: "#229ED9",
+  other: "#8E1537",
 };
 
 export const PLATFORM_GRADIENTS: Record<Platform, string> = {
-  tiktok: "linear-gradient(135deg, #F7A600 0%, #F7A600 100%)",
-  youtube: "linear-gradient(135deg, #F7A600 0%, #F7A600 100%)",
-  vk: "linear-gradient(135deg, #F7A600 0%, #F7A600 100%)",
-  instagram: "linear-gradient(135deg, #F7A600 0%, #F7A600 50%, #F7A600 100%)",
-  telegram: "linear-gradient(135deg, #F7A600 0%, #F7A600 100%)",
-  other: "linear-gradient(135deg, #F7A600 0%, #F7A600 100%)",
+  tiktok: "linear-gradient(135deg, #25F4EE 0%, #111111 48%, #FE2C55 100%)",
+  youtube: "linear-gradient(135deg, #FF0033 0%, #B90024 100%)",
+  vk: "linear-gradient(135deg, #0077FF 0%, #005FCC 100%)",
+  instagram: "linear-gradient(135deg, #FEDA75 0%, #D62976 50%, #4F5BD5 100%)",
+  telegram: "linear-gradient(135deg, #2AABEE 0%, #168AC0 100%)",
+  other: "linear-gradient(135deg, #8E1537 0%, #8E1537 100%)",
 };
 
 export function formatPrice(price: number, currency = "RUB"): string {
@@ -147,8 +147,8 @@ export function parseBadges(badges?: string | null): string[] {
 }
 
 export const BADGE_LABELS: Record<string, { label: string; color: string; icon: string }> = {
-  hot: { label: "Хит", color: "#F7A600", icon: "Flame" },
-  verified: { label: "Проверен", color: "#F7A600", icon: "BadgeCheck" },
-  top: { label: "Топ", color: "#F7A600", icon: "Trophy" },
-  premium: { label: "Премиум", color: "#F7A600", icon: "Crown" },
+  hot: { label: "Хит", color: "#8E1537", icon: "Flame" },
+  verified: { label: "Проверен", color: "#8E1537", icon: "BadgeCheck" },
+  top: { label: "Топ", color: "#8E1537", icon: "Trophy" },
+  premium: { label: "Премиум", color: "#8E1537", icon: "Crown" },
 };

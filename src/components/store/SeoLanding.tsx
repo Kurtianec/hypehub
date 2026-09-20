@@ -52,8 +52,8 @@ export function SeoLanding({
         <div className="container mx-auto px-4 max-w-5xl">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-xs text-[#888] font-mono uppercase mb-6">
-            <Link href="/" className="hover:text-[#F7A600]">ГЛАВНАЯ</Link>
-            <span className="text-[#F7A600]">/</span>
+            <Link href="/" className="hover:text-[#8E1537]">ГЛАВНАЯ</Link>
+            <span className="text-[#8E1537]">/</span>
             <span className="text-foreground">{category.name.toUpperCase()}</span>
           </div>
 
@@ -83,10 +83,10 @@ export function SeoLanding({
             className="flex flex-wrap gap-2 mb-10"
           >
             {[
-              { icon: Zap, text: "Мгновенная выдача", color: "#F7A600" },
-              { icon: Bitcoin, text: "Только крипта", color: "#F7A600" },
+              { icon: Zap, text: "Мгновенная выдача", color: "#8E1537" },
+              { icon: Bitcoin, text: "Только крипта", color: "#8E1537" },
               { icon: Shield, text: "Гарантия 14 дней", color: "#111318" },
-              { icon: Headphones, text: "Поддержка 24/7", color: "#E58B00" },
+              { icon: Headphones, text: "Поддержка 24/7", color: "#71102B" },
             ].map((b, i) => (
               <div key={i} className="inline-flex items-center gap-2 px-3 py-1.5 border-2 font-mono text-xs uppercase"
                 style={{ borderColor: `${b.color}40`, color: b.color }}
@@ -125,13 +125,13 @@ export function SeoLanding({
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: Math.min(i * 0.05, 0.4) }}
                       onClick={() => setSelectedProduct(product)}
-                      className="group relative text-left bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#F7A600] hover-press transition-all overflow-hidden"
+                      className="group relative text-left bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537] hover-press transition-all overflow-hidden"
                       style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
                     >
-                      <div className="relative aspect-[16/9] overflow-hidden border-b-2 border-[#2A2A2A] group-hover:border-[#F7A600] transition-colors">
+                      <div className="relative aspect-[16/9] overflow-hidden border-b-2 border-[#2A2A2A] group-hover:border-[#8E1537] transition-colors">
                         <ProductImage platform={category.platform} className="w-full h-full group-hover:scale-105 transition-transform duration-500" />
                         {discount > 0 && (
-                          <div className="absolute top-0 right-0 bg-[#F7A600] text-white text-xs font-black px-2 py-1 font-mono">
+                          <div className="absolute top-0 right-0 bg-[#8E1537] text-white text-xs font-black px-2 py-1 font-mono">
                             −{discount}%
                           </div>
                         )}
@@ -152,7 +152,7 @@ export function SeoLanding({
                             </span>
                           )}
                           {meta.monetization && (
-                            <span className="px-1.5 py-0.5 text-[10px] bg-[#F7A600]/10 border border-[#F7A600]/40 text-[#F7A600] font-mono uppercase font-bold flex items-center gap-1">
+                            <span className="px-1.5 py-0.5 text-[10px] bg-[#8E1537]/10 border border-[#8E1537]/40 text-[#8E1537] font-mono uppercase font-bold flex items-center gap-1">
                               <Check className="w-2.5 h-2.5" strokeWidth={3} />
                               MONET
                             </span>
@@ -165,11 +165,11 @@ export function SeoLanding({
                                 {formatPrice(product.oldPrice, product.currency)}
                               </span>
                             )}
-                            <span className="text-xl font-black text-[#F7A600] font-mono">
+                            <span className="text-xl font-black text-[#8E1537] font-mono">
                               {formatPrice(product.price, product.currency)}
                             </span>
                           </div>
-                          <div className="px-3 py-2 bg-[#F7A600] text-black text-xs font-black uppercase flex items-center gap-1.5 group-hover:bg-[#F7A600] group-hover:text-white transition-colors font-mono">
+                          <div className="px-3 py-2 bg-[#8E1537] text-black text-xs font-black uppercase flex items-center gap-1.5 group-hover:bg-[#8E1537] group-hover:text-white transition-colors font-mono">
                             Купить
                             <ArrowRight className="w-3.5 h-3.5" strokeWidth={3} />
                           </div>
@@ -209,7 +209,7 @@ export function SeoLanding({
             <div className="text-[10px] text-[#888] font-mono uppercase tracking-widest mb-3">{"// ПОПУЛЯРНЫЕ_ЗАПРОСЫ"}</div>
             <div className="flex flex-wrap gap-2">
               {keywords.map((k, i) => (
-                <span key={i} className="px-3 py-1.5 border border-[#2A2A2A] text-xs text-[#888] font-mono uppercase hover:border-[#F7A600] hover:text-[#F7A600] transition-colors cursor-default">
+                <span key={i} className="px-3 py-1.5 border border-[#2A2A2A] text-xs text-[#888] font-mono uppercase hover:border-[#8E1537] hover:text-[#8E1537] transition-colors cursor-default">
                   {k}
                 </span>
               ))}
@@ -217,7 +217,7 @@ export function SeoLanding({
           </div>
 
           {/* CTA */}
-          <div className="mt-10 text-center bg-[#0E0E0E] border-2 border-[#F7A600] p-6 md:p-8"
+          <div className="mt-10 text-center bg-[#0E0E0E] border-2 border-[#8E1537] p-6 md:p-8"
             style={{ clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))" }}
           >
             <h3 className="text-xl md:text-2xl font-black mb-2 uppercase tracking-tight">Готовы купить?</h3>
@@ -226,7 +226,7 @@ export function SeoLanding({
             </p>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#F7A600] text-black font-black uppercase border-2 border-[#F7A600] hover:bg-[#F7A600] hover:border-[#F7A600] hover:text-white transition-colors hover-press font-mono tracking-wide"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#8E1537] text-black font-black uppercase border-2 border-[#8E1537] hover:bg-[#8E1537] hover:border-[#8E1537] hover:text-white transition-colors hover-press font-mono tracking-wide"
             >
               Все категории
               <ArrowRight className="w-4 h-4" strokeWidth={3} />

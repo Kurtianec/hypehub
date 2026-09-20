@@ -76,7 +76,7 @@ export const metadata: Metadata = {
   category: "e-commerce",
   formatDetection: { telephone: false, address: false, email: false },
   other: {
-    "theme-color": "#F5F7FC",
+    "theme-color": "#080808",
     "yandex-verification": "hypehub-yandex-verify",
   },
 };
@@ -87,7 +87,7 @@ export const viewport: Viewport = {
   maximumScale: 5,
   themeColor: [
     { media: "(prefers-color-scheme: dark)", color: "#111318" },
-    { media: "(prefers-color-scheme: light)", color: "#F5F7FC" },
+    { media: "(prefers-color-scheme: light)", color: "#080808" },
   ],
   colorScheme: "light dark",
 };

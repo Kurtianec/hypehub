@@ -25,12 +25,12 @@ export function FAQ({ faqs }: { faqs: FaqItem[] }) {
           className="mb-8 md:mb-12"
         >
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#F7A600]" />
-            <span className="text-xs text-[#F7A600] font-semibold">Помощь покупателю</span>
+            <div className="w-1 h-8 bg-[#8E1537]" />
+            <span className="text-xs text-[#8E1537] font-semibold">Помощь покупателю</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
             <span className="text-foreground">Частые </span>
-            <span className="text-[#F7A600]">вопросы</span>
+            <span className="text-[#8E1537]">вопросы</span>
           </h2>
           <p className="text-[#888] text-sm md:text-base mt-2 font-mono">
             Коротко отвечаем на вопросы о покупке, оплате, выдаче и гарантии.
@@ -47,19 +47,19 @@ export function FAQ({ faqs }: { faqs: FaqItem[] }) {
               <AccordionItem
                 key={faq.id}
                 value={`item-${i}`}
-                className="bg-[#121212] border-2 border-[#2A2A2A] data-[state=open]:border-[#F7A600] transition-colors"
+                className="bg-[#121212] border-2 border-[#2A2A2A] data-[state=open]:border-[#8E1537] transition-colors"
                 style={{
                   clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))",
                 }}
               >
                 <AccordionTrigger className="text-left font-black text-base md:text-lg uppercase tracking-tight hover:no-underline py-5 px-5 flex items-center gap-3">
-                  <span className="text-[10px] font-mono text-[#F7A600] flex-shrink-0">
+                  <span className="text-[10px] font-mono text-[#8E1537] flex-shrink-0">
                     Q{String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="flex-1">{faq.question}</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-sm md:text-base text-[#888] leading-relaxed pb-5 px-5 font-mono">
-                  <div className="pl-8 border-l-2 border-[#F7A600]/30">
+                  <div className="pl-8 border-l-2 border-[#8E1537]/30">
                     {faq.answer}
                   </div>
                 </AccordionContent>
@@ -76,7 +76,7 @@ export function FAQ({ faqs }: { faqs: FaqItem[] }) {
           className="mt-10 text-center rounded-2xl bg-white/[.025] border border-white/10 p-6 md:p-8"
           style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}
         >
-          <MessageCircle className="w-10 h-10 mx-auto mb-3 text-[#F7A600]" strokeWidth={2.5} />
+          <MessageCircle className="w-10 h-10 mx-auto mb-3 text-[#8E1537]" strokeWidth={2.5} />
           <h3 className="text-xl font-black mb-2 uppercase tracking-tight">Остались вопросы?</h3>
           <p className="text-sm text-[#888] mb-4 font-mono">
             Сначала можно спросить AI-ассистента, а сложный вопрос передать живому оператору.
@@ -84,13 +84,13 @@ export function FAQ({ faqs }: { faqs: FaqItem[] }) {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={() => window.dispatchEvent(new CustomEvent("open-assistant"))}
-              className="px-6 py-3 bg-[#F7A600] text-black font-black uppercase border-2 border-[#F7A600] hover:bg-[#F7A600] hover:border-[#F7A600] hover:text-white transition-colors hover-press font-mono tracking-wide"
+              className="px-6 py-3 bg-[#8E1537] text-black font-black uppercase border-2 border-[#8E1537] hover:bg-[#8E1537] hover:border-[#8E1537] hover:text-white transition-colors hover-press font-mono tracking-wide"
             >
               AI-ассистент
             </button>
             <button
               onClick={() => window.dispatchEvent(new CustomEvent("open-support"))}
-              className="px-6 py-3 bg-transparent text-foreground font-black uppercase border-2 border-[#2A2A2A] hover:border-[#F7A600] hover:text-[#F7A600] transition-colors hover-press font-mono tracking-wide"
+              className="px-6 py-3 bg-transparent text-foreground font-black uppercase border-2 border-[#2A2A2A] hover:border-[#8E1537] hover:text-[#8E1537] transition-colors hover-press font-mono tracking-wide"
             >
               Чат поддержки
             </button>

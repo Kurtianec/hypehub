@@ -61,7 +61,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <main className="flex-1 pt-32 pb-12 text-center">
           <div className="container mx-auto px-4">
             <h1 className="text-3xl font-black uppercase mb-4">Статья не найдена</h1>
-            <Link href="/blog" className="text-[#F7A600] font-mono uppercase hover:underline">
+            <Link href="/blog" className="text-[#8E1537] font-mono uppercase hover:underline">
               ← Назад в блог
             </Link>
           </div>
@@ -103,7 +103,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   // Convert simple markdown to HTML
   const renderContent = (content: string) => {
-    const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#F7A600;" }[char] || char));
+    const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#8E1537;" }[char] || char));
     const lines = content.split("\n");
     const html: string[] = [];
     let inList = false;
@@ -112,7 +112,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       const trimmed = escapeHtml(line.trim());
       if (trimmed.startsWith("# ")) {
         if (inList) { html.push("</ul>"); inList = false; }
-        html.push(`<h2 class="text-2xl font-black uppercase tracking-tight mt-6 mb-3 text-[#F7A600] font-mono">${trimmed.slice(2)}</h2>`);
+        html.push(`<h2 class="text-2xl font-black uppercase tracking-tight mt-6 mb-3 text-[#8E1537] font-mono">${trimmed.slice(2)}</h2>`);
       } else if (trimmed.startsWith("## ")) {
         if (inList) { html.push("</ul>"); inList = false; }
         html.push(`<h3 class="text-lg font-black uppercase tracking-tight mt-5 mb-2 text-foreground">${trimmed.slice(3)}</h3>`);
@@ -121,11 +121,11 @@ export default async function BlogPostPage({ params }: PageProps) {
         html.push(`<h4 class="text-base font-bold mt-4 mb-2 text-foreground">${trimmed.slice(4)}</h4>`);
       } else if (trimmed.startsWith("- ")) {
         if (!inList) { html.push('<ul class="list-none space-y-1 my-3 ml-4">'); inList = true; }
-        html.push(`<li class="text-[#888] font-mono text-sm leading-relaxed flex gap-2"><span class="text-[#F7A600]">▸</span><span>${trimmed.slice(2)}</span></li>`);
+        html.push(`<li class="text-[#888] font-mono text-sm leading-relaxed flex gap-2"><span class="text-[#8E1537]">▸</span><span>${trimmed.slice(2)}</span></li>`);
       } else if (trimmed.match(/^\d+\.\s/)) {
         if (!inList) { html.push('<ol class="list-none space-y-1 my-3 ml-4">'); inList = true; }
         const match = trimmed.match(/^(\d+)\.\s(.+)/);
-        html.push(`<li class="text-[#888] font-mono text-sm leading-relaxed flex gap-2"><span class="text-[#F7A600] font-bold">${match?.[1]}.</span><span>${match?.[2]}</span></li>`);
+        html.push(`<li class="text-[#888] font-mono text-sm leading-relaxed flex gap-2"><span class="text-[#8E1537] font-bold">${match?.[1]}.</span><span>${match?.[2]}</span></li>`);
       } else if (trimmed === "") {
         if (inList) { html.push("</ul>"); inList = false; }
         html.push("<br/>");
@@ -159,16 +159,16 @@ export default async function BlogPostPage({ params }: PageProps) {
         <article className="container mx-auto px-4 max-w-3xl">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-xs text-[#888] font-mono uppercase mb-6">
-            <Link href="/" className="hover:text-[#F7A600]">ГЛАВНАЯ</Link>
-            <span className="text-[#F7A600]">/</span>
-            <Link href="/blog" className="hover:text-[#F7A600]">БЛОГ</Link>
-            <span className="text-[#F7A600]">/</span>
+            <Link href="/" className="hover:text-[#8E1537]">ГЛАВНАЯ</Link>
+            <span className="text-[#8E1537]">/</span>
+            <Link href="/blog" className="hover:text-[#8E1537]">БЛОГ</Link>
+            <span className="text-[#8E1537]">/</span>
             <span className="text-foreground truncate max-w-[200px]">{post.title}</span>
           </div>
 
           {/* Article header */}
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#F7A600]" />
+            <div className="w-1 h-8 bg-[#8E1537]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">
               {"// "}{new Date(post.createdAt).toLocaleDateString("ru-RU")}
             </span>
@@ -197,7 +197,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="mt-12 pt-6 border-t-2 border-[#1F1F1F]">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-[#F7A600] font-mono uppercase text-sm hover:underline"
+              className="inline-flex items-center gap-2 text-[#8E1537] font-mono uppercase text-sm hover:underline"
             >
               <ArrowLeft className="w-4 h-4" />
               Назад в блог
@@ -207,7 +207,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           {/* Related posts */}
           {otherPosts.length > 0 && (
             <div className="mt-10">
-              <h3 className="text-sm font-black uppercase tracking-widest mb-4 text-[#F7A600] font-mono">
+              <h3 className="text-sm font-black uppercase tracking-widest mb-4 text-[#8E1537] font-mono">
                 {"// ЧИТАЙТЕ ТАКЖЕ"}
               </h3>
               <div className="grid gap-3">
@@ -215,10 +215,10 @@ export default async function BlogPostPage({ params }: PageProps) {
                   <Link
                     key={p.id}
                     href={`/blog/${p.slug}`}
-                    className="block bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#F7A600] p-4 transition-colors group"
+                    className="block bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537] p-4 transition-colors group"
                     style={{ clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))" }}
                   >
-                    <h4 className="font-black uppercase tracking-tight group-hover:text-[#F7A600] transition-colors text-sm">{p.title}</h4>
+                    <h4 className="font-black uppercase tracking-tight group-hover:text-[#8E1537] transition-colors text-sm">{p.title}</h4>
                     <p className="text-xs text-[#888] font-mono mt-1 line-clamp-2">{p.excerpt}</p>
                   </Link>
                 ))}

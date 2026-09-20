@@ -30,17 +30,17 @@ export default async function AboutPage() {
   for (const s of settings) settingsMap[s.key] = s.value;
 
   const values = [
-    { icon: Zap, title: "Мгновенная выдача", text: "Данные аккаунта приходят сразу после оплаты. Без ожиданий и переписок.", color: "#F7A600" },
-    { icon: Bitcoin, title: "Анонимная оплата", text: "Криптовалюта. Без проверки личности, безопасно и быстро.", color: "#F7A600" },
-    { icon: Shield, title: "Гарантия до 14 дней", text: "На каждый аккаунт действует гарантия. При проблемах — замена или возврат.", color: "#F7A600" },
-    { icon: Headphones, title: "Поддержка 24/7", text: "Живой чат и AI-ассистент. Помогаем в любое время дня и ночи.", color: "#F7A600" },
+    { icon: Zap, title: "Мгновенная выдача", text: "Данные аккаунта приходят сразу после оплаты. Без ожиданий и переписок.", color: "#8E1537" },
+    { icon: Bitcoin, title: "Анонимная оплата", text: "Криптовалюта. Без проверки личности, безопасно и быстро.", color: "#8E1537" },
+    { icon: Shield, title: "Гарантия до 14 дней", text: "На каждый аккаунт действует гарантия. При проблемах — замена или возврат.", color: "#8E1537" },
+    { icon: Headphones, title: "Поддержка 24/7", text: "Живой чат и AI-ассистент. Помогаем в любое время дня и ночи.", color: "#8E1537" },
   ];
 
   const stats = [
-    { value: settingsMap.stats_clients || "12 800+", label: "Довольных клиентов", color: "#F7A600" },
-    { value: settingsMap.stats_accounts || "5 200+", label: "Аккаунтов продано", color: "#F7A600" },
-    { value: settingsMap.stats_rating || "4.9", label: "Средний рейтинг", color: "#F7A600" },
-    { value: "< 2 мин", label: "Средняя выдача", color: "#F7A600" },
+    { value: settingsMap.stats_clients || "12 800+", label: "Довольных клиентов", color: "#8E1537" },
+    { value: settingsMap.stats_accounts || "5 200+", label: "Аккаунтов продано", color: "#8E1537" },
+    { value: settingsMap.stats_rating || "4.9", label: "Средний рейтинг", color: "#8E1537" },
+    { value: "< 2 мин", label: "Средняя выдача", color: "#8E1537" },
   ];
 
   return (
@@ -51,13 +51,13 @@ export default async function AboutPage() {
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-xs text-[#888] font-mono uppercase mb-6">
-            <Link href="/" className="hover:text-[#F7A600]">ГЛАВНАЯ</Link>
-            <span className="text-[#F7A600]">/</span>
+            <Link href="/" className="hover:text-[#8E1537]">ГЛАВНАЯ</Link>
+            <span className="text-[#8E1537]">/</span>
             <span className="text-foreground">О НАС</span>
           </div>
 
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#F7A600]" />
+            <div className="w-1 h-8 bg-[#8E1537]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// ABOUT"}</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-4">
@@ -96,11 +96,11 @@ export default async function AboutPage() {
           </div>
 
           {/* Mission */}
-          <div className="bg-[#0E0E0E] border-2 border-[#F7A600] p-6 md:p-8 mb-8"
+          <div className="bg-[#0E0E0E] border-2 border-[#8E1537] p-6 md:p-8 mb-8"
             style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}>
             <div className="flex items-center gap-3 mb-3">
-              <Award className="w-5 h-5 text-[#F7A600]" strokeWidth={2.5} />
-              <h2 className="text-xl font-black uppercase tracking-tight font-mono text-[#F7A600]">{"// НАША_МИССИЯ"}</h2>
+              <Award className="w-5 h-5 text-[#8E1537]" strokeWidth={2.5} />
+              <h2 className="text-xl font-black uppercase tracking-tight font-mono text-[#8E1537]">{"// НАША_МИССИЯ"}</h2>
             </div>
             <p className="text-[#888] font-mono leading-relaxed text-sm">
               &gt; Мы верим, что каждый должен иметь возможность запустить свой проект в соцсетях без барьеров.
@@ -113,30 +113,30 @@ export default async function AboutPage() {
           </div>
 
           {/* Why us */}
-          <div className="bg-[#0E0E0E] border-2 border-[#F7A600] p-6 md:p-8 mb-8"
+          <div className="bg-[#0E0E0E] border-2 border-[#8E1537] p-6 md:p-8 mb-8"
             style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}>
             <div className="flex items-center gap-3 mb-3">
-              <Users className="w-5 h-5 text-[#F7A600]" strokeWidth={2.5} />
-              <h2 className="text-xl font-black uppercase tracking-tight font-mono text-[#F7A600]">{"// ПОЧЕМУ_МЫ"}</h2>
+              <Users className="w-5 h-5 text-[#8E1537]" strokeWidth={2.5} />
+              <h2 className="text-xl font-black uppercase tracking-tight font-mono text-[#8E1537]">{"// ПОЧЕМУ_МЫ"}</h2>
             </div>
             <ul className="space-y-2 text-[#888] font-mono text-sm">
-              <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> Только проверенные аккаунты с живой аудиторией</li>
-              <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> Мгновенная выдача данных после оплаты</li>
-              <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> Анонимная оплата криптой </li>
-              <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> Гарантия от 24 часов до 14 дней</li>
-              <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> Поддержка 24/7 в чате и AI-ассистент</li>
-              <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> Более 12 800 довольных клиентов</li>
-              <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> SSL-шифрование, защита данных</li>
+              <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> Только проверенные аккаунты с живой аудиторией</li>
+              <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> Мгновенная выдача данных после оплаты</li>
+              <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> Анонимная оплата криптой </li>
+              <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> Гарантия от 24 часов до 14 дней</li>
+              <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> Поддержка 24/7 в чате и AI-ассистент</li>
+              <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> Более 12 800 довольных клиентов</li>
+              <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> SSL-шифрование, защита данных</li>
             </ul>
           </div>
 
           {/* CTA */}
-          <div className="text-center bg-[#0E0E0E] border-2 border-[#F7A600] p-6 md:p-8"
+          <div className="text-center bg-[#0E0E0E] border-2 border-[#8E1537] p-6 md:p-8"
             style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}>
-            <Globe className="w-10 h-10 mx-auto mb-3 text-[#F7A600]" strokeWidth={2.5} />
+            <Globe className="w-10 h-10 mx-auto mb-3 text-[#8E1537]" strokeWidth={2.5} />
             <h3 className="text-xl font-black mb-2 uppercase tracking-tight">Готовы начать?</h3>
             <p className="text-sm text-[#888] mb-4 font-mono">&gt; Выберите аккаунт в каталоге и начните прямо сейчас</p>
-            <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 bg-[#F7A600] text-black font-black uppercase border-2 border-[#F7A600] hover:bg-[#F7A600] hover:border-[#F7A600] hover:text-white transition-colors font-mono tracking-wide">
+            <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 bg-[#8E1537] text-black font-black uppercase border-2 border-[#8E1537] hover:bg-[#8E1537] hover:border-[#8E1537] hover:text-white transition-colors font-mono tracking-wide">
               В каталог →
             </Link>
           </div>

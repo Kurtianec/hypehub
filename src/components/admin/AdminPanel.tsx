@@ -54,23 +54,23 @@ interface TabDef {
 }
 
 const TABS: TabDef[] = [
-  { id: "dashboard", label: "Дашборд", icon: LayoutDashboard, num: "01", color: "#F7A600" },
-  { id: "products", label: "Товары", icon: Package, num: "02", color: "#F7A600" },
-  { id: "categories", label: "Категории", icon: Tags, num: "03", color: "#F7A600" },
-  { id: "orders", label: "Заказы", icon: ShoppingCart, num: "04", color: "#F7A600", badgeKey: "orders" },
-  { id: "support", label: "Поддержка", icon: MessageSquare, num: "05", color: "#F7A600", badgeKey: "support" },
-  { id: "visitors", label: "Посетители", icon: Eye, num: "06", color: "#F7A600" },
-  { id: "reviews", label: "Отзывы", icon: Star, num: "07", color: "#F7A600", badgeKey: "reviews" },
-  { id: "blog", label: "Блог", icon: FileText, num: "08", color: "#F7A600" },
-  { id: "logs", label: "Журнал", icon: ScrollText, num: "09", color: "#F7A600" },
-  { id: "referral", label: "Рефералы", icon: Users, num: "10", color: "#F7A600" },
-  { id: "promo", label: "Промокоды", icon: Ticket, num: "11", color: "#F7A600" },
-  { id: "blacklist", label: "Чёрный список", icon: ShieldBan, num: "12", color: "#F7A600" },
-  { id: "sessions", label: "Сессии", icon: MonitorSmartphone, num: "13", color: "#F7A600" },
-  { id: "backups", label: "Резервные копии", icon: DatabaseBackup, num: "14", color: "#F7A600" },
-  { id: "warranty", label: "Гарантии", icon: ShieldCheck, num: "15", color: "#F7A600" },
-  { id: "health", label: "Система", icon: HeartPulse, num: "16", color: "#F7A600" },
-  { id: "settings", label: "Настройки", icon: SettingsIcon, num: "17", color: "#F7A600" },
+  { id: "dashboard", label: "Дашборд", icon: LayoutDashboard, num: "01", color: "#8E1537" },
+  { id: "products", label: "Товары", icon: Package, num: "02", color: "#8E1537" },
+  { id: "categories", label: "Категории", icon: Tags, num: "03", color: "#8E1537" },
+  { id: "orders", label: "Заказы", icon: ShoppingCart, num: "04", color: "#8E1537", badgeKey: "orders" },
+  { id: "support", label: "Поддержка", icon: MessageSquare, num: "05", color: "#8E1537", badgeKey: "support" },
+  { id: "visitors", label: "Посетители", icon: Eye, num: "06", color: "#8E1537" },
+  { id: "reviews", label: "Отзывы", icon: Star, num: "07", color: "#8E1537", badgeKey: "reviews" },
+  { id: "blog", label: "Блог", icon: FileText, num: "08", color: "#8E1537" },
+  { id: "logs", label: "Журнал", icon: ScrollText, num: "09", color: "#8E1537" },
+  { id: "referral", label: "Рефералы", icon: Users, num: "10", color: "#8E1537" },
+  { id: "promo", label: "Промокоды", icon: Ticket, num: "11", color: "#8E1537" },
+  { id: "blacklist", label: "Чёрный список", icon: ShieldBan, num: "12", color: "#8E1537" },
+  { id: "sessions", label: "Сессии", icon: MonitorSmartphone, num: "13", color: "#8E1537" },
+  { id: "backups", label: "Резервные копии", icon: DatabaseBackup, num: "14", color: "#8E1537" },
+  { id: "warranty", label: "Гарантии", icon: ShieldCheck, num: "15", color: "#8E1537" },
+  { id: "health", label: "Система", icon: HeartPulse, num: "16", color: "#8E1537" },
+  { id: "settings", label: "Настройки", icon: SettingsIcon, num: "17", color: "#8E1537" },
 ];
 
 interface NotificationItem {
@@ -238,7 +238,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
     const count = counts[badgeKey];
     if (count === 0) return null;
     return (
-      <span className="ml-auto min-w-[20px] h-5 px-1.5 bg-[#F7A600] text-white text-[10px] font-black flex items-center justify-center font-mono rounded-sm">
+      <span className="ml-auto min-w-[20px] h-5 px-1.5 bg-[#8E1537] text-white text-[10px] font-black flex items-center justify-center font-mono rounded-sm">
         {count > 99 ? "99+" : count}
       </span>
     );
@@ -247,15 +247,15 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
   return (
     <div className="admin-v3 admin-prism min-h-screen flex">
       {/* Sidebar — desktop */}
-      <aside className="admin-sidebar hidden lg:flex w-64 flex-shrink-0 bg-[#0E0E0E] border-r-2 border-[#F7A600]/40 flex-col">
+      <aside className="admin-sidebar hidden lg:flex w-64 flex-shrink-0 bg-[#0E0E0E] border-r-2 border-[#8E1537]/40 flex-col">
         <div className="p-6 border-b-2 border-[#1F1F1F]">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 bg-[#F7A600] flex items-center justify-center border-2 border-[#F7A600]">
+            <div className="w-10 h-10 bg-[#8E1537] flex items-center justify-center border-2 border-[#8E1537]">
               <BrandMark className="w-full h-full" />
             </div>
             <div>
               <div className="font-black uppercase tracking-tighter">
-                <span className="text-[#F7A600]">Хайп</span>Хаб
+                <span className="text-[#8E1537]">Хайп</span>Хаб
               </div>
               <div className="text-[10px] text-[#888] font-mono uppercase tracking-widest">
                 Панель управления
@@ -272,7 +272,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
               className={cn(
                 "admin-nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wide transition-all border-2 font-mono",
                 tab === t.id
-                  ? "bg-[#F7A600]/10 text-[#F7A600] border-[#F7A600]"
+                  ? "bg-[#8E1537]/10 text-[#8E1537] border-[#8E1537]"
                   : "text-[#888] border-transparent hover:bg-white/5 hover:text-foreground"
               )}
             >
@@ -294,7 +294,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
           </a>
           <button
             onClick={onLogout}
-            className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wide text-[#F7A600] hover:bg-[#F7A600]/10 transition-all font-mono"
+            className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wide text-[#8E1537] hover:bg-[#8E1537]/10 transition-all font-mono"
           >
             <LogOut className="w-4 h-4" />
             Выход
@@ -310,15 +310,15 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
-            className="admin-sidebar absolute left-0 top-0 bottom-0 w-64 bg-[#0E0E0E] border-r-2 border-[#F7A600] flex flex-col"
+            className="admin-sidebar absolute left-0 top-0 bottom-0 w-64 bg-[#0E0E0E] border-r-2 border-[#8E1537] flex flex-col"
           >
             <div className="p-6 border-b-2 border-[#1F1F1F] flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 bg-[#F7A600] flex items-center justify-center border-2 border-[#F7A600]">
+                <div className="w-9 h-9 bg-[#8E1537] flex items-center justify-center border-2 border-[#8E1537]">
                   <BrandMark className="w-full h-full" />
                 </div>
                 <div className="font-black uppercase tracking-tighter">
-                  <span className="text-[#F7A600]">Хайп</span>Хаб
+                  <span className="text-[#8E1537]">Хайп</span>Хаб
                 </div>
               </div>
               <button onClick={() => setSidebarOpen(false)} className="w-8 h-8 hover:bg-white/10 flex items-center justify-center">
@@ -333,7 +333,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
                   className={cn(
                     "admin-nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wide transition-all border-2 font-mono",
                     tab === t.id
-                      ? "bg-[#F7A600]/10 text-[#F7A600] border-[#F7A600]"
+                      ? "bg-[#8E1537]/10 text-[#8E1537] border-[#8E1537]"
                       : "text-[#888] border-transparent hover:bg-white/5"
                   )}
                 >
@@ -347,7 +347,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
             <div className="p-3 border-t-2 border-[#1F1F1F]">
               <button
                 onClick={onLogout}
-                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wide text-[#F7A600] hover:bg-[#F7A600]/10 font-mono"
+                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wide text-[#8E1537] hover:bg-[#8E1537]/10 font-mono"
               >
                 <LogOut className="w-4 h-4" />
                 Выход
@@ -381,12 +381,12 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
         </header>
 
         {/* Mobile header */}
-        <header className="admin-topbar lg:hidden sticky top-0 z-30 bg-[#0E0E0E] border-b-2 border-[#F7A600]/40 p-4 flex items-center justify-between">
-          <button onClick={() => setSidebarOpen(true)} className="w-10 h-10 border-2 border-[#F7A600] bg-[#F7A600] text-black flex items-center justify-center">
+        <header className="admin-topbar lg:hidden sticky top-0 z-30 bg-[#0E0E0E] border-b-2 border-[#8E1537]/40 p-4 flex items-center justify-between">
+          <button onClick={() => setSidebarOpen(true)} className="w-10 h-10 border-2 border-[#8E1537] bg-[#8E1537] text-black flex items-center justify-center">
             <PanelLeftOpen className="w-5 h-5" strokeWidth={2.2} />
           </button>
           <div className="font-black uppercase tracking-tighter font-mono">
-            <span className="text-[#F7A600]">Хайп</span>Хаб <span className="text-[#888] text-xs">· ADMIN</span>
+            <span className="text-[#8E1537]">Хайп</span>Хаб <span className="text-[#888] text-xs">· ADMIN</span>
           </div>
           <AdminNotifications
             notifications={notifications}

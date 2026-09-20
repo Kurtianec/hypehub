@@ -1,7 +1,7 @@
 import { CatalogSkeleton } from "@/components/store/Skeletons";
 
 export default function Loading() {
-  return <div className="min-h-screen bg-[#f5f7fc]">
+  return <div className="min-h-screen bg-[#080808]">
     <div className="container mx-auto px-4 pt-4"><div className="skeleton-block h-[68px] rounded-2xl" /></div>
     <main className="container mx-auto px-4 pb-16 pt-16">
       <div className="mx-auto mb-16 max-w-4xl text-center">

@@ -46,21 +46,21 @@ export function AdminNotifications({
   };
 
   const colorForType = (type: string) => {
-    if (type === "order") return "#F7A600";
-    if (type === "support") return "#F7A600";
-    return "#F7A600";
+    if (type === "order") return "#8E1537";
+    if (type === "support") return "#8E1537";
+    return "#8E1537";
   };
 
   return (
     <div className="relative">
       <button
         onClick={onTogglePanel}
-        className="relative w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#F7A600] flex items-center justify-center transition-colors flex-shrink-0"
+        className="relative w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#8E1537] flex items-center justify-center transition-colors flex-shrink-0"
         aria-label="Уведомления"
       >
-        <Bell className="w-4 h-4 text-[#888] group-hover:text-[#F7A600]" strokeWidth={2.5} />
+        <Bell className="w-4 h-4 text-[#888] group-hover:text-[#8E1537]" strokeWidth={2.5} />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-[#F7A600] text-white text-[9px] font-black w-4 h-4 flex items-center justify-center font-mono animate-pulse">
+          <span className="absolute -top-1 -right-1 bg-[#8E1537] text-white text-[9px] font-black w-4 h-4 flex items-center justify-center font-mono animate-pulse">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
@@ -76,11 +76,11 @@ export function AdminNotifications({
               exit={{ opacity: 0, y: -10 }}
               // Fixed position so it never escapes the viewport.
               // Anchored to the top-right of the screen, just below the top bar.
-              className="fixed right-4 top-16 w-[min(360px,calc(100vw-2rem))] bg-[#0E0E0E] border-2 border-[#F7A600] z-[100] overflow-hidden shadow-2xl max-h-[70vh] flex flex-col"
+              className="fixed right-4 top-16 w-[min(360px,calc(100vw-2rem))] bg-[#0E0E0E] border-2 border-[#8E1537] z-[100] overflow-hidden shadow-2xl max-h-[70vh] flex flex-col"
               style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}
             >
               <div className="flex items-center justify-between p-3 border-b border-[#1F1F1F] flex-shrink-0">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#F7A600]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#8E1537]">
                   Уведомления
                 </span>
                 <div className="flex items-center gap-2">
@@ -90,7 +90,7 @@ export function AdminNotifications({
                     </span>
                   )}
                   {notifications.length > 0 && (
-                    <button onClick={onClear} className="text-[10px] text-[#888] hover:text-[#F7A600] uppercase">
+                    <button onClick={onClear} className="text-[10px] text-[#888] hover:text-[#8E1537] uppercase">
                       Очистить
                     </button>
                   )}
@@ -101,31 +101,31 @@ export function AdminNotifications({
                   <div className="p-6 text-center text-[#888] text-sm">
                     {counts.orders > 0 || counts.support > 0 || counts.reviews > 0 ? (
                       <>
-                        <div className="text-[10px] font-mono uppercase mb-3 text-[#F7A600]">
+                        <div className="text-[10px] font-mono uppercase mb-3 text-[#8E1537]">
                           // Требуют внимания
                         </div>
                         <div className="space-y-2 text-left">
                           {counts.orders > 0 && (
-                            <div className="flex items-center gap-2 px-3 py-2 bg-[#F7A600]/5 border border-[#F7A600]/30">
-                              <ShoppingCart className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
+                            <div className="flex items-center gap-2 px-3 py-2 bg-[#8E1537]/5 border border-[#8E1537]/30">
+                              <ShoppingCart className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
                               <span className="text-xs">
-                                                Заказы ожидают: <b className="text-[#F7A600]">{counts.orders}</b>
+                                                Заказы ожидают: <b className="text-[#8E1537]">{counts.orders}</b>
                               </span>
                             </div>
                           )}
                           {counts.support > 0 && (
-                            <div className="flex items-center gap-2 px-3 py-2 bg-[#F7A600]/5 border border-[#F7A600]/30">
-                              <MessageSquare className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
+                            <div className="flex items-center gap-2 px-3 py-2 bg-[#8E1537]/5 border border-[#8E1537]/30">
+                              <MessageSquare className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
                               <span className="text-xs">
-                                Новых обращений: <b className="text-[#F7A600]">{counts.support}</b>
+                                Новых обращений: <b className="text-[#8E1537]">{counts.support}</b>
                               </span>
                             </div>
                           )}
                           {counts.reviews > 0 && (
-                            <div className="flex items-center gap-2 px-3 py-2 bg-[#F7A600]/5 border border-[#F7A600]/30">
-                              <Star className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
+                            <div className="flex items-center gap-2 px-3 py-2 bg-[#8E1537]/5 border border-[#8E1537]/30">
+                              <Star className="w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
                               <span className="text-xs">
-                                Отзывов на модерации: <b className="text-[#F7A600]">{counts.reviews}</b>
+                                Отзывов на модерации: <b className="text-[#8E1537]">{counts.reviews}</b>
                               </span>
                             </div>
                           )}
@@ -155,7 +155,7 @@ export function AdminNotifications({
                           </div>
                           <button
                             onClick={() => onRemove(n.id)}
-                            className="text-[#888] hover:text-[#F7A600] opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="text-[#888] hover:text-[#8E1537] opacity-0 group-hover:opacity-100 transition-opacity"
                           >
                             <X className="w-3 h-3" />
                           </button>

@@ -92,7 +92,7 @@ export function AdminBlog() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-[#F7A600]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#8E1537]" />
       </div>
     );
   }
@@ -102,7 +102,7 @@ export function AdminBlog() {
       <div className="flex flex-col sm:flex-row justify-between gap-3 mb-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#F7A600]" />
+            <div className="w-1 h-8 bg-[#8E1537]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_BLOG"}</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">Блог</h1>
@@ -110,7 +110,7 @@ export function AdminBlog() {
         </div>
         <Button
           onClick={() => setCreating(true)}
-          className="bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase border-2 border-[#F7A600] hover:border-[#F7A600] font-mono tracking-wide"
+          className="bg-[#8E1537] text-black hover:bg-[#8E1537] hover:text-white font-black uppercase border-2 border-[#8E1537] hover:border-[#8E1537] font-mono tracking-wide"
         >
           <Plus className="w-4 h-4 mr-1.5" strokeWidth={3} />
           Новая статья
@@ -129,16 +129,16 @@ export function AdminBlog() {
               key={p.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#F7A600] p-4 transition-colors"
+              className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537] p-4 transition-colors"
               style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
             >
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-[#1A1A1A] border-2 border-[#F7A600]/40 flex items-center justify-center flex-shrink-0">
-                  <FileText className="w-5 h-5 text-[#F7A600]" />
+                <div className="w-10 h-10 bg-[#1A1A1A] border-2 border-[#8E1537]/40 flex items-center justify-center flex-shrink-0">
+                  <FileText className="w-5 h-5 text-[#8E1537]" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className={`px-1.5 py-0.5 text-[9px] font-black border font-mono uppercase ${p.published ? "bg-[#F7A600]/15 text-[#F7A600] border-[#F7A600]/40" : "bg-[#888]/15 text-[#888] border-[#888]/40"}`}>
+                    <span className={`px-1.5 py-0.5 text-[9px] font-black border font-mono uppercase ${p.published ? "bg-[#8E1537]/15 text-[#8E1537] border-[#8E1537]/40" : "bg-[#888]/15 text-[#888] border-[#888]/40"}`}>
                       {p.published ? "ОПУБЛИКОВАН" : "ЧЕРНОВИК"}
                     </span>
                     <span className="text-[10px] text-[#888] font-mono uppercase">
@@ -153,16 +153,16 @@ export function AdminBlog() {
 
               <div className="flex gap-2 mt-3 pt-3 border-t border-[#1F1F1F]">
                 <Button size="sm" variant="ghost" onClick={() => setEditing(p)}
-                  className="flex-1 text-xs hover:bg-[#F7A600]/10 hover:text-[#F7A600] font-mono uppercase">
+                  className="flex-1 text-xs hover:bg-[#8E1537]/10 hover:text-[#8E1537] font-mono uppercase">
                   <Pencil className="w-3.5 h-3.5 mr-1" />
                   Редактировать
                 </Button>
                 <Button size="sm" variant="ghost" onClick={() => togglePublish(p)}
-                  className="text-xs hover:bg-[#F7A600]/10 hover:text-[#F7A600] font-mono uppercase">
+                  className="text-xs hover:bg-[#8E1537]/10 hover:text-[#8E1537] font-mono uppercase">
                   {p.published ? <><EyeOff className="w-3.5 h-3.5 mr-1" /> Скрыть</> : <><Eye className="w-3.5 h-3.5 mr-1" /> Опубл.</>}
                 </Button>
                 <Button size="sm" variant="ghost" onClick={() => setDeleteId(p.id)}
-                  className="text-[#F7A600] hover:bg-[#F7A600]/10">
+                  className="text-[#8E1537] hover:bg-[#8E1537]/10">
                   <Trash2 className="w-3.5 h-3.5" />
                 </Button>
               </div>
@@ -179,14 +179,14 @@ export function AdminBlog() {
       />
 
       <AlertDialog open={!!deleteId} onOpenChange={(o) => !o && setDeleteId(null)}>
-        <AlertDialogContent className="bg-[#0E0E0E] border-2 border-[#F7A600]">
+        <AlertDialogContent className="bg-[#0E0E0E] border-2 border-[#8E1537]">
           <AlertDialogHeader>
             <AlertDialogTitle>Удалить статью?</AlertDialogTitle>
             <AlertDialogDescription>Это действие нельзя отменить.</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel className="bg-transparent border-2 border-[#2A2A2A]">Отмена</AlertDialogCancel>
-            <AlertDialogAction onClick={onDelete} className="bg-[#F7A600] hover:bg-[#F7A600]/80 text-white">
+            <AlertDialogAction onClick={onDelete} className="bg-[#8E1537] hover:bg-[#8E1537]/80 text-white">
               Удалить
             </AlertDialogAction>
           </AlertDialogFooter>
@@ -254,7 +254,7 @@ function BlogForm({
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-[#0E0E0E] border-2 border-[#F7A600]">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-[#0E0E0E] border-2 border-[#8E1537]">
         <DialogHeader>
           <DialogTitle className="uppercase tracking-tight font-black">
             {isCreate ? "Новая статья" : "Редактирование"}
@@ -263,39 +263,39 @@ function BlogForm({
 
         <div className="space-y-4 py-2">
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ЗАГОЛОВОК *"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#8E1537]">{"// ЗАГОЛОВОК *"}</Label>
             <Input value={String(form.title || "")} onChange={(e) => set("title", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono" />
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono" />
           </div>
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// SLUG (URL) *"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#8E1537]">{"// SLUG (URL) *"}</Label>
             <Input value={String(form.slug || "")} onChange={(e) => set("slug", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono" placeholder="kak-kupit-akkaunt-tiktok" />
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono" placeholder="kak-kupit-akkaunt-tiktok" />
           </div>
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// КРАТКОЕ ОПИСАНИЕ"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#8E1537]">{"// КРАТКОЕ ОПИСАНИЕ"}</Label>
             <Textarea value={String(form.excerpt || "")} onChange={(e) => set("excerpt", e.target.value)}
-              rows={2} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono text-sm" />
+              rows={2} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono text-sm" />
           </div>
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// СОДЕРЖАНИЕ (MARKDOWN)"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#8E1537]">{"// СОДЕРЖАНИЕ (MARKDOWN)"}</Label>
             <Textarea value={String(form.content || "")} onChange={(e) => set("content", e.target.value)}
-              rows={12} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono text-sm" />
+              rows={12} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono text-sm" />
             <div className="text-[10px] text-[#888] font-mono mt-1 uppercase">
               Поддержка: # H2, ## H3, ### H4, - списки, **жирный**, | таблицы
             </div>
           </div>
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ТЕГИ (через запятую)"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#8E1537]">{"// ТЕГИ (через запятую)"}</Label>
             <Input value={String(form.tags || "")} onChange={(e) => set("tags", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono" placeholder="tiktok, покупка, безопасность" />
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono" placeholder="tiktok, покупка, безопасность" />
           </div>
           <div className="flex items-center gap-3 pt-2 border-t border-[#1F1F1F]">
             <button
               onClick={() => set("published", !form.published)}
               className={`flex items-center gap-2 px-3 py-2 border-2 text-sm transition-all font-mono uppercase ${
                 form.published
-                  ? "bg-[#F7A600]/15 text-[#F7A600] border-[#F7A600]/40"
+                  ? "bg-[#8E1537]/15 text-[#8E1537] border-[#8E1537]/40"
                   : "bg-transparent text-[#888] border-[#2A2A2A]"
               }`}
             >
@@ -310,7 +310,7 @@ function BlogForm({
             Отмена
           </Button>
           <Button onClick={save} disabled={saving}
-            className="flex-1 bg-[#F7A600] text-white hover:bg-[#F7A600]/80 font-black uppercase border-2 border-[#F7A600] font-mono tracking-wide">
+            className="flex-1 bg-[#8E1537] text-white hover:bg-[#8E1537]/80 font-black uppercase border-2 border-[#8E1537] font-mono tracking-wide">
             {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" strokeWidth={3} />}
             {isCreate ? "Создать" : "Сохранить"}
           </Button>

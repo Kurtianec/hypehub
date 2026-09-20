@@ -71,14 +71,14 @@ export default async function BlogPage() {
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-xs text-[#888] font-mono uppercase mb-6">
-            <Link href="/" className="hover:text-[#F7A600]">ГЛАВНАЯ</Link>
-            <span className="text-[#F7A600]">/</span>
+            <Link href="/" className="hover:text-[#8E1537]">ГЛАВНАЯ</Link>
+            <span className="text-[#8E1537]">/</span>
             <span className="text-foreground">БЛОГ</span>
           </div>
 
           {/* Header */}
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#F7A600]" />
+            <div className="w-1 h-8 bg-[#8E1537]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// BLOG"}</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-3">
@@ -99,15 +99,15 @@ export default async function BlogPage() {
                 <Link
                   key={p.id}
                   href={`/blog/${p.slug}`}
-                  className="block bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#F7A600] p-5 md:p-6 transition-colors group"
+                  className="block bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537] p-5 md:p-6 transition-colors group"
                   style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
-                      <div className="text-[10px] text-[#F7A600] font-mono uppercase mb-2">
+                      <div className="text-[10px] text-[#8E1537] font-mono uppercase mb-2">
                         {"// "}{String(i + 1).padStart(2, "0")} · {new Date(p.createdAt).toLocaleDateString("ru-RU")}
                       </div>
-                      <h2 className="text-xl md:text-2xl font-black uppercase tracking-tight mb-2 group-hover:text-[#F7A600] transition-colors">
+                      <h2 className="text-xl md:text-2xl font-black uppercase tracking-tight mb-2 group-hover:text-[#8E1537] transition-colors">
                         {p.title}
                       </h2>
                       <p className="text-sm text-[#888] leading-relaxed font-mono mb-3 line-clamp-2">
@@ -123,7 +123,7 @@ export default async function BlogPage() {
                         </div>
                       )}
                     </div>
-                    <div className="text-[#F7A600] font-mono text-2xl font-black opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0">
+                    <div className="text-[#8E1537] font-mono text-2xl font-black opacity-50 group-hover:opacity-100 transition-opacity flex-shrink-0">
                       →
                     </div>
                   </div>

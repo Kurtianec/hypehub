@@ -242,7 +242,7 @@ export function Catalog({
                     }
                   }}
                   disabled={safePage <= 1}
-                  className="w-10 h-10 flex items-center justify-center border-2 border-[var(--border)] hover:border-[#F7A600] disabled:opacity-30 disabled:hover:border-[var(--border)] transition-colors rounded-lg"
+                  className="w-10 h-10 flex items-center justify-center border-2 border-[var(--border)] hover:border-[#8E1537] disabled:opacity-30 disabled:hover:border-[var(--border)] transition-colors rounded-lg"
                   aria-label="Предыдущая страница"
                 >
                   <ChevronLeft className="w-4 h-4" />
@@ -276,8 +276,8 @@ export function Catalog({
                         className={
                           "w-10 h-10 flex items-center justify-center font-bold text-sm border-2 transition-colors rounded-lg " +
                           (page === safePage
-                            ? "bg-[#F7A600] text-black border-[#F7A600]"
-                            : "border-[var(--border)] hover:border-[#F7A600]")
+                            ? "bg-[#8E1537] text-black border-[#8E1537]"
+                            : "border-[var(--border)] hover:border-[#8E1537]")
                         }
                       >
                         {page}
@@ -294,7 +294,7 @@ export function Catalog({
                     }
                   }}
                   disabled={safePage >= totalPages}
-                  className="w-10 h-10 flex items-center justify-center border-2 border-[var(--border)] hover:border-[#F7A600] disabled:opacity-30 disabled:hover:border-[var(--border)] transition-colors rounded-lg"
+                  className="w-10 h-10 flex items-center justify-center border-2 border-[var(--border)] hover:border-[#8E1537] disabled:opacity-30 disabled:hover:border-[var(--border)] transition-colors rounded-lg"
                   aria-label="Следующая страница"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -368,7 +368,7 @@ function ProductCard({
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
     : 0;
 
-  const accentColor = product.category ? PLATFORM_COLORS[product.category.platform] : "#F7A600";
+  const accentColor = product.category ? PLATFORM_COLORS[product.category.platform] : "#8E1537";
 
   return (
     <motion.article
@@ -448,7 +448,7 @@ function ProductCard({
             const btn = e.currentTarget;
             const heart = document.createElement('div');
             heart.innerHTML = '♥';
-            heart.style.cssText = `position:fixed;left:${btn.getBoundingClientRect().left+12}px;top:${btn.getBoundingClientRect().top}px;font-size:20px;color:#F7A600;pointer-events:none;z-index:9999;transition:all 0.8s cubic-bezier(0.16,1,0.3,1);`;
+            heart.style.cssText = `position:fixed;left:${btn.getBoundingClientRect().left+12}px;top:${btn.getBoundingClientRect().top}px;font-size:20px;color:#A82049;pointer-events:none;z-index:9999;transition:all 0.8s cubic-bezier(0.16,1,0.3,1);`;
             document.body.appendChild(heart);
             requestAnimationFrame(() => {
               const target = document.querySelector('[aria-label="Избранное"]') as HTMLElement;
@@ -467,8 +467,8 @@ function ProductCard({
         >
           <Heart
             className="w-4 h-4 transition-transform"
-            fill={isFavorite ? "#F7A600" : "none"}
-            stroke={isFavorite ? "#F7A600" : "#888"}
+            fill={isFavorite ? "#A82049" : "none"}
+            stroke={isFavorite ? "#A82049" : "#B3B3B3"}
             strokeWidth={2.5}
             style={isFavorite ? { transform: 'scale(1.2)' } : {}}
           />
@@ -476,7 +476,7 @@ function ProductCard({
 
         {/* Discount — top-left */}
         {discount > 0 && (
-          <div className="absolute top-2 left-2 bg-[#F7A600] text-white text-xs font-black px-2 py-1 font-mono">
+          <div className="absolute top-2 left-2 bg-[#8E1537] text-white text-xs font-black px-2 py-1 font-mono rounded-md">
             −{discount}%
           </div>
         )}
@@ -493,12 +493,12 @@ function ProductCard({
 
         {/* New / Hit badge — bottom-right */}
         {badges.includes("new") && (
-          <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-[#F7A600] text-white text-[10px] font-bold">
+          <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-[#8E1537] text-white text-[10px] font-bold">
             New
           </div>
         )}
         {badges.includes("hit") && (
-          <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-[#F7A600] text-white text-[10px] font-bold">
+          <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-[#8E1537] text-white text-[10px] font-bold">
             Хит
           </div>
         )}
@@ -535,7 +535,7 @@ function ProductCard({
             </span>
           )}
           {meta.monetization && (
-            <span className="px-1.5 py-0.5 text-[10px] bg-[#F7A600]/10 border border-[#F7A600]/40 text-[#F7A600] font-mono font-semibold flex items-center gap-1">
+            <span className="px-1.5 py-0.5 text-[10px] bg-[#8E1537]/10 border border-[#8E1537]/40 text-[#8E1537] font-mono font-semibold flex items-center gap-1">
               <Check className="w-2.5 h-2.5" strokeWidth={3} />
               Монетизация
             </span>
@@ -550,7 +550,7 @@ function ProductCard({
                 {convertPrice ? convertPrice(product.oldPrice).formatted : formatPrice(product.oldPrice, product.currency)}
               </span>
             )}
-            <span className="text-lg md:text-xl font-bold text-[#F7A600] font-mono">
+            <span className="text-lg md:text-xl font-bold text-[#8E1537] font-mono">
               {convertPrice ? convertPrice(product.price).formatted : formatPrice(product.price, product.currency)}
             </span>
           </div>
@@ -562,8 +562,8 @@ function ProductCard({
               }}
               className={`w-8 h-8 flex items-center justify-center border-2 transition-all ${
                 isInCompare
-                  ? "bg-[#F7A600] text-black border-[#F7A600]"
-                  : "bg-[#1A1A1A] text-[#F7A600] border-[#2A2A2A] hover:border-[#F7A600]"
+                  ? "bg-[#8E1537] text-black border-[#8E1537]"
+                  : "bg-[#1A1A1A] text-[#8E1537] border-[#2A2A2A] hover:border-[#8E1537]"
               }`}
               aria-label="Сравнить"
               title="Добавить к сравнению"
@@ -575,7 +575,7 @@ function ProductCard({
                 <path d="M4 17h12"/>
               </svg>
             </button>
-          <div className="rounded-lg px-4 py-2 bg-[#F7A600] text-black text-xs font-bold flex items-center gap-1.5 group-hover:bg-[#F7A600] transition-colors">
+          <div className="product-buy-button rounded-lg px-4 py-2 text-xs font-bold flex items-center gap-1.5 transition-colors">
               Купить
             </div>
           </div>

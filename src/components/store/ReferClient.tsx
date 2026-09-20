@@ -82,13 +82,13 @@ export function ReferClient() {
       <div className="container mx-auto px-4 max-w-3xl">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-[#888] font-mono uppercase mb-6">
-          <a href="/" className="hover:text-[#F7A600]">ГЛАВНАЯ</a>
-          <span className="text-[#F7A600]">/</span>
+          <a href="/" className="hover:text-[#8E1537]">ГЛАВНАЯ</a>
+          <span className="text-[#8E1537]">/</span>
           <span className="text-foreground">РЕФЕРАЛКА</span>
         </div>
 
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-1 h-8 bg-[#F7A600]" />
+          <div className="w-1 h-8 bg-[#8E1537]" />
           <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// REFERRAL"}</span>
         </div>
         <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-3">
@@ -101,9 +101,9 @@ export function ReferClient() {
         {/* How it works */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           {[
-            { icon: Gift, title: "1. СОЗДАЙ КОД", text: "Получи уникальный реферальный код", color: "#F7A600" },
+            { icon: Gift, title: "1. СОЗДАЙ КОД", text: "Получи уникальный реферальный код", color: "#8E1537" },
             { icon: Share2, title: "2. ПОДЕЛИСЬ", text: "Отправь ссылку друзьям в Telegram, VK", color: "#111318" },
-            { icon: DollarSign, title: "3. ЗАРАБАТЫВАЙ", text: "10% от каждой покупки друга — тебе", color: "#E58B00" },
+            { icon: DollarSign, title: "3. ЗАРАБАТЫВАЙ", text: "10% от каждой покупки друга — тебе", color: "#71102B" },
           ].map((s, i) => (
             <div key={i} className="bg-[#121212] border-2 p-5"
               style={{ borderColor: `${s.color}40`, clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}>
@@ -119,11 +119,11 @@ export function ReferClient() {
 
         {/* Generate or show code */}
         {!refCode ? (
-          <div className="bg-[#0E0E0E] border-2 border-[#F7A600] p-6 md:p-8 mb-8"
+          <div className="bg-[#0E0E0E] border-2 border-[#8E1537] p-6 md:p-8 mb-8"
             style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}>
             <div className="flex items-center gap-3 mb-4">
-              <Sparkles className="w-5 h-5 text-[#F7A600]" strokeWidth={2.5} />
-              <h2 className="font-black uppercase tracking-tight font-mono text-sm text-[#F7A600]">{"// СОЗДАТЬ_КОД"}</h2>
+              <Sparkles className="w-5 h-5 text-[#8E1537]" strokeWidth={2.5} />
+              <h2 className="font-black uppercase tracking-tight font-mono text-sm text-[#8E1537]">{"// СОЗДАТЬ_КОД"}</h2>
             </div>
             <p className="text-sm text-[#888] font-mono mb-4">
               &gt; Введите email (необязательно), чтобы получать уведомления о начислениях
@@ -134,12 +134,12 @@ export function ReferClient() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com (необязательно)"
-                className="bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
+                className="bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] font-mono"
               />
               <Button
                 onClick={generate}
                 disabled={loading}
-                className="bg-[#F7A600] text-white hover:bg-[#F7A600]/80 font-black uppercase border-2 border-[#F7A600] font-mono tracking-wide"
+                className="bg-[#8E1537] text-white hover:bg-[#8E1537]/80 font-black uppercase border-2 border-[#8E1537] font-mono tracking-wide"
               >
                 {loading ? "..." : "Создать код"}
               </Button>
@@ -148,69 +148,69 @@ export function ReferClient() {
         ) : (
           <>
             {/* Referral link */}
-            <div className="bg-[#0E0E0E] border-2 border-[#F7A600] p-6 md:p-8 mb-6"
+            <div className="bg-[#0E0E0E] border-2 border-[#8E1537] p-6 md:p-8 mb-6"
               style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}>
               <div className="flex items-center gap-3 mb-4">
-                <Gift className="w-5 h-5 text-[#F7A600]" strokeWidth={2.5} />
-                <h2 className="font-black uppercase tracking-tight font-mono text-sm text-[#F7A600]">{"// ТВОЯ_ССЫЛКА"}</h2>
+                <Gift className="w-5 h-5 text-[#8E1537]" strokeWidth={2.5} />
+                <h2 className="font-black uppercase tracking-tight font-mono text-sm text-[#8E1537]">{"// ТВОЯ_ССЫЛКА"}</h2>
               </div>
               <div className="flex flex-col sm:flex-row gap-2">
-                <div className="flex-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] px-4 py-3 font-mono text-sm text-[#F7A600] break-all">
+                <div className="flex-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] px-4 py-3 font-mono text-sm text-[#8E1537] break-all">
                   {refLink}
                 </div>
                 <Button
                   onClick={copyLink}
-                  className="bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase border-2 border-[#F7A600] hover:border-[#F7A600] font-mono tracking-wide"
+                  className="bg-[#8E1537] text-black hover:bg-[#8E1537] hover:text-white font-black uppercase border-2 border-[#8E1537] hover:border-[#8E1537] font-mono tracking-wide"
                 >
                   {copied ? <><Check className="w-4 h-4 mr-1.5" strokeWidth={3} /> Скопировано</> : <><Copy className="w-4 h-4 mr-1.5" strokeWidth={2.5} /> Копировать</>}
                 </Button>
                 <Button
                   onClick={shareLink}
                   variant="outline"
-                  className="bg-transparent border-2 border-[#2A2A2A] hover:border-[#F7A600] font-mono uppercase"
+                  className="bg-transparent border-2 border-[#2A2A2A] hover:border-[#8E1537] font-mono uppercase"
                 >
                   <Share2 className="w-4 h-4" strokeWidth={2.5} />
                 </Button>
               </div>
               <div className="mt-3 text-xs text-[#888] font-mono uppercase">
-                {"// КОД: "}<span className="text-[#F7A600] font-black">{refCode}</span>
+                {"// КОД: "}<span className="text-[#8E1537] font-black">{refCode}</span>
               </div>
             </div>
 
             {/* Stats */}
             {stats && (
               <div className="grid grid-cols-3 gap-3 mb-8">
-                <div className="bg-[#121212] border-2 border-[#F7A600]/40 p-4 text-center"
+                <div className="bg-[#121212] border-2 border-[#8E1537]/40 p-4 text-center"
                   style={{ clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))" }}>
-                  <Users className="w-5 h-5 mx-auto mb-2 text-[#F7A600]" strokeWidth={2.5} />
-                  <div className="text-2xl font-black text-[#F7A600] font-mono">{stats.clicks}</div>
+                  <Users className="w-5 h-5 mx-auto mb-2 text-[#8E1537]" strokeWidth={2.5} />
+                  <div className="text-2xl font-black text-[#8E1537] font-mono">{stats.clicks}</div>
                   <div className="text-[10px] text-[#888] font-mono uppercase">Кликов</div>
                 </div>
-                <div className="bg-[#121212] border-2 border-[#F7A600]/40 p-4 text-center"
+                <div className="bg-[#121212] border-2 border-[#8E1537]/40 p-4 text-center"
                   style={{ clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))" }}>
-                  <TrendingUp className="w-5 h-5 mx-auto mb-2 text-[#F7A600]" strokeWidth={2.5} />
-                  <div className="text-2xl font-black text-[#F7A600] font-mono">{stats.orders}</div>
+                  <TrendingUp className="w-5 h-5 mx-auto mb-2 text-[#8E1537]" strokeWidth={2.5} />
+                  <div className="text-2xl font-black text-[#8E1537] font-mono">{stats.orders}</div>
                   <div className="text-[10px] text-[#888] font-mono uppercase">Заказов</div>
                 </div>
-                <div className="bg-[#121212] border-2 border-[#F7A600]/40 p-4 text-center"
+                <div className="bg-[#121212] border-2 border-[#8E1537]/40 p-4 text-center"
                   style={{ clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))" }}>
-                  <DollarSign className="w-5 h-5 mx-auto mb-2 text-[#F7A600]" strokeWidth={2.5} />
-                  <div className="text-2xl font-black text-[#F7A600] font-mono">{stats.earnings.toFixed(0)}₽</div>
+                  <DollarSign className="w-5 h-5 mx-auto mb-2 text-[#8E1537]" strokeWidth={2.5} />
+                  <div className="text-2xl font-black text-[#8E1537] font-mono">{stats.earnings.toFixed(0)}₽</div>
                   <div className="text-[10px] text-[#888] font-mono uppercase">Заработано</div>
                 </div>
               </div>
             )}
 
             {/* How earnings work */}
-            <div className="bg-[#0E0E0E] border-2 border-[#F7A600] p-5"
+            <div className="bg-[#0E0E0E] border-2 border-[#8E1537] p-5"
               style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}>
-              <h3 className="font-black uppercase tracking-tight font-mono text-sm text-[#F7A600] mb-3">{"// КАК_ЭТО_РАБОТАЕТ"}</h3>
+              <h3 className="font-black uppercase tracking-tight font-mono text-sm text-[#8E1537] mb-3">{"// КАК_ЭТО_РАБОТАЕТ"}</h3>
               <ul className="space-y-2 text-sm text-[#888] font-mono">
-                <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> Друг переходит по твоей ссылке</li>
-                <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> Покупает любой аккаунт на ХайпХаб</li>
-                <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> Ты получаешь 10% от суммы заказа</li>
-                <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> Выплата на криптокошелёк по запросу</li>
-                <li className="flex gap-2"><span className="text-[#F7A600]">▸</span> Минимум к выплате: 500₽</li>
+                <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> Друг переходит по твоей ссылке</li>
+                <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> Покупает любой аккаунт на ХайпХаб</li>
+                <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> Ты получаешь 10% от суммы заказа</li>
+                <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> Выплата на криптокошелёк по запросу</li>
+                <li className="flex gap-2"><span className="text-[#8E1537]">▸</span> Минимум к выплате: 500₽</li>
               </ul>
             </div>
           </>

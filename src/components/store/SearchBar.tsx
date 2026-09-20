@@ -111,13 +111,13 @@ export function SearchBar({ products: initialProducts, categories, onProductClic
       {/* Search icon button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#F7A600] flex items-center justify-center transition-colors relative z-10"
+        className="w-10 h-10 border-2 border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#8E1537] flex items-center justify-center transition-colors relative z-10"
         aria-label="Поиск"
       >
         {open ? (
           <X className="w-4 h-4 text-[#888]" strokeWidth={2.5} />
         ) : (
-          <Search className="w-4 h-4 text-[#888] group-hover:text-[#F7A600]" strokeWidth={2.5} />
+          <Search className="w-4 h-4 text-[#888] group-hover:text-[#8E1537]" strokeWidth={2.5} />
         )}
       </button>
 
@@ -129,12 +129,12 @@ export function SearchBar({ products: initialProducts, categories, onProductClic
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-12 w-[340px] md:w-[420px] bg-[#0E0E0E] border-2 border-[#F7A600] z-[100] overflow-hidden shadow-2xl"
+            className="absolute right-0 top-12 w-[340px] md:w-[420px] bg-[#0E0E0E] border-2 border-[#8E1537] z-[100] overflow-hidden shadow-2xl"
             style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}
           >
             {/* Input */}
             <div className="relative border-b-2 border-[#1F1F1F]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8E1537]" strokeWidth={2.5} />
               <input
                 ref={inputRef}
                 value={query}
@@ -146,7 +146,7 @@ export function SearchBar({ products: initialProducts, categories, onProductClic
                 className="w-full bg-transparent pl-10 pr-10 py-3.5 text-sm font-mono text-foreground placeholder:text-[#888] focus:outline-none"
               />
               {loading && (
-                <Loader2 className="absolute right-9 top-1/2 -translate-y-1/2 w-4 h-4 text-[#F7A600] animate-spin" />
+                <Loader2 className="absolute right-9 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8E1537] animate-spin" />
               )}
               {query && !loading && (
                 <button
@@ -171,7 +171,7 @@ export function SearchBar({ products: initialProducts, categories, onProductClic
                       <button
                         key={tag}
                         onClick={() => setQuery(tag)}
-                        className="px-2.5 py-1 border border-[#2A2A2A] text-[10px] text-[#888] font-mono uppercase hover:border-[#F7A600] hover:text-[#F7A600] transition-colors"
+                        className="px-2.5 py-1 border border-[#2A2A2A] text-[10px] text-[#888] font-mono uppercase hover:border-[#8E1537] hover:text-[#8E1537] transition-colors"
                       >
                         {tag}
                       </button>
@@ -210,16 +210,16 @@ export function SearchBar({ products: initialProducts, categories, onProductClic
                           {c?.name.charAt(0) || "?"}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-xs font-bold truncate uppercase tracking-tight group-hover:text-[#F7A600] transition-colors">
+                          <div className="text-xs font-bold truncate uppercase tracking-tight group-hover:text-[#8E1537] transition-colors">
                             {p.title}
                           </div>
                           <div className="text-[10px] text-[#888] font-mono">{p.followers || c?.name}</div>
                         </div>
                         <div className="flex items-center gap-2 flex-shrink-0">
-                          <span className="text-sm font-black text-[#F7A600] font-mono">
+                          <span className="text-sm font-black text-[#8E1537] font-mono">
                             {formatPrice(p.price, p.currency)}
                           </span>
-                          <ArrowRight className="w-3.5 h-3.5 text-[#888] group-hover:text-[#F7A600] transition-colors" strokeWidth={2.5} />
+                          <ArrowRight className="w-3.5 h-3.5 text-[#888] group-hover:text-[#8E1537] transition-colors" strokeWidth={2.5} />
                         </div>
                       </button>
                     );

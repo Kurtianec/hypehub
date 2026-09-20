@@ -20,32 +20,21 @@ export function ProductImage({
   const Logo = PlatformLogos[platform];
   const isModal = variant === "modal";
 
-  // Solid colors per platform
-  const solidColors: Record<Platform, string> = {
-    tiktok: "#000000",
-    youtube: "#F7A600",
-    vk: "#F7A600",
-    instagram: "#F7A600",
-    telegram: "#F7A600",
-    other: "#F7A600",
-  };
-
   const accentColors: Record<Platform, string> = {
-    tiktok: "#F7A600",
+    tiktok: "#25F4EE",
     youtube: "#FFFFFF",
     vk: "#FFFFFF",
-    instagram: "#F7A600",
+    instagram: "#FFFFFF",
     telegram: "#FFFFFF",
-    other: "#F7A600",
+    other: "#D8A1B1",
   };
 
-  const bg = solidColors[platform];
   const accent = accentColors[platform];
 
   return (
     <div
       className={`absolute inset-0 overflow-hidden ${className}`}
-      style={{ backgroundColor: bg }}
+      style={{ background: PLATFORM_GRADIENTS[platform] }}
     >
       {/* Grid pattern overlay */}
       <div
