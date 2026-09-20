@@ -636,6 +636,14 @@ body { letter-spacing: -0.005em; }
 :root:not(.dark) .storefront-v3 select { background: #fff !important; color: #172039; }
 :root:not(.dark) .storefront-v3 footer { background: #edf1f8; }
 
+/* Soft diamond field on the neutral canvas. */
+:root:not(.dark) body::before {
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg width='96' height='96' viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M48 34 62 48 48 62 34 48Z' fill='none' stroke='%237A8398' stroke-width='1' opacity='.13'/%3E%3Cpath d='M6 4 10 8 6 12 2 8Z' fill='%23625DF5' opacity='.055'/%3E%3C/svg%3E");
+  background-size:96px 96px; mask-image:linear-gradient(to bottom,rgba(0,0,0,.75),rgba(0,0,0,.28) 55%,rgba(0,0,0,.5));
+}
+:root:not(.dark) .storefront-v3 { position:relative; z-index:1; background:rgba(245,247,252,.58); }
+
 /* Prism cascade lock: these intentional storefront shapes win over legacy skin rules. */
 .storefront-v3 .prism-header { padding:14px 18px; }
 .storefront-v3 .prism-header.is-scrolled { padding-top:8px; }
