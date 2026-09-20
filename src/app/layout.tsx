@@ -49,11 +49,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg?v=2", type: "image/svg+xml" },
+      { url: "/favicon.svg?v=3", type: "image/svg+xml" },
       { url: "/logo.svg", type: "image/svg+xml" },
     ],
     apple: "/apple-touch-icon.svg",
-    shortcut: "/favicon.svg?v=2",
+    shortcut: "/favicon.svg?v=3",
   },
   manifest: "/manifest.webmanifest",
   openGraph: {

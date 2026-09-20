@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Heart, Layers3, Moon, Search as SearchIcon, Sun, User, X } from "lucide-react";
+import { Heart, Moon, Search as SearchIcon, Sun, User, X } from "lucide-react";
 import type { Product, Category } from "@/lib/types";
 import type { Theme } from "@/hooks/use-theme";
 import type { Locale } from "@/hooks/use-locale";
 import { SearchBar } from "./SearchBar";
+import { BrandMark } from "./BrandMark";
 
 const navRu = [["Каталог", "#catalog"], ["Как купить", "#how-to-buy"], ["Преимущества", "#advantages"], ["FAQ", "#faq"]];
 const navEn = [["Catalog", "#catalog"], ["How to buy", "#how-to-buy"], ["Benefits", "#advantages"], ["FAQ", "#faq"]];
@@ -40,7 +41,7 @@ export function Header({ siteName = "ХайпХаб", products = [], categories 
       <header className={`prism-header ${scrolled ? "is-scrolled" : ""}`}>
         <div className="prism-nav-shell">
           <Link href="/" className="prism-brand" aria-label={`${siteName} — главная`}>
-            <span className="prism-brand-icon"><Layers3 className="h-5 w-5" /></span><span className="prism-brand-name">{siteName}</span>
+            <span className="prism-brand-icon"><BrandMark className="h-full w-full" /></span><span className="prism-brand-name">{siteName}</span>
           </Link>
           <nav className="prism-nav-links" aria-label="Главная навигация">
             {nav.map(([label, href], index) => <button key={href} onClick={() => go(href)}><small>0{index + 1}</small>{label}</button>)}

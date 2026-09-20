@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   LayoutDashboard, Package, Tags, ShoppingCart, MessageSquare,
-  Settings as SettingsIcon, LogOut, Layers3, Menu, X, ExternalLink, Eye, Star, FileText, ScrollText,
+  Settings as SettingsIcon, LogOut, PanelLeftOpen, X, ExternalLink, Eye, Star, FileText, ScrollText,
   Users, Ticket, ShieldBan,
   MonitorSmartphone, DatabaseBackup, ShieldCheck, HeartPulse,
 } from "lucide-react";
@@ -33,6 +33,7 @@ import { AdminWarranty } from "./AdminWarranty";
 import { AdminHealth } from "./AdminHealth";
 import { cn } from "@/lib/utils";
 import type { Category, Product, FaqItem } from "@/lib/types";
+import { BrandMark } from "@/components/store/BrandMark";
 
 interface AdminData {
   categories: Category[];
@@ -244,20 +245,20 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
   };
 
   return (
-    <div className="admin-v3 min-h-screen flex">
+    <div className="admin-v3 admin-prism min-h-screen flex">
       {/* Sidebar — desktop */}
-      <aside className="hidden lg:flex w-64 flex-shrink-0 bg-[#0E0E0E] border-r-2 border-[#BFFF00]/40 flex-col">
+      <aside className="admin-sidebar hidden lg:flex w-64 flex-shrink-0 bg-[#0E0E0E] border-r-2 border-[#BFFF00]/40 flex-col">
         <div className="p-6 border-b-2 border-[#1F1F1F]">
           <div className="flex items-center gap-2.5">
             <div className="w-10 h-10 bg-[#BFFF00] flex items-center justify-center border-2 border-[#BFFF00]">
-              <Layers3 className="w-5 h-5 text-white" strokeWidth={2.2} />
+              <BrandMark className="w-full h-full" />
             </div>
             <div>
               <div className="font-black uppercase tracking-tighter">
                 <span className="text-[#BFFF00]">Хайп</span>Хаб
               </div>
               <div className="text-[10px] text-[#888] font-mono uppercase tracking-widest">
-                {"// ADMIN_PANEL v.2024"}
+                Панель управления
               </div>
             </div>
           </div>
@@ -269,7 +270,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
               key={t.id}
               onClick={() => setTab(t.id)}
               className={cn(
-                "w-full flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wide transition-all border-2 font-mono",
+                "admin-nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wide transition-all border-2 font-mono",
                 tab === t.id
                   ? "bg-[#BFFF00]/10 text-[#BFFF00] border-[#BFFF00]"
                   : "text-[#888] border-transparent hover:bg-white/5 hover:text-foreground"
@@ -309,12 +310,12 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
-            className="absolute left-0 top-0 bottom-0 w-64 bg-[#0E0E0E] border-r-2 border-[#BFFF00] flex flex-col"
+            className="admin-sidebar absolute left-0 top-0 bottom-0 w-64 bg-[#0E0E0E] border-r-2 border-[#BFFF00] flex flex-col"
           >
             <div className="p-6 border-b-2 border-[#1F1F1F] flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div className="w-9 h-9 bg-[#BFFF00] flex items-center justify-center border-2 border-[#BFFF00]">
-                  <Layers3 className="w-4 h-4 text-white" strokeWidth={2.2} />
+                  <BrandMark className="w-full h-full" />
                 </div>
                 <div className="font-black uppercase tracking-tighter">
                   <span className="text-[#BFFF00]">Хайп</span>Хаб
@@ -330,7 +331,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
                   key={t.id}
                   onClick={() => { setTab(t.id); setSidebarOpen(false); }}
                   className={cn(
-                    "w-full flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wide transition-all border-2 font-mono",
+                    "admin-nav-item w-full flex items-center gap-3 px-4 py-3 text-sm font-bold uppercase tracking-wide transition-all border-2 font-mono",
                     tab === t.id
                       ? "bg-[#BFFF00]/10 text-[#BFFF00] border-[#BFFF00]"
                       : "text-[#888] border-transparent hover:bg-white/5"
@@ -357,12 +358,12 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
       )}
 
       {/* Main */}
-      <main className="flex-1 overflow-x-hidden flex flex-col">
+      <main className="admin-main flex-1 overflow-x-hidden flex flex-col">
         {/* Desktop top bar with notification bell — fixed positioning context */}
-        <header className="hidden lg:flex sticky top-0 z-30 bg-[#0E0E0E]/95 backdrop-blur border-b-2 border-[#1F1F1F] px-6 py-3 items-center justify-between">
+        <header className="admin-topbar hidden lg:flex sticky top-0 z-30 bg-[#0E0E0E]/95 backdrop-blur border-b-2 border-[#1F1F1F] px-6 py-3 items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="text-[10px] font-mono text-[#888] uppercase tracking-widest">
-              {"// SECTION_"}{tab.toUpperCase()}
+              Раздел · {TABS.find((item) => item.id === tab)?.label}
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -380,12 +381,12 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
         </header>
 
         {/* Mobile header */}
-        <header className="lg:hidden sticky top-0 z-30 bg-[#0E0E0E] border-b-2 border-[#BFFF00]/40 p-4 flex items-center justify-between">
+        <header className="admin-topbar lg:hidden sticky top-0 z-30 bg-[#0E0E0E] border-b-2 border-[#BFFF00]/40 p-4 flex items-center justify-between">
           <button onClick={() => setSidebarOpen(true)} className="w-10 h-10 border-2 border-[#BFFF00] bg-[#BFFF00] text-black flex items-center justify-center">
-            <Menu className="w-5 h-5" strokeWidth={3} />
+            <PanelLeftOpen className="w-5 h-5" strokeWidth={2.2} />
           </button>
           <div className="font-black uppercase tracking-tighter font-mono">
-            <span className="text-[#BFFF00]">Хайп</span>Хаб <span className="text-[#888] text-xs">{"// ADMIN"}</span>
+            <span className="text-[#BFFF00]">Хайп</span>Хаб <span className="text-[#888] text-xs">· ADMIN</span>
           </div>
           <AdminNotifications
             notifications={notifications}
@@ -399,7 +400,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
           />
         </header>
 
-        <div className="p-4 md:p-8 flex-1">
+        <div className="admin-content p-4 md:p-7 flex-1">
           {tab === "dashboard" && <AdminDashboard data={data} />}
           {tab === "products" && (
             <AdminProducts

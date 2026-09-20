@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Lock, ArrowRight, Eye, EyeOff, Terminal } from "lucide-react";
+import { Lock, ArrowRight, Eye, EyeOff, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { BrandMark } from "@/components/store/BrandMark";
 
 export function AdminLogin({ onLogin }: { onLogin: () => void }) {
   const [password, setPassword] = useState("");
@@ -48,14 +49,14 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="admin-login-shell min-h-screen flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
       >
         <div
-          className="bg-[#0E0E0E] border-2 border-[#BFFF00] p-8 md:p-10"
+          className="admin-login-card bg-[#0E0E0E] border-2 border-[#BFFF00] p-8 md:p-10"
           style={{ clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))" }}
         >
           {/* Logo */}
@@ -63,7 +64,7 @@ export function AdminLogin({ onLogin }: { onLogin: () => void }) {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-[#BFFF00] border-2 border-[#BFFF00] mb-4"
               style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
             >
-              <Sparkles className="w-8 h-8 text-black" strokeWidth={2.5} />
+              <BrandMark className="w-full h-full" />
             </div>
 
             <h1 className="text-2xl font-black mb-1 uppercase tracking-tighter">

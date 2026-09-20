@@ -1,7 +1,8 @@
 "use client";
 
-import { Layers3, Mail, Send, Shield, Zap, ShieldCheck, Eye } from "lucide-react";
+import { Mail, Send, Shield, Zap, ShieldCheck, Eye } from "lucide-react";
 import type { Settings } from "@/lib/types";
+import { BrandMark } from "./BrandMark";
 
 interface FooterProps {
   settings: Settings;
@@ -21,7 +22,7 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
           <div className="md:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
               <div className="w-10 h-10 bg-[#BFFF00] flex items-center justify-center border-2 border-[#BFFF00]">
-                <Layers3 className="w-5 h-5 text-white" strokeWidth={2.2} />
+                <BrandMark className="w-full h-full" />
               </div>
               <div>
                 <div className="text-xl font-black uppercase tracking-tighter">
