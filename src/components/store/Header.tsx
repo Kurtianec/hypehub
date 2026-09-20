@@ -50,7 +50,7 @@ export function Header({ siteName = "ХайпХаб", products = [], categories 
             <Link href="/account" className="prism-icon-btn" aria-label="Личный кабинет"><User className="h-4 w-4" /></Link>
             <SearchBar products={products.length ? products : undefined} categories={categories} onProductClick={onProductClick} />
             <button onClick={() => setOpen(true)} className="prism-menu-trigger" aria-label="Открыть навигацию">
-              <span className="prism-menu-symbol" aria-hidden="true"><i/><i/><i/><i/></span><span>Навигация</span>
+              <span className="prism-menu-symbol" aria-hidden="true"><i/><i/><i/><i/></span><span>Меню</span>
             </button>
           </div>
         </div>
@@ -58,8 +58,8 @@ export function Header({ siteName = "ХайпХаб", products = [], categories 
       <AnimatePresence>
         {open && (
           <motion.div className="prism-menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <motion.div className="prism-menu-panel" initial={{ y: "-105%", rotate: -2 }} animate={{ y: 0, rotate: 0 }} exit={{ y: "-105%", rotate: 2 }} transition={{ type: "spring", damping: 25, stiffness: 210 }}>
-              <div className="prism-menu-top"><span>Навигация</span><button onClick={() => setOpen(false)} aria-label="Закрыть"><X className="h-5 w-5"/></button></div>
+            <motion.div className="prism-menu-panel" initial={{ opacity: 0, y: -12, scale: .96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: .97 }} transition={{ duration: .22, ease: [0.16, 1, 0.3, 1] }}>
+              <div className="prism-menu-top"><span>Меню</span><button onClick={() => setOpen(false)} aria-label="Закрыть"><X className="h-5 w-5"/></button></div>
               <div className="prism-menu-links">
                 {nav.map(([label, href], index) => <button key={href} onClick={() => go(href)}><small>0{index + 1}</small><span>{label}</span></button>)}
                 <Link href="/account" onClick={() => setOpen(false)}><small>05</small><span>Мои заказы</span></Link>
