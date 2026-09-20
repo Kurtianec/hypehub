@@ -74,6 +74,9 @@ export function Storefront({
 
   return (
     <div className="storefront-v3 min-h-screen flex flex-col">
+      <div className="ambient-sparks" aria-hidden="true">
+        {Array.from({ length: 9 }, (_, index) => <span key={index} />)}
+      </div>
       <VisitorTracker />
       <Header
         siteName={settings.site_name}

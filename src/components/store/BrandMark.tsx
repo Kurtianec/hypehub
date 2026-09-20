@@ -2,20 +2,15 @@ export function BrandMark({ className = "" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
-        <linearGradient id="hypehub-loop-a" x1="7" y1="18" x2="36" y2="46" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#29D3C7" /><stop offset="1" stopColor="#77F2E5" />
-        </linearGradient>
-        <linearGradient id="hypehub-loop-b" x1="29" y1="18" x2="58" y2="46" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#8C68FF" /><stop offset="1" stopColor="#5149E8" />
-        </linearGradient>
-        <linearGradient id="hypehub-tile" x1="8" y1="5" x2="57" y2="60" gradientUnits="userSpaceOnUse"><stop stopColor="#202944"/><stop offset="1" stopColor="#111728"/></linearGradient>
+        <linearGradient id="classic-tile" x1="7" y1="5" x2="57" y2="61" gradientUnits="userSpaceOnUse"><stop stopColor="#776DFF"/><stop offset="1" stopColor="#6674F7"/></linearGradient>
+        <linearGradient id="classic-cyan" x1="17" y1="29" x2="48" y2="49" gradientUnits="userSpaceOnUse"><stop stopColor="#7AFFF1"/><stop offset="1" stopColor="#24C9C1"/></linearGradient>
       </defs>
-      <path d="M5 17C5 9.82 10.82 4 18 4h28c7.18 0 13 5.82 13 13v30c0 7.18-5.82 13-13 13H18C10.82 60 5 54.18 5 47V17Z" fill="url(#hypehub-tile)"/>
-      <path d="M32 32c-5.4-8.7-10.2-12-15.1-10.6-8.9 2.5-8.9 18.7 0 21.2C21.8 44 26.6 40.7 32 32Z" stroke="url(#hypehub-loop-a)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M32 32c5.4-8.7 10.2-12 15.1-10.6 8.9 2.5 8.9 18.7 0 21.2C42.2 44 37.4 40.7 32 32Z" stroke="url(#hypehub-loop-b)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
-      <circle cx="32" cy="32" r="5" fill="white"/>
-      <circle cx="32" cy="32" r="2.2" fill="#635BF0"/>
-      <circle cx="51.5" cy="14.5" r="2.5" fill="#77F2E5"/>
+      <rect x="4" y="4" width="56" height="56" rx="17" fill="url(#classic-tile)"/>
+      <path d="m14 28 18-17 18 17-9 9-9-9-9 9-9-9Z" fill="#5B52DB" opacity=".78"/>
+      <path d="m14 33 9-9 9 9 9-9 9 9-18 18-18-18Z" fill="url(#classic-cyan)"/>
+      <path d="m23 28 9-9 9 9-9 9-9-9Z" fill="#17203B"/>
+      <path d="m18 34 14 14 14-14" stroke="white" strokeWidth="1.4" strokeLinecap="round" opacity=".22"/>
+      <circle cx="50" cy="14" r="3.2" fill="#9DFFF3"/>
     </svg>
   );
 }
