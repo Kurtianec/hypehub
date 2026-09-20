@@ -14,19 +14,19 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
   return (
     <footer
       id="footer"
-      className="relative mt-auto pt-12 pb-6 px-4 border-t-2 border-[#BFFF00]/40 scroll-mt-20"
+      className="relative mt-auto pt-12 pb-6 px-4 border-t-2 border-[#F7A600]/40 scroll-mt-20"
     >
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-10 h-10 bg-[#BFFF00] flex items-center justify-center border-2 border-[#BFFF00]">
+              <div className="w-10 h-10 bg-[#F7A600] flex items-center justify-center border-2 border-[#F7A600]">
                 <BrandMark className="w-full h-full" />
               </div>
               <div>
                 <div className="text-xl font-black uppercase tracking-tighter">
-                  <span className="text-[#BFFF00]">Хайп</span><span className="text-foreground">Хаб</span>
+                  <span className="text-[#F7A600]">Хайп</span><span className="text-foreground">Хаб</span>
                 </div>
                 <div className="text-[10px] text-[#888] font-mono uppercase tracking-widest">
                   {settings.tagline || "Маркетплейс аккаунтов"}
@@ -36,7 +36,7 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
             <p className="text-sm text-[#888] leading-relaxed max-w-md mb-4 font-mono">
               Маркетплейс готовых аккаунтов соцсетей с живой аудиторией.
               <br />
-              Проверка, гарантия и поддержка после покупки. Оплата: <span className="text-[#F7931A]">BTC</span>, <span className="text-[#26A17B]">USDT</span>, <span className="text-[#0098EA]">TON</span>.
+              Проверка, гарантия и поддержка после покупки. Оплата: <span className="text-[#F7A600]">BTC</span>, <span className="text-[#F7A600]">USDT</span>, <span className="text-[#F7A600]">TON</span>.
             </p>
             <div className="flex flex-wrap gap-1.5">
               {["TikTok", "YouTube", "VK", "Instagram", "Telegram"].map((p) => (
@@ -67,14 +67,14 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
                   {l.external ? (
                     <a
                       href={l.href}
-                      className="text-[#888] hover:text-[#BFFF00] transition-colors uppercase"
+                      className="text-[#888] hover:text-[#F7A600] transition-colors uppercase"
                     >
                       {l.label}
                     </a>
                   ) : (
                     <button
                       onClick={() => document.querySelector(l.href)?.scrollIntoView({ behavior: "smooth" })}
-                      className="text-[#888] hover:text-[#BFFF00] transition-colors uppercase"
+                      className="text-[#888] hover:text-[#F7A600] transition-colors uppercase"
                     >
                       {l.label}
                     </button>
@@ -90,7 +90,7 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
             <ul className="space-y-3 text-sm font-mono">
               <li>
                 <a href={`mailto:${settings.support_email || "support@hypehub.vercel.app"}`}
-                   className="flex items-center gap-2 text-[#888] hover:text-[#BFFF00] transition-colors">
+                   className="flex items-center gap-2 text-[#888] hover:text-[#F7A600] transition-colors">
                   <Mail className="w-4 h-4" />
                   {settings.support_email || "support@hypehub.vercel.app"}
                 </a>
@@ -99,17 +99,17 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
                 <a href={`https://t.me/${(settings.support_telegram || "@hypehub_support").replace("@", "")}`}
                    target="_blank"
                    rel="noopener noreferrer"
-                   className="flex items-center gap-2 text-[#888] hover:text-[#BFFF00] transition-colors">
+                   className="flex items-center gap-2 text-[#888] hover:text-[#F7A600] transition-colors">
                   <Send className="w-4 h-4" />
                   {settings.support_telegram || "@hypehub_support"}
                 </a>
               </li>
               <li className="flex items-center gap-2 text-[#888]">
-                <Shield className="w-4 h-4 text-[#BFFF00]" />
+                <Shield className="w-4 h-4 text-[#F7A600]" />
                 Гарантия на все товары
               </li>
               <li className="flex items-center gap-2 text-[#888]">
-                <Zap className="w-4 h-4 text-[#FF2D87]" />
+                <Zap className="w-4 h-4 text-[#F7A600]" />
                 Поддержка 24/7
               </li>
             </ul>
@@ -127,9 +127,9 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 pt-5 border-t-2 border-[#1F1F1F] text-xs text-[#888] font-mono uppercase">
           <p>© 2026 ХАЙПХАБ · ДАННЫЕ ЗАЩИЩЕНЫ</p>
           <div className="flex gap-4">
-            <a href="/terms" className="hover:text-[#BFFF00] transition-colors">Условия</a>
-            <a href="/privacy" className="hover:text-[#BFFF00] transition-colors">Конфиденциальность</a>
-            <a href="/about" className="hover:text-[#BFFF00] transition-colors">О нас</a>
+            <a href="/terms" className="hover:text-[#F7A600] transition-colors">Условия</a>
+            <a href="/privacy" className="hover:text-[#F7A600] transition-colors">Конфиденциальность</a>
+            <a href="/about" className="hover:text-[#F7A600] transition-colors">О нас</a>
           </div>
         </div>
       </div>

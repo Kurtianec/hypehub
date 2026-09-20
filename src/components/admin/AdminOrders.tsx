@@ -16,10 +16,10 @@ import { cn } from "@/lib/utils";
 
 
 const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
-  pending: { label: "Ожидает оплаты", color: "#FFD700" },
-  paid: { label: "Оплачен", color: "#00F2EA" },
-  delivered: { label: "Доставлен", color: "#10B981" },
-  cancelled: { label: "Отменён", color: "#EF4444" },
+  pending: { label: "Ожидает оплаты", color: "#F7A600" },
+  paid: { label: "Оплачен", color: "#F7A600" },
+  delivered: { label: "Доставлен", color: "#F7A600" },
+  cancelled: { label: "Отменён", color: "#F7A600" },
   archived: { label: "В архиве", color: "#888888" },
 };
 
@@ -99,7 +99,7 @@ export function AdminOrders() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-[#00F0FF]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#F7A600]" />
       </div>
     );
   }
@@ -108,7 +108,7 @@ export function AdminOrders() {
     <div>
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-1 h-8 bg-[#00F0FF]" />
+          <div className="w-1 h-8 bg-[#F7A600]" />
           <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_ORDERS"}</span>
         </div>
         <h1 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">Заказы</h1>
@@ -122,14 +122,14 @@ export function AdminOrders() {
           className={cn(
             "px-4 py-2 text-xs font-mono uppercase border-2 transition-all flex items-center gap-2",
             view === "active"
-              ? "bg-[#00F0FF]/10 text-[#00F0FF] border-[#00F0FF]"
-              : "bg-[#121212] text-[#888] border-[#2A2A2A] hover:border-[#00F0FF]/50"
+              ? "bg-[#F7A600]/10 text-[#F7A600] border-[#F7A600]"
+              : "bg-[#121212] text-[#888] border-[#2A2A2A] hover:border-[#F7A600]/50"
           )}
         >
           <ShoppingCart className="w-3.5 h-3.5" />
           Активные
           {view !== "active" && activeCount > 0 && (
-            <span className="ml-1 bg-[#FF2D87] text-white text-[9px] px-1.5 py-0.5 font-black">
+            <span className="ml-1 bg-[#F7A600] text-white text-[9px] px-1.5 py-0.5 font-black">
               {activeCount}
             </span>
           )}
@@ -139,8 +139,8 @@ export function AdminOrders() {
           className={cn(
             "px-4 py-2 text-xs font-mono uppercase border-2 transition-all flex items-center gap-2",
             view === "archived"
-              ? "bg-[#A855F7]/10 text-[#A855F7] border-[#A855F7]"
-              : "bg-[#121212] text-[#888] border-[#2A2A2A] hover:border-[#A855F7]/50"
+              ? "bg-[#F7A600]/10 text-[#F7A600] border-[#F7A600]"
+              : "bg-[#121212] text-[#888] border-[#2A2A2A] hover:border-[#F7A600]/50"
           )}
         >
           <Archive className="w-3.5 h-3.5" />
@@ -175,7 +175,7 @@ export function AdminOrders() {
                 animate={{ opacity: 1, y: 0 }}
                 className={cn(
                   "bg-[#121212] border-2 p-4 flex flex-col md:flex-row md:items-center gap-3 transition-colors",
-                  view === "archived" ? "border-[#2A2A2A] opacity-70" : "border-[#2A2A2A] hover:border-[#00F0FF]"
+                  view === "archived" ? "border-[#2A2A2A] opacity-70" : "border-[#2A2A2A] hover:border-[#F7A600]"
                 )}
                 style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
               >
@@ -212,13 +212,13 @@ export function AdminOrders() {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="text-right">
-                    <div className="font-black text-[#BFFF00] font-mono">{formatPrice(o.amount, o.currency)}</div>
+                    <div className="font-black text-[#F7A600] font-mono">{formatPrice(o.amount, o.currency)}</div>
                   </div>
                   {view === "active" && o.status === "pending" && (
-                    <Button size="sm" onClick={() => updateOrder(o, "paid")} disabled={updatingId === o.id} className="bg-[#00F0FF] text-black hover:bg-[#00D0DD] text-[10px] font-mono uppercase">Оплачено</Button>
+                    <Button size="sm" onClick={() => updateOrder(o, "paid")} disabled={updatingId === o.id} className="bg-[#F7A600] text-black hover:bg-[#F7A600] text-[10px] font-mono uppercase">Оплачено</Button>
                   )}
                   {view === "active" && o.status === "paid" && (
-                    <Button size="sm" onClick={() => updateOrder(o, "delivered")} disabled={updatingId === o.id} className="bg-[#10B981] text-white hover:bg-[#0D9669] text-[10px] font-mono uppercase">Выдать</Button>
+                    <Button size="sm" onClick={() => updateOrder(o, "delivered")} disabled={updatingId === o.id} className="bg-[#F7A600] text-white hover:bg-[#F7A600] text-[10px] font-mono uppercase">Выдать</Button>
                   )}
                   {view === "archived" && o.status !== "archived" && (
                     <Button size="sm" variant="ghost" onClick={() => updateOrder(o, "archived")} disabled={updatingId === o.id} className="text-[10px] font-mono uppercase"><Archive className="w-3.5 h-3.5 mr-1" />В архив</Button>
@@ -226,7 +226,7 @@ export function AdminOrders() {
                   {/* Restore product to catalog — shows for any non-pending order OR pending too */}
                   {(o.status === "delivered" || o.status === "cancelled" || o.status === "pending" || o.status === "paid") && (
                     restoredIds.has(o.id) ? (
-                      <span className="flex items-center gap-1 px-2 py-1.5 text-[10px] font-mono uppercase text-[#BFFF00] bg-[#BFFF00]/10 border border-[#BFFF00]/30">
+                      <span className="flex items-center gap-1 px-2 py-1.5 text-[10px] font-mono uppercase text-[#F7A600] bg-[#F7A600]/10 border border-[#F7A600]/30">
                         <Check className="w-3 h-3" />
                         В каталоге
                       </span>
@@ -236,7 +236,7 @@ export function AdminOrders() {
                         variant="ghost"
                         onClick={() => restoreProduct(o)}
                         disabled={restoringId === o.id}
-                        className="text-[10px] text-[#BFFF00] hover:bg-[#BFFF00]/10 font-mono uppercase px-2"
+                        className="text-[10px] text-[#F7A600] hover:bg-[#F7A600]/10 font-mono uppercase px-2"
                         title="Вернуть товар в каталог"
                       >
                         {restoringId === o.id ? (
@@ -252,7 +252,7 @@ export function AdminOrders() {
                     size="sm"
                     variant="ghost"
                     onClick={() => openOrder(o)}
-                    className="hover:bg-[#00F0FF]/10 hover:text-[#00F0FF]"
+                    className="hover:bg-[#F7A600]/10 hover:text-[#F7A600]"
                   >
                     <Eye className="w-4 h-4" />
                   </Button>
@@ -281,7 +281,7 @@ export function AdminOrders() {
                 <div className="space-y-3">
                   {(viewOrder.events?.length ? viewOrder.events : [{ type: "created", label: "Заказ создан", actor: "Система", createdAt: viewOrder.createdAt }]).map((event, index) => (
                     <div key={`${event.type}-${index}`} className="flex gap-3 text-xs">
-                      <div className="flex flex-col items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#00F0FF]" />{index < (viewOrder.events?.length || 1) - 1 && <span className="w-px flex-1 bg-[#2A2A2A] mt-1" />}</div>
+                      <div className="flex flex-col items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#F7A600]" />{index < (viewOrder.events?.length || 1) - 1 && <span className="w-px flex-1 bg-[#2A2A2A] mt-1" />}</div>
                       <div className="pb-2"><div className="font-bold text-foreground">{event.label}</div><div className="text-[#888] font-mono">{new Date(event.createdAt).toLocaleString("ru-RU")} · {event.actor}</div></div>
                     </div>
                   ))}
@@ -311,8 +311,8 @@ export function AdminOrders() {
                 )}
               </div>
               {viewOrder.status === "delivered" && viewOrder.deliveryLogin && (
-                <div className="glass rounded-xl p-3 border border-green-500/30">
-                  <div className="text-xs text-green-400 mb-1 font-bold">Данные доставлены:</div>
+                <div className="glass rounded-xl p-3 border border-[#F7A600]/30">
+                  <div className="text-xs text-[#D48600] mb-1 font-bold">Данные доставлены:</div>
                   <div className="text-xs font-mono space-y-1">
                     <div>Логин: <span className="text-foreground">{viewOrder.deliveryLogin}</span></div>
                     <div>Пароль: <span className="text-foreground">{viewOrder.deliveryPass}</span></div>
@@ -321,8 +321,8 @@ export function AdminOrders() {
               )}
 
               <div className="grid grid-cols-2 gap-2 pt-2">
-                {viewOrder.status === "pending" && <Button onClick={() => updateOrder(viewOrder, "paid")} disabled={updatingId === viewOrder.id} className="bg-[#00F0FF] text-black hover:bg-[#00D0DD] font-bold">Оплачено</Button>}
-                {viewOrder.status === "paid" && <Button onClick={() => updateOrder(viewOrder, "delivered")} disabled={updatingId === viewOrder.id} className="bg-[#10B981] text-white hover:bg-[#0D9669] font-bold">Выдать данные</Button>}
+                {viewOrder.status === "pending" && <Button onClick={() => updateOrder(viewOrder, "paid")} disabled={updatingId === viewOrder.id} className="bg-[#F7A600] text-black hover:bg-[#F7A600] font-bold">Оплачено</Button>}
+                {viewOrder.status === "paid" && <Button onClick={() => updateOrder(viewOrder, "delivered")} disabled={updatingId === viewOrder.id} className="bg-[#F7A600] text-white hover:bg-[#F7A600] font-bold">Выдать данные</Button>}
                 {(viewOrder.status === "delivered" || viewOrder.status === "cancelled") && <Button onClick={() => updateOrder(viewOrder, "archived")} disabled={updatingId === viewOrder.id} variant="outline"><Archive className="w-4 h-4 mr-2" />В архив</Button>}
                 {(viewOrder.status === "pending" || viewOrder.status === "paid") && <Button onClick={() => updateOrder(viewOrder, "cancelled", true)} disabled={updatingId === viewOrder.id} variant="destructive">Отменить</Button>}
               </div>
@@ -331,15 +331,15 @@ export function AdminOrders() {
               {(viewOrder.status === "delivered" || viewOrder.status === "cancelled" || viewOrder.status === "pending" || viewOrder.status === "paid") && (
                 <div className="pt-2">
                   {restoredIds.has(viewOrder.id) ? (
-                    <div className="flex items-center justify-center gap-2 p-3 bg-[#BFFF00]/10 border border-[#BFFF00]/30 rounded-xl">
-                      <Check className="w-4 h-4 text-[#BFFF00]" />
-                      <span className="text-xs font-mono uppercase text-[#BFFF00]">Товар в каталоге</span>
+                    <div className="flex items-center justify-center gap-2 p-3 bg-[#F7A600]/10 border border-[#F7A600]/30 rounded-xl">
+                      <Check className="w-4 h-4 text-[#F7A600]" />
+                      <span className="text-xs font-mono uppercase text-[#F7A600]">Товар в каталоге</span>
                     </div>
                   ) : (
                     <Button
                       onClick={() => restoreProduct(viewOrder)}
                       disabled={restoringId === viewOrder.id}
-                      className="w-full bg-[#BFFF00] text-black hover:bg-[#FF2D87] hover:text-white font-black uppercase font-mono"
+                      className="w-full bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase font-mono"
                     >
                       {restoringId === viewOrder.id ? (
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />

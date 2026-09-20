@@ -138,13 +138,13 @@ export default async function PrivacyPage() {
       <main className="flex-1 pt-28 md:pt-32 pb-12">
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="flex items-center gap-2 text-xs text-[#888] font-mono uppercase mb-6">
-            <Link href="/" className="hover:text-[#BFFF00]">ГЛАВНАЯ</Link>
-            <span className="text-[#BFFF00]">/</span>
+            <Link href="/" className="hover:text-[#F7A600]">ГЛАВНАЯ</Link>
+            <span className="text-[#F7A600]">/</span>
             <span className="text-foreground">КОНФИДЕНЦИАЛЬНОСТЬ</span>
           </div>
 
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#00F0FF]" />
+            <div className="w-1 h-8 bg-[#F7A600]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// PRIVACY"}</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-6">
@@ -155,14 +155,14 @@ export default async function PrivacyPage() {
             {sections.map((s, i) => (
               <div key={i} className="bg-[#121212] border-2 border-[#2A2A2A] p-5 md:p-6"
                 style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}>
-                <h2 className="font-black text-lg md:text-xl mb-3 uppercase tracking-tight text-[#00F0FF] font-mono">{s.title}</h2>
+                <h2 className="font-black text-lg md:text-xl mb-3 uppercase tracking-tight text-[#F7A600] font-mono">{s.title}</h2>
                 <div className="text-sm text-[#888] leading-relaxed font-mono whitespace-pre-line">{s.content}</div>
               </div>
             ))}
           </div>
 
           <div className="mt-8 text-center">
-            <Link href="/" className="inline-flex items-center gap-2 text-[#BFFF00] font-mono uppercase text-sm hover:underline">
+            <Link href="/" className="inline-flex items-center gap-2 text-[#F7A600] font-mono uppercase text-sm hover:underline">
               ← Назад на главную
             </Link>
           </div>

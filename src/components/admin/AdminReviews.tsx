@@ -17,10 +17,10 @@ import { cn } from "@/lib/utils";
 
 
 const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
-  pending: { label: "Ожидает", color: "#FFE600" },
-  approved: { label: "Одобрен", color: "#BFFF00" },
-  rejected: { label: "Отклонён", color: "#FF3333" },
-  archived: { label: "Архив", color: "#A855F7" },
+  pending: { label: "Ожидает", color: "#F7A600" },
+  approved: { label: "Одобрен", color: "#F7A600" },
+  rejected: { label: "Отклонён", color: "#F7A600" },
+  archived: { label: "Архив", color: "#F7A600" },
 };
 
 interface Review {
@@ -113,7 +113,7 @@ export function AdminReviews() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-[#BFFF00]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#F7A600]" />
       </div>
     );
   }
@@ -122,13 +122,13 @@ export function AdminReviews() {
     <div>
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-1 h-8 bg-[#FFE600]" />
+          <div className="w-1 h-8 bg-[#F7A600]" />
           <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_REVIEWS"}</span>
         </div>
         <h1 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">
           Отзывы
           {pendingCount > 0 && (
-            <span className="ml-2 px-2 py-0.5 bg-[#FFE600] text-black text-xs font-black border-2 border-[#FFE600] font-mono">
+            <span className="ml-2 px-2 py-0.5 bg-[#F7A600] text-black text-xs font-black border-2 border-[#F7A600] font-mono">
               {pendingCount} NEW
             </span>
           )}
@@ -150,7 +150,7 @@ export function AdminReviews() {
             onClick={() => setFilter(f.v)}
             className={cn(
               "px-3 py-1.5 text-xs font-black uppercase tracking-wide transition-all font-mono",
-              filter === f.v ? "bg-[#BFFF00] text-black" : "text-[#888] hover:text-foreground"
+              filter === f.v ? "bg-[#F7A600] text-black" : "text-[#888] hover:text-foreground"
             )}
           >
             {f.l}
@@ -190,7 +190,7 @@ export function AdminReviews() {
                       <div className="flex items-center gap-2 mt-0.5">
                         <div className="flex gap-0.5">
                           {[1, 2, 3, 4, 5].map((s) => (
-                            <Star key={s} className="w-3 h-3" fill={s <= r.rating ? "#FFE600" : "none"} stroke="#FFE600" />
+                            <Star key={s} className="w-3 h-3" fill={s <= r.rating ? "#F7A600" : "none"} stroke="#F7A600" />
                           ))}
                         </div>
                         <span className="px-2 py-0.5 text-[9px] font-black border font-mono uppercase"
@@ -208,7 +208,7 @@ export function AdminReviews() {
                 </div>
 
                 {r.product && (
-                  <div className="inline-block px-2 py-0.5 bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[10px] text-[#BFFF00] font-mono uppercase mb-2">
+                  <div className="inline-block px-2 py-0.5 bg-[#F7A600]/10 border border-[#F7A600]/30 text-[10px] text-[#F7A600] font-mono uppercase mb-2">
                     {r.product}
                   </div>
                 )}
@@ -216,8 +216,8 @@ export function AdminReviews() {
                 <p className="text-sm text-[#888] font-mono mb-3 whitespace-pre-wrap">{r.text}</p>
 
                 {r.reply && (
-                  <div className="bg-[#0A0A0A] border-l-2 border-[#00F0FF] p-3 mb-3">
-                    <div className="text-[10px] text-[#00F0FF] font-mono uppercase mb-1">{"// ОТВЕТ_HYPEHUB"}</div>
+                  <div className="bg-[#0A0A0A] border-l-2 border-[#F7A600] p-3 mb-3">
+                    <div className="text-[10px] text-[#F7A600] font-mono uppercase mb-1">{"// ОТВЕТ_HYPEHUB"}</div>
                     <p className="text-sm text-[#888] font-mono">{r.reply}</p>
                   </div>
                 )}
@@ -226,37 +226,37 @@ export function AdminReviews() {
                 <div className="flex flex-wrap gap-2 pt-3 border-t border-[#1F1F1F]">
                   {r.status !== "approved" && (
                     <Button size="sm" onClick={() => updateStatus(r.id, "approved")}
-                      className="bg-[#BFFF00] text-black hover:bg-[#BFFF00]/80 font-black uppercase border-2 border-[#BFFF00] font-mono text-xs">
+                      className="bg-[#F7A600] text-black hover:bg-[#F7A600]/80 font-black uppercase border-2 border-[#F7A600] font-mono text-xs">
                       <Check className="w-3.5 h-3.5 mr-1" strokeWidth={3} />
                       Одобрить
                     </Button>
                   )}
                   {r.status !== "rejected" && (
                     <Button size="sm" variant="ghost" onClick={() => updateStatus(r.id, "rejected")}
-                      className="text-[#FF3333] hover:bg-[#FF3333]/10 font-mono uppercase text-xs">
+                      className="text-[#F7A600] hover:bg-[#F7A600]/10 font-mono uppercase text-xs">
                       <X className="w-3.5 h-3.5 mr-1" strokeWidth={3} />
                       Отклонить
                     </Button>
                   )}
                   <Button size="sm" variant="ghost" onClick={() => setEditingReview(r)}
-                    className="text-[#FF2D87] hover:bg-[#FF2D87]/10 font-mono uppercase text-xs">
+                    className="text-[#F7A600] hover:bg-[#F7A600]/10 font-mono uppercase text-xs">
                     <Pencil className="w-3.5 h-3.5 mr-1" strokeWidth={2.5} />
                     Изменить
                   </Button>
                   <Button size="sm" variant="ghost" onClick={() => { setReplyingTo(replyingTo === r.id ? null : r.id); setReplyText(r.reply || ""); }}
-                    className="text-[#00F0FF] hover:bg-[#00F0FF]/10 font-mono uppercase text-xs">
+                    className="text-[#F7A600] hover:bg-[#F7A600]/10 font-mono uppercase text-xs">
                     <MessageSquare className="w-3.5 h-3.5 mr-1" strokeWidth={2.5} />
                     {r.reply ? "Изменить ответ" : "Ответить"}
                   </Button>
                   {r.status !== "archived" && (
                     <Button size="sm" variant="ghost" onClick={() => updateStatus(r.id, "archived")}
-                      className="text-[#A855F7] hover:bg-[#A855F7]/10 font-mono uppercase text-xs">
+                      className="text-[#F7A600] hover:bg-[#F7A600]/10 font-mono uppercase text-xs">
                       <Archive className="w-3.5 h-3.5 mr-1" strokeWidth={2.5} />
                       В архив
                     </Button>
                   )}
                   <Button size="sm" variant="ghost" onClick={() => deleteReview(r.id)}
-                    className="text-[#FF3333] hover:bg-[#FF3333]/10 ml-auto">
+                    className="text-[#F7A600] hover:bg-[#F7A600]/10 ml-auto">
                     <Trash2 className="w-3.5 h-3.5" />
                   </Button>
                 </div>
@@ -269,11 +269,11 @@ export function AdminReviews() {
                       onChange={(e) => setReplyText(e.target.value)}
                       placeholder="Ваш ответ на отзыв..."
                       rows={3}
-                      className="bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#00F0FF] font-mono text-sm"
+                      className="bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono text-sm"
                     />
                     <div className="flex gap-2 mt-2">
                       <Button size="sm" onClick={() => sendReply(r.id)}
-                        className="bg-[#00F0FF] text-black hover:bg-[#00F0FF]/80 font-black uppercase border-2 border-[#00F0FF] font-mono text-xs">
+                        className="bg-[#F7A600] text-black hover:bg-[#F7A600]/80 font-black uppercase border-2 border-[#F7A600] font-mono text-xs">
                         Отправить ответ
                       </Button>
                       <Button size="sm" variant="ghost" onClick={() => setReplyingTo(null)}
@@ -363,38 +363,38 @@ function EditReviewDialog({
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="max-w-lg bg-[#0E0E0E] border-2 border-[#FF2D87]">
+      <DialogContent className="max-w-lg bg-[#0E0E0E] border-2 border-[#F7A600]">
         <DialogHeader>
           <DialogTitle className="uppercase font-black tracking-tight font-mono">{"// РЕДАКТИРОВАНИЕ_ОТЗЫВА"}</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4 py-2">
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FF2D87]">{"// ИМЯ"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ИМЯ"}</Label>
             <Input
               value={String(form.name || "")}
               onChange={(e) => set("name", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#FF2D87] font-mono"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
             />
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FF2D87]">{"// РЕЙТИНГ"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// РЕЙТИНГ"}</Label>
             <div className="flex gap-2 mt-1.5">
               {[1, 2, 3, 4, 5].map((s) => (
                 <button
                   key={s}
                   onClick={() => set("rating", s)}
-                  className="w-10 h-10 border-2 flex items-center justify-center hover:border-[#FFE600] transition-colors"
+                  className="w-10 h-10 border-2 flex items-center justify-center hover:border-[#F7A600] transition-colors"
                   style={{
-                    borderColor: s <= (form.rating as number) ? "#FFE600" : "#2A2A2A",
-                    background: s <= (form.rating as number) ? "#FFE60015" : "transparent",
+                    borderColor: s <= (form.rating as number) ? "#F7A600" : "#2A2A2A",
+                    background: s <= (form.rating as number) ? "#F7A60026" : "transparent",
                   }}
                 >
                   <Star
                     className="w-5 h-5"
-                    fill={s <= (form.rating as number) ? "#FFE600" : "none"}
-                    stroke="#FFE600"
+                    fill={s <= (form.rating as number) ? "#F7A600" : "none"}
+                    stroke="#F7A600"
                   />
                 </button>
               ))}
@@ -402,37 +402,37 @@ function EditReviewDialog({
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FF2D87]">{"// ТОВАР"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ТОВАР"}</Label>
             <Input
               value={String(form.product || "")}
               onChange={(e) => set("product", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#FF2D87] font-mono"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
             />
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FF2D87]">{"// ТЕКСТ ОТЗЫВА"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ТЕКСТ ОТЗЫВА"}</Label>
             <Textarea
               value={String(form.text || "")}
               onChange={(e) => set("text", e.target.value)}
               rows={5}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#FF2D87] font-mono text-sm"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono text-sm"
             />
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FF2D87]">{"// ОТВЕТ HYPEHUB"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ОТВЕТ HYPEHUB"}</Label>
             <Textarea
               value={String(form.reply || "")}
               onChange={(e) => set("reply", e.target.value)}
               rows={3}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#FF2D87] font-mono text-sm"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono text-sm"
               placeholder="Ответ компании..."
             />
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FF2D87]">{"// СТАТУС"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// СТАТУС"}</Label>
             <div className="flex gap-2 mt-1.5">
               {Object.entries(STATUS_CONFIG).map(([k, v]) => (
                 <button
@@ -458,7 +458,7 @@ function EditReviewDialog({
           <Button
             onClick={save}
             disabled={saving}
-            className="flex-1 bg-[#FF2D87] text-white hover:bg-[#FF2D87]/80 font-black uppercase border-2 border-[#FF2D87] font-mono tracking-wide"
+            className="flex-1 bg-[#F7A600] text-white hover:bg-[#F7A600]/80 font-black uppercase border-2 border-[#F7A600] font-mono tracking-wide"
           >
             {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" strokeWidth={3} />}
             Сохранить

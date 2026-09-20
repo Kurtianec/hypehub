@@ -41,13 +41,13 @@ export function FavoritesBar({
             animate={{ x: 0 }}
             exit={{ x: 400 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="relative bg-[#0E0E0E] border-2 border-[#FF2D87] w-full max-w-md max-h-[80vh] flex flex-col overflow-hidden"
+            className="relative bg-[#0E0E0E] border-2 border-[#F7A600] w-full max-w-md max-h-[80vh] flex flex-col overflow-hidden"
             style={{ clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))" }}
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b-2 border-[#1F1F1F] bg-[#0A0A0A]">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#FF2D87] flex items-center justify-center border-2 border-[#FF2D87]">
+                <div className="w-9 h-9 bg-[#F7A600] flex items-center justify-center border-2 border-[#F7A600]">
                   <Heart className="w-4 h-4 text-white" fill="white" strokeWidth={2.5} />
                 </div>
                 <div>
@@ -61,7 +61,7 @@ export function FavoritesBar({
                 {favorites.length > 0 && (
                   <button
                     onClick={onClear}
-                    className="w-8 h-8 hover:bg-[#FF3333]/10 flex items-center justify-center text-[#FF3333]"
+                    className="w-8 h-8 hover:bg-[#F7A600]/10 flex items-center justify-center text-[#F7A600]"
                     aria-label="Очистить"
                     title="Очистить всё"
                   >
@@ -93,7 +93,7 @@ export function FavoritesBar({
                     return (
                       <div
                         key={p.id}
-                        className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#FF2D87] p-3 transition-colors group"
+                        className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#F7A600] p-3 transition-colors group"
                         style={{ clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))" }}
                       >
                         <div className="flex items-center gap-3">
@@ -113,11 +113,11 @@ export function FavoritesBar({
                             }}
                             className="flex-1 min-w-0 text-left"
                           >
-                            <div className="text-xs font-bold truncate uppercase tracking-tight group-hover:text-[#FF2D87] transition-colors">
+                            <div className="text-xs font-bold truncate uppercase tracking-tight group-hover:text-[#F7A600] transition-colors">
                               {p.title}
                             </div>
                             <div className="flex items-center gap-2 mt-0.5">
-                              <span className="text-sm font-black text-[#BFFF00] font-mono">
+                              <span className="text-sm font-black text-[#F7A600] font-mono">
                                 {formatPrice(p.price, p.currency)}
                               </span>
                               {p.followers && (
@@ -127,7 +127,7 @@ export function FavoritesBar({
                           </button>
                           <button
                             onClick={() => onRemove(p.id)}
-                            className="w-7 h-7 flex-shrink-0 hover:bg-[#FF3333]/10 flex items-center justify-center text-[#FF3333]"
+                            className="w-7 h-7 flex-shrink-0 hover:bg-[#F7A600]/10 flex items-center justify-center text-[#F7A600]"
                             aria-label="Убрать из избранного"
                           >
                             <X className="w-3.5 h-3.5" strokeWidth={2.5} />

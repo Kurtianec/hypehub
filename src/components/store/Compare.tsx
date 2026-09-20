@@ -26,8 +26,8 @@ export function CompareButton({
       }}
       className={`absolute bottom-2 right-2 w-8 h-8 flex items-center justify-center border-2 transition-all ${
         isActive
-          ? "bg-[#00F0FF] text-black border-[#00F0FF]"
-          : "bg-black/80 backdrop-blur-sm text-[#00F0FF] border-[#00F0FF]/40 hover:border-[#00F0FF]"
+          ? "bg-[#F7A600] text-black border-[#F7A600]"
+          : "bg-black/80 backdrop-blur-sm text-[#F7A600] border-[#F7A600]/40 hover:border-[#F7A600]"
       }`}
       aria-label="Добавить к сравнению"
       title="Сравнить"
@@ -61,13 +61,13 @@ export function CompareBar({
       className="fixed bottom-4 left-4 right-4 md:left-auto md:right-24 md:w-auto z-30"
     >
       <div
-        className="bg-[#0E0E0E] border-2 border-[#00F0FF] p-3 flex items-center gap-3"
+        className="bg-[#0E0E0E] border-2 border-[#F7A600] p-3 flex items-center gap-3"
         style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
       >
-        <div className="flex items-center gap-2 text-xs font-mono uppercase text-[#00F0FF] flex-shrink-0">
+        <div className="flex items-center gap-2 text-xs font-mono uppercase text-[#F7A600] flex-shrink-0">
           <GitCompare className="w-4 h-4" strokeWidth={2.5} />
           <span className="hidden md:inline">СРАВНЕНИЕ:</span>
-          <span className="bg-[#00F0FF] text-black px-1.5 py-0.5 font-black">{products.length}</span>
+          <span className="bg-[#F7A600] text-black px-1.5 py-0.5 font-black">{products.length}</span>
         </div>
         <div className="flex gap-1.5 flex-1 overflow-x-auto no-scrollbar max-w-md">
           {products.map((p) => (
@@ -75,7 +75,7 @@ export function CompareBar({
               <span className="truncate max-w-[80px]">{p.title}</span>
               <button
                 onClick={() => onRemove(p.id)}
-                className="text-[#FF3333] hover:text-[#FF3333]/70"
+                className="text-[#F7A600] hover:text-[#F7A600]/70"
                 aria-label="Убрать"
               >
                 <X className="w-3 h-3" strokeWidth={3} />
@@ -87,13 +87,13 @@ export function CompareBar({
           onClick={onOpen}
           size="sm"
           disabled={products.length < 2}
-          className="bg-[#00F0FF] text-black hover:bg-[#BFFF00] font-black uppercase border-2 border-[#00F0FF] hover:border-[#BFFF00] font-mono text-xs flex-shrink-0"
+          className="bg-[#F7A600] text-black hover:bg-[#F7A600] font-black uppercase border-2 border-[#F7A600] hover:border-[#F7A600] font-mono text-xs flex-shrink-0"
         >
           Сравнить
         </Button>
         <button
           onClick={onClear}
-          className="text-[#888] hover:text-[#FF3333] flex-shrink-0 p-1"
+          className="text-[#888] hover:text-[#F7A600] flex-shrink-0 p-1"
           aria-label="Очистить"
         >
           <X className="w-4 h-4" />
@@ -130,17 +130,17 @@ export function CompareModal({
   const rows: { label: string; render: (p: Product) => React.ReactNode }[] = [
     { label: "Платформа", render: (p) => cat(p)?.name || "—" },
     { label: "Подписчики", render: (p) => p.followers || "—" },
-    { label: "Цена", render: (p) => <span className="font-black text-[#BFFF00]">{formatPrice(p.price, p.currency)}</span> },
+    { label: "Цена", render: (p) => <span className="font-black text-[#F7A600]">{formatPrice(p.price, p.currency)}</span> },
     { label: "Старая цена", render: (p) => p.oldPrice ? formatPrice(p.oldPrice, p.currency) : "—" },
     { label: "Скидка", render: (p) => {
       if (!p.oldPrice) return "—";
       const d = Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100);
-      return <span className="text-[#FF2D87] font-bold">−{d}%</span>;
+      return <span className="text-[#F7A600] font-bold">−{d}%</span>;
     }},
     { label: "Страна", render: (p) => (getMeta(p).country as string) || "—" },
     { label: "Возраст", render: (p) => (getMeta(p).age as string) || "—" },
-    { label: "Монетизация", render: (p) => getMeta(p).monetization ? <Check className="w-4 h-4 text-[#BFFF00]" strokeWidth={3} /> : <Minus className="w-4 h-4 text-[#888]" /> },
-    { label: "Верификация", render: (p) => getMeta(p).verified ? <Check className="w-4 h-4 text-[#BFFF00]" strokeWidth={3} /> : <Minus className="w-4 h-4 text-[#888]" /> },
+    { label: "Монетизация", render: (p) => getMeta(p).monetization ? <Check className="w-4 h-4 text-[#F7A600]" strokeWidth={3} /> : <Minus className="w-4 h-4 text-[#888]" /> },
+    { label: "Верификация", render: (p) => getMeta(p).verified ? <Check className="w-4 h-4 text-[#F7A600]" strokeWidth={3} /> : <Minus className="w-4 h-4 text-[#888]" /> },
     { label: "Часы просмотра", render: (p) => (getMeta(p).watchHours as string) || "—" },
     { label: "Просмотры", render: (p) => String(p.views || 0) },
     { label: "Бейджи", render: (p) => {
@@ -168,12 +168,12 @@ export function CompareModal({
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="relative bg-[#0E0E0E] border-2 border-[#00F0FF] w-full max-w-4xl max-h-[85vh] overflow-y-auto"
+        className="relative bg-[#0E0E0E] border-2 border-[#F7A600] w-full max-w-4xl max-h-[85vh] overflow-y-auto"
         style={{ clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))" }}
       >
         <div className="sticky top-0 bg-[#0E0E0E] border-b-2 border-[#1F1F1F] p-4 flex items-center justify-between z-10">
           <div className="flex items-center gap-3">
-            <GitCompare className="w-5 h-5 text-[#00F0FF]" strokeWidth={2.5} />
+            <GitCompare className="w-5 h-5 text-[#F7A600]" strokeWidth={2.5} />
             <h2 className="font-black uppercase tracking-tight font-mono text-sm">
               {"// СРАВНЕНИЕ_ТОВАРОВ"}
             </h2>

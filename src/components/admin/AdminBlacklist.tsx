@@ -105,7 +105,7 @@ export function AdminBlacklist() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-[#FF3333]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#F7A600]" />
       </div>
     );
   }
@@ -119,7 +119,7 @@ export function AdminBlacklist() {
       <div className="flex flex-col sm:flex-row justify-between gap-3 mb-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#FF3333]" />
+            <div className="w-1 h-8 bg-[#F7A600]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_BLACKLIST"}</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">Чёрный список</h1>
@@ -129,7 +129,7 @@ export function AdminBlacklist() {
         </div>
         <Button
           onClick={() => setAdding(true)}
-          className="bg-[#FF3333] hover:bg-[#FF3333]/80 text-white font-black uppercase border-2 border-[#FF3333] font-mono tracking-wide"
+          className="bg-[#F7A600] hover:bg-[#F7A600]/80 text-white font-black uppercase border-2 border-[#F7A600] font-mono tracking-wide"
         >
           <Plus className="w-4 h-4 mr-1.5" strokeWidth={3} />
           Добавить
@@ -138,12 +138,12 @@ export function AdminBlacklist() {
 
       {/* Warning banner */}
       <div
-        className="mb-6 bg-[#FF3333]/10 border-2 border-[#FF3333]/40 p-4 flex items-start gap-3"
+        className="mb-6 bg-[#F7A600]/10 border-2 border-[#F7A600]/40 p-4 flex items-start gap-3"
         style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
       >
-        <AlertTriangle className="w-5 h-5 text-[#FF3333] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+        <AlertTriangle className="w-5 h-5 text-[#F7A600] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
         <div className="text-xs font-mono">
-          <div className="font-black uppercase text-[#FF3333] mb-1">// ВНИМАНИЕ</div>
+          <div className="font-black uppercase text-[#F7A600] mb-1">// ВНИМАНИЕ</div>
           <div className="text-[#888]">
             &gt; Записи в чёрном списке блокируют оформление заказов и отправку сообщений в поддержку с указанных адресов.
             <br />&gt; Добавление требует ручного подтверждения администратора.
@@ -163,7 +163,7 @@ export function AdminBlacklist() {
             <BlacklistSection
               title="EMAIL"
               icon={Mail}
-              color="#A855F7"
+              color="#F7A600"
               entries={emailEntries}
               onDelete={(e) => setConfirmDelete(e)}
             />
@@ -172,7 +172,7 @@ export function AdminBlacklist() {
             <BlacklistSection
               title="IP-АДРЕСА"
               icon={Globe}
-              color="#00F0FF"
+              color="#F7A600"
               entries={ipEntries}
               onDelete={(e) => setConfirmDelete(e)}
             />
@@ -181,7 +181,7 @@ export function AdminBlacklist() {
             <BlacklistSection
               title="ДРУГОЕ"
               icon={ShieldBan}
-              color="#FFD700"
+              color="#F7A600"
               entries={otherEntries}
               onDelete={(e) => setConfirmDelete(e)}
             />
@@ -222,13 +222,13 @@ export function AdminBlacklist() {
                 className="bg-[#0A0A0A] border-2 border-[#2A2A2A] font-mono mt-1"
               />
             </div>
-            <div className="bg-[#FF3333]/10 border border-[#FF3333]/30 p-2 text-[10px] font-mono text-[#888]">
+            <div className="bg-[#F7A600]/10 border border-[#F7A600]/30 p-2 text-[10px] font-mono text-[#888]">
               &gt; Будет заблокировано: оформление заказов, обращения в поддержку с этого источника
             </div>
             <div className="flex gap-2 pt-2">
               <Button
                 onClick={addEntry}
-                className="flex-1 bg-[#FF3333] hover:bg-[#FF3333]/80 text-white font-black uppercase font-mono"
+                className="flex-1 bg-[#F7A600] hover:bg-[#F7A600]/80 text-white font-black uppercase font-mono"
               >
                 Заблокировать
               </Button>
@@ -265,7 +265,7 @@ export function AdminBlacklist() {
                     onDelete();
                   }}
                   disabled={deleting}
-                  className="flex-1 bg-[#10B981] hover:bg-[#10B981]/80 text-white font-black uppercase font-mono"
+                  className="flex-1 bg-[#F7A600] hover:bg-[#F7A600]/80 text-white font-black uppercase font-mono"
                 >
                   {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Разблокировать"}
                 </Button>
@@ -317,7 +317,7 @@ function BlacklistSection({
               key={e.id}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-3 py-2 px-3 bg-[#0A0A0A] border border-[#1F1F1F] hover:border-[#FF3333]/50 transition-colors"
+              className="flex items-center gap-3 py-2 px-3 bg-[#0A0A0A] border border-[#1F1F1F] hover:border-[#F7A600]/50 transition-colors"
             >
               <Icon className="w-4 h-4 flex-shrink-0" style={{ color }} strokeWidth={2} />
               <div className="flex-1 min-w-0">
@@ -328,7 +328,7 @@ function BlacklistSection({
               </div>
               <button
                 onClick={() => onDelete(e)}
-                className="text-[#888] hover:text-[#10B981] transition-colors px-2 py-1 text-[10px] font-mono uppercase border border-[#2A2A2A] hover:border-[#10B981]"
+                className="text-[#888] hover:text-[#F7A600] transition-colors px-2 py-1 text-[10px] font-mono uppercase border border-[#2A2A2A] hover:border-[#F7A600]"
               >
                 <Trash2 className="w-3 h-3 inline mr-1" />
                 Разблокировать

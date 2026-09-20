@@ -50,7 +50,7 @@ export function AdminReferral() {
   if (loading && !stats) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-[#22D3EE]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#F7A600]" />
       </div>
     );
   }
@@ -69,7 +69,7 @@ export function AdminReferral() {
     <div>
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-1 h-8 bg-[#22D3EE]" />
+          <div className="w-1 h-8 bg-[#F7A600]" />
           <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_REFERRAL"}</span>
         </div>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
@@ -79,7 +79,7 @@ export function AdminReferral() {
           </div>
           <button
             onClick={load}
-            className="px-3 py-2 bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#22D3EE] text-xs font-mono uppercase flex items-center gap-2"
+            className="px-3 py-2 bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#F7A600] text-xs font-mono uppercase flex items-center gap-2"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
             Обновить
@@ -89,10 +89,10 @@ export function AdminReferral() {
 
       {/* Key metrics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
-        <MetricCard icon={Users} label="РЕФЕРАЛОВ" value={String(stats.totalReferrals)} color="#22D3EE" />
-        <MetricCard icon={MousePointerClick} label="КЛИКОВ" value={String(stats.totalClicks)} color="#00F0FF" />
-        <MetricCard icon={ShoppingCart} label="ЗАКАЗОВ" value={String(stats.totalOrders)} color="#BFFF00" />
-        <MetricCard icon={DollarSign} label="ЗАРАБОТАНО" value={formatPrice(stats.totalEarnings)} color="#FF2D87" />
+        <MetricCard icon={Users} label="РЕФЕРАЛОВ" value={String(stats.totalReferrals)} color="#F7A600" />
+        <MetricCard icon={MousePointerClick} label="КЛИКОВ" value={String(stats.totalClicks)} color="#F7A600" />
+        <MetricCard icon={ShoppingCart} label="ЗАКАЗОВ" value={String(stats.totalOrders)} color="#F7A600" />
+        <MetricCard icon={DollarSign} label="ЗАРАБОТАНО" value={formatPrice(stats.totalEarnings)} color="#F7A600" />
       </div>
 
       {/* Daily clicks chart */}
@@ -101,8 +101,8 @@ export function AdminReferral() {
         style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
       >
         <h3 className="font-black mb-4 flex items-center gap-2 uppercase tracking-tight">
-          <TrendingUp className="w-4 h-4 text-[#22D3EE]" strokeWidth={2.5} />
-          <span className="text-[#22D3EE] font-mono text-xs">{"// КЛИКИ_ЗА_14_ДНЕЙ"}</span>
+          <TrendingUp className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
+          <span className="text-[#F7A600] font-mono text-xs">{"// КЛИКИ_ЗА_14_ДНЕЙ"}</span>
         </h3>
         <div className="flex items-end gap-1 h-32">
           {stats.daily.map((d, i) => (
@@ -114,10 +114,10 @@ export function AdminReferral() {
               className="flex-1 group relative"
             >
               <div
-                className="w-full bg-[#22D3EE] hover:bg-[#FF2D87] transition-colors cursor-pointer"
+                className="w-full bg-[#F7A600] hover:bg-[#F7A600] transition-colors cursor-pointer"
                 style={{ minHeight: d.clicks > 0 ? "8px" : "2px", opacity: d.clicks > 0 ? 1 : 0.2 }}
               />
-              <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-black border border-[#22D3EE] text-[10px] font-bold font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+              <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-black border border-[#F7A600] text-[10px] font-bold font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                 {d.clicks} кликов
               </div>
             </motion.div>
@@ -135,8 +135,8 @@ export function AdminReferral() {
         style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
       >
         <h3 className="font-black mb-4 flex items-center gap-2 uppercase tracking-tight">
-          <Users className="w-4 h-4 text-[#BFFF00]" strokeWidth={2.5} />
-          <span className="text-[#BFFF00] font-mono text-xs">{"// ТОП_РЕФЕРАЛОВ"}</span>
+          <Users className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
+          <span className="text-[#F7A600] font-mono text-xs">{"// ТОП_РЕФЕРАЛОВ"}</span>
         </h3>
         {stats.topReferrers.length === 0 ? (
           <div className="text-center py-8 text-[#888] font-mono text-sm">
@@ -146,7 +146,7 @@ export function AdminReferral() {
           <div className="space-y-2">
             {stats.topReferrers.map((r, i) => (
               <div key={r.code} className="flex items-center gap-3 py-2 border-b border-[#1F1F1F] last:border-0">
-                <span className="w-6 h-6 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-xs font-bold font-mono text-[#22D3EE]">
+                <span className="w-6 h-6 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center text-xs font-bold font-mono text-[#F7A600]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div className="flex-1 min-w-0">
@@ -154,9 +154,9 @@ export function AdminReferral() {
                   <div className="text-[10px] text-[#888] font-mono uppercase">{r.email}</div>
                 </div>
                 <div className="flex items-center gap-4 text-xs font-mono">
-                  <span className="text-[#00F0FF]">{r.clicks} кликов</span>
-                  <span className="text-[#BFFF00]">{r.orders} зак.</span>
-                  <span className="text-[#FF2D87] font-black">{formatPrice(r.earnings)}</span>
+                  <span className="text-[#F7A600]">{r.clicks} кликов</span>
+                  <span className="text-[#F7A600]">{r.orders} зак.</span>
+                  <span className="text-[#F7A600] font-black">{formatPrice(r.earnings)}</span>
                 </div>
               </div>
             ))}

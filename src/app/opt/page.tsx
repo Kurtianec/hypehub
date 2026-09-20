@@ -23,9 +23,9 @@ export default async function OptPage() {
   for (const s of settings) settingsMap[s.key] = s.value;
 
   const tiers = [
-    { count: "3+", discount: "10%", color: "#BFFF00", features: ["Скидка 10% на заказ", "Приоритетная поддержка", "Резерв 24 часа"] },
-    { count: "5+", discount: "20%", color: "#FF2D87", features: ["Скидка 20% на заказ", "Персональный менеджер", "Резерв 48 часов", "Помощь с настройкой"] },
-    { count: "10+", discount: "30%", color: "#FFE600", features: ["Скидка 30% на заказ", "Эксклюзивные товары", "Безлимитный резерв", "API доступ", "Отложенная оплата"] },
+    { count: "3+", discount: "10%", color: "#F7A600", features: ["Скидка 10% на заказ", "Приоритетная поддержка", "Резерв 24 часа"] },
+    { count: "5+", discount: "20%", color: "#F7A600", features: ["Скидка 20% на заказ", "Персональный менеджер", "Резерв 48 часов", "Помощь с настройкой"] },
+    { count: "10+", discount: "30%", color: "#F7A600", features: ["Скидка 30% на заказ", "Эксклюзивные товары", "Безлимитный резерв", "API доступ", "Отложенная оплата"] },
   ];
 
   return (
@@ -35,13 +35,13 @@ export default async function OptPage() {
       <main className="flex-1 pt-28 md:pt-32 pb-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="flex items-center gap-2 text-xs text-[#888] font-mono uppercase mb-6">
-            <Link href="/" className="hover:text-[#BFFF00]">ГЛАВНАЯ</Link>
-            <span className="text-[#BFFF00]">/</span>
+            <Link href="/" className="hover:text-[#F7A600]">ГЛАВНАЯ</Link>
+            <span className="text-[#F7A600]">/</span>
             <span className="text-foreground">ОПТ</span>
           </div>
 
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#BFFF00]" />
+            <div className="w-1 h-8 bg-[#F7A600]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// B2B"}</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-3">
@@ -76,11 +76,11 @@ export default async function OptPage() {
 
           {/* Features */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div className="bg-[#0E0E0E] border-2 border-[#00F0FF] p-5"
+            <div className="bg-[#0E0E0E] border-2 border-[#F7A600] p-5"
               style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}>
               <div className="flex items-center gap-3 mb-3">
-                <Package className="w-5 h-5 text-[#00F0FF]" strokeWidth={2.5} />
-                <h2 className="font-black uppercase tracking-tight font-mono text-sm text-[#00F0FF]">{"// РЕЗЕРВИРОВАНИЕ"}</h2>
+                <Package className="w-5 h-5 text-[#F7A600]" strokeWidth={2.5} />
+                <h2 className="font-black uppercase tracking-tight font-mono text-sm text-[#F7A600]">{"// РЕЗЕРВИРОВАНИЕ"}</h2>
               </div>
               <p className="text-sm text-[#888] font-mono leading-relaxed">
                 &gt; Не готовы оплатить сразу? Забронируйте аккаунт на 24 часа с предоплатой всего 10%.
@@ -89,11 +89,11 @@ export default async function OptPage() {
               </p>
             </div>
 
-            <div className="bg-[#0E0E0E] border-2 border-[#FF2D87] p-5"
+            <div className="bg-[#0E0E0E] border-2 border-[#F7A600] p-5"
               style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}>
               <div className="flex items-center gap-3 mb-3">
-                <TrendingUp className="w-5 h-5 text-[#FF2D87]" strokeWidth={2.5} />
-                <h2 className="font-black uppercase tracking-tight font-mono text-sm text-[#FF2D87]">{"// КАК_РАБОТАЕТ"}</h2>
+                <TrendingUp className="w-5 h-5 text-[#F7A600]" strokeWidth={2.5} />
+                <h2 className="font-black uppercase tracking-tight font-mono text-sm text-[#F7A600]">{"// КАК_РАБОТАЕТ"}</h2>
               </div>
               <ul className="space-y-1.5 text-sm text-[#888] font-mono">
                 <li>&gt; Выберите товары в каталоге</li>
@@ -106,12 +106,12 @@ export default async function OptPage() {
           </div>
 
           {/* CTA */}
-          <div className="text-center bg-[#0E0E0E] border-2 border-[#BFFF00] p-6 md:p-8"
+          <div className="text-center bg-[#0E0E0E] border-2 border-[#F7A600] p-6 md:p-8"
             style={{ clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))" }}>
-            <Shield className="w-10 h-10 mx-auto mb-3 text-[#BFFF00]" strokeWidth={2.5} />
+            <Shield className="w-10 h-10 mx-auto mb-3 text-[#F7A600]" strokeWidth={2.5} />
             <h3 className="text-xl font-black mb-2 uppercase tracking-tight">Готовы к оптовой покупке?</h3>
             <p className="text-sm text-[#888] mb-4 font-mono">&gt; Выберите товары в каталоге и оформите оптовый заказ</p>
-            <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 bg-[#BFFF00] text-black font-black uppercase border-2 border-[#BFFF00] hover:bg-[#FF2D87] hover:border-[#FF2D87] hover:text-white transition-colors font-mono tracking-wide">
+            <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 bg-[#F7A600] text-black font-black uppercase border-2 border-[#F7A600] hover:bg-[#F7A600] hover:border-[#F7A600] hover:text-white transition-colors font-mono tracking-wide">
               В каталог <ArrowRight className="w-4 h-4" strokeWidth={3} />
             </Link>
           </div>

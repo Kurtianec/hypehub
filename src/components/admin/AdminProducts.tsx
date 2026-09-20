@@ -36,11 +36,11 @@ const STATUS_LABELS: Record<string, string> = {
 };
 
 const STATUS_COLORS: Record<string, string> = {
-  available: "#BFFF00",
-  reserved: "#FFE600",
+  available: "#F7A600",
+  reserved: "#F7A600",
   sold: "#888",
-  archived: "#A855F7",
-  coming_soon: "#00F0FF",
+  archived: "#F7A600",
+  coming_soon: "#F7A600",
 };
 
 export function AdminProducts({
@@ -203,14 +203,14 @@ export function AdminProducts({
   return (
     <div>
       {products.filter((p) => p.status === "available").length < 5 && (
-        <div className="mb-4 rounded-xl border border-[#FFE600]/30 bg-[#FFE600]/5 p-3 text-sm text-[#FFE600]">
+        <div className="mb-4 rounded-xl border border-[#F7A600]/30 bg-[#F7A600]/5 p-3 text-sm text-[#F7A600]">
           Низкий остаток: в продаже осталось {products.filter((p) => p.status === "available").length} товаров. Добавьте или восстановите позиции.
         </div>
       )}
       <div className="flex flex-col sm:flex-row justify-between gap-3 mb-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#FF2D87]" />
+            <div className="w-1 h-8 bg-[#F7A600]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_PRODUCTS"}</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">Товары</h1>
@@ -220,7 +220,7 @@ export function AdminProducts({
         </div>
         <Button
           onClick={() => setCreating(true)}
-          className="bg-[#BFFF00] text-black hover:bg-[#FF2D87] hover:text-white font-black uppercase border-2 border-[#BFFF00] hover:border-[#FF2D87] font-mono tracking-wide"
+          className="bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase border-2 border-[#F7A600] hover:border-[#F7A600] font-mono tracking-wide"
         >
           <Plus className="w-4 h-4 mr-1.5" strokeWidth={3} />
           Добавить товар
@@ -235,11 +235,11 @@ export function AdminProducts({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Поиск по названию..."
-            className="pl-10 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono"
+            className="pl-10 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
           />
         </div>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-full sm:w-48 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono">
+          <SelectTrigger className="w-full sm:w-48 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono">
             <SelectValue placeholder="Статус" />
           </SelectTrigger>
           <SelectContent>
@@ -258,10 +258,10 @@ export function AdminProducts({
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-[#0E0E0E] border-2 border-[#BFFF00] p-3 mb-4 flex flex-wrap items-center gap-3"
+          className="bg-[#0E0E0E] border-2 border-[#F7A600] p-3 mb-4 flex flex-wrap items-center gap-3"
           style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
         >
-          <span className="text-sm font-black text-[#BFFF00] font-mono uppercase">
+          <span className="text-sm font-black text-[#F7A600] font-mono uppercase">
             {"// "}{selected.size} ВЫБРАНО
           </span>
           <div className="flex-1" />
@@ -287,7 +287,7 @@ export function AdminProducts({
             onClick={applyBulkAction}
             disabled={!bulkAction}
             size="sm"
-            className="bg-[#BFFF00] text-black hover:bg-[#FF2D87] hover:text-white font-black uppercase font-mono"
+            className="bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase font-mono"
           >
             Применить
           </Button>
@@ -307,10 +307,10 @@ export function AdminProducts({
         <div className="flex items-center gap-3 mb-3 px-1">
           <button
             onClick={toggleSelectAll}
-            className="flex items-center gap-2 text-xs font-mono uppercase text-[#888] hover:text-[#BFFF00]"
+            className="flex items-center gap-2 text-xs font-mono uppercase text-[#888] hover:text-[#F7A600]"
           >
             {selected.size === filtered.length && filtered.length > 0 ? (
-              <CheckSquare className="w-4 h-4 text-[#BFFF00]" strokeWidth={2.5} />
+              <CheckSquare className="w-4 h-4 text-[#F7A600]" strokeWidth={2.5} />
             ) : (
               <Square className="w-4 h-4" strokeWidth={2.5} />
             )}
@@ -339,7 +339,7 @@ export function AdminProducts({
                 animate={{ opacity: 1, y: 0 }}
                 className={cn(
                   "bg-[#121212] border-2 p-4 transition-colors relative",
-                  isSelected ? "border-[#BFFF00]" : "border-[#2A2A2A] hover:border-[#BFFF00]/60"
+                  isSelected ? "border-[#F7A600]" : "border-[#2A2A2A] hover:border-[#F7A600]/60"
                 )}
                 style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
               >
@@ -351,7 +351,7 @@ export function AdminProducts({
                     aria-label="Выбрать"
                   >
                     {isSelected ? (
-                      <CheckSquare className="w-5 h-5 text-[#BFFF00]" strokeWidth={2.5} />
+                      <CheckSquare className="w-5 h-5 text-[#F7A600]" strokeWidth={2.5} />
                     ) : (
                       <Square className="w-5 h-5 text-[#888]" strokeWidth={2.5} />
                     )}
@@ -371,8 +371,8 @@ export function AdminProducts({
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap gap-1 mb-1">
                       {p.featured && (
-                        <span className="px-1.5 py-0.5 text-[9px] font-black bg-[#FFE600]/15 text-[#FFE600] border border-[#FFE600]/40 font-mono uppercase flex items-center gap-0.5">
-                          <Star className="w-2 h-2" fill="#FFE600" /> TOP
+                        <span className="px-1.5 py-0.5 text-[9px] font-black bg-[#F7A600]/15 text-[#F7A600] border border-[#F7A600]/40 font-mono uppercase flex items-center gap-0.5">
+                          <Star className="w-2 h-2" fill="#F7A600" /> TOP
                         </span>
                       )}
                       {badges.slice(0, 2).map((b) => {
@@ -388,7 +388,7 @@ export function AdminProducts({
                     <h3 className="font-black text-sm leading-tight mb-1 line-clamp-2 uppercase tracking-tight">{p.title}</h3>
                     <div className="text-[10px] text-[#888] mb-1 font-mono uppercase">{p.category?.name}</div>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-black text-[#BFFF00] font-mono">
+                      <span className="text-sm font-black text-[#F7A600] font-mono">
                         {formatPrice(p.price, p.currency)}
                       </span>
                       {p.oldPrice && (
@@ -406,12 +406,12 @@ export function AdminProducts({
                     size="sm"
                     variant="ghost"
                     onClick={() => setEditing(p)}
-                    className="text-xs hover:bg-[#BFFF00]/10 hover:text-[#BFFF00] font-mono uppercase px-2"
+                    className="text-xs hover:bg-[#F7A600]/10 hover:text-[#F7A600] font-mono uppercase px-2"
                   >
                     <Pencil className="w-3.5 h-3.5 mr-1" />
                     Изменить
                   </Button>
-                  <Button size="sm" variant="ghost" onClick={() => duplicateProduct(p.id)} className="text-xs hover:bg-[#00F0FF]/10 hover:text-[#00F0FF] font-mono uppercase px-2">
+                  <Button size="sm" variant="ghost" onClick={() => duplicateProduct(p.id)} className="text-xs hover:bg-[#F7A600]/10 hover:text-[#F7A600] font-mono uppercase px-2">
                     <Copy className="w-3.5 h-3.5 mr-1" /> Копия
                   </Button>
                   {p.status === "archived" || p.status === "sold" || p.status === "reserved" ? (
@@ -419,7 +419,7 @@ export function AdminProducts({
                       size="sm"
                       variant="ghost"
                       onClick={() => quickStatusChange(p.id, "available")}
-                      className="text-xs text-[#BFFF00] hover:bg-[#BFFF00]/10 font-mono uppercase px-2"
+                      className="text-xs text-[#F7A600] hover:bg-[#F7A600]/10 font-mono uppercase px-2"
                     >
                       <ArchiveRestore className="w-3.5 h-3.5 mr-1" />
                       Восстановить
@@ -429,7 +429,7 @@ export function AdminProducts({
                       size="sm"
                       variant="ghost"
                       onClick={() => quickStatusChange(p.id, "archived")}
-                      className="text-xs text-[#A855F7] hover:bg-[#A855F7]/10 font-mono uppercase px-2"
+                      className="text-xs text-[#F7A600] hover:bg-[#F7A600]/10 font-mono uppercase px-2"
                     >
                       <Archive className="w-3.5 h-3.5 mr-1" />
                       В архив
@@ -439,7 +439,7 @@ export function AdminProducts({
                     size="sm"
                     variant="ghost"
                     onClick={() => setDeleteId(p.id)}
-                    className="text-[#FF3333] hover:text-[#FF3333] hover:bg-[#FF3333]/10 ml-auto"
+                    className="text-[#F7A600] hover:text-[#F7A600] hover:bg-[#F7A600]/10 ml-auto"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </Button>
@@ -459,7 +459,7 @@ export function AdminProducts({
       />
 
       <AlertDialog open={!!deleteId} onOpenChange={(o) => !o && setDeleteId(null)}>
-        <AlertDialogContent className="bg-[#0E0E0E] border-2 border-[#FF3333]">
+        <AlertDialogContent className="bg-[#0E0E0E] border-2 border-[#F7A600]">
           <AlertDialogHeader>
             <AlertDialogTitle className="uppercase font-black font-mono">Удалить товар?</AlertDialogTitle>
             <AlertDialogDescription>Это действие нельзя отменить. Товар будет удалён навсегда.</AlertDialogDescription>
@@ -469,7 +469,7 @@ export function AdminProducts({
             <AlertDialogAction
               onClick={onDelete}
               disabled={deleting}
-              className="bg-[#FF3333] hover:bg-[#FF3333]/80 text-white font-mono uppercase"
+              className="bg-[#F7A600] hover:bg-[#F7A600]/80 text-white font-mono uppercase"
             >
               {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Удалить"}
             </AlertDialogAction>
@@ -531,7 +531,7 @@ export function AdminProducts({
                       <div key={p.id} className="flex justify-between py-0.5">
                         <span className="truncate text-foreground flex-1 pr-2">{p.title}</span>
                         <span className="text-[#888] line-through">{p.price} ₽</span>
-                        <span className="text-[#BFFF00] ml-2">→ {newPrice} ₽</span>
+                        <span className="text-[#F7A600] ml-2">→ {newPrice} ₽</span>
                       </div>
                     );
                   })}
@@ -544,7 +544,7 @@ export function AdminProducts({
               <Button
                 onClick={applyBulkPrice}
                 disabled={!bulkPriceValue || bulkPriceLoading}
-                className="flex-1 bg-[#BFFF00] text-black hover:bg-[#FF2D87] hover:text-white font-black uppercase font-mono"
+                className="flex-1 bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase font-mono"
               >
                 {bulkPriceLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
                 Применить к {selected.size}
@@ -662,7 +662,7 @@ function ProductForm({
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-[#0E0E0E] border-2 border-[#BFFF00]">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-[#0E0E0E] border-2 border-[#F7A600]">
         <DialogHeader>
           <DialogTitle className="uppercase font-black tracking-tight font-mono">
             {isCreate ? "// НОВЫЙ_ТОВАР" : "// РЕДАКТИРОВАНИЕ"}
@@ -671,22 +671,22 @@ function ProductForm({
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-2">
           <div className="md:col-span-2">
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#BFFF00]">{"// НАЗВАНИЕ *"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// НАЗВАНИЕ *"}</Label>
             <Input
               value={String(form.title || "")}
               onChange={(e) => set("title", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
               placeholder="TikTok аккаунт 10K подписчиков"
             />
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#BFFF00]">{"// КАТЕГОРИЯ *"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// КАТЕГОРИЯ *"}</Label>
             <Select
               value={String(form.categoryId || "")}
               onValueChange={(v) => set("categoryId", v)}
             >
-              <SelectTrigger className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono">
+              <SelectTrigger className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono">
                 <SelectValue placeholder="Выберите..." />
               </SelectTrigger>
               <SelectContent>
@@ -698,12 +698,12 @@ function ProductForm({
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#BFFF00]">{"// СТАТУС"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// СТАТУС"}</Label>
             <Select
               value={String(form.status || "available")}
               onValueChange={(v) => set("status", v)}
             >
-              <SelectTrigger className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono">
+              <SelectTrigger className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -717,117 +717,117 @@ function ProductForm({
           </div>
 
           <div className="md:col-span-2">
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#BFFF00]">{"// ОПИСАНИЕ"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ОПИСАНИЕ"}</Label>
             <Textarea
               value={String(form.description || "")}
               onChange={(e) => set("description", e.target.value)}
               rows={3}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono text-sm"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono text-sm"
               placeholder="Подробное описание..."
             />
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#BFFF00]">{"// ЦЕНА (₽) *"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ЦЕНА (₽) *"}</Label>
             <Input
               type="number"
               value={String(form.price || "")}
               onChange={(e) => set("price", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
               placeholder="1490"
             />
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#BFFF00]">{"// СТАРАЯ ЦЕНА"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// СТАРАЯ ЦЕНА"}</Label>
             <Input
               type="number"
               value={String(form.oldPrice || "")}
               onChange={(e) => set("oldPrice", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
               placeholder="2490"
             />
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#BFFF00]">{"// ПОДПИСЧИКИ"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ПОДПИСЧИКИ"}</Label>
             <Input
               value={String(form.followers || "")}
               onChange={(e) => set("followers", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
               placeholder="10K подписчиков"
             />
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#BFFF00]">{"// БЕЙДЖИ"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// БЕЙДЖИ"}</Label>
             <Input
               value={String(form.badges || "")}
               onChange={(e) => set("badges", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
               placeholder="hot,verified,premium,top"
             />
             <div className="text-[10px] text-[#888] mt-1 font-mono uppercase">Доступно: hot, verified, top, premium</div>
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#BFFF00]">{"// JSON МЕТА"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// JSON МЕТА"}</Label>
             <Input
               value={String(form.metadata || "")}
               onChange={(e) => set("metadata", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#BFFF00] font-mono text-xs"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono text-xs"
               placeholder='{"country":"RU","age":"6 мес"}'
             />
           </div>
 
           <div className="md:col-span-2 pt-3 border-t border-[#1F1F1F]">
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FF2D87]">{"// ДАННЫЕ ДЛЯ ВЫДАЧИ ПОКУПАТЕЛЮ"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ДАННЫЕ ДЛЯ ВЫДАЧИ ПОКУПАТЕЛЮ"}</Label>
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#00F0FF]">Гарантия, дней</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">Гарантия, дней</Label>
             <Input type="number" min="0" value={String(form.warrantyDays || 14)} onChange={(e) => set("warrantyDays", e.target.value)} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A]" />
           </div>
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#00F0FF]">Последняя проверка</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">Последняя проверка</Label>
             <Input type="date" value={String(form.lastCheckedAt || "")} onChange={(e) => set("lastCheckedAt", e.target.value)} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A]" />
           </div>
           <div className="md:col-span-2">
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#00F0FF]">Опубликовать по расписанию</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">Опубликовать по расписанию</Label>
             <Input type="datetime-local" value={String(form.publishedAt || "")} onChange={(e) => set("publishedAt", e.target.value)} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A]" />
           </div>
           <div className="md:col-span-2">
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FFE600]">Внутренняя заметка (не видна покупателю)</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">Внутренняя заметка (не видна покупателю)</Label>
             <Textarea value={String(form.internalNote || "")} onChange={(e) => set("internalNote", e.target.value)} rows={2} className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A]" />
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FF2D87]">{"// ЛОГИН *"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ЛОГИН *"}</Label>
             <Input
               value={String(form.login || "")}
               onChange={(e) => set("login", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#FF2D87] font-mono"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
               placeholder="user@mail.com"
             />
           </div>
 
           <div>
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FF2D87]">{"// ПАРОЛЬ *"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ПАРОЛЬ *"}</Label>
             <Input
               value={String(form.password || "")}
               onChange={(e) => set("password", e.target.value)}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#FF2D87] font-mono"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono"
               placeholder="Password123!"
             />
           </div>
 
           <div className="md:col-span-2">
-            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#FF2D87]">{"// ИНСТРУКЦИЯ ПО ДОСТАВКЕ"}</Label>
+            <Label className="text-[10px] uppercase tracking-widest font-mono text-[#F7A600]">{"// ИНСТРУКЦИЯ ПО ДОСТАВКЕ"}</Label>
             <Textarea
               value={String(form.deliveryNote || "")}
               onChange={(e) => set("deliveryNote", e.target.value)}
               rows={2}
-              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#FF2D87] font-mono text-sm"
+              className="mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] font-mono text-sm"
               placeholder="Смените пароль сразу после входа..."
             />
           </div>
@@ -838,11 +838,11 @@ function ProductForm({
               className={cn(
                 "flex items-center gap-2 px-3 py-2 border-2 text-sm transition-all font-mono uppercase",
                 form.featured
-                  ? "bg-[#FFE600]/15 text-[#FFE600] border-[#FFE600]/40"
+                  ? "bg-[#F7A600]/15 text-[#F7A600] border-[#F7A600]/40"
                   : "bg-transparent text-[#888] border-[#2A2A2A]"
               )}
             >
-              <Star className="w-4 h-4" fill={form.featured ? "#FFE600" : "none"} />
+              <Star className="w-4 h-4" fill={form.featured ? "#F7A600" : "none"} />
               Рекомендуемый (показывается первым)
             </button>
           </div>
@@ -855,7 +855,7 @@ function ProductForm({
           <Button
             onClick={save}
             disabled={saving}
-            className="flex-1 bg-[#BFFF00] text-black hover:bg-[#FF2D87] hover:text-white font-black uppercase border-2 border-[#BFFF00] hover:border-[#FF2D87] font-mono tracking-wide"
+            className="flex-1 bg-[#F7A600] text-black hover:bg-[#F7A600] hover:text-white font-black uppercase border-2 border-[#F7A600] hover:border-[#F7A600] font-mono tracking-wide"
           >
             {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" strokeWidth={3} />}
             {isCreate ? "Создать" : "Сохранить"}

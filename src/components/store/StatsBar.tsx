@@ -10,7 +10,7 @@ export async function StatsBar() {
     { label: "КЛИЕНТОВ", value: map.stats_clients || "12 800+", color: "#F7A600" },
     { label: "АККАУНТОВ", value: map.stats_accounts || "5 200+", color: "#111318" },
     { label: "РЕЙТИНГ", value: `${map.stats_rating || "4.9"}/5`, color: "#E58B00" },
-    { label: "АПТАЙМ", value: map.stats_support || "24/7", color: "#59616D" },
+    { label: "АПТАЙМ", value: map.stats_support || "24/7", color: "#666666" },
   ];
 
   return (

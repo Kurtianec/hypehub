@@ -274,10 +274,10 @@ support@hypehub.vercel.app
               <div className="mb-2">
                 <span className={cn(
                   "inline-flex rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide",
-                  product.status === "available" && "border-green-400/30 bg-green-400/10 text-green-400",
+                  product.status === "available" && "border-[#F7A600]/30 bg-[#F7A600]/10 text-[#D48600]",
                   product.status === "reserved" && "border-yellow-400/30 bg-yellow-400/10 text-yellow-300",
-                  product.status === "sold" && "border-red-400/30 bg-red-400/10 text-red-300",
-                  product.status === "coming_soon" && "border-cyan-400/30 bg-cyan-400/10 text-cyan-300",
+                  product.status === "sold" && "border-[#F7A600]/30 bg-[#F7A600]/10 text-[#D48600]",
+                  product.status === "coming_soon" && "border-[#F7A600]/30 bg-[#F7A600]/10 text-[#D48600]",
                 )}>
                   {product.status === "available" ? "В продаже" : product.status === "reserved" ? "Зарезервирован" : product.status === "sold" ? "Продан" : "Скоро появится"}
                 </span>
@@ -322,15 +322,15 @@ support@hypehub.vercel.app
 
               {/* Guarantees — compact inline */}
               <div className="flex flex-wrap gap-x-3 gap-y-1 mb-4 text-[10px]">
-                <div className="flex items-center gap-1 text-green-400">
+                <div className="flex items-center gap-1 text-[#D48600]">
                   <Shield className="w-3 h-3" />
                   Гарантия
                 </div>
-                <div className="flex items-center gap-1 text-[#00F2EA]">
+                <div className="flex items-center gap-1 text-[#F7A600]">
                   <Zap className="w-3 h-3" />
                   Мгновенно
                 </div>
-                <div className="flex items-center gap-1 text-[#FFD700]">
+                <div className="flex items-center gap-1 text-[#F7A600]">
                   <Lock className="w-3 h-3" />
                   Безопасно
                 </div>
@@ -356,14 +356,14 @@ support@hypehub.vercel.app
                     {formatPrice(product.price, product.currency)}
                   </div>
                   {discount > 0 && (
-                    <div className="text-[10px] text-[#FF0050] font-bold">Скидка {discount}%</div>
+                    <div className="text-[10px] text-[#F7A600] font-bold">Скидка {discount}%</div>
                   )}
                 </div>
                 <Button
                   onClick={() => setStep("checkout")}
                   disabled={product.status !== "available"}
                   size="lg"
-                  className="bg-gradient-to-r from-[#FF0050] to-[#FF0000] text-white font-bold px-6"
+                  className="bg-gradient-to-r from-[#F7A600] to-[#F7A600] text-white font-bold px-6"
                 >
                   {product.status === "available" ? "Купить" : product.status === "coming_soon" ? "Скоро появится" : product.status === "reserved" ? "Зарезервирован" : "Продан"}
                   <ArrowRight className="w-4 h-4 ml-2" />
@@ -374,7 +374,7 @@ support@hypehub.vercel.app
               {related.length > 0 && onSwitchProduct && (
                 <div className="pt-3 border-t border-white/10">
                   <div className="flex items-center gap-1.5 mb-2">
-                    <Sparkles className="w-3 h-3 text-[#BFFF00]" />
+                    <Sparkles className="w-3 h-3 text-[#F7A600]" />
                     <h4 className="font-bold text-[10px] uppercase tracking-wide">Похожие товары</h4>
                   </div>
                   <div className="grid grid-cols-3 gap-2">
@@ -385,10 +385,10 @@ support@hypehub.vercel.app
                           setStep("details");
                           onSwitchProduct(rp);
                         }}
-                        className="text-left p-2 glass hover:bg-white/5 transition-colors border border-white/5 hover:border-[#BFFF00]/30"
+                        className="text-left p-2 glass hover:bg-white/5 transition-colors border border-white/5 hover:border-[#F7A600]/30"
                       >
                         <div className="text-[10px] font-bold line-clamp-2 mb-0.5 leading-tight">{rp.title}</div>
-                        <div className="text-xs font-black text-[#BFFF00]">
+                        <div className="text-xs font-black text-[#F7A600]">
                           {formatPrice(rp.price, rp.currency)}
                         </div>
                       </button>
@@ -450,9 +450,9 @@ support@hypehub.vercel.app
 
                 <div>
                   <Label className="text-[10px] uppercase tracking-wider">Способ оплаты</Label>
-                  <div className="p-2.5 rounded-lg border-2 border-[#FF0050] bg-[#FF0050]/10 mt-1">
+                  <div className="p-2.5 rounded-lg border-2 border-[#F7A600] bg-[#F7A600]/10 mt-1">
                     <div className="flex items-center gap-2">
-                      <Bitcoin className="w-5 h-5 text-[#FF7A00]" />
+                      <Bitcoin className="w-5 h-5 text-[#F7A600]" />
                       <div>
                         <div className="text-xs font-bold">Криптовалюта</div>
                         <div className="text-[10px] text-muted-foreground">BTC · USDT · TON — анонимно</div>
@@ -465,9 +465,9 @@ support@hypehub.vercel.app
                   <Label className="text-[10px] uppercase tracking-wider">Монета</Label>
                   <div className="grid grid-cols-3 gap-2 mt-1">
                     {[
-                        { k: "btc" as const, label: "BTC", color: "#F7931A" },
-                        { k: "usdt" as const, label: "USDT", color: "#26A17B" },
-                        { k: "ton" as const, label: "TON", color: "#0098EA" },
+                        { k: "btc" as const, label: "BTC", color: "#F7A600" },
+                        { k: "usdt" as const, label: "USDT", color: "#F7A600" },
+                        { k: "ton" as const, label: "TON", color: "#F7A600" },
                       ].map((c) => (
                         <button
                           key={c.k}
@@ -512,7 +512,7 @@ support@hypehub.vercel.app
 
                 <Button
                   onClick={createOrder}
-                  className="w-full bg-gradient-to-r from-[#FF0050] to-[#FF0000] text-white font-bold py-4"
+                  className="w-full bg-gradient-to-r from-[#F7A600] to-[#F7A600] text-white font-bold py-4"
                 >
                   Перейти к оплате
                   <ArrowRight className="w-4 h-4 ml-2" />
@@ -540,11 +540,11 @@ support@hypehub.vercel.app
                 {`Переведите точную сумму на ${cryptoLabel(cryptoType)} адрес`}
               </p>
               {secondsLeft > 0 && (
-                <div className="mb-3 border border-[#FFE600]/40 bg-[#FFE600]/10 px-3 py-2 text-center font-mono text-sm text-[#FFE600]">
+                <div className="mb-3 border border-[#F7A600]/40 bg-[#F7A600]/10 px-3 py-2 text-center font-mono text-sm text-[#F7A600]">
                   Товар зарезервирован ещё на {String(Math.floor(secondsLeft / 60)).padStart(2, "0")}:{String(secondsLeft % 60).padStart(2, "0")}
                 </div>
               )}
-              {orderId && <a href={`/order/${orderId}`} className="mb-3 block text-center text-xs text-[#00F0FF] hover:underline">Открыть постоянную страницу заказа</a>}
+              {orderId && <a href={`/order/${orderId}`} className="mb-3 block text-center text-xs text-[#F7A600] hover:underline">Открыть постоянную страницу заказа</a>}
 
               <div className="glass rounded-lg p-3 mb-3 space-y-3">
                 <div>
@@ -595,7 +595,7 @@ support@hypehub.vercel.app
                 </div>
               </div>
 
-              <div className="flex items-start gap-2 p-2 rounded-md bg-[#00F2EA]/10 text-[#00F2EA] text-[11px] mb-3">
+              <div className="flex items-start gap-2 p-2 rounded-md bg-[#F7A600]/10 text-[#F7A600] text-[11px] mb-3">
                 <AlertCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
                 <div>
                   После перевода нажмите «Я оплатил». Зачисление за 5–15 мин.
@@ -616,7 +616,7 @@ support@hypehub.vercel.app
 
               <Button
                 onClick={confirmPayment}
-                className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-4"
+                className="w-full bg-gradient-to-r from-[#F7A600] to-[#D48600] text-white font-bold py-4"
               >
                 <CheckCircle2 className="w-4 h-4 mr-2" />
                 Я оплатил — получить данные
@@ -637,7 +637,7 @@ support@hypehub.vercel.app
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                className="w-16 h-16 mx-auto mb-4 rounded-full border-4 border-white/10 border-t-[#FF0050]"
+                className="w-16 h-16 mx-auto mb-4 rounded-full border-4 border-white/10 border-t-[#F7A600]"
               />
               <h2 className="text-xl font-bold mb-2">Обрабатываем платёж...</h2>
               <p className="text-sm text-muted-foreground">Проверяем транзакцию и готовим данные аккаунта</p>
@@ -657,13 +657,13 @@ support@hypehub.vercel.app
                 transition={{ duration: 1.5, repeat: Infinity }}
                 className="w-16 h-16 mx-auto mb-4 flex items-center justify-center"
               >
-                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#FFD700" strokeWidth="2.5">
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#F7A600" strokeWidth="2.5">
                   <circle cx="12" cy="12" r="10"/>
                   <path d="M12 8v4"/>
                   <path d="M12 16h.01"/>
                 </svg>
               </motion.div>
-              <h2 className="text-xl font-bold mb-2 text-[#FFD700]">Вы не оплатили</h2>
+              <h2 className="text-xl font-bold mb-2 text-[#F7A600]">Вы не оплатили</h2>
               <p className="text-sm text-muted-foreground mb-4">
                 Идёт проверка платежа... Ожидание подтверждения транзакции.
               </p>
@@ -711,7 +711,7 @@ support@hypehub.vercel.app
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
-                  className="w-14 h-14 mx-auto mb-3 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center"
+                  className="w-14 h-14 mx-auto mb-3 rounded-full bg-gradient-to-br from-[#F7A600] to-[#D48600] flex items-center justify-center"
                 >
                   <CheckCircle2 className="w-7 h-7 text-white" />
                 </motion.div>
@@ -752,7 +752,7 @@ support@hypehub.vercel.app
                 </div>
 
                 {delivery.deliveryNote && (
-                  <div className="p-2 rounded-md bg-[#00F2EA]/10 text-[#00F2EA] text-[11px]">
+                  <div className="p-2 rounded-md bg-[#F7A600]/10 text-[#F7A600] text-[11px]">
                     <AlertCircle className="w-3.5 h-3.5 inline mr-1" />
                     {delivery.deliveryNote}
                   </div>
@@ -762,7 +762,7 @@ support@hypehub.vercel.app
               <div className="flex flex-col sm:flex-row gap-2">
                 <Button
                   onClick={downloadCredentials}
-                  className="flex-1 bg-gradient-to-r from-[#FF0050] to-[#FF0000] text-white font-bold py-3"
+                  className="flex-1 bg-gradient-to-r from-[#F7A600] to-[#F7A600] text-white font-bold py-3"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Скачать .txt

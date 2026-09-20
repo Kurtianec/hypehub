@@ -89,7 +89,7 @@ export function AdminVisitors() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-[#FF0050]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#F7A600]" />
       </div>
     );
   }
@@ -101,7 +101,7 @@ export function AdminVisitors() {
       <div className="flex flex-col sm:flex-row justify-between gap-3 mb-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-1 h-8 bg-[#10B981]" />
+            <div className="w-1 h-8 bg-[#F7A600]" />
             <span className="font-mono text-xs text-[#888] uppercase tracking-widest">{"// SECTION_VISITORS"}</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-black mb-1 uppercase tracking-tighter">Посетители</h1>
@@ -115,7 +115,7 @@ export function AdminVisitors() {
               className={cn(
                 "px-3 py-1.5 text-xs font-black uppercase tracking-wide transition-all font-mono",
                 range === r.value
-                  ? "bg-[#BFFF00] text-black"
+                  ? "bg-[#F7A600] text-black"
                   : "text-[#888] hover:text-foreground"
               )}
             >
@@ -127,16 +127,16 @@ export function AdminVisitors() {
 
       {/* Stats cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
-        <StatCard icon={Eye} label="Всего визитов" value={data.stats.total} color="#FF0050" />
-        <StatCard icon={Users} label="Уникальных" value={data.stats.unique} color="#00F2EA" />
-        <StatCard icon={TrendingUp} label="Сегодня" value={data.stats.today} color="#FFD700" />
-        <StatCard icon={Globe} label="Стран" value={data.byCountry.length} color="#229ED9" />
+        <StatCard icon={Eye} label="Всего визитов" value={data.stats.total} color="#F7A600" />
+        <StatCard icon={Users} label="Уникальных" value={data.stats.unique} color="#F7A600" />
+        <StatCard icon={TrendingUp} label="Сегодня" value={data.stats.today} color="#F7A600" />
+        <StatCard icon={Globe} label="Стран" value={data.byCountry.length} color="#F7A600" />
       </div>
 
       {/* Hourly chart */}
       <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5 mb-6" style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}>
         <h3 className="font-bold mb-4 flex items-center gap-2">
-          <Clock className="w-4 h-4 text-[#FF0050]" />
+          <Clock className="w-4 h-4 text-[#F7A600]" />
           Активность за 24 часа
         </h3>
         <div className="flex items-end gap-1 h-32">
@@ -149,7 +149,7 @@ export function AdminVisitors() {
               className="flex-1 group relative"
             >
               <div
-                className="w-full rounded-t-md bg-gradient-to-t from-[#FF0050] to-[#FF8C00] hover:from-[#FF0050] hover:to-[#FF0050] transition-colors cursor-pointer"
+                className="w-full rounded-t-md bg-gradient-to-t from-[#F7A600] to-[#FF8C00] hover:from-[#F7A600] hover:to-[#F7A600] transition-colors cursor-pointer"
                 style={{ minHeight: h.count > 0 ? "8px" : "2px", opacity: h.count > 0 ? 1 : 0.2 }}
               />
               <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md bg-black/80 text-[10px] font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
@@ -169,7 +169,7 @@ export function AdminVisitors() {
         {/* By country */}
         <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5">
           <h3 className="font-bold mb-4 flex items-center gap-2">
-            <Globe className="w-4 h-4 text-[#00F2EA]" />
+            <Globe className="w-4 h-4 text-[#F7A600]" />
             По странам
           </h3>
           {data.byCountry.length === 0 ? (
@@ -191,7 +191,7 @@ export function AdminVisitors() {
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${(c.count / max) * 100}%` }}
-                        className="h-full bg-[#00F0FF]"
+                        className="h-full bg-[#F7A600]"
                       />
                     </div>
                   </div>
@@ -204,7 +204,7 @@ export function AdminVisitors() {
         {/* By city */}
         <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5">
           <h3 className="font-bold mb-4 flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-[#FF0050]" />
+            <MapPin className="w-4 h-4 text-[#F7A600]" />
             По городам
           </h3>
           {data.byCity.length === 0 ? (
@@ -223,7 +223,7 @@ export function AdminVisitors() {
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${(c.count / max) * 100}%` }}
-                        className="h-full bg-[#FF2D87]"
+                        className="h-full bg-[#F7A600]"
                       />
                     </div>
                   </div>
@@ -236,7 +236,7 @@ export function AdminVisitors() {
         {/* By referrer */}
         <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5">
           <h3 className="font-bold mb-4 flex items-center gap-2">
-            <Link2 className="w-4 h-4 text-[#FFD700]" />
+            <Link2 className="w-4 h-4 text-[#F7A600]" />
             Источники трафика
           </h3>
           {data.byReferrer.length === 0 ? (
@@ -254,7 +254,7 @@ export function AdminVisitors() {
                       </div>
                       <div className="h-1.5 bg-[#1A1A1A] overflow-hidden">
                         <div
-                          className="h-full bg-[#FFE600]"
+                          className="h-full bg-[#F7A600]"
                           style={{ width: `${(r.count / max) * 100}%` }}
                         />
                       </div>
@@ -269,7 +269,7 @@ export function AdminVisitors() {
         {/* By path */}
         <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5">
           <h3 className="font-bold mb-4 flex items-center gap-2">
-            <ArrowRight className="w-4 h-4 text-[#A855F7]" />
+            <ArrowRight className="w-4 h-4 text-[#F7A600]" />
             Посещённые страницы
           </h3>
           {data.byPath.length === 0 ? (
@@ -286,7 +286,7 @@ export function AdminVisitors() {
                     </div>
                     <div className="h-1.5 bg-[#1A1A1A] overflow-hidden">
                       <div
-                        className="h-full bg-[#A855F7]"
+                        className="h-full bg-[#F7A600]"
                         style={{ width: `${(p.count / max) * 100}%` }}
                       />
                     </div>
@@ -301,7 +301,7 @@ export function AdminVisitors() {
       {/* Recent visitors table */}
       <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5">
         <h3 className="font-bold mb-4 flex items-center gap-2">
-          <Monitor className="w-4 h-4 text-[#00F2EA]" />
+          <Monitor className="w-4 h-4 text-[#F7A600]" />
           Последние посетители ({data.recent.length})
         </h3>
         {data.recent.length === 0 ? (

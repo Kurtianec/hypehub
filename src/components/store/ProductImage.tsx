@@ -23,20 +23,20 @@ export function ProductImage({
   // Solid colors per platform
   const solidColors: Record<Platform, string> = {
     tiktok: "#000000",
-    youtube: "#FF0000",
-    vk: "#0077FF",
-    instagram: "#E1306C",
-    telegram: "#229ED9",
-    other: "#A855F7",
+    youtube: "#F7A600",
+    vk: "#F7A600",
+    instagram: "#F7A600",
+    telegram: "#F7A600",
+    other: "#F7A600",
   };
 
   const accentColors: Record<Platform, string> = {
-    tiktok: "#00F2EA",
+    tiktok: "#F7A600",
     youtube: "#FFFFFF",
     vk: "#FFFFFF",
-    instagram: "#FFD700",
+    instagram: "#F7A600",
     telegram: "#FFFFFF",
-    other: "#FFE600",
+    other: "#F7A600",
   };
 
   const bg = solidColors[platform];

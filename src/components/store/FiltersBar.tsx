@@ -64,7 +64,7 @@ export function FiltersBar({
         <select
           value={sort}
           onChange={(e) => onSortChange(e.target.value as SortOption)}
-          className="appearance-none bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#BFFF00] text-xs font-mono uppercase font-bold pl-9 pr-8 py-2.5 cursor-pointer focus:outline-none focus:border-[#BFFF00] transition-colors"
+          className="appearance-none bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#F7A600] text-xs font-mono uppercase font-bold pl-9 pr-8 py-2.5 cursor-pointer focus:outline-none focus:border-[#F7A600] transition-colors"
         >
           <option value="default">По умолчанию</option>
           <option value="price-asc">Цена ↑</option>
@@ -72,7 +72,7 @@ export function FiltersBar({
           <option value="views-desc">Популярные</option>
           <option value="newest">Новые</option>
         </select>
-        <ArrowDownUp className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#BFFF00] pointer-events-none" strokeWidth={2.5} />
+        <ArrowDownUp className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#F7A600] pointer-events-none" strokeWidth={2.5} />
         <svg className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3 h-3 text-[#888] pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
           <path d="M6 9l6 6 6-6"/>
         </svg>
@@ -84,14 +84,14 @@ export function FiltersBar({
         className={cn(
           "flex items-center gap-2 px-3 py-2.5 border-2 text-xs font-mono uppercase font-bold transition-colors",
           activeCount > 0
-            ? "bg-[#00F0FF]/10 text-[#00F0FF] border-[#00F0FF]/40"
-            : "bg-[#121212] text-[#888] border-[#2A2A2A] hover:border-[#00F0FF] hover:text-[#00F0FF]"
+            ? "bg-[#F7A600]/10 text-[#F7A600] border-[#F7A600]/40"
+            : "bg-[#121212] text-[#888] border-[#2A2A2A] hover:border-[#F7A600] hover:text-[#F7A600]"
         )}
       >
         <SlidersHorizontal className="w-3.5 h-3.5" strokeWidth={2.5} />
         Фильтры
         {activeCount > 0 && (
-          <span className="bg-[#00F0FF] text-black px-1.5 py-0.5 text-[9px] font-black">{activeCount}</span>
+          <span className="bg-[#F7A600] text-black px-1.5 py-0.5 text-[9px] font-black">{activeCount}</span>
         )}
       </button>
 
@@ -104,10 +104,10 @@ export function FiltersBar({
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="absolute top-full mt-2 right-0 w-[340px] bg-[#0E0E0E] border-2 border-[#00F0FF] z-[100] overflow-hidden shadow-2xl"
+              className="absolute top-full mt-2 right-0 w-[340px] bg-[#0E0E0E] border-2 border-[#F7A600] z-[100] overflow-hidden shadow-2xl"
             >
               <div className="flex items-center justify-between p-4 border-b-2 border-[#1F1F1F]">
-                <span className="text-xs font-mono uppercase tracking-widest text-[#00F0FF]">{"// ФИЛЬТРЫ"}</span>
+                <span className="text-xs font-mono uppercase tracking-widest text-[#F7A600]">{"// ФИЛЬТРЫ"}</span>
                 <button onClick={() => setOpen(false)} className="text-[#888] hover:text-foreground">
                   <X className="w-4 h-4" />
                 </button>
@@ -126,7 +126,7 @@ export function FiltersBar({
                           onClick={() => toggleCategory(c.id)}
                           className={cn(
                             "px-2.5 py-1.5 text-[10px] font-bold uppercase border-2 transition-all font-mono",
-                            isActive ? "text-black" : "text-[#888] border-[#2A2A2A] hover:border-[#00F0FF]"
+                            isActive ? "text-black" : "text-[#888] border-[#2A2A2A] hover:border-[#F7A600]"
                           )}
                           style={isActive ? { background: PLATFORM_COLORS[c.platform], borderColor: PLATFORM_COLORS[c.platform] } : {}}
                         >
@@ -146,7 +146,7 @@ export function FiltersBar({
                       value={filters.minPrice}
                       onChange={(e) => onFiltersChange({ ...filters, minPrice: e.target.value })}
                       placeholder="от"
-                      className="w-full bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#00F0FF] px-2 py-1.5 text-xs font-mono"
+                      className="w-full bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] px-2 py-1.5 text-xs font-mono"
                     />
                     <span className="text-[#888]">—</span>
                     <input
@@ -154,7 +154,7 @@ export function FiltersBar({
                       value={filters.maxPrice}
                       onChange={(e) => onFiltersChange({ ...filters, maxPrice: e.target.value })}
                       placeholder="до"
-                      className="w-full bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#00F0FF] px-2 py-1.5 text-xs font-mono"
+                      className="w-full bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#F7A600] px-2 py-1.5 text-xs font-mono"
                     />
                   </div>
                 </div>
@@ -166,8 +166,8 @@ export function FiltersBar({
                     className={cn(
                       "w-full flex items-center justify-between px-3 py-2 border-2 text-xs font-mono uppercase transition-all",
                       filters.hasMonetization
-                        ? "bg-[#BFFF00]/10 text-[#BFFF00] border-[#BFFF00]/40"
-                        : "text-[#888] border-[#2A2A2A] hover:border-[#BFFF00]"
+                        ? "bg-[#F7A600]/10 text-[#F7A600] border-[#F7A600]/40"
+                        : "text-[#888] border-[#2A2A2A] hover:border-[#F7A600]"
                     )}
                   >
                     С монетизацией
@@ -178,8 +178,8 @@ export function FiltersBar({
                     className={cn(
                       "w-full flex items-center justify-between px-3 py-2 border-2 text-xs font-mono uppercase transition-all",
                       filters.hasDiscount
-                        ? "bg-[#FF2D87]/10 text-[#FF2D87] border-[#FF2D87]/40"
-                        : "text-[#888] border-[#2A2A2A] hover:border-[#FF2D87]"
+                        ? "bg-[#F7A600]/10 text-[#F7A600] border-[#F7A600]/40"
+                        : "text-[#888] border-[#2A2A2A] hover:border-[#F7A600]"
                     )}
                   >
                     Со скидкой
@@ -191,7 +191,7 @@ export function FiltersBar({
                 {activeCount > 0 && (
                   <button
                     onClick={reset}
-                    className="w-full py-2 text-xs font-mono uppercase text-[#FF3333] hover:bg-[#FF3333]/10 border-2 border-[#FF3333]/30 transition-colors"
+                    className="w-full py-2 text-xs font-mono uppercase text-[#F7A600] hover:bg-[#F7A600]/10 border-2 border-[#F7A600]/30 transition-colors"
                   >
                     Сбросить ({activeCount})
                   </button>
