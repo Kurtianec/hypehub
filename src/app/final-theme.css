@@ -1,0 +1,257 @@
+/* HYPEHUB SPLIT SCENE — authoritative final palette layer */
+:root,
+:root:not(.dark),
+.dark {
+  --background:#080808;
+  --foreground:#f7f7f7;
+  --card:#ffffff;
+  --card-foreground:#161616;
+  --popover:#ffffff;
+  --popover-foreground:#161616;
+  --primary:#94183d;
+  --primary-foreground:#ffffff;
+  --secondary:#f1f1f1;
+  --secondary-foreground:#202020;
+  --muted:#ededed;
+  --muted-foreground:#707070;
+  --accent:#94183d;
+  --accent-foreground:#ffffff;
+  --border:#dedede;
+  --input:#dedede;
+  --ring:#94183d;
+}
+
+html { background:#080808; }
+body,
+:root:not(.dark) body {
+  color:#f5f5f5 !important;
+  background:#080808 !important;
+  background-image:none !important;
+}
+
+.storefront-v3,
+:root:not(.dark) .storefront-v3 { color:#f5f5f5; background:#080808 !important; }
+
+/* Black opening scene: header + hero */
+.prism-header { z-index:80; }
+.storefront-v3 header > div > div,
+:root:not(.dark) .storefront-v3 header > div > div {
+  color:#f6f6f6 !important;
+  border-color:rgba(255,255,255,.13) !important;
+  background:rgba(13,13,13,.90) !important;
+  box-shadow:0 24px 65px -38px rgba(148,24,61,.75), inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+.prism-brand, .prism-brand-name, .prism-nav-links button { color:#e9e9e9 !important; }
+.prism-nav-links { background:rgba(255,255,255,.045) !important; }
+.prism-nav-links button:hover { color:#fff !important; background:rgba(148,24,61,.22) !important; }
+.prism-icon-btn,
+.prism-header .prism-nav-actions > div > button,
+.prism-menu-trigger { color:#f4f4f4 !important; border-color:rgba(255,255,255,.12) !important; background:#151515 !important; }
+
+.prism-hero {
+  min-height:430px;
+  padding:104px 18px 92px !important;
+  background:
+    radial-gradient(700px 370px at 12% 6%, rgba(148,24,61,.28), transparent 68%),
+    radial-gradient(520px 300px at 91% 65%, rgba(148,24,61,.12), transparent 72%),
+    linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px),
+    #080808 !important;
+  background-size:auto,auto,42px 42px,42px 42px,auto !important;
+}
+.prism-hero-grid { opacity:.26 !important; background-image:radial-gradient(circle,rgba(195,71,107,.7) 0 1px,transparent 1.5px) !important; background-size:130px 130px !important; }
+.prism-hero-shell,
+.dark .prism-hero-shell {
+  color:#f5f5f5 !important;
+  border-color:rgba(195,71,107,.28) !important;
+  background:linear-gradient(120deg,rgba(25,25,25,.96),rgba(11,11,11,.98)) !important;
+  box-shadow:0 40px 110px -68px rgba(148,24,61,.9),inset 0 1px 0 rgba(255,255,255,.055) !important;
+}
+.prism-eyebrow { color:#d05b7d !important; }
+.prism-hero-copy h1,
+.dark .prism-hero-copy h1 { color:#fff !important; }
+.prism-hero-copy h1 span { color:#b72a53 !important; }
+.prism-hero-copy p,
+.dark .prism-hero-copy p { color:#aaa !important; }
+.prism-catalog-jump {
+  color:#fff !important;
+  background:linear-gradient(145deg,#a82049,#671028) !important;
+  box-shadow:0 20px 48px -24px rgba(168,32,73,.9) !important;
+}
+.prism-trust-item,
+.dark .prism-trust-item { color:#c8c8c8 !important; border-color:rgba(255,255,255,.09) !important; background:rgba(255,255,255,.035) !important; }
+.prism-trust-item svg { color:#d05b7d !important; }
+
+/* White marketplace scene with a real wave entering from the black hero */
+.storefront-light-zone {
+  --foreground:#171717;
+  --card-foreground:#171717;
+  --muted-foreground:#707070;
+  --border:#dedede;
+  position:relative;
+  isolation:isolate;
+  color:#171717;
+  padding-top:34px;
+  padding-bottom:42px;
+  background:#f7f7f7;
+}
+.storefront-light-zone::before {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:0;
+  right:0;
+  top:-82px;
+  height:84px;
+  background-repeat:no-repeat;
+  background-position:center bottom;
+  background-size:100% 100%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23f7f7f7' d='M0 72C170 22 292 112 480 68S765 14 954 63s310 43 486-6v63H0z'/%3E%3C/svg%3E");
+}
+.storefront-light-zone::after {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  pointer-events:none;
+  opacity:.45;
+  background:radial-gradient(600px 330px at 8% 12%,rgba(148,24,61,.055),transparent 72%),radial-gradient(circle,rgba(148,24,61,.12) 0 1px,transparent 1.5px);
+  background-size:auto,180px 180px;
+  mask-image:linear-gradient(#000,transparent 74%);
+}
+.prism-catalog { padding:14px 0 62px !important; background:transparent !important; }
+.prism-catalog-heading { border-color:#dedede !important; }
+.prism-catalog-heading h2,
+.storefront-light-zone section h2 { color:#171717 !important; }
+.prism-section-index { color:#94183d !important; }
+.prism-catalog-heading p { color:#747474 !important; }
+
+/* Catalogue controls and cards: one unambiguous light palette */
+.storefront-light-zone input,
+.storefront-light-zone textarea,
+.storefront-light-zone select,
+.storefront-light-zone button[role="combobox"] {
+  color:#202020 !important;
+  border-color:#dcdcdc !important;
+  background:#fff !important;
+}
+.storefront-light-zone input::placeholder,
+.storefront-light-zone textarea::placeholder { color:#8a8a8a !important; }
+.storefront-light-zone [class*="bg-[#121212]"],
+.storefront-light-zone [class*="bg-[#0E0E0E]"],
+.storefront-light-zone [class*="bg-[#0A0A0A]"],
+.storefront-light-zone [class*="bg-[#1A1A1A]"] { color:#222 !important; background-color:#fff !important; }
+.storefront-light-zone [class*="border-[#2A2A2A]"],
+.storefront-light-zone [class*="border-[#1F1F1F]"] { border-color:#dedede !important; }
+
+.product-card,
+:root:not(.dark) .product-card {
+  color:#171717 !important;
+  border-color:#dfdfdf !important;
+  background:#fff !important;
+  box-shadow:0 16px 42px -32px rgba(0,0,0,.38) !important;
+}
+.product-card:hover { border-color:rgba(148,24,61,.5) !important; box-shadow:0 24px 52px -34px rgba(94,12,38,.42) !important; }
+.product-card h3 { color:#1b1b1b !important; }
+.product-card .text-\[\#888\] { color:#757575 !important; }
+.product-card [class*="border-[#1F1F1F]"] { border-color:#e1e1e1 !important; }
+.product-card [class*="bg-[#1A1A1A]"] { color:#666 !important; border-color:#e2e2e2 !important; background:#f4f4f4 !important; }
+.product-buy-button { color:#fff !important; border:1px solid #181818 !important; background:#181818 !important; }
+.product-card:hover .product-buy-button { border-color:#94183d !important; background:#94183d !important; }
+
+/* Content sections remain clean white, burgundy is only an accent */
+.storefront-light-zone .btn-primary { color:#fff; background:linear-gradient(135deg,#a82049,#71102b); }
+.storefront-light-zone .btn-secondary { color:#222; border-color:#d8d8d8; background:#fff; }
+.storefront-light-zone .trust-card { color:#222; border-color:#e0e0e0; background:#fff; }
+
+/* Footer: white-to-black wave, then fully black scene */
+.storefront-v3 footer,
+:root:not(.dark) .storefront-v3 footer {
+  position:relative;
+  z-index:1;
+  margin-top:82px !important;
+  color:#ededed !important;
+  border-top:0 !important;
+  background:
+    radial-gradient(650px 280px at 13% 5%,rgba(148,24,61,.24),transparent 72%),
+    radial-gradient(520px 260px at 92% 88%,rgba(148,24,61,.12),transparent 70%),
+    #080808 !important;
+  box-shadow:none !important;
+}
+.storefront-v3 footer::before {
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:-82px;
+  height:84px;
+  background-repeat:no-repeat;
+  background-position:center bottom;
+  background-size:100% 100%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23080808' d='M0 70c183 51 298-34 480 7s300 46 480-2 306-30 480 4v41H0z'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.storefront-v3 footer::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.2;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:34px 34px;
+  mask-image:linear-gradient(#000,transparent 88%);
+}
+.storefront-v3 footer h3 { color:#fff !important; }
+.storefront-v3 footer .footer-trust-chip { color:#ddd !important; border-color:rgba(255,255,255,.11) !important; background:rgba(255,255,255,.04) !important; }
+
+@media (max-width:640px) {
+  .prism-hero { min-height:360px; padding:80px 8px 76px !important; }
+  .storefront-light-zone::before,
+  .storefront-v3 footer::before { top:-54px; height:56px; }
+  .storefront-v3 footer { margin-top:54px !important; }
+  .storefront-light-zone { padding-top:22px; }
+}
+
+/* Internal storefront pages keep the same restrained black/white/bordeaux language. */
+.storefront-v3 main > section:not(.prism-hero):not(.prism-catalog),
+.storefront-v3 main > div:not(.storefront-light-zone) {
+  color:#ededed;
+}
+.storefront-v3 main > section:not(.prism-hero):not(.prism-catalog) input,
+.storefront-v3 main > section:not(.prism-hero):not(.prism-catalog) textarea,
+.storefront-v3 main > section:not(.prism-hero):not(.prism-catalog) select {
+  color:#f3f3f3 !important;
+  border-color:#303030 !important;
+  background:#141414 !important;
+}
+
+/* Admin follows the same palette without inheriting the white catalogue cards. */
+.admin-v3,
+.admin-prism,
+:root:not(.dark) .admin-prism {
+  --background:#090909;
+  --foreground:#f2f2f2;
+  --card:#131313;
+  --card-foreground:#f2f2f2;
+  --popover:#151515;
+  --popover-foreground:#f2f2f2;
+  --border:#303030;
+  --input:#303030;
+  color:#f2f2f2 !important;
+  background-color:#090909 !important;
+  background-image:radial-gradient(720px 420px at 98% 0%,rgba(148,24,61,.17),transparent 68%) !important;
+}
+.admin-v3 .admin-sidebar,
+.admin-v3 aside { border-color:#292929 !important; background:#0d0d0d !important; }
+.admin-v3 .admin-content,
+.admin-v3 [role="dialog"] { color:#f2f2f2 !important; background-color:#111 !important; }
+.admin-v3 input,
+.admin-v3 textarea,
+.admin-v3 select,
+.admin-v3 button[role="combobox"] { color:#f3f3f3 !important; border-color:#303030 !important; background:#151515 !important; }
+.admin-v3 .admin-nav-item { color:#aaa !important; }
+.admin-v3 .admin-nav-item:hover { color:#fff !important; background:rgba(148,24,61,.18) !important; }
+.admin-v3 [class*="bg-[#8E1537]"] { color:#fff !important; background:#94183d !important; }
+.admin-v3 [class*="border-[#2A2A2A]"],
+.admin-v3 [class*="border-[#1F1F1F]"] { border-color:#303030 !important; }

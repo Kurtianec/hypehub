@@ -92,18 +92,20 @@ export function Storefront({
       />
       <main className="flex-1">
         <Hero />
-        <Catalog
-          categories={categories}
-          products={products}
-          settings={settingsObj}
-          favoritesHook={favoritesHook}
-          convertPrice={convert}
-          currency={currency}
-          onToggleCurrency={toggleCurrency}
-        />
-        <HowToBuy />
-        <Advantages settings={settingsObj} />
-        <FAQ faqs={faqs} />
+        <div className="storefront-light-zone">
+          <Catalog
+            categories={categories}
+            products={products}
+            settings={settingsObj}
+            favoritesHook={favoritesHook}
+            convertPrice={convert}
+            currency={currency}
+            onToggleCurrency={toggleCurrency}
+          />
+          <HowToBuy />
+          <Advantages settings={settingsObj} />
+          <FAQ faqs={faqs} />
+        </div>
       </main>
       <Footer
         settings={settingsObj}
