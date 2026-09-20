@@ -1841,3 +1841,60 @@ body {
 :root:not(.dark) .storefront-v3 [class*="border-[#2A2A2A]"], :root:not(.dark) .storefront-v3 [class*="border-[#1F1F1F]"] { border-color: #E5E5E5 !important; }
 :root:not(.dark) .storefront-v3 input, :root:not(.dark) .storefront-v3 textarea, :root:not(.dark) .storefront-v3 select { background: #fff !important; color: #111318; }
 :root:not(.dark) .storefront-v3 footer { background: #E5E7EB; }
+
+/* Critical contrast locks — deliberately last in this file. */
+.storefront-v3 .hype-nav-shell,
+:root:not(.dark) .storefront-v3 .hype-nav-shell {
+  color:#f7f7f7 !important;
+  border-color:rgba(255,255,255,.13) !important;
+  background:rgba(13,13,13,.94) !important;
+  box-shadow:0 24px 65px -38px rgba(148,24,61,.75),inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+.hype-nav-shell .prism-brand,
+.hype-nav-shell .prism-brand-name,
+.hype-nav-shell .prism-nav-links button { color:#ededed !important; }
+.hype-nav-shell .prism-nav-links { background:rgba(255,255,255,.05) !important; }
+.hype-nav-shell .prism-icon-btn,
+.hype-nav-shell .prism-nav-actions > div > button,
+.hype-nav-shell .prism-menu-trigger { color:#fff !important; border-color:rgba(255,255,255,.12) !important; background:#171717 !important; }
+.hype-nav-shell .prism-icon-btn:hover,
+.hype-nav-shell .prism-nav-actions > div > button:hover { color:#fff !important; border-color:rgba(195,71,107,.55) !important; background:#241218 !important; }
+
+.storefront-v3 .hype-menu-panel,
+:root:not(.dark) .storefront-v3 .hype-menu-panel {
+  color:#f5f5f5 !important;
+  border-color:rgba(255,255,255,.11) !important;
+  background:linear-gradient(145deg,#181818,#090909 75%) !important;
+}
+.hype-menu-panel .prism-menu-top,
+.hype-menu-panel .prism-menu-links span,
+.hype-menu-panel .prism-menu-tools button { color:#eee !important; }
+
+.storefront-v3 .hype-product-dialog,
+:root:not(.dark) .storefront-v3 .hype-product-dialog {
+  color:#171717 !important;
+  border-color:#d9d9d9 !important;
+  background:#fff !important;
+  box-shadow:0 28px 90px rgba(0,0,0,.42) !important;
+}
+.hype-product-dialog h2,
+.hype-product-dialog h3,
+.hype-product-dialog h4,
+.hype-product-dialog b,
+.hype-product-dialog .text-foreground { color:#171717 !important; }
+.hype-product-dialog .text-muted-foreground { color:#6f6f6f !important; }
+.hype-product-dialog .glass,
+.hype-product-dialog .glass-strong { color:#252525 !important; border-color:#dedede !important; background:#f6f6f6 !important; }
+.hype-product-dialog input,
+.hype-product-dialog textarea { color:#171717 !important; border-color:#d8d8d8 !important; background:#fff !important; }
+.hype-product-dialog input::placeholder,
+.hype-product-dialog textarea::placeholder { color:#888 !important; }
+.hype-product-dialog [class*="border-white"] { border-color:#dedede !important; }
+.hype-product-dialog [class*="bg-black"] { color:#343434 !important; background:#f0f0f0 !important; }
+.hype-product-dialog .gradient-text { color:#94183d !important; background:none !important; -webkit-text-fill-color:#94183d !important; }
+
+.product-card .product-monetization {
+  color:#71102b !important;
+  border-color:#d8a1b1 !important;
+  background:#f6e9ee !important;
+}

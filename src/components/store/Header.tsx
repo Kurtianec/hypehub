@@ -39,7 +39,7 @@ export function Header({ siteName = "ХайпХаб", products = [], categories 
   return (
     <>
       <header className={`prism-header ${scrolled ? "is-scrolled" : ""}`}>
-        <div className="prism-nav-shell">
+        <div className="prism-nav-shell hype-nav-shell">
           <Link href="/" className="prism-brand" aria-label={`${siteName} — главная`}>
             <span className="prism-brand-icon"><BrandMark className="h-full w-full" /></span><span className="prism-brand-name">{siteName}</span>
           </Link>
@@ -59,7 +59,7 @@ export function Header({ siteName = "ХайпХаб", products = [], categories 
       <AnimatePresence>
         {open && (
           <motion.div className="prism-menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <motion.div className="prism-menu-panel" initial={{ opacity: 0, y: -12, scale: .96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: .97 }} transition={{ duration: .22, ease: [0.16, 1, 0.3, 1] }}>
+            <motion.div className="prism-menu-panel hype-menu-panel" initial={{ opacity: 0, y: -12, scale: .96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: .97 }} transition={{ duration: .22, ease: [0.16, 1, 0.3, 1] }}>
               <div className="prism-menu-top"><span>Меню</span><button onClick={() => setOpen(false)} aria-label="Закрыть"><X className="h-5 w-5"/></button></div>
               <div className="prism-menu-links">
                 {nav.map(([label, href], index) => <button key={href} onClick={() => go(href)}><small>0{index + 1}</small><span>{label}</span></button>)}

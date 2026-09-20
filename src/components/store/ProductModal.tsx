@@ -254,7 +254,21 @@ support@hypehub.vercel.app
     <>
       <Confetti trigger={showConfetti} />
       <Dialog open={!!product} onOpenChange={(open) => !open && handleClose()}>
-        <DialogContent className="max-w-xl max-h-[92vh] overflow-hidden glass-strong border-white/10 p-0 flex flex-col">
+        <DialogContent
+          className="hype-product-dialog max-w-xl max-h-[92vh] overflow-hidden border p-0 flex flex-col"
+          style={{
+            "--background": "#ffffff",
+            "--foreground": "#171717",
+            "--card": "#ffffff",
+            "--card-foreground": "#171717",
+            "--popover": "#ffffff",
+            "--popover-foreground": "#171717",
+            "--muted": "#f1f1f1",
+            "--muted-foreground": "#6f6f6f",
+            "--border": "#dedede",
+            "--input": "#dedede",
+          } as React.CSSProperties}
+        >
           <DialogHeader className="sr-only">
             <DialogTitle>{product.title}</DialogTitle>
             <DialogDescription>Детали товара и оформление заказа</DialogDescription>
@@ -340,7 +354,7 @@ support@hypehub.vercel.app
                 </div>
               </div>
 
-              <div className="mb-4 rounded-xl border border-white/10 bg-black/20 p-3 text-[11px] leading-relaxed text-muted-foreground">
+              <div className="mb-4 rounded-xl border border-[#dedede] bg-[#f1f1f1] p-3 text-[11px] leading-relaxed text-[#666]">
                 <b className="text-foreground">После покупки:</b> вы получите логин, пароль и инструкцию. Сразу смените пароль, привяжите свои контакты и включите защиту входа.
               </div>
 
@@ -385,7 +399,7 @@ support@hypehub.vercel.app
                           setStep("details");
                           onSwitchProduct(rp);
                         }}
-                        className="text-left p-2 glass hover:bg-white/5 transition-colors border border-white/5 hover:border-[#8E1537]/30"
+                        className="text-left p-2 bg-[#f7f7f7] transition-colors border border-[#dedede] hover:border-[#8E1537]/40"
                       >
                         <div className="text-[10px] font-bold line-clamp-2 mb-0.5 leading-tight">{rp.title}</div>
                         <div className="text-xs font-black text-[#8E1537]">

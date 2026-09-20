@@ -535,7 +535,7 @@ function ProductCard({
             </span>
           )}
           {meta.monetization && (
-            <span className="px-1.5 py-0.5 text-[10px] bg-[#8E1537]/10 border border-[#8E1537]/40 text-[#8E1537] font-mono font-semibold flex items-center gap-1">
+            <span className="product-monetization px-1.5 py-0.5 text-[10px] bg-[#f6e9ee] border border-[#d8a1b1] text-[#71102B] font-mono font-semibold flex items-center gap-1">
               <Check className="w-2.5 h-2.5" strokeWidth={3} />
               Монетизация
             </span>
