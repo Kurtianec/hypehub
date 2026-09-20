@@ -115,29 +115,11 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
           </div>
         </div>
 
-        {/* Payment methods */}
-        <div className="flex flex-wrap items-center justify-between gap-4 py-5 border-t-2 border-[#1F1F1F]">
-          <div className="flex flex-wrap gap-1.5">
-            {["BTC", "USDT TRC-20", "TON"].map((p) => (
-              <span key={p} className="px-3 py-1.5 border border-[#2A2A2A] text-xs font-bold text-[#888] font-mono uppercase">
-                {p}
-              </span>
-            ))}
-          </div>
-          <div className="flex items-center gap-2 text-xs text-[#888] font-mono uppercase">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full bg-[#BFFF00] opacity-75 blink"></span>
-              <span className="relative inline-flex h-2 w-2 bg-[#BFFF00]"></span>
-            </span>
-            SYSTEM ONLINE 24/7
-          </div>
-        </div>
-
         {/* Compact trust badges row */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-4 pt-4">
-          {visitorsTotal > 0 && <TrustChip icon={Eye} color="#BFFF00" title="Посетители" value={visitorsToday.toLocaleString("ru-RU")} sub={`Всего: ${visitorsTotal.toLocaleString("ru-RU")}`} />}
-          <TrustChip icon={ShieldCheck} color="#10B981" title="Защита" value="SSL" sub="Шифрование соединения" />
-          <TrustChip icon={Shield} color="#BFFF00" title="Гарантия" value="14 дней" sub="Обращение из кабинета" />
+        <div className="footer-trust-row flex flex-wrap items-center justify-center gap-2 mb-4 pt-4 border-t border-[#1F1F1F]">
+          {visitorsTotal > 0 && <TrustChip icon={Eye} color="#514BD9" title="Посетители" value={visitorsToday.toLocaleString("ru-RU")} sub={`Всего: ${visitorsTotal.toLocaleString("ru-RU")}`} />}
+          <TrustChip icon={ShieldCheck} color="#087F68" title="Защита" value="SSL" sub="Шифрование соединения" />
+          <TrustChip icon={Shield} color="#C95322" title="Гарантия" value="14 дней" sub="Обращение из кабинета" />
         </div>
 
         {/* Bottom row */}
@@ -168,7 +150,7 @@ function TrustChip({
   sub: string;
 }) {
   return (
-    <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-[#2A2A2A] bg-[#0E0E0E]">
+    <div className="footer-trust-chip inline-flex items-center gap-2 px-3 py-2 border border-[#2A2A2A] bg-[#0E0E0E]" style={{ "--chip-accent": color } as React.CSSProperties}>
       <Icon className="w-3.5 h-3.5" style={{ color }} />
       <span className="text-[10px] text-[#888] font-mono uppercase">{title}:</span>
       <span className="text-[10px] font-black font-mono" style={{ color }}>{value}</span>

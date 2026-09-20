@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Heart, Layers3, Menu, Moon, Search as SearchIcon, Sun, User, X } from "lucide-react";
+import { Heart, Layers3, Moon, Search as SearchIcon, Sun, User, X } from "lucide-react";
 import type { Product, Category } from "@/lib/types";
 import type { Theme } from "@/hooks/use-theme";
 import type { Locale } from "@/hooks/use-locale";
@@ -49,7 +49,9 @@ export function Header({ siteName = "ХайпХаб", products = [], categories 
             {onOpenFavorites && <button onClick={onOpenFavorites} className="prism-icon-btn" aria-label="Избранное"><Heart className="h-4 w-4" />{favoritesCount > 0 && <b>{favoritesCount}</b>}</button>}
             <Link href="/account" className="prism-icon-btn" aria-label="Личный кабинет"><User className="h-4 w-4" /></Link>
             <SearchBar products={products.length ? products : undefined} categories={categories} onProductClick={onProductClick} />
-            <button onClick={() => setOpen(true)} className="prism-menu-trigger" aria-label="Открыть меню"><Menu className="h-5 w-5"/><span>Меню</span></button>
+            <button onClick={() => setOpen(true)} className="prism-menu-trigger" aria-label="Открыть навигацию">
+              <span className="prism-menu-symbol" aria-hidden="true"><i/><i/><i/><i/></span><span>Навигация</span>
+            </button>
           </div>
         </div>
       </header>

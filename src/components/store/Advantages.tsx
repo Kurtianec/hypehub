@@ -19,10 +19,10 @@ const ADVANTAGES = [
 
 export function Advantages({ settings }: { settings?: { stats_clients?: string; stats_accounts?: string; stats_rating?: string; stats_support?: string } }) {
   const stats = [
-    { icon: Users, value: settings?.stats_clients || "0", label: "Клиентов" },
-    { icon: ShoppingBag, value: settings?.stats_accounts || "0", label: "Продано" },
-    { icon: Star, value: `${settings?.stats_rating || "0"}/5`, label: "Рейтинг" },
-    { icon: Headphones, value: settings?.stats_support || "24/7", label: "Поддержка" },
+    { icon: Users, value: settings?.stats_clients || "0", label: "Клиентов", accent: "#514BD9" },
+    { icon: ShoppingBag, value: settings?.stats_accounts || "0", label: "Продано", accent: "#087F68" },
+    { icon: Star, value: `${settings?.stats_rating || "0"}/5`, label: "Рейтинг", accent: "#C95322" },
+    { icon: Headphones, value: settings?.stats_support || "24/7", label: "Поддержка", accent: "#8B3FC7" },
   ];
   return (
     <section
@@ -92,9 +92,9 @@ export function Advantages({ settings }: { settings?: { stats_clients?: string; 
           className="stats-panel mt-8 md:mt-12 p-3 md:p-4 grid grid-cols-2 md:grid-cols-4 gap-2"
         >
           {stats.map((s, i) => (
-            <div key={i} className="stat-tile flex items-center gap-3 p-4 md:p-5 text-left">
-              <div className="stat-icon flex h-10 w-10 shrink-0 items-center justify-center"><s.icon className="h-4.5 w-4.5"/></div>
-              <div><div className="text-xl md:text-2xl font-black leading-none mb-1">{s.value}</div><div className="text-xs text-muted-foreground">{s.label}</div></div>
+            <div key={i} className="stat-tile flex items-center gap-3 p-4 md:p-5 text-left" style={{ "--stat-accent": s.accent } as React.CSSProperties}>
+              <div className="stat-icon flex h-10 w-10 shrink-0 items-center justify-center" style={{ color: s.accent, background: `${s.accent}16` }}><s.icon className="h-4.5 w-4.5"/></div>
+              <div><div className="stat-value text-xl md:text-2xl font-black leading-none mb-1" style={{ color: s.accent }}>{s.value}</div><div className="text-xs text-muted-foreground">{s.label}</div></div>
             </div>
           ))}
         </motion.div>
