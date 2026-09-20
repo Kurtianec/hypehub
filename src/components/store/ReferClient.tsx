@@ -101,9 +101,9 @@ export function ReferClient() {
         {/* How it works */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           {[
-            { icon: Gift, title: "1. СОЗДАЙ КОД", text: "Получи уникальный реферальный код", color: "#BFFF00" },
-            { icon: Share2, title: "2. ПОДЕЛИСЬ", text: "Отправь ссылку друзьям в Telegram, VK", color: "#FF2D87" },
-            { icon: DollarSign, title: "3. ЗАРАБАТЫВАЙ", text: "10% от каждой покупки друга — тебе", color: "#FFE600" },
+            { icon: Gift, title: "1. СОЗДАЙ КОД", text: "Получи уникальный реферальный код", color: "#F7A600" },
+            { icon: Share2, title: "2. ПОДЕЛИСЬ", text: "Отправь ссылку друзьям в Telegram, VK", color: "#111318" },
+            { icon: DollarSign, title: "3. ЗАРАБАТЫВАЙ", text: "10% от каждой покупки друга — тебе", color: "#E58B00" },
           ].map((s, i) => (
             <div key={i} className="bg-[#121212] border-2 p-5"
               style={{ borderColor: `${s.color}40`, clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}>

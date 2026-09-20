@@ -83,10 +83,10 @@ export function SeoLanding({
             className="flex flex-wrap gap-2 mb-10"
           >
             {[
-              { icon: Zap, text: "Мгновенная выдача", color: "#BFFF00" },
+              { icon: Zap, text: "Мгновенная выдача", color: "#F7A600" },
               { icon: Bitcoin, text: "Только крипта", color: "#FF7A00" },
-              { icon: Shield, text: "Гарантия 14 дней", color: "#00F0FF" },
-              { icon: Headphones, text: "Поддержка 24/7", color: "#FF2D87" },
+              { icon: Shield, text: "Гарантия 14 дней", color: "#111318" },
+              { icon: Headphones, text: "Поддержка 24/7", color: "#E58B00" },
             ].map((b, i) => (
               <div key={i} className="inline-flex items-center gap-2 px-3 py-1.5 border-2 font-mono text-xs uppercase"
                 style={{ borderColor: `${b.color}40`, color: b.color }}

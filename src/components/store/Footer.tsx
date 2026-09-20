@@ -118,9 +118,9 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
 
         {/* Compact trust badges row */}
         <div className="footer-trust-row flex flex-wrap items-center justify-center gap-2 mb-4 pt-4 border-t border-[#1F1F1F]">
-          {visitorsTotal > 0 && <TrustChip icon={Eye} color="#514BD9" title="Посетители" value={visitorsToday.toLocaleString("ru-RU")} sub={`Всего: ${visitorsTotal.toLocaleString("ru-RU")}`} />}
-          <TrustChip icon={ShieldCheck} color="#087F68" title="Защита" value="SSL" sub="Шифрование соединения" />
-          <TrustChip icon={Shield} color="#C95322" title="Гарантия" value="14 дней" sub="Обращение из кабинета" />
+          {visitorsTotal > 0 && <TrustChip icon={Eye} color="#F7A600" title="Посетители" value={visitorsToday.toLocaleString("ru-RU")} sub={`Всего: ${visitorsTotal.toLocaleString("ru-RU")}`} />}
+          <TrustChip icon={ShieldCheck} color="#303640" title="Защита" value="SSL" sub="Шифрование соединения" />
+          <TrustChip icon={Shield} color="#E58B00" title="Гарантия" value="14 дней" sub="Обращение из кабинета" />
         </div>
 
         {/* Bottom row */}

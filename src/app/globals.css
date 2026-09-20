@@ -658,6 +658,72 @@ body { letter-spacing: -0.005em; }
 @keyframes ambient-pulse { 0%,100% { opacity:.045; transform:scale(.75); } 45% { opacity:.2; transform:scale(1.35); } 70% { opacity:.08; transform:scale(.9); } }
 @media (prefers-reduced-motion:reduce) { .ambient-sparks span { animation:none; opacity:.1; } }
 
+/* ========================================================================== 
+   HYPEHUB BYBIT PALETTE — black, white and orange across store + admin
+   ========================================================================== */
+:root:not(.dark) {
+  --background:#f4f5f7; --foreground:#111318; --card:#ffffff; --card-foreground:#111318;
+  --popover:#ffffff; --popover-foreground:#111318; --primary:#f7a600; --primary-foreground:#111318;
+  --secondary:#eceef1; --secondary-foreground:#20242b; --muted:#eef0f2; --muted-foreground:#69707c;
+  --accent:#f7a600; --accent-foreground:#111318; --border:#dde0e4; --input:#e2e5e8; --ring:#f7a600;
+}
+:root:not(.dark) body { color:#111318; background:#f4f5f7 !important; background-image:radial-gradient(800px 420px at 10% -10%,rgba(247,166,0,.11),transparent 65%) !important; }
+:root:not(.dark) body::before { filter:grayscale(1) sepia(.25) saturate(1.5); opacity:.7; }
+:root:not(.dark) .storefront-v3 { color:#111318; background:rgba(244,245,247,.56); }
+
+.ambient-sparks span { background:#f7a600; box-shadow:0 0 10px 2px rgba(247,166,0,.18); }
+.ambient-sparks span:nth-child(3),.ambient-sparks span:nth-child(6) { background:#ffffff; box-shadow:0 0 9px 2px rgba(20,22,26,.12); }
+.ambient-sparks span:nth-child(8) { background:#d48600; }
+
+.storefront-v3 .prism-brand-icon { box-shadow:0 10px 24px -14px rgba(247,166,0,.9); }
+.storefront-v3 .prism-eyebrow,.storefront-v3 .prism-section-index { color:#d48600; }
+.storefront-v3 .prism-hero-copy h1 span { color:#f0a000; }
+.storefront-v3 .prism-catalog-jump { color:#111318 !important; background:linear-gradient(145deg,#ffb51f,#f49a00) !important; box-shadow:0 18px 38px -20px rgba(247,166,0,.85); }
+.storefront-v3 .prism-trust-item svg { color:#e58b00; }
+.storefront-v3 .prism-menu-trigger { color:#fff !important; background:#111318 !important; border-color:#111318 !important; }
+.storefront-v3 .prism-menu-links small { color:#d48600; }
+.storefront-v3 .prism-menu-links a:hover,.storefront-v3 .prism-menu-links button:hover { color:#a86500; border-color:#f4cc83; background:#fff7e8; }
+.storefront-v3 .prism-menu-symbol i { background:#f7a600; }
+.storefront-v3 .btn-primary { color:#111318; background:linear-gradient(135deg,#ffb51f,#f49a00); box-shadow:0 14px 34px -18px rgba(247,166,0,.9); }
+.storefront-v3 .hero-kicker { color:#b26d00; border-color:rgba(247,166,0,.28); background:rgba(247,166,0,.08); }
+.storefront-v3 .product-card:hover { border-color:rgba(247,166,0,.62) !important; }
+.storefront-v3 .support-fab { color:#111318 !important; border-color:#e39100 !important; background:linear-gradient(145deg,#ffb51f,#f49a00) !important; box-shadow:0 16px 36px -14px rgba(247,166,0,.65) !important; }
+.storefront-v3 .ai-fab { color:#bd7500 !important; border-color:#ead6ae !important; }
+.storefront-v3 [class*="text-[#BFFF00]"] { color:#d48600 !important; }
+.storefront-v3 [class*="bg-[#BFFF00]"] { color:#111318 !important; background-color:#f7a600 !important; }
+.storefront-v3 [class*="border-[#BFFF00]"] { border-color:rgba(247,166,0,.62) !important; }
+.storefront-v3 [class*="text-[#00F0FF]"],.storefront-v3 [class*="text-[#FF2D87]"],.storefront-v3 [class*="text-[#A855F7]"] { color:#d48600 !important; }
+.storefront-v3 [class*="bg-[#00F0FF]"],.storefront-v3 [class*="bg-[#FF2D87]"],.storefront-v3 [class*="bg-[#A855F7]"] { background-color:#f7a600 !important; }
+.storefront-v3 [class*="border-[#00F0FF]"],.storefront-v3 [class*="border-[#FF2D87]"],.storefront-v3 [class*="border-[#A855F7]"] { border-color:rgba(247,166,0,.55) !important; }
+:root:not(.dark) footer#footer,.storefront-v3 footer#footer { color:#d6d9df; background:#111318 !important; background-image:radial-gradient(circle at 15% 30%,rgba(247,166,0,.11) 0 1px,transparent 1.5px) !important; background-size:110px 100px !important; border-color:#242830 !important; }
+:root:not(.dark) footer#footer h3,:root:not(.dark) footer#footer .text-foreground { color:#fff !important; }
+:root:not(.dark) footer#footer [class*="text-[#888]"] { color:#989faa !important; }
+:root:not(.dark) footer#footer [class*="bg-[#0E0E0E]"],:root:not(.dark) footer#footer .footer-trust-chip { background:#1a1e24 !important; border-color:#2c3139 !important; }
+
+:root:not(.dark) .admin-prism { color:#111318; background:#f1f2f4 !important; }
+:root:not(.dark) .admin-prism .admin-nav-item:hover { color:#9c6200 !important; background:#fff7e8 !important; }
+:root:not(.dark) .admin-prism .admin-nav-item[class*="bg-[#BFFF00]/10"] { color:#9c6200 !important; border-color:#f1ca7e !important; background:linear-gradient(135deg,#fff3d9,#fffaf0) !important; box-shadow:inset 3px 0 #f7a600; }
+:root:not(.dark) .admin-prism .admin-content input:focus,:root:not(.dark) .admin-prism .admin-content textarea:focus,:root:not(.dark) .admin-prism .admin-content select:focus { border-color:#e49a13 !important; box-shadow:0 0 0 3px rgba(247,166,0,.11); }
+.admin-v3 [class*="text-[#BFFF00]"] { color:#d48600 !important; }
+.admin-v3 [class*="bg-[#BFFF00]"] { color:#111318 !important; background-color:#f7a600 !important; }
+.admin-v3 [class*="border-[#BFFF00]"] { border-color:rgba(247,166,0,.62) !important; }
+.admin-v3 [class*="text-[#00F0FF]"],.admin-v3 [class*="text-[#FF2D87]"],.admin-v3 [class*="text-[#A855F7]"] { color:#d48600 !important; }
+.admin-v3 [class*="bg-[#00F0FF]"],.admin-v3 [class*="bg-[#FF2D87]"],.admin-v3 [class*="bg-[#A855F7]"] { background-color:#f7a600 !important; }
+.admin-v3 [class*="border-[#00F0FF]"],.admin-v3 [class*="border-[#FF2D87]"],.admin-v3 [class*="border-[#A855F7]"] { border-color:rgba(247,166,0,.55) !important; }
+.admin-login-shell { background:#f1f2f4; }
+.admin-login-shell::before { border-color:rgba(247,166,0,.18); box-shadow:0 0 0 70px rgba(247,166,0,.025),0 0 0 140px rgba(247,166,0,.018); }
+
+.dark { --primary:#f7a600; --ring:#f7a600; --accent:#f7a600; }
+.dark body { background:#0b0e11; background-image:radial-gradient(700px 430px at 10% -8%,rgba(247,166,0,.07),transparent 68%); }
+.dark .prism-catalog-jump,.dark .btn-primary,.dark .support-fab { color:#111318 !important; background:linear-gradient(145deg,#ffb51f,#f49a00) !important; }
+.dark .prism-hero-copy h1 span,.dark .prism-eyebrow,.dark .prism-section-index { color:#f7a600; }
+.storefront-v3 .prism-hero-shell { border-color:rgba(247,166,0,.16); box-shadow:0 35px 100px -70px rgba(247,166,0,.9); }
+.storefront-v3 .prism-orbit { border-color:rgba(247,166,0,.15); }
+.storefront-v3 .prism-menu-panel::after { background:#f7a600; }
+:root:not(.dark) .stats-panel { border-color:#dedfe2; background:linear-gradient(135deg,#fafafa,#eceef1); }
+:root:not(.dark) .admin-prism .admin-nav-item svg { color:#777f8b !important; }
+:root:not(.dark) .admin-prism .admin-nav-item[class*="bg-[#BFFF00]/10"] svg { color:#d48600 !important; }
+
 /* Prism cascade lock: these intentional storefront shapes win over legacy skin rules. */
 .storefront-v3 .prism-header { padding:14px 18px; }
 .storefront-v3 .prism-header.is-scrolled { padding-top:8px; }

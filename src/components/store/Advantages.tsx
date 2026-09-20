@@ -7,22 +7,22 @@ import {
 } from "lucide-react";
 
 const ADVANTAGES = [
-  { icon: Zap, title: "Быстрая выдача", description: "Данные становятся доступны в заказе сразу после подтверждения оплаты.", color: "#7180FF" },
-  { icon: Bitcoin, title: "Только крипта", description: "Принимаем BTC, USDT TRC-20, TON. Полная анонимность, без проверки личности.", color: "#FF7A00" },
-  { icon: Shield, title: "Гарантия 14 дней", description: "Если возникнет проблема, обращение создаётся прямо из личного кабинета.", color: "#25BFD2" },
-  { icon: Headphones, title: "Поддержка", description: "Живой чат и AI-ассистент помогают с покупкой, входом и безопасностью.", color: "#A77FFF" },
-  { icon: RefreshCw, title: "Проверка перед продажей", description: "В карточке указывается дата последней проверки и основные характеристики.", color: "#FFAD66" },
-  { icon: Lock, title: "Защищённая передача", description: "Реквизиты хранятся зашифрованно и выдаются только после подтверждения заказа.", color: "#7180FF" },
-  { icon: Clock, title: "Экономия времени", description: "Не нужно месяцами накручивать подписчиков. Готовый аккаунт с аудиторией — сразу в работу.", color: "#10B981" },
-  { icon: Globe, title: "Разные платформы", description: "TikTok, YouTube, VK, Instagram и Telegram в одном каталоге.", color: "#A77FFF" },
+  { icon: Zap, title: "Быстрая выдача", description: "Данные становятся доступны в заказе сразу после подтверждения оплаты.", color: "#F7A600" },
+  { icon: Bitcoin, title: "Только крипта", description: "Принимаем BTC, USDT TRC-20, TON. Полная анонимность, без проверки личности.", color: "#111318" },
+  { icon: Shield, title: "Гарантия 14 дней", description: "Если возникнет проблема, обращение создаётся прямо из личного кабинета.", color: "#E58B00" },
+  { icon: Headphones, title: "Поддержка", description: "Живой чат и AI-ассистент помогают с покупкой, входом и безопасностью.", color: "#59616D" },
+  { icon: RefreshCw, title: "Проверка перед продажей", description: "В карточке указывается дата последней проверки и основные характеристики.", color: "#D27E00" },
+  { icon: Lock, title: "Защищённая передача", description: "Реквизиты хранятся зашифрованно и выдаются только после подтверждения заказа.", color: "#252A31" },
+  { icon: Clock, title: "Экономия времени", description: "Не нужно месяцами накручивать подписчиков. Готовый аккаунт с аудиторией — сразу в работу.", color: "#F7A600" },
+  { icon: Globe, title: "Разные платформы", description: "TikTok, YouTube, VK, Instagram и Telegram в одном каталоге.", color: "#737B86" },
 ];
 
 export function Advantages({ settings }: { settings?: { stats_clients?: string; stats_accounts?: string; stats_rating?: string; stats_support?: string } }) {
   const stats = [
-    { icon: Users, value: settings?.stats_clients || "0", label: "Клиентов", accent: "#514BD9" },
-    { icon: ShoppingBag, value: settings?.stats_accounts || "0", label: "Продано", accent: "#087F68" },
-    { icon: Star, value: `${settings?.stats_rating || "0"}/5`, label: "Рейтинг", accent: "#C95322" },
-    { icon: Headphones, value: settings?.stats_support || "24/7", label: "Поддержка", accent: "#8B3FC7" },
+    { icon: Users, value: settings?.stats_clients || "0", label: "Клиентов", accent: "#F7A600" },
+    { icon: ShoppingBag, value: settings?.stats_accounts || "0", label: "Продано", accent: "#111318" },
+    { icon: Star, value: `${settings?.stats_rating || "0"}/5`, label: "Рейтинг", accent: "#E58B00" },
+    { icon: Headphones, value: settings?.stats_support || "24/7", label: "Поддержка", accent: "#4E5663" },
   ];
   return (
     <section
