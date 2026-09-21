@@ -99,6 +99,17 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { toast } = useToast();
 
+  // The admin console is intentionally always dark. This also disables the
+  // obsolete :root:not(.dark) rules left by earlier storefront themes.
+  useEffect(() => {
+    const root = document.documentElement;
+    const wasDark = root.classList.contains("dark");
+    root.classList.add("dark");
+    return () => {
+      if (!wasDark) root.classList.remove("dark");
+    };
+  }, []);
+
   useEffect(() => {
     fetch("/api/admin/session").then((r) => setAuthenticated(r.ok)).catch(() => setAuthenticated(false));
   }, []);

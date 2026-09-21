@@ -4,12 +4,15 @@
  * storefront chrome and the admin console after several legacy theme layers.
  */
 
-/* The storefront navigation belongs to the opening scene and scrolls away. */
+/* Floating navigation: full size at the top, compact after scrolling. */
 html body .storefront-v3 > header.prism-header {
-  position:absolute !important;
+  position:fixed !important;
   inset:0 0 auto !important;
   z-index:80 !important;
   padding:14px 18px !important;
+}
+html body .storefront-v3 > header.prism-header.is-scrolled {
+  padding-top:8px !important;
 }
 html body .storefront-v3 > header.prism-header > .hype-nav-shell {
   width:min(1180px,100%) !important;
@@ -17,12 +20,17 @@ html body .storefront-v3 > header.prism-header > .hype-nav-shell {
   border-color:rgba(255,255,255,.13) !important;
   background:rgba(13,13,13,.92) !important;
 }
+html body .storefront-v3 > header.prism-header.is-scrolled > .hype-nav-shell {
+  width:min(1040px,100%) !important;
+  background:rgba(10,10,10,.95) !important;
+  box-shadow:0 20px 60px -32px rgba(0,0,0,.92),0 12px 38px -28px rgba(148,24,61,.9) !important;
+}
 
 /* Black footer with a visible wave in every browser theme. */
 html body .storefront-v3 > footer#footer.hype-footer.footer-noir {
   position:relative !important;
   z-index:2 !important;
-  margin-top:82px !important;
+  margin-top:0 !important;
   color:#e8e8e8 !important;
   border:0 !important;
   background-color:#080808 !important;
@@ -77,17 +85,88 @@ html body .storefront-v3::after {
     radial-gradient(circle at 71% 16%,rgba(142,21,55,.48) 0 2px,transparent 3px),
     radial-gradient(circle at 88% 59%,rgba(18,18,18,.43) 0 2px,transparent 3px),
     radial-gradient(circle at 94% 28%,rgba(142,21,55,.52) 0 2px,transparent 3px);
-  opacity:.28;
-  animation:hype-background-pulse 4.8s ease-in-out infinite;
+  opacity:.38;
+  animation:hype-background-pulse 3.8s ease-in-out infinite;
 }
 html body .storefront-v3 > .ambient-sparks { display:none !important; }
 html body .storefront-v3 > header,
 html body .storefront-v3 > main,
 html body .storefront-v3 > footer { position:relative; z-index:1; }
 @keyframes hype-background-pulse {
-  0%,100% { opacity:.16; filter:brightness(.85); }
-  48% { opacity:.66; filter:brightness(1.18); }
-  72% { opacity:.30; filter:brightness(.96); }
+  0%,100% { opacity:.18; filter:brightness(.75); transform:translate3d(0,0,0); }
+  38% { opacity:.82; filter:brightness(1.35); transform:translate3d(7px,-5px,0); }
+  68% { opacity:.34; filter:brightness(.95); transform:translate3d(-4px,6px,0); }
+}
+
+/* Scattered points remain part of the light background and pulse below cards. */
+html body .storefront-v3 .storefront-light-zone::after {
+  z-index:0 !important;
+  opacity:.42 !important;
+  mask-image:none !important;
+  background-image:
+    radial-gradient(circle at 4% 11%,rgba(142,21,55,.72) 0 2px,transparent 3px),
+    radial-gradient(circle at 14% 57%,rgba(12,12,12,.48) 0 2px,transparent 3px),
+    radial-gradient(circle at 27% 83%,rgba(142,21,55,.62) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 41% 24%,rgba(12,12,12,.44) 0 2px,transparent 3px),
+    radial-gradient(circle at 55% 68%,rgba(142,21,55,.65) 0 2px,transparent 3px),
+    radial-gradient(circle at 69% 15%,rgba(12,12,12,.42) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 78% 88%,rgba(142,21,55,.66) 0 2px,transparent 3px),
+    radial-gradient(circle at 91% 39%,rgba(12,12,12,.46) 0 2px,transparent 3px),
+    radial-gradient(circle at 97% 72%,rgba(142,21,55,.68) 0 1.5px,transparent 2.5px) !important;
+  background-size:100% 100% !important;
+  animation:hype-light-points 4.2s ease-in-out infinite !important;
+}
+html body .storefront-v3 .storefront-light-zone > * { position:relative; z-index:1; }
+@keyframes hype-light-points {
+  0%,100% { opacity:.20; filter:brightness(.8); }
+  45% { opacity:.78; filter:brightness(1.25); }
+  72% { opacity:.38; filter:brightness(.95); }
+}
+
+/* Black process island with real light-to-black waves on both edges. */
+html body .storefront-v3 .storefront-light-zone section.process-noir {
+  position:relative;
+  z-index:2;
+  margin:84px 0 !important;
+  color:#ededed !important;
+  background:
+    radial-gradient(circle at 9% 23%,rgba(142,21,55,.42) 0 2px,transparent 3px),
+    radial-gradient(circle at 87% 72%,rgba(142,21,55,.36) 0 2px,transparent 3px),
+    radial-gradient(620px 300px at 15% 20%,rgba(142,21,55,.16),transparent 72%),
+    #090909 !important;
+}
+html body .storefront-v3 section.process-noir::before,
+html body .storefront-v3 section.process-noir::after {
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:86px;
+  pointer-events:none;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:100% 100%;
+}
+html body .storefront-v3 section.process-noir::before {
+  top:-84px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23090909' d='M0 74c190-54 308 37 493-5s295-43 477 3 302 31 470-5v53H0z'/%3E%3C/svg%3E");
+}
+html body .storefront-v3 section.process-noir::after {
+  bottom:-84px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23090909' d='M0 0h1440v51c-170 48-303-37-482 6S657 98 480 53 174 25 0 63z'/%3E%3C/svg%3E");
+}
+html body .storefront-v3 section.process-noir .container { position:relative; z-index:1; }
+html body .storefront-v3 section.process-noir h2,
+html body .storefront-v3 section.process-noir h2 .text-foreground,
+html body .storefront-v3 section.process-noir h3 { color:#f5f5f5 !important; }
+html body .storefront-v3 section.process-noir p { color:#aaa !important; }
+html body .storefront-v3 section.process-noir .process-card {
+  color:#ededed !important;
+  border-color:#303030 !important;
+  border-radius:18px !important;
+  background:#151515 !important;
+  clip-path:none !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035) !important;
 }
 
 /* ---------- Single admin palette ---------- */
@@ -197,6 +276,6 @@ html body .admin-v3.admin-prism table.visitor-table thead { color:#aaa !importan
 
 @media (max-width:640px) {
   html body .storefront-v3 > header.prism-header { padding:8px !important; }
-  html body .storefront-v3 > footer#footer.hype-footer.footer-noir { margin-top:54px !important; }
+  html body .storefront-v3 > footer#footer.hype-footer.footer-noir { margin-top:0 !important; }
   html body .storefront-v3 > footer#footer.hype-footer.footer-noir::before { top:-54px !important; height:56px !important; }
 }

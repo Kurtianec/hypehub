@@ -40,7 +40,7 @@ export function HowToBuy() {
   return (
     <section
       id="how-to-buy"
-      className="relative py-12 md:py-20 scroll-mt-20"
+      className="process-noir relative py-12 md:py-20 scroll-mt-20"
       aria-label="Как купить аккаунт"
     >
       <div className="container mx-auto px-4">
@@ -74,7 +74,7 @@ export function HowToBuy() {
               className="relative"
             >
               <div
-                className="relative bg-[#121212] border-2 p-5 md:p-6 h-full hover-press transition-all"
+                className="process-card relative bg-[#121212] border-2 p-5 md:p-6 h-full hover-press transition-all"
                 style={{
                   borderColor: `${step.color}40`,
                   clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))",
