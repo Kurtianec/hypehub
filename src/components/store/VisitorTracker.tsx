@@ -24,6 +24,13 @@ export function VisitorTracker() {
         path: window.location.pathname + window.location.search,
         referrer: document.referrer || null,
         sessionId,
+        client: {
+          language: navigator.language,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          screen: `${window.screen.width}×${window.screen.height}`,
+          touch: navigator.maxTouchPoints > 0,
+          connection: (navigator as Navigator & { connection?: { effectiveType?: string } }).connection?.effectiveType,
+        },
       }),
       keepalive: true,
     }).catch(() => {});

@@ -14,7 +14,7 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
   return (
     <footer
       id="footer"
-      className="relative mt-auto pt-12 pb-6 px-4 border-t-2 border-[#8E1537]/40 scroll-mt-20"
+      className="hype-footer relative mt-auto pt-12 pb-6 px-4 scroll-mt-20"
     >
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">

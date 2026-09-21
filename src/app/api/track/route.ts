@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { buildVisitorInfo } from "@/lib/visitor-device";
 
 // POST /api/track — log visitor
 export async function POST(req: NextRequest) {
@@ -17,7 +18,8 @@ export async function POST(req: NextRequest) {
       (realIp?.trim()) ||
       "0.0.0.0";
 
-    const userAgent = req.headers.get("user-agent") || null;
+    const rawUserAgent = req.headers.get("user-agent") || "";
+    const userAgent = JSON.stringify(buildVisitorInfo(rawUserAgent, body.client || {}));
     const referer = req.headers.get("referer") || body.referrer || null;
     const sessionId = body.sessionId || null;
 

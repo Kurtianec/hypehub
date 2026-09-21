@@ -1,6 +1,7 @@
 import { requireAdmin } from "@/lib/security";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { decodeVisitorInfo } from "@/lib/visitor-device";
 
 
 export async function GET(req: NextRequest) {
@@ -111,6 +112,18 @@ export async function GET(req: NextRequest) {
     };
   });
 
+  const detailedRecent = recent.map((v) => ({ ...v, client: decodeVisitorInfo(v.userAgent) }));
+  const aggregate = (key: "device" | "os" | "browser") => {
+    const counts = new Map<string, number>();
+    for (const visitor of detailedRecent) {
+      const label = visitor.client[key] || "Неизвестно";
+      counts.set(label, (counts.get(label) || 0) + 1);
+    }
+    return [...counts.entries()]
+      .map(([label, count]) => ({ label, count }))
+      .sort((a, b) => b.count - a.count);
+  };
+
   return NextResponse.json({
     stats: {
       total,
@@ -123,10 +136,21 @@ export async function GET(req: NextRequest) {
     byCity,
     byReferrer,
     byPath,
-    recent: recent.map((v) => ({
+    byDevice: aggregate("device"),
+    byOS: aggregate("os"),
+    byBrowser: aggregate("browser"),
+    recent: detailedRecent.map((v) => ({
       id: v.id,
       ip: v.ip,
-      userAgent: v.userAgent,
+      userAgent: v.client.ua,
+      device: v.client.device,
+      os: v.client.os,
+      browser: v.client.browser,
+      language: v.client.language,
+      timezone: v.client.timezone,
+      screen: v.client.screen,
+      touch: v.client.touch,
+      connection: v.client.connection,
       referer: v.referer,
       path: v.path,
       country: v.country,

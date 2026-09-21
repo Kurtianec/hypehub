@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Eye, Users, Globe, MapPin, Link2, Loader2, TrendingUp,
-  Clock, Monitor, ArrowRight, ExternalLink,
+  Clock, Monitor, ArrowRight, MonitorSmartphone, Cpu, Compass,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface VisitorData {
@@ -21,10 +20,21 @@ interface VisitorData {
   byCity: { city: string; count: number }[];
   byReferrer: { referer: string; count: number }[];
   byPath: { path: string; count: number }[];
+  byDevice: { label: string; count: number }[];
+  byOS: { label: string; count: number }[];
+  byBrowser: { label: string; count: number }[];
   recent: {
     id: string;
     ip: string;
     userAgent: string | null;
+    device: string;
+    os: string;
+    browser: string;
+    language?: string;
+    timezone?: string;
+    screen?: string;
+    touch?: boolean;
+    connection?: string;
     referer: string | null;
     path: string;
     country: string | null;
@@ -65,26 +75,6 @@ export function AdminVisitors() {
   }, [range]);
 
   const maxHour = Math.max(...(data?.hourly.map((h) => h.count) || [1]), 1);
-
-  const parseBrowser = (ua?: string | null): string => {
-    if (!ua) return "Неизвестно";
-    if (ua.includes("Firefox")) return "Firefox";
-    if (ua.includes("Edg")) return "Edge";
-    if (ua.includes("Chrome")) return "Chrome";
-    if (ua.includes("Safari")) return "Safari";
-    if (ua.includes("OPR")) return "Opera";
-    return "Другой";
-  };
-
-  const parseOS = (ua?: string | null): string => {
-    if (!ua) return "—";
-    if (ua.includes("Windows")) return "Windows";
-    if (ua.includes("Mac OS")) return "macOS";
-    if (ua.includes("Android")) return "Android";
-    if (ua.includes("iPhone") || ua.includes("iPad")) return "iOS";
-    if (ua.includes("Linux")) return "Linux";
-    return "Другая";
-  };
 
   if (loading) {
     return (
@@ -162,6 +152,13 @@ export function AdminVisitors() {
           <span>24ч назад</span>
           <span>сейчас</span>
         </div>
+      </div>
+
+      {/* Devices, operating systems and browsers */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <BreakdownCard icon={MonitorSmartphone} title="Устройства" items={data.byDevice || []} />
+        <BreakdownCard icon={Cpu} title="Операционные системы" items={data.byOS || []} />
+        <BreakdownCard icon={Compass} title="Браузеры" items={data.byBrowser || []} />
       </div>
 
       {/* Geo + sources grid */}
@@ -313,7 +310,8 @@ export function AdminVisitors() {
                 <tr className="text-left text-xs text-[#888] border-b border-[#1F1F1F]">
                   <th className="pb-2 pr-3">IP</th>
                   <th className="pb-2 pr-3 hidden md:table-cell">Локация</th>
-                  <th className="pb-2 pr-3 hidden md:table-cell">Браузер / ОС</th>
+                  <th className="pb-2 pr-3 hidden md:table-cell">Устройство</th>
+                  <th className="pb-2 pr-3 hidden lg:table-cell">Экран / среда</th>
                   <th className="pb-2 pr-3 hidden lg:table-cell">Источник</th>
                   <th className="pb-2 pr-3 hidden lg:table-cell">Страница</th>
                   <th className="pb-2 text-right">Время</th>
@@ -335,8 +333,13 @@ export function AdminVisitors() {
                         )}
                       </div>
                     </td>
-                    <td className="py-2.5 pr-3 hidden md:table-cell text-xs text-[#888]">
-                      {parseBrowser(v.userAgent)} · {parseOS(v.userAgent)}
+                    <td className="py-2.5 pr-3 hidden md:table-cell text-xs">
+                      <div className="font-semibold">{v.device}</div>
+                      <div className="text-[#888]">{v.browser} · {v.os}</div>
+                    </td>
+                    <td className="py-2.5 pr-3 hidden lg:table-cell text-xs text-[#888]">
+                      <div>{v.screen || "Экран —"} · {v.connection || "сеть —"}</div>
+                      <div>{v.language || "язык —"} · {v.timezone || "часовой пояс —"}</div>
                     </td>
                     <td className="py-2.5 pr-3 hidden lg:table-cell text-xs">
                       {v.referer ? (
@@ -360,6 +363,33 @@ export function AdminVisitors() {
       <p className="text-xs text-[#888] mt-4 text-center">
         Данные обновляются при каждом заходе посетителя на сайт. Геоопределение по IP через ip-api.com.
       </p>
+    </div>
+  );
+}
+
+function BreakdownCard({ icon: Icon, title, items }: { icon: React.ComponentType<{ className?: string }>; title: string; items: { label: string; count: number }[] }) {
+  const total = items.reduce((sum, item) => sum + item.count, 0) || 1;
+  return (
+    <div className="admin-surface bg-[#121212] border border-[#2A2A2A] p-5 rounded-xl">
+      <h3 className="font-bold mb-4 flex items-center gap-2">
+        <Icon className="w-4 h-4 text-[#8E1537]" />
+        {title}
+      </h3>
+      {items.length === 0 ? <p className="text-sm text-[#888]">Нет данных</p> : (
+        <div className="space-y-3">
+          {items.slice(0, 6).map((item) => (
+            <div key={item.label}>
+              <div className="mb-1 flex items-center justify-between text-xs">
+                <span className="truncate">{item.label}</span>
+                <span className="font-bold text-[#D05B7D]">{item.count} · {Math.round(item.count / total * 100)}%</span>
+              </div>
+              <div className="h-1.5 overflow-hidden rounded-full bg-[#242424]">
+                <div className="h-full rounded-full bg-[#8E1537]" style={{ width: `${item.count / total * 100}%` }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
