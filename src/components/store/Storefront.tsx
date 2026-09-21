@@ -93,6 +93,9 @@ export function Storefront({
       <main className="flex-1">
         <Hero />
         <div className="storefront-light-zone">
+          <div className="light-background-pulses" aria-hidden="true">
+            {Array.from({ length: 12 }, (_, index) => <span key={index} />)}
+          </div>
           <Catalog
             categories={categories}
             products={products}

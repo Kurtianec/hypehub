@@ -27,7 +27,7 @@ html body .storefront-v3 > header.prism-header.is-scrolled > .hype-nav-shell {
 }
 
 /* Black footer with a visible wave in every browser theme. */
-html body footer#footer.hype-footer.footer-noir {
+html:root body footer#footer.site-footer-v2.footer-noir {
   position:relative !important;
   z-index:2 !important;
   margin-top:0 !important;
@@ -41,22 +41,22 @@ html body footer#footer.hype-footer.footer-noir {
     linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) !important;
   background-size:auto,auto,42px 42px,42px 42px !important;
 }
-html body .footer-wave-boundary {
+html:root body .footer-wave-boundary.footer-wave-v2 {
   position:relative !important;
   z-index:2 !important;
   width:100% !important;
   height:92px !important;
   margin:0 !important;
   overflow:hidden !important;
-  background:transparent !important;
+  background:#f7f7f7 !important;
 }
-html body .footer-wave-boundary svg {
+html:root body .footer-wave-boundary.footer-wave-v2 svg {
   display:block !important;
   width:100% !important;
   height:100% !important;
 }
-html body .footer-wave-boundary path { fill:#080808 !important; }
-html body footer#footer.hype-footer.footer-noir::before {
+html:root body .footer-wave-boundary.footer-wave-v2 path { fill:#080808 !important; }
+html:root body footer#footer.site-footer-v2.footer-noir::before {
   display:none !important;
 }
 html body footer#footer.footer-noir h3,
@@ -71,6 +71,51 @@ html body footer#footer.footer-noir .footer-trust-chip {
   color:#ddd !important;
   border-color:rgba(255,255,255,.13) !important;
   background:rgba(255,255,255,.055) !important;
+}
+
+/* Light scene: subtle flowing lines plus real pulse nodes below all content. */
+html:root body .storefront-v3 .storefront-light-zone {
+  background-color:#f7f7f7 !important;
+  background-image:
+    repeating-radial-gradient(ellipse at 15% -10%,transparent 0 38px,rgba(20,20,20,.035) 39px 40px,transparent 41px 67px),
+    repeating-radial-gradient(ellipse at 86% 32%,transparent 0 52px,rgba(142,21,55,.027) 53px 54px,transparent 55px 88px),
+    linear-gradient(115deg,rgba(142,21,55,.018),transparent 35%,rgba(15,15,15,.018) 70%,transparent) !important;
+  background-size:860px 460px,980px 520px,100% 100% !important;
+}
+html:root body .storefront-v3 .light-background-pulses {
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  overflow:hidden !important;
+  pointer-events:none !important;
+}
+html:root body .storefront-v3 .light-background-pulses span {
+  position:absolute;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  opacity:.18;
+  background:#8e1537;
+  box-shadow:0 0 0 0 rgba(142,21,55,.30);
+  animation:visible-background-pulse 3.6s ease-in-out infinite;
+}
+html:root body .storefront-v3 .light-background-pulses span:nth-child(3n) { background:#171717; box-shadow:0 0 0 0 rgba(17,17,17,.22); }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(1) { left:5%; top:8%; animation-delay:-.4s; }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(2) { left:17%; top:31%; animation-delay:-2.1s; }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(3) { left:29%; top:72%; animation-delay:-1.2s; }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(4) { left:42%; top:18%; animation-delay:-3s; }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(5) { left:53%; top:58%; animation-delay:-.8s; }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(6) { left:64%; top:87%; animation-delay:-2.6s; }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(7) { left:73%; top:27%; animation-delay:-1.6s; }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(8) { left:84%; top:69%; animation-delay:-3.3s; }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(9) { left:95%; top:42%; animation-delay:-.2s; }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(10) { left:10%; top:91%; animation-delay:-2.8s; }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(11) { left:58%; top:37%; animation-delay:-1s; }
+html:root body .storefront-v3 .light-background-pulses span:nth-child(12) { left:89%; top:12%; animation-delay:-2.3s; }
+@keyframes visible-background-pulse {
+  0%,100% { opacity:.12; transform:scale(.65); box-shadow:0 0 0 0 rgba(142,21,55,0); }
+  48% { opacity:.72; transform:scale(1); box-shadow:0 0 0 8px rgba(142,21,55,.08); }
+  70% { opacity:.28; transform:scale(.78); box-shadow:0 0 0 14px rgba(142,21,55,0); }
 }
 
 /* One background animation. It never sits above cards or controls. */
@@ -120,7 +165,7 @@ html body .storefront-v3 .storefront-light-zone::after {
   background-size:100% 100% !important;
   animation:hype-light-points 4.2s ease-in-out infinite !important;
 }
-html body .storefront-v3 .storefront-light-zone > * { position:relative; z-index:1; }
+html body .storefront-v3 .storefront-light-zone > *:not(.light-background-pulses) { position:relative; z-index:1; }
 @keyframes hype-light-points {
   0%,100% { opacity:.20; filter:brightness(.8); }
   45% { opacity:.78; filter:brightness(1.25); }
@@ -289,6 +334,10 @@ html body .admin-v3.admin-prism table.visitor-table thead { color:#aaa !importan
 
 @media (max-width:640px) {
   html body .storefront-v3 > header.prism-header { padding:8px !important; }
-  html body footer#footer.hype-footer.footer-noir { margin-top:0 !important; }
-  html body .footer-wave-boundary { height:58px !important; }
+  html:root body footer#footer.site-footer-v2.footer-noir { margin-top:0 !important; }
+  html:root body .footer-wave-boundary.footer-wave-v2 { height:58px !important; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  html:root body .storefront-v3 .light-background-pulses span { animation:none !important; opacity:.30 !important; }
 }

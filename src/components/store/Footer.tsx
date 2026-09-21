@@ -13,14 +13,14 @@ interface FooterProps {
 export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: FooterProps) {
   return (
     <>
-      <div className="footer-wave-boundary" aria-hidden="true">
+      <div className="footer-wave-boundary footer-wave-v2" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
-          <path d="M0 76C164 25 306 111 486 69S783 22 963 66s306 41 477-3v57H0Z" />
+          <path d="M0 92C170 38 318 112 498 72C681 31 814 41 982 78C1158 116 1294 52 1440 68V120H0Z" />
         </svg>
       </div>
       <footer
       id="footer"
-      className="hype-footer footer-noir relative mt-auto pt-12 pb-6 px-4 scroll-mt-20"
+      className="site-footer-v2 footer-noir relative mt-auto pt-12 pb-6 px-4 scroll-mt-20"
     >
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">

@@ -17,7 +17,7 @@ const STEPS = [
     icon: MousePointerClick,
     title: "ОФОРМЛЕНИЕ",
     description: "Нажмите «Купить», укажите email и контакт. Выберите оплату — криптовалюта.",
-    color: "#111318",
+    color: "#B8B8B8",
     code: "02",
   },
   {
