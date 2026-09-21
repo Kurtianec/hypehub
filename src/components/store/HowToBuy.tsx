@@ -74,9 +74,11 @@ export function HowToBuy() {
               className="relative"
             >
               <div
-                className="process-card relative bg-[#121212] border-2 p-5 md:p-6 h-full hover-press transition-all"
+                className="process-card relative border-2 p-5 md:p-6 h-full hover-press transition-all"
                 style={{
                   borderColor: `${step.color}40`,
+                  backgroundColor: "#151515",
+                  color: "#ededed",
                   clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))",
                 }}
               >

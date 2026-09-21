@@ -12,7 +12,13 @@ interface FooterProps {
 
 export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: FooterProps) {
   return (
-    <footer
+    <>
+      <div className="footer-wave-boundary" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
+          <path d="M0 76C164 25 306 111 486 69S783 22 963 66s306 41 477-3v57H0Z" />
+        </svg>
+      </div>
+      <footer
       id="footer"
       className="hype-footer footer-noir relative mt-auto pt-12 pb-6 px-4 scroll-mt-20"
     >
@@ -133,7 +139,8 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
           </div>
         </div>
       </div>
-    </footer>
+      </footer>
+    </>
   );
 }
 

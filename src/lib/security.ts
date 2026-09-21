@@ -1,4 +1,4 @@
-import { createCipheriv, createDecipheriv, createHash, createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
+import { createCipheriv, createDecipheriv, createHash, createHmac, randomBytes, randomInt, scryptSync, timingSafeEqual } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
@@ -40,8 +40,8 @@ function signingKey() {
 }
 
 export function createCaptchaChallenge() {
-  const a = 2 + Math.floor(Math.random() * 8);
-  const b = 1 + Math.floor(Math.random() * 9);
+  const a = randomInt(2, 10);
+  const b = randomInt(1, 10);
   const payload = Buffer.from(JSON.stringify({ answer: a + b, expires: Date.now() + 5 * 60_000 })).toString("base64url");
   const signature = createHmac("sha256", signingKey()).update(payload).digest("base64url");
   return { question: `${a} + ${b} = ?`, token: `${payload}.${signature}` };

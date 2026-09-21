@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { requireAdmin } from "@/lib/security";
 
 // POST /api/fraud-check — check order for suspicious activity
 // Returns warning level (no auto-actions, only admin notification)
 export async function POST(req: NextRequest) {
+  const unauthorized = await requireAdmin(req);
+  if (unauthorized) return unauthorized;
+
   const body = await req.json();
   const { email, contact, ip } = body;
 

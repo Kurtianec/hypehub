@@ -5,10 +5,14 @@ import { db } from "@/lib/db";
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const productId = searchParams.get("productId");
-  const limit = parseInt(searchParams.get("limit") || "3");
+  const requestedLimit = Number.parseInt(searchParams.get("limit") || "3", 10);
+  const limit = Number.isFinite(requestedLimit) ? Math.min(Math.max(requestedLimit, 1), 8) : 3;
 
   if (!productId) {
     return NextResponse.json({ error: "productId required" }, { status: 400 });
+  }
+  if (productId.length > 64) {
+    return NextResponse.json({ error: "Invalid productId" }, { status: 400 });
   }
 
   const product = await db.product.findUnique({

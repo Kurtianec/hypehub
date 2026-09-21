@@ -447,7 +447,7 @@ function ProductCard({
             // Flying heart animation
             const btn = e.currentTarget;
             const heart = document.createElement('div');
-            heart.innerHTML = '♥';
+            heart.textContent = '♥';
             heart.style.cssText = `position:fixed;left:${btn.getBoundingClientRect().left+12}px;top:${btn.getBoundingClientRect().top}px;font-size:20px;color:#A82049;pointer-events:none;z-index:9999;transition:all 0.8s cubic-bezier(0.16,1,0.3,1);`;
             document.body.appendChild(heart);
             requestAnimationFrame(() => {

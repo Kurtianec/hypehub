@@ -27,7 +27,7 @@ html body .storefront-v3 > header.prism-header.is-scrolled > .hype-nav-shell {
 }
 
 /* Black footer with a visible wave in every browser theme. */
-html body .storefront-v3 > footer#footer.hype-footer.footer-noir {
+html body footer#footer.hype-footer.footer-noir {
   position:relative !important;
   z-index:2 !important;
   margin-top:0 !important;
@@ -41,29 +41,33 @@ html body .storefront-v3 > footer#footer.hype-footer.footer-noir {
     linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) !important;
   background-size:auto,auto,42px 42px,42px 42px !important;
 }
-html body .storefront-v3 > footer#footer.hype-footer.footer-noir::before {
-  display:block !important;
-  content:"" !important;
-  position:absolute !important;
-  left:0 !important;
-  right:0 !important;
-  top:-82px !important;
-  height:84px !important;
-  background-color:transparent !important;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23080808' d='M0 72c162 47 305-36 483 5s304 48 477-1 312-29 480 2v42H0z'/%3E%3C/svg%3E") !important;
-  background-repeat:no-repeat !important;
-  background-position:center bottom !important;
-  background-size:100% 100% !important;
+html body .footer-wave-boundary {
+  position:relative !important;
+  z-index:2 !important;
+  width:100% !important;
+  height:92px !important;
+  margin:0 !important;
+  overflow:hidden !important;
+  background:transparent !important;
 }
-html body .storefront-v3 > footer#footer.footer-noir h3,
-html body .storefront-v3 > footer#footer.footer-noir .text-foreground { color:#fff !important; }
-html body .storefront-v3 > footer#footer.footer-noir p,
-html body .storefront-v3 > footer#footer.footer-noir a,
-html body .storefront-v3 > footer#footer.footer-noir button,
-html body .storefront-v3 > footer#footer.footer-noir li,
-html body .storefront-v3 > footer#footer.footer-noir [class*="text-[#888]"] { color:#aaa !important; }
-html body .storefront-v3 > footer#footer.footer-noir [class*="text-[#8E1537]"] { color:#d05b7d !important; }
-html body .storefront-v3 > footer#footer.footer-noir .footer-trust-chip {
+html body .footer-wave-boundary svg {
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+}
+html body .footer-wave-boundary path { fill:#080808 !important; }
+html body footer#footer.hype-footer.footer-noir::before {
+  display:none !important;
+}
+html body footer#footer.footer-noir h3,
+html body footer#footer.footer-noir .text-foreground { color:#fff !important; }
+html body footer#footer.footer-noir p,
+html body footer#footer.footer-noir a,
+html body footer#footer.footer-noir button,
+html body footer#footer.footer-noir li,
+html body footer#footer.footer-noir [class*="text-[#888]"] { color:#aaa !important; }
+html body footer#footer.footer-noir [class*="text-[#8E1537]"] { color:#d05b7d !important; }
+html body footer#footer.footer-noir .footer-trust-chip {
   color:#ddd !important;
   border-color:rgba(255,255,255,.13) !important;
   background:rgba(255,255,255,.055) !important;
@@ -160,7 +164,7 @@ html body .storefront-v3 section.process-noir h2,
 html body .storefront-v3 section.process-noir h2 .text-foreground,
 html body .storefront-v3 section.process-noir h3 { color:#f5f5f5 !important; }
 html body .storefront-v3 section.process-noir p { color:#aaa !important; }
-html body .storefront-v3 section.process-noir .process-card {
+html:root body .storefront-v3 .storefront-light-zone section#how-to-buy.process-noir .process-card {
   color:#ededed !important;
   border-color:#303030 !important;
   border-radius:18px !important;
@@ -168,6 +172,15 @@ html body .storefront-v3 section.process-noir .process-card {
   clip-path:none !important;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.035) !important;
 }
+html:root:not(.dark) body .storefront-v3 .storefront-light-zone section#how-to-buy.process-noir .process-card,
+html.dark body .storefront-v3 .storefront-light-zone section#how-to-buy.process-noir .process-card {
+  color:#ededed !important;
+  border-color:#303030 !important;
+  background-color:#151515 !important;
+  background-image:none !important;
+}
+html:root body .storefront-v3 .storefront-light-zone section#how-to-buy.process-noir .process-card h3 { color:#fff !important; }
+html:root body .storefront-v3 .storefront-light-zone section#how-to-buy.process-noir .process-card p { color:#aaa !important; }
 
 /* ---------- Single admin palette ---------- */
 html body .admin-v3.admin-prism {
@@ -276,6 +289,6 @@ html body .admin-v3.admin-prism table.visitor-table thead { color:#aaa !importan
 
 @media (max-width:640px) {
   html body .storefront-v3 > header.prism-header { padding:8px !important; }
-  html body .storefront-v3 > footer#footer.hype-footer.footer-noir { margin-top:0 !important; }
-  html body .storefront-v3 > footer#footer.hype-footer.footer-noir::before { top:-54px !important; height:56px !important; }
+  html body footer#footer.hype-footer.footer-noir { margin-top:0 !important; }
+  html body .footer-wave-boundary { height:58px !important; }
 }

@@ -1,13 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { consumeRateLimit, requestIp } from "@/lib/security";
 
 // POST /api/promo/validate — validate promo code
 export async function POST(req: NextRequest) {
+  const ip = requestIp(req);
+  if (!(await consumeRateLimit(`promo-check:${ip}`, 12, 15 * 60_000)).allowed) {
+    return NextResponse.json({ error: "Слишком много попыток" }, { status: 429 });
+  }
   const body = await req.json();
   const code = (body.code || "").toString().toUpperCase().trim();
 
   if (!code) {
     return NextResponse.json({ error: "Введите код" }, { status: 400 });
+  }
+  if (code.length > 64 || !/^[A-Z0-9_-]+$/.test(code)) {
+    return NextResponse.json({ error: "Некорректный код" }, { status: 400 });
   }
 
   const promo = await db.promoCode.findUnique({

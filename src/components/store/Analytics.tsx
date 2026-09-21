@@ -1,7 +1,6 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect } from "react";
 
 interface AnalyticsProps {
   yandexMetrika?: string;
@@ -10,18 +9,6 @@ interface AnalyticsProps {
 }
 
 export function Analytics({ yandexMetrika, googleAnalytics, hotjarId }: AnalyticsProps) {
-  // Track page views for internal analytics
-  useEffect(() => {
-    const path = window.location.pathname;
-    // Send to our internal tracker
-    fetch("/api/track", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ path: path + window.location.search }),
-      keepalive: true,
-    }).catch(() => {});
-  }, []);
-
   return (
     <>
       {/* Яндекс.Метрика */}

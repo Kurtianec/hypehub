@@ -103,34 +103,38 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   // Convert simple markdown to HTML
   const renderContent = (content: string) => {
-    const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#8E1537;" }[char] || char));
+    const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char] || char));
     const lines = content.split("\n");
     const html: string[] = [];
-    let inList = false;
+    let listType: "ul" | "ol" | null = null;
+    const closeList = () => {
+      if (listType) html.push(`</${listType}>`);
+      listType = null;
+    };
 
     for (const line of lines) {
       const trimmed = escapeHtml(line.trim());
       if (trimmed.startsWith("# ")) {
-        if (inList) { html.push("</ul>"); inList = false; }
+        closeList();
         html.push(`<h2 class="text-2xl font-black uppercase tracking-tight mt-6 mb-3 text-[#8E1537] font-mono">${trimmed.slice(2)}</h2>`);
       } else if (trimmed.startsWith("## ")) {
-        if (inList) { html.push("</ul>"); inList = false; }
+        closeList();
         html.push(`<h3 class="text-lg font-black uppercase tracking-tight mt-5 mb-2 text-foreground">${trimmed.slice(3)}</h3>`);
       } else if (trimmed.startsWith("### ")) {
-        if (inList) { html.push("</ul>"); inList = false; }
+        closeList();
         html.push(`<h4 class="text-base font-bold mt-4 mb-2 text-foreground">${trimmed.slice(4)}</h4>`);
       } else if (trimmed.startsWith("- ")) {
-        if (!inList) { html.push('<ul class="list-none space-y-1 my-3 ml-4">'); inList = true; }
+        if (listType !== "ul") { closeList(); html.push('<ul class="list-none space-y-1 my-3 ml-4">'); listType = "ul"; }
         html.push(`<li class="text-[#888] font-mono text-sm leading-relaxed flex gap-2"><span class="text-[#8E1537]">▸</span><span>${trimmed.slice(2)}</span></li>`);
       } else if (trimmed.match(/^\d+\.\s/)) {
-        if (!inList) { html.push('<ol class="list-none space-y-1 my-3 ml-4">'); inList = true; }
+        if (listType !== "ol") { closeList(); html.push('<ol class="list-none space-y-1 my-3 ml-4">'); listType = "ol"; }
         const match = trimmed.match(/^(\d+)\.\s(.+)/);
         html.push(`<li class="text-[#888] font-mono text-sm leading-relaxed flex gap-2"><span class="text-[#8E1537] font-bold">${match?.[1]}.</span><span>${match?.[2]}</span></li>`);
       } else if (trimmed === "") {
-        if (inList) { html.push("</ul>"); inList = false; }
+        closeList();
         html.push("<br/>");
       } else if (trimmed.startsWith("|")) {
-        if (inList) { html.push("</ul>"); inList = false; }
+        closeList();
         const cells = trimmed.split("|").filter((c) => c.trim());
         html.push(`<div class="grid grid-cols-${Math.min(cells.length, 4)} gap-1 my-3">`);
         cells.forEach((c) => {
@@ -138,12 +142,12 @@ export default async function BlogPostPage({ params }: PageProps) {
         });
         html.push("</div>");
       } else {
-        if (inList) { html.push("</ul>"); inList = false; }
+        closeList();
         const htmlLine = trimmed.replace(/\*\*(.+?)\*\*/g, '<strong class="text-foreground">$1</strong>');
         html.push(`<p class="text-[#888] font-mono text-sm leading-relaxed my-2">${htmlLine}</p>`);
       }
     }
-    if (inList) html.push("</ul>");
+    closeList();
     return html.join("");
   };
 
