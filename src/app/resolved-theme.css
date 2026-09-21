@@ -46,13 +46,9 @@ html:root body .footer-wave-boundary.footer-wave-v2 {
   z-index:2 !important;
   width:100% !important;
   height:70px !important;
-  margin:0 !important;
+  margin:-70px 0 0 !important;
   overflow:hidden !important;
-  background-color:#f7f7f7 !important;
-  background-image:url("/abstract-light.svg") !important;
-  background-size:100% 900px !important;
-  background-position:center bottom !important;
-  background-repeat:no-repeat !important;
+  background:transparent !important;
 }
 html:root body .footer-wave-boundary.footer-wave-v2 svg {
   display:block !important;
@@ -75,6 +71,21 @@ html body footer#footer.footer-noir .footer-trust-chip {
   color:#ddd !important;
   border-color:rgba(255,255,255,.13) !important;
   background:rgba(255,255,255,.055) !important;
+}
+
+html:root body .storefront-v3 .storefront-light-zone { padding-bottom:112px !important; }
+
+/* Social networks keep their recognizable brand colours inside the hero copy. */
+html:root body .storefront-v3 .prism-hero-copy p .hero-social { font-weight:750 !important; }
+html:root body .storefront-v3 .prism-hero-copy p .hero-social-vk { color:#2787f5 !important; }
+html:root body .storefront-v3 .prism-hero-copy p .hero-social-youtube { color:#ff3040 !important; }
+html:root body .storefront-v3 .prism-hero-copy p .hero-social-telegram { color:#2aabee !important; }
+html:root body .storefront-v3 .prism-hero-copy p .hero-social-instagram {
+  color:#c13584 !important;
+  background:linear-gradient(90deg,#f58529,#dd2a7b 48%,#8134af) !important;
+  background-clip:text !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
 }
 
 /* Light scene: calm depth without grids, stripes or decorative dots. */
@@ -340,7 +351,7 @@ html body .admin-v3.admin-prism table.visitor-table thead { color:#aaa !importan
 @media (max-width:640px) {
   html body .storefront-v3 > header.prism-header { padding:8px !important; }
   html:root body footer#footer.site-footer-v2.footer-noir { margin-top:0 !important; }
-  html:root body .footer-wave-boundary.footer-wave-v2 { height:48px !important; }
+  html:root body .footer-wave-boundary.footer-wave-v2 { height:48px !important; margin-top:-48px !important; }
 }
 
 @media (prefers-reduced-motion:reduce) {
