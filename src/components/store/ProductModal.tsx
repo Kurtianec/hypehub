@@ -308,13 +308,13 @@ support@hypehub.vercel.app
               </p>
 
               <div className="mb-4 grid grid-cols-2 gap-2 text-xs">
-                <div className="rounded-lg border border-white/10 bg-white/[.025] p-3">
-                  <div className="text-muted-foreground">Последняя проверка</div>
-                  <div className="mt-1 font-semibold">{product.lastCheckedAt ? new Date(product.lastCheckedAt).toLocaleDateString("ru-RU") : "Перед публикацией"}</div>
+                <div className="product-assurance rounded-lg border p-3">
+                  <div className="product-assurance-label">Последняя проверка</div>
+                  <div className="product-assurance-value mt-1 font-semibold">{product.lastCheckedAt ? new Date(product.lastCheckedAt).toLocaleDateString("ru-RU") : "Перед публикацией"}</div>
                 </div>
-                <div className="rounded-lg border border-white/10 bg-white/[.025] p-3">
-                  <div className="text-muted-foreground">Гарантия</div>
-                  <div className="mt-1 font-semibold">{product.warrantyDays || 14} дней</div>
+                <div className="product-assurance rounded-lg border p-3">
+                  <div className="product-assurance-label">Гарантия</div>
+                  <div className="product-assurance-value mt-1 font-semibold">{product.warrantyDays || 14} дней</div>
                 </div>
               </div>
 

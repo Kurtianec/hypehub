@@ -1898,3 +1898,61 @@ body {
   border-color:#d8a1b1 !important;
   background:#f6e9ee !important;
 }
+
+/* Scrolled header must never fall back to the legacy white skin. */
+.storefront-v3 .prism-header.is-scrolled > .hype-nav-shell,
+:root:not(.dark) .storefront-v3 .prism-header.is-scrolled > .hype-nav-shell {
+  color:#f7f7f7 !important;
+  border-color:rgba(255,255,255,.13) !important;
+  background:rgba(11,11,11,.96) !important;
+  box-shadow:0 18px 58px -30px rgba(0,0,0,.9),0 0 34px rgba(148,24,61,.12) !important;
+}
+
+/* Dropdown menu contrast lock. */
+.storefront-v3 .hype-menu-panel .prism-menu-top { color:#f5f5f5 !important; }
+.storefront-v3 .hype-menu-panel .prism-menu-top button { color:#fff !important; background:rgba(255,255,255,.08) !important; }
+.storefront-v3 .hype-menu-panel .prism-menu-links a,
+.storefront-v3 .hype-menu-panel .prism-menu-links button {
+  color:#e8e8e8 !important;
+  border-color:rgba(255,255,255,.10) !important;
+  background:transparent !important;
+}
+.storefront-v3 .hype-menu-panel .prism-menu-links small { color:#d05b7d !important; }
+.storefront-v3 .hype-menu-panel .prism-menu-links span { color:#f1f1f1 !important; }
+.storefront-v3 .hype-menu-panel .prism-menu-links a:hover,
+.storefront-v3 .hype-menu-panel .prism-menu-links button:hover {
+  color:#fff !important;
+  border-color:rgba(195,71,107,.46) !important;
+  background:rgba(148,24,61,.20) !important;
+}
+.storefront-v3 .hype-menu-panel .prism-menu-tools button {
+  color:#ddd !important;
+  border-color:rgba(255,255,255,.13) !important;
+  background:#171717 !important;
+}
+
+/* Ambient points: strictly black and bordeaux. */
+.storefront-v3 .ambient-sparks span {
+  background:#8e1537 !important;
+  box-shadow:0 0 10px 2px rgba(142,21,55,.20) !important;
+}
+.storefront-v3 .ambient-sparks span:nth-child(odd) {
+  background:#0a0a0a !important;
+  box-shadow:0 0 8px 2px rgba(0,0,0,.16) !important;
+}
+
+/* Explicitly readable assurance fields inside the product modal. */
+.hype-product-dialog .product-assurance {
+  color:#171717 !important;
+  border-color:#d8d8d8 !important;
+  background:#f3f3f3 !important;
+}
+.hype-product-dialog .product-assurance-label {
+  color:#656565 !important;
+  font-size:11px;
+  font-weight:600;
+}
+.hype-product-dialog .product-assurance-value {
+  color:#181818 !important;
+  font-weight:750;
+}
