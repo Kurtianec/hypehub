@@ -172,7 +172,7 @@ export function AdminReviews() {
                 key={r.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[current] p-5 transition-colors"
+                className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537]/60 p-5 transition-colors"
                 style={{
                   clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))",
                   color: status.color,

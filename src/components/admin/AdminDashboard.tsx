@@ -419,7 +419,7 @@ function ExportButton({ label, onClick, color }: { label: string; onClick: () =>
   return (
     <button
       onClick={onClick}
-      className="bg-[#121212] border-2 p-4 hover:press transition-all flex items-center justify-between font-mono text-sm uppercase font-bold"
+      className="bg-[#121212] border-2 p-4 hover:-translate-y-0.5 transition-all flex items-center justify-between font-mono text-sm uppercase font-bold"
       style={{ borderColor: `${color}40`, color }}
     >
       <span className="flex items-center gap-2">

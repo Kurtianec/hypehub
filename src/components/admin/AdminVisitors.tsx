@@ -296,7 +296,7 @@ export function AdminVisitors() {
       </div>
 
       {/* Recent visitors table */}
-      <div className="admin-panel-card bg-[#121212] border-2 border-[#2A2A2A] p-5">
+      <div className="admin-panel-card visitor-table-card bg-[#121212] border-2 border-[#2A2A2A] p-5">
         <h3 className="font-bold mb-4 flex items-center gap-2">
           <Monitor className="w-4 h-4 text-[#8E1537]" />
           Последние посетители ({data.recent.length})
@@ -304,17 +304,17 @@ export function AdminVisitors() {
         {data.recent.length === 0 ? (
           <p className="text-sm text-[#888] text-center py-8">Пока нет данных о посетителях</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+          <div className="visitor-table-scroll max-w-full overflow-x-auto">
+            <table className="visitor-table w-full min-w-[1040px] table-fixed text-sm">
               <thead>
                 <tr className="text-left text-xs text-[#888] border-b border-[#1F1F1F]">
-                  <th className="pb-2 pr-3">IP</th>
-                  <th className="pb-2 pr-3 hidden md:table-cell">Локация</th>
-                  <th className="pb-2 pr-3 hidden md:table-cell">Устройство</th>
-                  <th className="pb-2 pr-3 hidden lg:table-cell">Экран / среда</th>
-                  <th className="pb-2 pr-3 hidden lg:table-cell">Источник</th>
-                  <th className="pb-2 pr-3 hidden lg:table-cell">Страница</th>
-                  <th className="pb-2 text-right">Время</th>
+                  <th className="w-[125px] pb-2 pr-3">IP</th>
+                  <th className="w-[150px] pb-2 pr-3">Локация</th>
+                  <th className="w-[205px] pb-2 pr-3">Устройство</th>
+                  <th className="w-[210px] pb-2 pr-3">Экран / среда</th>
+                  <th className="w-[170px] pb-2 pr-3">Источник</th>
+                  <th className="w-[90px] pb-2 pr-3">Страница</th>
+                  <th className="w-[110px] pb-2 text-right">Время</th>
                 </tr>
               </thead>
               <tbody>
@@ -323,7 +323,7 @@ export function AdminVisitors() {
                     <td className="py-2.5 pr-3 font-mono text-xs">
                       <span className="px-1.5 py-0.5 rounded bg-white/[0.06] text-foreground">{v.ip}</span>
                     </td>
-                    <td className="py-2.5 pr-3 hidden md:table-cell text-xs">
+                    <td className="py-2.5 pr-3 text-xs">
                       <div className="flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-[#888]" />
                         {v.country ? (
@@ -333,22 +333,22 @@ export function AdminVisitors() {
                         )}
                       </div>
                     </td>
-                    <td className="py-2.5 pr-3 hidden md:table-cell text-xs">
+                    <td className="py-2.5 pr-3 text-xs">
                       <div className="font-semibold">{v.device}</div>
                       <div className="text-[#888]">{v.browser} · {v.os}</div>
                     </td>
-                    <td className="py-2.5 pr-3 hidden lg:table-cell text-xs text-[#888]">
+                    <td className="py-2.5 pr-3 text-xs text-[#888]">
                       <div>{v.screen || "Экран —"} · {v.connection || "сеть —"}</div>
                       <div>{v.language || "язык —"} · {v.timezone || "часовой пояс —"}</div>
                     </td>
-                    <td className="py-2.5 pr-3 hidden lg:table-cell text-xs">
+                    <td className="overflow-hidden py-2.5 pr-3 text-xs">
                       {v.referer ? (
-                        <span className="truncate max-w-[120px] inline-block" title={v.referer}>{v.referer}</span>
+                        <span className="block truncate" title={v.referer}>{v.referer}</span>
                       ) : (
                         <span className="text-[#888]">Прямой</span>
                       )}
                     </td>
-                    <td className="py-2.5 pr-3 hidden lg:table-cell text-xs font-mono text-[#888]">{v.path}</td>
+                    <td className="overflow-hidden py-2.5 pr-3 text-xs font-mono text-[#888]"><span className="block truncate" title={v.path}>{v.path}</span></td>
                     <td className="py-2.5 text-right text-xs text-[#888] whitespace-nowrap">
                       {new Date(v.createdAt).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
                     </td>

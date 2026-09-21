@@ -93,7 +93,7 @@ export function AdminCategories({
             key={cat.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[current] p-4 transition-colors"
+            className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537]/60 p-4 transition-colors"
             style={{
               clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))",
               color: cat.color,
@@ -152,7 +152,7 @@ export function AdminCategories({
             <AlertDialogAction
               onClick={onDelete}
               disabled={deleting}
-              className="bg-[#8E1537]0 hover:bg-[#8E1537] text-white"
+              className="bg-[#8E1537] hover:bg-[#A61E46] text-white"
             >
               {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Удалить"}
             </AlertDialogAction>

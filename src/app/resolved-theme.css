@@ -1,0 +1,202 @@
+/*
+ * HypeHub resolved theme.
+ * This is deliberately imported last. It is the single authority for the
+ * storefront chrome and the admin console after several legacy theme layers.
+ */
+
+/* The storefront navigation belongs to the opening scene and scrolls away. */
+html body .storefront-v3 > header.prism-header {
+  position:absolute !important;
+  inset:0 0 auto !important;
+  z-index:80 !important;
+  padding:14px 18px !important;
+}
+html body .storefront-v3 > header.prism-header > .hype-nav-shell {
+  width:min(1180px,100%) !important;
+  color:#f3f3f3 !important;
+  border-color:rgba(255,255,255,.13) !important;
+  background:rgba(13,13,13,.92) !important;
+}
+
+/* Black footer with a visible wave in every browser theme. */
+html body .storefront-v3 > footer#footer.hype-footer.footer-noir {
+  position:relative !important;
+  z-index:2 !important;
+  margin-top:82px !important;
+  color:#e8e8e8 !important;
+  border:0 !important;
+  background-color:#080808 !important;
+  background-image:
+    radial-gradient(660px 290px at 10% 5%,rgba(148,24,61,.23),transparent 72%),
+    radial-gradient(500px 260px at 92% 88%,rgba(148,24,61,.11),transparent 72%),
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) !important;
+  background-size:auto,auto,42px 42px,42px 42px !important;
+}
+html body .storefront-v3 > footer#footer.hype-footer.footer-noir::before {
+  display:block !important;
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  top:-82px !important;
+  height:84px !important;
+  background-color:transparent !important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23080808' d='M0 72c162 47 305-36 483 5s304 48 477-1 312-29 480 2v42H0z'/%3E%3C/svg%3E") !important;
+  background-repeat:no-repeat !important;
+  background-position:center bottom !important;
+  background-size:100% 100% !important;
+}
+html body .storefront-v3 > footer#footer.footer-noir h3,
+html body .storefront-v3 > footer#footer.footer-noir .text-foreground { color:#fff !important; }
+html body .storefront-v3 > footer#footer.footer-noir p,
+html body .storefront-v3 > footer#footer.footer-noir a,
+html body .storefront-v3 > footer#footer.footer-noir button,
+html body .storefront-v3 > footer#footer.footer-noir li,
+html body .storefront-v3 > footer#footer.footer-noir [class*="text-[#888]"] { color:#aaa !important; }
+html body .storefront-v3 > footer#footer.footer-noir [class*="text-[#8E1537]"] { color:#d05b7d !important; }
+html body .storefront-v3 > footer#footer.footer-noir .footer-trust-chip {
+  color:#ddd !important;
+  border-color:rgba(255,255,255,.13) !important;
+  background:rgba(255,255,255,.055) !important;
+}
+
+/* One background animation. It never sits above cards or controls. */
+html body .storefront-v3 { position:relative !important; isolation:isolate !important; }
+html body .storefront-v3::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle at 7% 18%,rgba(142,21,55,.58) 0 2px,transparent 3px),
+    radial-gradient(circle at 19% 72%,rgba(18,18,18,.48) 0 2px,transparent 3px),
+    radial-gradient(circle at 38% 33%,rgba(142,21,55,.52) 0 2px,transparent 3px),
+    radial-gradient(circle at 54% 86%,rgba(18,18,18,.42) 0 2px,transparent 3px),
+    radial-gradient(circle at 71% 16%,rgba(142,21,55,.48) 0 2px,transparent 3px),
+    radial-gradient(circle at 88% 59%,rgba(18,18,18,.43) 0 2px,transparent 3px),
+    radial-gradient(circle at 94% 28%,rgba(142,21,55,.52) 0 2px,transparent 3px);
+  opacity:.28;
+  animation:hype-background-pulse 4.8s ease-in-out infinite;
+}
+html body .storefront-v3 > .ambient-sparks { display:none !important; }
+html body .storefront-v3 > header,
+html body .storefront-v3 > main,
+html body .storefront-v3 > footer { position:relative; z-index:1; }
+@keyframes hype-background-pulse {
+  0%,100% { opacity:.16; filter:brightness(.85); }
+  48% { opacity:.66; filter:brightness(1.18); }
+  72% { opacity:.30; filter:brightness(.96); }
+}
+
+/* ---------- Single admin palette ---------- */
+html body .admin-v3.admin-prism {
+  --background:#090909;
+  --foreground:#f1f1f1;
+  --card:#151515;
+  --card-foreground:#f1f1f1;
+  --popover:#171717;
+  --popover-foreground:#f1f1f1;
+  --muted:#202020;
+  --muted-foreground:#999;
+  --border:#303030;
+  --input:#343434;
+  color:#ededed !important;
+  background-color:#090909 !important;
+}
+html body .admin-v3.admin-prism .admin-main,
+html body .admin-v3.admin-prism .admin-content { min-width:0 !important; color:#ededed !important; background:transparent !important; }
+html body .admin-v3.admin-prism .admin-content h1,
+html body .admin-v3.admin-prism .admin-content h2,
+html body .admin-v3.admin-prism .admin-content h3,
+html body .admin-v3.admin-prism .admin-content .text-foreground { color:#f5f5f5 !important; }
+html body .admin-v3.admin-prism .admin-content [class*="text-[#888]"],
+html body .admin-v3.admin-prism .admin-content .text-muted-foreground { color:#999 !important; }
+
+/* Every legacy surface is normalized, including light-mode !important rules. */
+html body .admin-v3.admin-prism .admin-content .admin-panel-card,
+html body .admin-v3.admin-prism .admin-content .admin-surface,
+html body .admin-v3.admin-prism .admin-content [class*="bg-[#121212]"],
+html body .admin-v3.admin-prism .admin-content [class*="bg-[#0E0E0E]"],
+html body .admin-v3.admin-prism .admin-content [class*="bg-[#0A0A0A]"],
+html body .admin-v3.admin-prism .admin-content [class*="bg-[#1A1A1A]"],
+html body .admin-v3.admin-prism .admin-content [class*="bg-white"],
+html body .admin-v3.admin-prism .admin-content .glass,
+html body .admin-v3.admin-prism .admin-content .glass-strong {
+  color:#ededed !important;
+  border-color:#303030 !important;
+  background-color:#151515 !important;
+  background-image:none !important;
+}
+html body .admin-v3.admin-prism .admin-content [style*="clip-path"] {
+  clip-path:none !important;
+  border-radius:16px !important;
+}
+html body .admin-v3.admin-prism .admin-content > div [class*="border-2"][class*="p-"],
+html body .admin-v3.admin-prism .admin-content > div [class*="border"][class*="rounded-xl"] {
+  border-width:1px !important;
+  border-color:#303030 !important;
+  border-radius:16px !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025) !important;
+}
+html body .admin-v3.admin-prism .admin-content input,
+html body .admin-v3.admin-prism .admin-content textarea,
+html body .admin-v3.admin-prism .admin-content select,
+html body .admin-v3.admin-prism .admin-content button[role="combobox"] {
+  color:#efefef !important;
+  border-color:#363636 !important;
+  background:#111 !important;
+}
+html body .admin-v3.admin-prism .admin-content input::placeholder,
+html body .admin-v3.admin-prism .admin-content textarea::placeholder { color:#777 !important; }
+html body .admin-v3.admin-prism .admin-content [class*="bg-[#8E1537]"] {
+  color:#fff !important;
+  background-color:#9e1942 !important;
+}
+html body .admin-v3.admin-prism .admin-content [class*="text-black"] { color:#fff !important; }
+html body .admin-v3.admin-prism .admin-content [class*="border-[#2A2A2A]"],
+html body .admin-v3.admin-prism .admin-content [class*="border-[#1F1F1F]"],
+html body .admin-v3.admin-prism .admin-content [class*="border-white"] { border-color:#303030 !important; }
+
+/* Navigation and filters use dark compact controls instead of white strips. */
+html body .admin-v3.admin-prism .admin-sidebar,
+html body .admin-v3.admin-prism .admin-topbar { color:#e7e7e7 !important; border-color:#292929 !important; background:#101010 !important; }
+html body .admin-v3.admin-prism .admin-nav-item { color:#949494 !important; background:transparent !important; }
+html body .admin-v3.admin-prism .admin-nav-item[class*="bg-[#8E1537]/10"] {
+  color:#fff !important;
+  border-color:rgba(208,91,125,.34) !important;
+  background:linear-gradient(90deg,rgba(142,21,55,.30),rgba(142,21,55,.08)) !important;
+}
+html body .admin-v3.admin-prism .admin-content > div > div[class*="w-fit"],
+html body .admin-v3.admin-prism .admin-content > div > div[class*="gap-1.5"][class*="p-1"] {
+  color:#ddd !important;
+  border:1px solid #303030 !important;
+  border-radius:12px !important;
+  background:#151515 !important;
+}
+
+/* Tables stay inside the content column and scroll horizontally when needed. */
+html body .admin-v3.admin-prism .visitor-table-card { max-width:100% !important; overflow:hidden !important; }
+html body .admin-v3.admin-prism .visitor-table-scroll {
+  width:100% !important;
+  max-width:100% !important;
+  overflow-x:auto !important;
+  scrollbar-color:#8e1537 #202020;
+  scrollbar-width:thin;
+}
+html body .admin-v3.admin-prism table.visitor-table {
+  color:#e9e9e9 !important;
+  border:1px solid #303030 !important;
+  border-radius:12px !important;
+  background:#111 !important;
+}
+html body .admin-v3.admin-prism table.visitor-table th,
+html body .admin-v3.admin-prism table.visitor-table td { overflow:hidden !important; }
+html body .admin-v3.admin-prism table.visitor-table thead { color:#aaa !important; background:#181818 !important; }
+
+@media (max-width:640px) {
+  html body .storefront-v3 > header.prism-header { padding:8px !important; }
+  html body .storefront-v3 > footer#footer.hype-footer.footer-noir { margin-top:54px !important; }
+  html body .storefront-v3 > footer#footer.hype-footer.footer-noir::before { top:-54px !important; height:56px !important; }
+}

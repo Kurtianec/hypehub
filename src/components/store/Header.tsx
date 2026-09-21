@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -20,15 +20,8 @@ export function Header({ siteName = "ХайпХаб", products = [], categories 
   theme?: Theme; onToggleTheme?: () => void; locale?: Locale; onToggleLocale?: () => void;
 }) {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const nav = locale === "en" ? navEn : navRu;
-
-  useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 18);
-    update(); window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
-  }, []);
 
   const go = (href: string) => {
     setOpen(false);
@@ -38,7 +31,7 @@ export function Header({ siteName = "ХайпХаб", products = [], categories 
 
   return (
     <>
-      <header className={`prism-header ${scrolled ? "is-scrolled" : ""}`}>
+      <header className="prism-header">
         <div className="prism-nav-shell hype-nav-shell">
           <Link href="/" className="prism-brand" aria-label={`${siteName} — главная`}>
             <span className="prism-brand-icon"><BrandMark className="h-full w-full" /></span><span className="prism-brand-name">{siteName}</span>

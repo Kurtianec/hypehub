@@ -58,7 +58,7 @@ export function Advantages({ settings }: { settings?: { stats_clients?: string; 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: Math.min(i * 0.05, 0.4) }}
-              className="group relative bg-[#121212] border-2 border-[#2A2A2A] hover:border-[current] p-5 md:p-6 hover-press transition-all"
+              className="group relative bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537]/60 p-5 md:p-6 hover:-translate-y-0.5 transition-all"
               style={{
                 clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))",
                 color: adv.color,

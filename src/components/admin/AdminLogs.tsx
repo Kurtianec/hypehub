@@ -143,7 +143,7 @@ export function AdminLogs() {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: Math.min(i * 0.02, 0.5) }}
-                className="bg-[#121212] border-2 border-[#2A2A2A] p-3 flex items-start gap-3 hover:border-[current] transition-colors"
+                className="bg-[#121212] border-2 border-[#2A2A2A] p-3 flex items-start gap-3 hover:border-[#8E1537]/60 transition-colors"
                 style={{ color, clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))" }}
               >
                 <div className="w-8 h-8 flex items-center justify-center border-2 flex-shrink-0"

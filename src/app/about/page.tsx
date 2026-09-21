@@ -83,7 +83,7 @@ export default async function AboutPage() {
           {/* Values */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
             {values.map((v, i) => (
-              <div key={i} className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[current] p-5 transition-colors"
+              <div key={i} className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537]/60 p-5 transition-colors"
                 style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))", color: v.color }}>
                 <div className="w-11 h-11 flex items-center justify-center mb-4 border-2"
                   style={{ background: `${v.color}20`, borderColor: v.color }}>
