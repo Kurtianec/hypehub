@@ -361,7 +361,7 @@ function MetricCard({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-[#121212] border-2 p-4 md:p-5"
+      className="admin-panel-card bg-[#121212] border-2 p-4 md:p-5"
       style={{
         borderColor: `${color}40`,
         clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))",
@@ -395,7 +395,7 @@ function StatCard({ icon: Icon, label, value, color }: { icon: React.ComponentTy
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-[#121212] border-2 p-4 md:p-5"
+      className="admin-panel-card bg-[#121212] border-2 p-4 md:p-5"
       style={{
         borderColor: `${color}40`,
         clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))",

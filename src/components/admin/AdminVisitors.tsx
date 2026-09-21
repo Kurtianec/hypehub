@@ -124,7 +124,7 @@ export function AdminVisitors() {
       </div>
 
       {/* Hourly chart */}
-      <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5 mb-6" style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}>
+      <div className="admin-panel-card bg-[#121212] border-2 border-[#2A2A2A] p-5 mb-6">
         <h3 className="font-bold mb-4 flex items-center gap-2">
           <Clock className="w-4 h-4 text-[#8E1537]" />
           Активность за 24 часа
@@ -164,7 +164,7 @@ export function AdminVisitors() {
       {/* Geo + sources grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5 mb-6">
         {/* By country */}
-        <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5">
+        <div className="admin-panel-card bg-[#121212] border-2 border-[#2A2A2A] p-5">
           <h3 className="font-bold mb-4 flex items-center gap-2">
             <Globe className="w-4 h-4 text-[#8E1537]" />
             По странам
@@ -199,7 +199,7 @@ export function AdminVisitors() {
         </div>
 
         {/* By city */}
-        <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5">
+        <div className="admin-panel-card bg-[#121212] border-2 border-[#2A2A2A] p-5">
           <h3 className="font-bold mb-4 flex items-center gap-2">
             <MapPin className="w-4 h-4 text-[#8E1537]" />
             По городам
@@ -231,7 +231,7 @@ export function AdminVisitors() {
         </div>
 
         {/* By referrer */}
-        <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5">
+        <div className="admin-panel-card bg-[#121212] border-2 border-[#2A2A2A] p-5">
           <h3 className="font-bold mb-4 flex items-center gap-2">
             <Link2 className="w-4 h-4 text-[#8E1537]" />
             Источники трафика
@@ -264,7 +264,7 @@ export function AdminVisitors() {
         </div>
 
         {/* By path */}
-        <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5">
+        <div className="admin-panel-card bg-[#121212] border-2 border-[#2A2A2A] p-5">
           <h3 className="font-bold mb-4 flex items-center gap-2">
             <ArrowRight className="w-4 h-4 text-[#8E1537]" />
             Посещённые страницы
@@ -296,7 +296,7 @@ export function AdminVisitors() {
       </div>
 
       {/* Recent visitors table */}
-      <div className="bg-[#121212] border-2 border-[#2A2A2A] p-5">
+      <div className="admin-panel-card bg-[#121212] border-2 border-[#2A2A2A] p-5">
         <h3 className="font-bold mb-4 flex items-center gap-2">
           <Monitor className="w-4 h-4 text-[#8E1537]" />
           Последние посетители ({data.recent.length})
@@ -399,7 +399,7 @@ function StatCard({ icon: Icon, label, value, color }: { icon: React.ComponentTy
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-[#121212] border-2 p-4 md:p-5"
+      className="admin-panel-card bg-[#121212] border-2 p-4 md:p-5"
       style={{
         borderColor: `${color}40`,
         clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))",
