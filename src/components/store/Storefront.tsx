@@ -114,11 +114,9 @@ export function Storefront({
             currency={currency}
             onToggleCurrency={toggleCurrency}
           />
-          {settingsObj.ad_wide_enabled === "true" && (
-            <div className="wide-ad-slot container mx-auto px-4 md:px-6">
-              <AdBanner variant="wide" settings={settingsObj} />
-            </div>
-          )}
+          <div className="wide-ad-slot container mx-auto px-4 md:px-6">
+            <AdBanner variant="wide" settings={settingsObj} />
+          </div>
           <HowToBuy />
           <Advantages settings={settingsObj} />
           <FAQ faqs={faqs} />

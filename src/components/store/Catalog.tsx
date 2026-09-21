@@ -229,7 +229,7 @@ export function Catalog({
                     }}
                     convertPrice={convertPrice}
                   />
-                  {i === 2 && safePage === 1 && settings?.ad_portrait_enabled === "true" && (
+                  {i === 2 && safePage === 1 && settings && (
                     <div className="portrait-ad-slot hidden xl:block xl:row-span-2">
                       <AdBanner variant="portrait" settings={settings} />
                     </div>
