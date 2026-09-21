@@ -15,6 +15,7 @@ import { CookieBanner } from "./CookieBanner";
 import { Analytics } from "./Analytics";
 import { FavoritesBar } from "./FavoritesBar";
 import { ProductModal } from "./ProductModal";
+import { AdBanner } from "./AdBanner";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useCurrency } from "@/hooks/use-currency";
 import { useTheme } from "@/hooks/use-theme";
@@ -59,6 +60,14 @@ export function Storefront({
     yandex_metrika: settings.yandex_metrika,
     google_analytics: settings.google_analytics,
     hotjar_id: settings.hotjar_id,
+    ad_wide_enabled: settings.ad_wide_enabled,
+    ad_wide_image: settings.ad_wide_image,
+    ad_wide_url: settings.ad_wide_url,
+    ad_wide_title: settings.ad_wide_title,
+    ad_portrait_enabled: settings.ad_portrait_enabled,
+    ad_portrait_image: settings.ad_portrait_image,
+    ad_portrait_url: settings.ad_portrait_url,
+    ad_portrait_title: settings.ad_portrait_title,
   };
 
   useEffect(() => {
@@ -105,6 +114,11 @@ export function Storefront({
             currency={currency}
             onToggleCurrency={toggleCurrency}
           />
+          {settingsObj.ad_wide_enabled === "true" && (
+            <div className="wide-ad-slot container mx-auto px-4 md:px-6">
+              <AdBanner variant="wide" settings={settingsObj} />
+            </div>
+          )}
           <HowToBuy />
           <Advantages settings={settingsObj} />
           <FAQ faqs={faqs} />

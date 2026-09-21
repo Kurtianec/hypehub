@@ -96,6 +96,7 @@ export interface FaqItem {
 }
 
 export interface Settings {
+  [key: string]: string | undefined;
   site_name?: string;
   tagline?: string;
   crypto_btc?: string;
@@ -110,6 +111,14 @@ export interface Settings {
   yandex_metrika?: string;
   google_analytics?: string;
   hotjar_id?: string;
+  ad_wide_enabled?: string;
+  ad_wide_image?: string;
+  ad_wide_url?: string;
+  ad_wide_title?: string;
+  ad_portrait_enabled?: string;
+  ad_portrait_image?: string;
+  ad_portrait_url?: string;
+  ad_portrait_title?: string;
 }
 
 export const PLATFORM_COLORS: Record<Platform, string> = {

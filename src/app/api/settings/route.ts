@@ -9,6 +9,8 @@ const PUBLIC_KEYS = [
   "operator_online",
   "stats_accounts", "stats_clients", "stats_rating", "stats_support",
   "yandex_metrika", "google_analytics", "hotjar_id",
+  "ad_wide_enabled", "ad_wide_image", "ad_wide_url", "ad_wide_title",
+  "ad_portrait_enabled", "ad_portrait_image", "ad_portrait_url", "ad_portrait_title",
 ];
 
 export async function GET() {

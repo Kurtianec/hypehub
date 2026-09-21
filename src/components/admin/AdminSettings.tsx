@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Save, Loader2, Settings as SettingsIcon, Bitcoin, Wallet, Mail, Send, BarChart3, Lock } from "lucide-react";
+import { Save, Loader2, Settings as SettingsIcon, Bitcoin, Mail, BarChart3, Lock, Megaphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,6 +34,16 @@ const FIELDS = [
     { key: "yandex_metrika", label: "Yandex.Metrika ID", type: "text", mono: true },
     { key: "google_analytics", label: "Google Analytics ID (G-XXXX)", type: "text", mono: true },
     { key: "hotjar_id", label: "Hotjar ID", type: "text", mono: true },
+  ]},
+  { group: "Рекламные баннеры", icon: Megaphone, fields: [
+    { key: "ad_wide_enabled", label: "Показывать широкий баннер 970 × 250", type: "checkbox" },
+    { key: "ad_wide_image", label: "Изображение широкого баннера (URL)", type: "url", placeholder: "https://.../banner-970x250.jpg" },
+    { key: "ad_wide_url", label: "Ссылка широкого баннера", type: "url", placeholder: "https://..." },
+    { key: "ad_wide_title", label: "Название рекламодателя / alt-текст", type: "text" },
+    { key: "ad_portrait_enabled", label: "Показывать вертикальный баннер 300 × 600", type: "checkbox" },
+    { key: "ad_portrait_image", label: "Изображение вертикального баннера (URL)", type: "url", placeholder: "https://.../banner-300x600.jpg" },
+    { key: "ad_portrait_url", label: "Ссылка вертикального баннера", type: "url", placeholder: "https://..." },
+    { key: "ad_portrait_title", label: "Название рекламодателя / alt-текст", type: "text" },
   ]},
   { group: "Безопасность", icon: Lock, fields: [
     { key: "admin_pass", label: "Новый пароль админа", type: "text" },
@@ -113,13 +123,23 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
             <div className="space-y-3">
               {group.fields.map((f) => (
                 <div key={f.key}>
-                  <Label className="text-[10px] uppercase tracking-widest font-mono text-[#888]">{f.label}</Label>
-                  <Input
-                    type={f.type}
-                    value={String(form[f.key] || "")}
-                    onChange={(e) => set(f.key, e.target.value)}
-                    className={`mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] ${f.mono ? "font-mono text-xs" : ""}`}
-                  />
+                  {f.type === "checkbox" ? (
+                    <label className="flex items-center justify-between gap-4 rounded-xl border border-[#303030] bg-[#0A0A0A] px-3 py-3 cursor-pointer">
+                      <span className="text-xs font-semibold">{f.label}</span>
+                      <input type="checkbox" checked={form[f.key] === "true"} onChange={(e) => set(f.key, String(e.target.checked))} className="h-5 w-5 accent-[#8E1537]" />
+                    </label>
+                  ) : (
+                    <>
+                      <Label className="text-[10px] uppercase tracking-widest font-mono text-[#888]">{f.label}</Label>
+                      <Input
+                        type={f.type}
+                        value={String(form[f.key] || "")}
+                        onChange={(e) => set(f.key, e.target.value)}
+                        placeholder={"placeholder" in f ? f.placeholder : undefined}
+                        className={`mt-1 bg-[#0A0A0A] border-2 border-[#2A2A2A] focus:border-[#8E1537] ${"mono" in f && f.mono ? "font-mono text-xs" : ""}`}
+                      />
+                    </>
+                  )}
                 </div>
               ))}
             </div>

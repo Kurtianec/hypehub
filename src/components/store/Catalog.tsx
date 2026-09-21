@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { Fragment, useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Music2, Youtube, Users, Instagram, Send, Tag,
@@ -11,6 +11,7 @@ import type { Category, Product, Settings } from "@/lib/types";
 import { PLATFORM_COLORS, formatPrice, parseBadges, BADGE_LABELS } from "@/lib/types";
 import { ProductModal } from "./ProductModal";
 import { ProductImage } from "./ProductImage";
+import { AdBanner } from "./AdBanner";
 import { PlatformLogos } from "./PlatformLogos";
 import { CompareBar, CompareModal, useCompare } from "./Compare";
 import { FiltersBar, type SortOption, type FilterState } from "./FiltersBar";
@@ -210,24 +211,30 @@ export function Catalog({
               className="prism-product-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5"
             >
               {pagedProducts.map((product, i) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  index={(safePage - 1) * pageSize + i}
-                  onClick={() => setSelectedProduct(product)}
-                  onAddToCompare={handleAddToCompare}
-                  isInCompare={isInCompare(product.id)}
-                  isFavorite={favoritesHook?.isFavorite(product.id) || false}
-                  onToggleFavorite={(p) => {
-                    const wasFav = favoritesHook?.isFavorite(p.id) ?? false;
-                    favoritesHook?.toggleFavorite(p);
-                    toast({
-                      title: wasFav ? "Удалено из избранного" : "Добавлено в избранное",
-                      description: p.title,
-                    });
-                  }}
-                  convertPrice={convertPrice}
-                />
+                <Fragment key={product.id}>
+                  <ProductCard
+                    product={product}
+                    index={(safePage - 1) * pageSize + i}
+                    onClick={() => setSelectedProduct(product)}
+                    onAddToCompare={handleAddToCompare}
+                    isInCompare={isInCompare(product.id)}
+                    isFavorite={favoritesHook?.isFavorite(product.id) || false}
+                    onToggleFavorite={(p) => {
+                      const wasFav = favoritesHook?.isFavorite(p.id) ?? false;
+                      favoritesHook?.toggleFavorite(p);
+                      toast({
+                        title: wasFav ? "Удалено из избранного" : "Добавлено в избранное",
+                        description: p.title,
+                      });
+                    }}
+                    convertPrice={convertPrice}
+                  />
+                  {i === 2 && safePage === 1 && settings?.ad_portrait_enabled === "true" && (
+                    <div className="portrait-ad-slot hidden xl:block xl:row-span-2">
+                      <AdBanner variant="portrait" settings={settings} />
+                    </div>
+                  )}
+                </Fragment>
               ))}
             </motion.div>
 
