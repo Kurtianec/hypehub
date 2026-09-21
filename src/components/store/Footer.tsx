@@ -15,7 +15,15 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
     <>
       <div className="footer-wave-boundary footer-wave-v2" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
-          <path d="M0 86C340 22 720 18 1015 62C1194 89 1327 75 1440 42V120H0Z" />
+          <defs>
+            <linearGradient id="footerWaveGradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#240710" />
+              <stop offset="32%" stopColor="#10090B" />
+              <stop offset="68%" stopColor="#080808" />
+              <stop offset="100%" stopColor="#120208" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#footerWaveGradient)" d="M0 92C170 38 318 112 498 72C681 31 814 41 982 78C1158 116 1294 52 1440 68V120H0Z" />
         </svg>
       </div>
       <footer

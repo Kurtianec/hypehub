@@ -55,7 +55,7 @@ html:root body .footer-wave-boundary.footer-wave-v2 svg {
   width:100% !important;
   height:100% !important;
 }
-html:root body .footer-wave-boundary.footer-wave-v2 path { fill:#080808 !important; }
+html:root body .footer-wave-boundary.footer-wave-v2 path { fill:url("#footerWaveGradient") !important; }
 html:root body footer#footer.site-footer-v2.footer-noir::before {
   display:none !important;
 }
@@ -73,62 +73,27 @@ html body footer#footer.footer-noir .footer-trust-chip {
   background:rgba(255,255,255,.055) !important;
 }
 
-/* Light scene: subtle flowing lines plus real pulse nodes below all content. */
+/* Light scene: calm depth without grids, stripes or decorative dots. */
 html:root body .storefront-v3 .storefront-light-zone {
   background-color:#f7f7f7 !important;
   background-image:
-    radial-gradient(760px 400px at 4% 16%,rgba(142,21,55,.035),transparent 72%),
-    radial-gradient(680px 380px at 96% 72%,rgba(25,25,25,.025),transparent 75%),
-    radial-gradient(circle,rgba(22,22,22,.052) 0 .7px,transparent .9px) !important;
-  background-size:auto,auto,28px 28px !important;
+    radial-gradient(820px 440px at -8% 12%,rgba(142,21,55,.045),transparent 70%),
+    radial-gradient(760px 420px at 108% 46%,rgba(30,30,30,.035),transparent 72%),
+    radial-gradient(620px 360px at 44% 88%,rgba(142,21,55,.022),transparent 74%) !important;
+  background-size:auto !important;
 }
 
-/* One calm asymmetric sweep from the dark hero into the catalogue. */
+/* Smooth wave from the dark hero into the catalogue. */
 html:root body .storefront-v3 .storefront-light-zone::before {
-  top:-78px !important;
-  height:80px !important;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23f7f7f7' d='M0 33C320 97 712 103 1018 57C1200 29 1327 36 1440 61V120H0Z'/%3E%3C/svg%3E") !important;
-}
-html:root body .storefront-v3 .light-background-pulses {
-  position:absolute !important;
-  inset:0 !important;
-  z-index:0 !important;
-  overflow:hidden !important;
-  pointer-events:none !important;
-}
-html:root body .storefront-v3 .light-background-pulses span {
-  position:absolute;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  opacity:.18;
-  background:#8e1537;
-  box-shadow:0 0 0 0 rgba(142,21,55,.30);
-  animation:visible-background-pulse 3.6s ease-in-out infinite;
-}
-html:root body .storefront-v3 .light-background-pulses span:nth-child(3n) { background:#171717; box-shadow:0 0 0 0 rgba(17,17,17,.22); }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(1) { left:5%; top:8%; animation-delay:-.4s; }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(2) { left:17%; top:31%; animation-delay:-2.1s; }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(3) { left:29%; top:72%; animation-delay:-1.2s; }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(4) { left:42%; top:18%; animation-delay:-3s; }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(5) { left:53%; top:58%; animation-delay:-.8s; }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(6) { left:64%; top:87%; animation-delay:-2.6s; }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(7) { left:73%; top:27%; animation-delay:-1.6s; }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(8) { left:84%; top:69%; animation-delay:-3.3s; }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(9) { left:95%; top:42%; animation-delay:-.2s; }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(10) { left:10%; top:91%; animation-delay:-2.8s; }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(11) { left:58%; top:37%; animation-delay:-1s; }
-html:root body .storefront-v3 .light-background-pulses span:nth-child(12) { left:89%; top:12%; animation-delay:-2.3s; }
-@keyframes visible-background-pulse {
-  0%,100% { opacity:.12; transform:scale(.65); box-shadow:0 0 0 0 rgba(142,21,55,0); }
-  48% { opacity:.72; transform:scale(1); box-shadow:0 0 0 8px rgba(142,21,55,.08); }
-  70% { opacity:.28; transform:scale(.78); box-shadow:0 0 0 14px rgba(142,21,55,0); }
+  top:-82px !important;
+  height:84px !important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23f7f7f7' d='M0 72C170 22 292 112 480 68S765 14 954 63s310 43 486-6v63H0z'/%3E%3C/svg%3E") !important;
 }
 
 /* One background animation. It never sits above cards or controls. */
 html body .storefront-v3 { position:relative !important; isolation:isolate !important; }
 html body .storefront-v3::after {
-  content:"";
+  content:none !important;
   position:fixed;
   inset:0;
   z-index:0;
@@ -157,22 +122,15 @@ html body .storefront-v3 > footer { position:relative; z-index:1; }
 /* Scattered points remain part of the light background and pulse below cards. */
 html body .storefront-v3 .storefront-light-zone::after {
   z-index:0 !important;
-  opacity:.42 !important;
+  opacity:1 !important;
   mask-image:none !important;
   background-image:
-    radial-gradient(circle at 4% 11%,rgba(142,21,55,.72) 0 2px,transparent 3px),
-    radial-gradient(circle at 14% 57%,rgba(12,12,12,.48) 0 2px,transparent 3px),
-    radial-gradient(circle at 27% 83%,rgba(142,21,55,.62) 0 1.5px,transparent 2.5px),
-    radial-gradient(circle at 41% 24%,rgba(12,12,12,.44) 0 2px,transparent 3px),
-    radial-gradient(circle at 55% 68%,rgba(142,21,55,.65) 0 2px,transparent 3px),
-    radial-gradient(circle at 69% 15%,rgba(12,12,12,.42) 0 1.5px,transparent 2.5px),
-    radial-gradient(circle at 78% 88%,rgba(142,21,55,.66) 0 2px,transparent 3px),
-    radial-gradient(circle at 91% 39%,rgba(12,12,12,.46) 0 2px,transparent 3px),
-    radial-gradient(circle at 97% 72%,rgba(142,21,55,.68) 0 1.5px,transparent 2.5px) !important;
+    radial-gradient(540px 280px at 18% 42%,rgba(142,21,55,.025),transparent 72%),
+    radial-gradient(620px 320px at 82% 76%,rgba(15,15,15,.018),transparent 74%) !important;
   background-size:100% 100% !important;
-  animation:hype-light-points 4.2s ease-in-out infinite !important;
+  animation:none !important;
 }
-html body .storefront-v3 .storefront-light-zone > *:not(.light-background-pulses) { position:relative; z-index:1; }
+html body .storefront-v3 .storefront-light-zone > * { position:relative; z-index:1; }
 @keyframes hype-light-points {
   0%,100% { opacity:.20; filter:brightness(.8); }
   45% { opacity:.78; filter:brightness(1.25); }
@@ -205,11 +163,11 @@ html body .storefront-v3 section.process-noir::after {
 }
 html body .storefront-v3 section.process-noir::before {
   top:-84px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23090909' d='M0 83C354 28 754 25 1040 66C1210 90 1335 75 1440 45V120H0Z'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23090909' d='M0 74c190-54 308 37 493-5s295-43 477 3 302 31 470-5v53H0z'/%3E%3C/svg%3E");
 }
 html body .storefront-v3 section.process-noir::after {
   bottom:-84px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23090909' d='M0 0H1440V41C1100 102 735 91 438 54C260 32 128 44 0 79Z'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23090909' d='M0 0h1440v51c-170 48-303-37-482 6S657 98 480 53 174 25 0 63z'/%3E%3C/svg%3E");
 }
 html body .storefront-v3 section.process-noir .container { position:relative; z-index:1; }
 html body .storefront-v3 section.process-noir h2,
@@ -343,8 +301,4 @@ html body .admin-v3.admin-prism table.visitor-table thead { color:#aaa !importan
   html body .storefront-v3 > header.prism-header { padding:8px !important; }
   html:root body footer#footer.site-footer-v2.footer-noir { margin-top:0 !important; }
   html:root body .footer-wave-boundary.footer-wave-v2 { height:58px !important; }
-}
-
-@media (prefers-reduced-motion:reduce) {
-  html:root body .storefront-v3 .light-background-pulses span { animation:none !important; opacity:.30 !important; }
 }
