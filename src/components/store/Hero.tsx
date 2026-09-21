@@ -18,7 +18,7 @@ export function Hero() {
         <div className="prism-hero-copy">
           <div className="prism-eyebrow"><Sparkles className="h-3.5 w-3.5" /> Маркетплейс аккаунтов</div>
           <h1>Нужный аккаунт.<br/><span>Уже готов.</span></h1>
-          <p>Проверенные аккаунты социальных платформ — с понятной историей сделки и безопасной выдачей.</p>
+          <p>У нас Вы можете купить проверенные аккаунты социальных платформ — группу ВК, канал YouTube, группу Telegram, страницу Instagram с понятной историей сделки и безопасной выдачей.</p>
         </div>
         <button onClick={openCatalog} className="prism-catalog-jump" aria-label="Перейти к каталогу">
           <span>Смотреть<br/>ассортимент</span><ArrowDownRight className="h-6 w-6" />

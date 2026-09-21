@@ -45,10 +45,14 @@ html:root body .footer-wave-boundary.footer-wave-v2 {
   position:relative !important;
   z-index:2 !important;
   width:100% !important;
-  height:92px !important;
+  height:70px !important;
   margin:0 !important;
   overflow:hidden !important;
-  background:#f7f7f7 !important;
+  background-color:#f7f7f7 !important;
+  background-image:url("/abstract-light.svg") !important;
+  background-size:100% 900px !important;
+  background-position:center bottom !important;
+  background-repeat:no-repeat !important;
 }
 html:root body .footer-wave-boundary.footer-wave-v2 svg {
   display:block !important;
@@ -336,7 +340,7 @@ html body .admin-v3.admin-prism table.visitor-table thead { color:#aaa !importan
 @media (max-width:640px) {
   html body .storefront-v3 > header.prism-header { padding:8px !important; }
   html:root body footer#footer.site-footer-v2.footer-noir { margin-top:0 !important; }
-  html:root body .footer-wave-boundary.footer-wave-v2 { height:58px !important; }
+  html:root body .footer-wave-boundary.footer-wave-v2 { height:48px !important; }
 }
 
 @media (prefers-reduced-motion:reduce) {
