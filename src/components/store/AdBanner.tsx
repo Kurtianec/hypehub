@@ -9,7 +9,7 @@ export function AdBanner({ variant, settings }: { variant: "wide" | "portrait"; 
   const image = String(settings[`${prefix}_image` as keyof Settings] || "").trim();
   const href = String(settings[`${prefix}_url` as keyof Settings] || "").trim();
   const title = String(settings[`${prefix}_title` as keyof Settings] || "Рекламное место").trim();
-  const validImage = enabled && /^(https?:\/\/|\/)/i.test(image);
+  const validImage = enabled && /^(https?:\/\/|\/|data:image\/(jpeg|png|webp|gif);base64,)/i.test(image);
   const validHref = /^https?:\/\//i.test(href);
 
   const content = (

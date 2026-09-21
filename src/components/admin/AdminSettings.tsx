@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Save, Loader2, Settings as SettingsIcon, Bitcoin, Mail, BarChart3, Lock, Megaphone } from "lucide-react";
+import { Save, Loader2, Settings as SettingsIcon, Bitcoin, Mail, BarChart3, Lock, Megaphone, Upload, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -37,11 +37,11 @@ const FIELDS = [
   ]},
   { group: "Рекламные баннеры", icon: Megaphone, fields: [
     { key: "ad_wide_enabled", label: "Показывать широкий баннер 970 × 250", type: "checkbox" },
-    { key: "ad_wide_image", label: "Изображение широкого баннера (URL)", type: "url", placeholder: "https://.../banner-970x250.jpg" },
+    { key: "ad_wide_image", label: "Загрузить широкий баннер 970 × 250", type: "file", accept: "image/jpeg,image/png,image/webp,image/gif" },
     { key: "ad_wide_url", label: "Ссылка широкого баннера", type: "url", placeholder: "https://..." },
     { key: "ad_wide_title", label: "Название рекламодателя / alt-текст", type: "text" },
     { key: "ad_portrait_enabled", label: "Показывать вертикальный баннер 300 × 600", type: "checkbox" },
-    { key: "ad_portrait_image", label: "Изображение вертикального баннера (URL)", type: "url", placeholder: "https://.../banner-300x600.jpg" },
+    { key: "ad_portrait_image", label: "Загрузить вертикальный баннер 300 × 600", type: "file", accept: "image/jpeg,image/png,image/webp,image/gif" },
     { key: "ad_portrait_url", label: "Ссылка вертикального баннера", type: "url", placeholder: "https://..." },
     { key: "ad_portrait_title", label: "Название рекламодателя / alt-текст", type: "text" },
   ]},
@@ -56,6 +56,25 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
   const { toast } = useToast();
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
+
+  const uploadBanner = (key: string, file?: File) => {
+    if (!file) return;
+    if (!["image/jpeg", "image/png", "image/webp", "image/gif"].includes(file.type)) {
+      toast({ title: "Неверный формат", description: "Используйте JPG, PNG, WebP или GIF.", variant: "destructive" });
+      return;
+    }
+    if (file.size > 1024 * 1024) {
+      toast({ title: "Файл слишком большой", description: "Максимальный размер баннера — 1 МБ.", variant: "destructive" });
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      set(key, String(reader.result || ""));
+      toast({ title: "Баннер загружен", description: "Нажмите «Сохранить», чтобы опубликовать его на сайте." });
+    };
+    reader.onerror = () => toast({ title: "Не удалось прочитать файл", variant: "destructive" });
+    reader.readAsDataURL(file);
+  };
 
   const save = async () => {
     setSaving(true);
@@ -128,6 +147,31 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
                       <span className="text-xs font-semibold">{f.label}</span>
                       <input type="checkbox" checked={form[f.key] === "true"} onChange={(e) => set(f.key, String(e.target.checked))} className="h-5 w-5 accent-[#8E1537]" />
                     </label>
+                  ) : f.type === "file" ? (
+                    <div>
+                      <Label className="text-[10px] uppercase tracking-widest font-mono text-[#888]">{f.label}</Label>
+                      <div className="mt-1 flex items-center gap-2">
+                        <label className="flex min-h-10 flex-1 cursor-pointer items-center justify-center gap-2 rounded-md border-2 border-dashed border-[#3A3A3A] bg-[#0A0A0A] px-3 text-xs font-bold transition-colors hover:border-[#8E1537]">
+                          <Upload className="h-4 w-4 text-[#8E1537]" />
+                          {form[f.key] ? "Заменить изображение" : "Выбрать файл"}
+                          <input
+                            type="file"
+                            accept={"accept" in f ? f.accept : undefined}
+                            className="sr-only"
+                            onChange={(e) => {
+                              uploadBanner(f.key, e.target.files?.[0]);
+                              e.currentTarget.value = "";
+                            }}
+                          />
+                        </label>
+                        {form[f.key] && (
+                          <Button type="button" variant="outline" size="icon" onClick={() => set(f.key, "")} title="Удалить баннер" className="border-[#3A3A3A] bg-[#0A0A0A] hover:border-[#8E1537]">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        )}
+                      </div>
+                      <p className="mt-1 text-[10px] text-[#777]">JPG, PNG, WebP или GIF · до 1 МБ{form[f.key] ? " · файл выбран" : ""}</p>
+                    </div>
                   ) : (
                     <>
                       <Label className="text-[10px] uppercase tracking-widest font-mono text-[#888]">{f.label}</Label>

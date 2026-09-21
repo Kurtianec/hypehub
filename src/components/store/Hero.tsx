@@ -19,7 +19,7 @@ export function Hero() {
           <div className="prism-eyebrow"><Sparkles className="h-3.5 w-3.5" /> Маркетплейс аккаунтов</div>
           <h1>Нужный аккаунт.<br/><span>Уже готов.</span></h1>
           <p>
-            У нас Вы можете купить проверенные аккаунты социальных платформ — группу <span className="hero-social hero-social-vk">ВК</span>, канал <span className="hero-social hero-social-youtube">YouTube</span>, группу <span className="hero-social hero-social-telegram">Telegram</span>, страницу <span className="hero-social hero-social-instagram">Instagram</span> с понятной историей сделки и безопасной выдачей.
+            У нас Вы можете купить проверенные аккаунты социальных платформ: купить группу <span className="hero-social hero-social-vk">ВК</span>, купить канал <span className="hero-social hero-social-youtube">YouTube</span>, купить <span className="hero-social hero-social-telegram">Telegram</span>-канал, купить аккаунт <span className="hero-social hero-social-tiktok">TikTok</span> или купить страницу <span className="hero-social hero-social-instagram">Instagram</span> с понятной историей сделки и безопасной выдачей.
           </p>
         </div>
         <button onClick={openCatalog} className="prism-catalog-jump" aria-label="Перейти к каталогу">
