@@ -77,10 +77,17 @@ html body footer#footer.footer-noir .footer-trust-chip {
 html:root body .storefront-v3 .storefront-light-zone {
   background-color:#f7f7f7 !important;
   background-image:
-    repeating-radial-gradient(ellipse at 15% -10%,transparent 0 38px,rgba(20,20,20,.035) 39px 40px,transparent 41px 67px),
-    repeating-radial-gradient(ellipse at 86% 32%,transparent 0 52px,rgba(142,21,55,.027) 53px 54px,transparent 55px 88px),
-    linear-gradient(115deg,rgba(142,21,55,.018),transparent 35%,rgba(15,15,15,.018) 70%,transparent) !important;
-  background-size:860px 460px,980px 520px,100% 100% !important;
+    radial-gradient(760px 400px at 4% 16%,rgba(142,21,55,.035),transparent 72%),
+    radial-gradient(680px 380px at 96% 72%,rgba(25,25,25,.025),transparent 75%),
+    radial-gradient(circle,rgba(22,22,22,.052) 0 .7px,transparent .9px) !important;
+  background-size:auto,auto,28px 28px !important;
+}
+
+/* One calm asymmetric sweep from the dark hero into the catalogue. */
+html:root body .storefront-v3 .storefront-light-zone::before {
+  top:-78px !important;
+  height:80px !important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23f7f7f7' d='M0 33C320 97 712 103 1018 57C1200 29 1327 36 1440 61V120H0Z'/%3E%3C/svg%3E") !important;
 }
 html:root body .storefront-v3 .light-background-pulses {
   position:absolute !important;
@@ -198,11 +205,11 @@ html body .storefront-v3 section.process-noir::after {
 }
 html body .storefront-v3 section.process-noir::before {
   top:-84px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23090909' d='M0 74c190-54 308 37 493-5s295-43 477 3 302 31 470-5v53H0z'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23090909' d='M0 83C354 28 754 25 1040 66C1210 90 1335 75 1440 45V120H0Z'/%3E%3C/svg%3E");
 }
 html body .storefront-v3 section.process-noir::after {
   bottom:-84px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23090909' d='M0 0h1440v51c-170 48-303-37-482 6S657 98 480 53 174 25 0 63z'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23090909' d='M0 0H1440V41C1100 102 735 91 438 54C260 32 128 44 0 79Z'/%3E%3C/svg%3E");
 }
 html body .storefront-v3 section.process-noir .container { position:relative; z-index:1; }
 html body .storefront-v3 section.process-noir h2,

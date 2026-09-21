@@ -15,7 +15,7 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
     <>
       <div className="footer-wave-boundary footer-wave-v2" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
-          <path d="M0 92C170 38 318 112 498 72C681 31 814 41 982 78C1158 116 1294 52 1440 68V120H0Z" />
+          <path d="M0 86C340 22 720 18 1015 62C1194 89 1327 75 1440 42V120H0Z" />
         </svg>
       </div>
       <footer
