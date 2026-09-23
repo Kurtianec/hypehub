@@ -389,32 +389,48 @@ html body .admin-v3.admin-prism table.visitor-table thead { color:#aaa !importan
 .portrait-ad-slot .ad-banner-link,
 .portrait-ad-slot .ad-banner-portrait { width:100%; height:600px; min-height:600px; }
 
-/* AI assistant must not inherit the storefront light-card overrides. */
-html body .storefront-v3 .ai-assistant-panel {
-  color:#f2f2f2 !important;
+/* Chat windows use one explicit light palette and cannot inherit legacy theme utilities. */
+html body .storefront-v3 .ai-assistant-panel,
+html body .storefront-v3 .support-chat-panel {
+  color:#202020 !important;
   border-color:#8e1537 !important;
-  background:#0a0a0a !important;
+  background:#fff !important;
 }
 html body .storefront-v3 .ai-assistant-panel [class*="bg-[#0E0E0E]"],
 html body .storefront-v3 .ai-assistant-panel [class*="bg-[#0A0A0A]"],
 html body .storefront-v3 .ai-assistant-panel [class*="bg-[#121212]"],
-html body .storefront-v3 .ai-assistant-panel [class*="bg-[#1A1A1A]"] {
-  color:#ededed !important;
-  border-color:#303030 !important;
-  background-color:#121212 !important;
+html body .storefront-v3 .ai-assistant-panel [class*="bg-[#1A1A1A]"],
+html body .storefront-v3 .support-chat-panel [class*="bg-[#0E0E0E]"],
+html body .storefront-v3 .support-chat-panel [class*="bg-[#0A0A0A]"],
+html body .storefront-v3 .support-chat-panel [class*="bg-[#121212]"],
+html body .storefront-v3 .support-chat-panel [class*="bg-[#1A1A1A]"] {
+  color:#202020 !important;
+  border-color:#dedede !important;
+  background-color:#fff !important;
 }
-html body .storefront-v3 .ai-assistant-panel [class*="text-foreground"] { color:#ededed !important; }
-html body .storefront-v3 .ai-assistant-panel [class*="text-[#888]"] { color:#a7a7a7 !important; }
-html body .storefront-v3 .ai-assistant-panel input {
-  color:#f2f2f2 !important;
-  border-color:#353535 !important;
-  background:#0d0d0d !important;
-  -webkit-text-fill-color:#f2f2f2 !important;
+html body .storefront-v3 .ai-assistant-panel [class*="text-foreground"],
+html body .storefront-v3 .support-chat-panel [class*="text-foreground"],
+html body .storefront-v3 .ai-assistant-panel h3,
+html body .storefront-v3 .support-chat-panel h3 { color:#202020 !important; }
+html body .storefront-v3 .ai-assistant-panel [class*="text-[#888]"],
+html body .storefront-v3 .support-chat-panel [class*="text-[#888]"] { color:#707070 !important; }
+html body .storefront-v3 .ai-assistant-panel input,
+html body .storefront-v3 .support-chat-panel input,
+html body .storefront-v3 .support-chat-panel textarea {
+  color:#202020 !important;
+  border-color:#d8d8d8 !important;
+  background:#fff !important;
+  -webkit-text-fill-color:#202020 !important;
 }
-html body .storefront-v3 .ai-assistant-panel input::placeholder {
-  color:#929292 !important;
-  -webkit-text-fill-color:#929292 !important;
+html body .storefront-v3 .ai-assistant-panel input::placeholder,
+html body .storefront-v3 .support-chat-panel input::placeholder,
+html body .storefront-v3 .support-chat-panel textarea::placeholder {
+  color:#8a8a8a !important;
+  opacity:1 !important;
+  -webkit-text-fill-color:#8a8a8a !important;
 }
+html body .storefront-v3 .ai-assistant-panel button:not([class*="bg-[#8E1537]"]),
+html body .storefront-v3 .support-chat-panel button:not([class*="bg-[#8E1537]"]) { color:#333 !important; }
 
 /* Keep catalogue sorting readable despite legacy dark-theme selectors. */
 html body .storefront-v3 .storefront-light-zone select.catalog-sort-select {

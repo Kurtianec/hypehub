@@ -248,7 +248,7 @@ export function SupportChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed bottom-4 right-4 left-4 md:left-auto md:bottom-6 md:right-6 z-50 w-auto md:w-[400px] h-[560px] max-h-[85vh] bg-[#0A0A0A] border-2 border-[#8E1537] flex flex-col overflow-hidden"
+            className="support-chat-panel fixed bottom-4 right-4 left-4 md:left-auto md:bottom-6 md:right-6 z-50 w-auto md:w-[400px] h-[560px] max-h-[85vh] bg-[#0A0A0A] border-2 border-[#8E1537] flex flex-col overflow-hidden"
             style={{ clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))" }}
           >
             {/* Header */}
