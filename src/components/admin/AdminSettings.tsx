@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Save, Loader2, Settings as SettingsIcon, Bitcoin, Mail, BarChart3, Lock, Megaphone, Upload, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -38,11 +39,11 @@ const FIELDS = [
   { group: "Рекламные баннеры", icon: Megaphone, fields: [
     { key: "ad_wide_enabled", label: "Показывать широкий баннер 970 × 250", type: "checkbox" },
     { key: "ad_wide_image", label: "Загрузить широкий баннер 970 × 250", type: "file", accept: "image/jpeg,image/png,image/webp,image/gif" },
-    { key: "ad_wide_url", label: "Ссылка широкого баннера", type: "url", placeholder: "https://..." },
+    { key: "ad_wide_url", label: "Ссылка для перехода по широкому баннеру", type: "url", placeholder: "https://example.com" },
     { key: "ad_wide_title", label: "Название рекламодателя / alt-текст", type: "text" },
     { key: "ad_portrait_enabled", label: "Показывать вертикальный баннер 300 × 600", type: "checkbox" },
     { key: "ad_portrait_image", label: "Загрузить вертикальный баннер 300 × 600", type: "file", accept: "image/jpeg,image/png,image/webp,image/gif" },
-    { key: "ad_portrait_url", label: "Ссылка вертикального баннера", type: "url", placeholder: "https://..." },
+    { key: "ad_portrait_url", label: "Ссылка для перехода по вертикальному баннеру", type: "url", placeholder: "https://zismo.biz" },
     { key: "ad_portrait_title", label: "Название рекламодателя / alt-текст", type: "text" },
   ]},
   { group: "Безопасность", icon: Lock, fields: [
@@ -69,8 +70,9 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
     }
     const reader = new FileReader();
     reader.onload = () => {
-      set(key, String(reader.result || ""));
-      toast({ title: "Баннер загружен", description: "Нажмите «Сохранить», чтобы опубликовать его на сайте." });
+      const enabledKey = key.replace(/_image$/, "_enabled");
+      setForm((current) => ({ ...current, [key]: String(reader.result || ""), [enabledKey]: "true" }));
+      toast({ title: "Баннер загружен и включён", description: "Добавьте ссылку перехода и нажмите «Сохранить»." });
     };
     reader.onerror = () => toast({ title: "Не удалось прочитать файл", variant: "destructive" });
     reader.readAsDataURL(file);
@@ -171,6 +173,19 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
                         )}
                       </div>
                       <p className="mt-1 text-[10px] text-[#777]">JPG, PNG, WebP или GIF · до 1 МБ{form[f.key] ? " · файл выбран" : ""}</p>
+                      {form[f.key] && (
+                        <div className="mt-3 overflow-hidden rounded-xl border border-[#303030] bg-[#080808] p-2">
+                          <p className="mb-2 text-[10px] font-mono uppercase tracking-widest text-[#777]">Предпросмотр</p>
+                          <Image
+                            src={form[f.key]}
+                            alt="Предпросмотр рекламного баннера"
+                            width={f.key === "ad_wide_image" ? 970 : 300}
+                            height={f.key === "ad_wide_image" ? 250 : 600}
+                            unoptimized
+                            className={`mx-auto block max-w-full rounded-lg object-cover ${f.key === "ad_wide_image" ? "h-auto" : "h-[300px] w-[150px]"}`}
+                          />
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <>

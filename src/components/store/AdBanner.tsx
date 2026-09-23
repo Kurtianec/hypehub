@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import type { Settings } from "@/lib/types";
 
 export function AdBanner({ variant, settings }: { variant: "wide" | "portrait"; settings: Settings }) {
@@ -10,13 +9,14 @@ export function AdBanner({ variant, settings }: { variant: "wide" | "portrait"; 
   const href = String(settings[`${prefix}_url` as keyof Settings] || "").trim();
   const title = String(settings[`${prefix}_title` as keyof Settings] || "Рекламное место").trim();
   const validImage = enabled && /^(https?:\/\/|\/|data:image\/(jpeg|png|webp|gif);base64,)/i.test(image);
-  const validHref = /^https?:\/\//i.test(href);
+  const normalizedHref = href && !/^https?:\/\//i.test(href) ? `https://${href}` : href;
+  const validHref = /^https?:\/\//i.test(normalizedHref);
 
   const content = (
     <div className={`ad-banner ad-banner-${variant}${validImage ? "" : " ad-banner-empty"}`}>
       <span className="ad-banner-label">Реклама</span>
       {validImage ? (
-        <Image src={image} alt={title} fill unoptimized sizes={variant === "wide" ? "(max-width: 1024px) 100vw, 970px" : "300px"} />
+        <div className="ad-banner-image" style={{ backgroundImage: `url(${JSON.stringify(image)})` }} role="img" aria-label={title} />
       ) : (
         <div className="ad-banner-placeholder">
           <strong>Реклама</strong>
@@ -26,5 +26,5 @@ export function AdBanner({ variant, settings }: { variant: "wide" | "portrait"; 
     </div>
   );
 
-  return validImage && validHref ? <a className="ad-banner-link" href={href} target="_blank" rel="sponsored noopener noreferrer" aria-label={title}>{content}</a> : content;
+  return validImage && validHref ? <a className="ad-banner-link" href={normalizedHref} target="_blank" rel="sponsored noopener noreferrer" aria-label={title}>{content}</a> : content;
 }

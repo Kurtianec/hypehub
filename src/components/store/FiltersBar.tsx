@@ -64,7 +64,7 @@ export function FiltersBar({
         <select
           value={sort}
           onChange={(e) => onSortChange(e.target.value as SortOption)}
-          className="appearance-none bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537] text-xs font-mono uppercase font-bold pl-9 pr-8 py-2.5 cursor-pointer focus:outline-none focus:border-[#8E1537] transition-colors"
+          className="catalog-sort-select appearance-none bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537] text-xs font-mono uppercase font-bold pl-9 pr-8 py-2.5 cursor-pointer focus:outline-none focus:border-[#8E1537] transition-colors"
         >
           <option value="default">По умолчанию</option>
           <option value="price-asc">Цена ↑</option>
