@@ -444,6 +444,76 @@ html body .storefront-v3 .storefront-light-zone select.catalog-sort-select optio
   color:#202020 !important;
   background:#fff !important;
 }
+
+/* Product/payment dialog: isolate it from broad legacy utility selectors. */
+html body .storefront-v3 .product-modal-panel {
+  color:#202020 !important;
+  border-color:#d8d8d8 !important;
+  background:#fff !important;
+}
+html body .storefront-v3 .product-modal-panel h1,
+html body .storefront-v3 .product-modal-panel h2,
+html body .storefront-v3 .product-modal-panel h3,
+html body .storefront-v3 .product-modal-panel label { color:#202020 !important; }
+html body .storefront-v3 .product-modal-panel .payment-reservation-notice,
+html body .storefront-v3 .product-modal-panel .payment-info-notice {
+  color:#8e1537 !important;
+  border-color:rgba(142,21,55,.35) !important;
+  background:#f8edf1 !important;
+  background-image:none !important;
+}
+html body .storefront-v3 .product-modal-panel .payment-confirm-button {
+  color:#fff !important;
+  background:#8e1537 !important;
+  background-image:none !important;
+  opacity:1 !important;
+  -webkit-text-fill-color:#fff !important;
+}
+html body .storefront-v3 .product-modal-panel .payment-status-log {
+  color:#d7d7d7 !important;
+  border-color:#2a2a2a !important;
+  background:#101115 !important;
+}
+html body .storefront-v3 .product-modal-panel .payment-status-log p { color:#aeb1b7 !important; }
+html body .storefront-v3 .product-modal-panel .payment-check-button,
+html body .storefront-v3 .product-modal-panel .payment-close-button {
+  color:#202020 !important;
+  border-color:#a9a9a9 !important;
+  background:#fff !important;
+  opacity:1 !important;
+  -webkit-text-fill-color:#202020 !important;
+}
+html body .storefront-v3 .product-modal-panel .payment-check-button:hover,
+html body .storefront-v3 .product-modal-panel .payment-close-button:hover { background:#f1f1f1 !important; }
+html body .storefront-v3 .product-modal-panel input {
+  color:#202020 !important;
+  border-color:#cfd2d7 !important;
+  background:#f7f7f8 !important;
+  -webkit-text-fill-color:#202020 !important;
+}
+
+/* Permanent order page: white card content and dark-page actions stay legible. */
+html body .storefront-v3 .order-tracking-page .order-panel {
+  color:#202020 !important;
+  border-color:#dedede !important;
+  background:#fff !important;
+}
+html body .storefront-v3 .order-tracking-page .order-event-label { color:#202020 !important; }
+html body .storefront-v3 .order-tracking-page .order-event-meta { color:#666 !important; }
+html body .storefront-v3 .order-tracking-page .order-account-button {
+  color:#fff !important;
+  border-color:#fff !important;
+  background:transparent !important;
+}
+html body .storefront-v3 .order-tracking-page .order-catalog-button {
+  color:#fff !important;
+  background:transparent !important;
+}
+html body .storefront-v3 .order-tracking-page .order-account-button:hover,
+html body .storefront-v3 .order-tracking-page .order-catalog-button:hover {
+  color:#fff !important;
+  background:#8e1537 !important;
+}
 @media (max-width:767px) {
   .wide-ad-slot { padding-inline:16px; }
   .ad-banner-wide { aspect-ratio:320/100; min-height:100px; border-radius:14px; }

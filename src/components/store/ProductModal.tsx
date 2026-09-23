@@ -255,7 +255,7 @@ support@hypehub.vercel.app
       <Confetti trigger={showConfetti} />
       <Dialog open={!!product} onOpenChange={(open) => !open && handleClose()}>
         <DialogContent
-          className="hype-product-dialog max-w-xl max-h-[92vh] overflow-hidden border p-0 flex flex-col"
+          className="hype-product-dialog product-modal-panel max-w-xl max-h-[92vh] overflow-hidden border p-0 flex flex-col"
           style={{
             "--background": "#ffffff",
             "--foreground": "#171717",
@@ -554,7 +554,7 @@ support@hypehub.vercel.app
                 {`Переведите точную сумму на ${cryptoLabel(cryptoType)} адрес`}
               </p>
               {secondsLeft > 0 && (
-                <div className="mb-3 border border-[#8E1537]/40 bg-[#8E1537]/10 px-3 py-2 text-center font-mono text-sm text-[#8E1537]">
+                <div className="payment-reservation-notice mb-3 border border-[#8E1537]/40 bg-[#8E1537]/10 px-3 py-2 text-center font-mono text-sm text-[#8E1537]">
                   Товар зарезервирован ещё на {String(Math.floor(secondsLeft / 60)).padStart(2, "0")}:{String(secondsLeft % 60).padStart(2, "0")}
                 </div>
               )}
@@ -609,7 +609,7 @@ support@hypehub.vercel.app
                 </div>
               </div>
 
-              <div className="flex items-start gap-2 p-2 rounded-md bg-[#8E1537]/10 text-[#8E1537] text-[11px] mb-3">
+              <div className="payment-info-notice flex items-start gap-2 p-2 rounded-md bg-[#8E1537]/10 text-[#8E1537] text-[11px] mb-3">
                 <AlertCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
                 <div>
                   После перевода нажмите «Я оплатил». Зачисление за 5–15 мин.
@@ -630,7 +630,7 @@ support@hypehub.vercel.app
 
               <Button
                 onClick={confirmPayment}
-                className="w-full bg-gradient-to-r from-[#8E1537] to-[#71102B] text-white font-bold py-4"
+                className="payment-confirm-button w-full bg-gradient-to-r from-[#8E1537] to-[#71102B] text-white font-bold py-4"
               >
                 <CheckCircle2 className="w-4 h-4 mr-2" />
                 Я оплатил — получить данные
@@ -681,7 +681,7 @@ support@hypehub.vercel.app
               <p className="text-sm text-muted-foreground mb-4">
                 Идёт проверка платежа... Ожидание подтверждения транзакции.
               </p>
-              <div className="bg-[#0A0A0A] border border-[#2A2A2A] p-3 rounded-lg mb-4 text-left">
+              <div className="payment-status-log bg-[#0A0A0A] border border-[#2A2A2A] p-3 rounded-lg mb-4 text-left">
                 <p className="text-xs text-[#888] font-mono">
                   &gt; Заказ #{orderId?.slice(0, 8)} создан<br/>
                   &gt; Статус: ожидает оплаты<br/>
@@ -697,14 +697,14 @@ support@hypehub.vercel.app
                 <Button
                   onClick={() => checkPaymentStatus()}
                   variant="outline"
-                  className="flex-1 border-[#2A2A2A]"
+                  className="payment-check-button flex-1 border-[#2A2A2A]"
                 >
                   Проверить ещё раз
                 </Button>
                 <Button
                   onClick={handleClose}
                   variant="outline"
-                  className="flex-1 border-[#2A2A2A]"
+                  className="payment-close-button flex-1 border-[#2A2A2A]"
                 >
                   Закрыть
                 </Button>
