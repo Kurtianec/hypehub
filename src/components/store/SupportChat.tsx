@@ -50,7 +50,7 @@ function saveLocalMessages(msgs: StoredMessage[]) {
   sessionStorage.setItem(MESSAGES_KEY, JSON.stringify(msgs));
 }
 
-export function SupportChat() {
+export function SupportChat({ showLauncher = false }: { showLauncher?: boolean }) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<"form" | "chat">("form");
   const [name, setName] = useState("");
@@ -217,7 +217,7 @@ export function SupportChat() {
   return (
     <>
       <AnimatePresence>
-        {!open && (
+        {showLauncher && !open && (
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}

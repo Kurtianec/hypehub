@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  X, Send, Loader2, Bot, User, Lightbulb, Sparkles,
+  X, Send, Loader2, Bot, User, Lightbulb, Sparkles, Headphones, MessageCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,6 +32,7 @@ const CONTEXT_SUGGESTIONS: Record<string, string[]> = {
 
 export function AIAssistant() {
   const [open, setOpen] = useState(false);
+  const [chooserOpen, setChooserOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -123,13 +124,34 @@ export function AIAssistant() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            onClick={() => setOpen(true)}
-            className="ai-fab fixed bottom-24 right-8 z-40 w-11 h-11 flex items-center justify-center group transition-all"
+            onClick={() => setChooserOpen((value) => !value)}
+            className="help-center-fab ai-fab fixed bottom-6 right-6 z-40 w-14 h-14 flex items-center justify-center group transition-all"
             style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))" }}
-            aria-label="Открыть AI-ассистент"
+            aria-label="Открыть центр помощи"
           >
-            <Bot className="w-5 h-5" strokeWidth={2} />
+            {chooserOpen ? <X className="w-5 h-5" /> : <MessageCircle className="w-6 h-6" strokeWidth={2.2} />}
           </motion.button>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {chooserOpen && !open && (
+          <motion.div
+            initial={{ opacity: 0, y: 12, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.96 }}
+            className="help-center-chooser fixed bottom-24 right-4 z-50 w-[min(340px,calc(100vw-2rem))] rounded-2xl border bg-white p-3 shadow-2xl"
+          >
+            <div className="px-2 pb-2 text-sm font-black text-[#202020]">Чем помочь?</div>
+            <button onClick={() => { setChooserOpen(false); setOpen(true); }} className="help-choice-button mb-2 flex w-full items-center gap-3 rounded-xl border p-3 text-left">
+              <span className="help-choice-icon"><Bot className="h-5 w-5" /></span>
+              <span><b>Быстрый вопрос AI</b><small>Ответы о товарах, оплате и гарантии</small></span>
+            </button>
+            <button onClick={() => { setChooserOpen(false); window.dispatchEvent(new Event("open-support")); }} className="help-choice-button flex w-full items-center gap-3 rounded-xl border p-3 text-left">
+              <span className="help-choice-icon"><Headphones className="h-5 w-5" /></span>
+              <span><b>Написать оператору</b><small>Помощь с заказом или оплатой</small></span>
+            </button>
+          </motion.div>
         )}
       </AnimatePresence>
 

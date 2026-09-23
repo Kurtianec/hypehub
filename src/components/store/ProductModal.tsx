@@ -20,6 +20,7 @@ import {
 import { cn } from "@/lib/utils";
 import { ProductImage } from "./ProductImage";
 import { Confetti } from "./Confetti";
+import { QRCodeSVG } from "qrcode.react";
 
 type Step = "details" | "checkout" | "payment" | "delivering" | "checking" | "done";
 
@@ -250,6 +251,10 @@ support@hypehub.vercel.app
     ton: settings?.crypto_ton,
   }[cryptoType] : null;
 
+  const paymentNetwork = cryptoType === "btc" ? "Bitcoin" : cryptoType === "usdt" ? "TRON (TRC-20)" : "The Open Network (TON)";
+  const purchaseStages = ["Заказ", "Резерв", "Оплата", "Выдача"];
+  const activeStage = step === "checkout" ? 0 : step === "payment" ? 2 : step === "done" ? 3 : 2;
+
   return (
     <>
       <Confetti trigger={showConfetti} />
@@ -273,6 +278,19 @@ support@hypehub.vercel.app
             <DialogTitle>{product.title}</DialogTitle>
             <DialogDescription>Детали товара и оформление заказа</DialogDescription>
           </DialogHeader>
+
+          {step !== "details" && (
+            <div className="purchase-progress border-b px-4 py-3 md:px-6" aria-label="Этап оформления заказа">
+              <div className="grid grid-cols-4 gap-1">
+                {purchaseStages.map((label, index) => (
+                  <div key={label} className={cn("purchase-progress-step", index <= activeStage && "is-active", index < activeStage && "is-complete")}>
+                    <span>{index < activeStage ? <Check className="h-3 w-3" /> : index + 1}</span>
+                    <small>{label}</small>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
         <AnimatePresence mode="wait">
           {/* Step 1: Details */}
@@ -560,7 +578,25 @@ support@hypehub.vercel.app
               )}
               {orderId && <a href={`/order/${orderId}`} className="mb-3 block text-center text-xs text-[#8E1537] hover:underline">Открыть постоянную страницу заказа</a>}
 
-              <div className="glass rounded-lg p-3 mb-3 space-y-3">
+              <div className="payment-network-warning mb-3 rounded-lg border p-3 text-xs">
+                <div className="flex items-start gap-2">
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                  <div><b>Сеть перевода: {paymentNetwork}</b><br/>Отправляйте только {cryptoLabel(cryptoType)} в указанной сети. Перевод через другую сеть может быть потерян.</div>
+                </div>
+              </div>
+
+              <div className="payment-wallet-card glass rounded-lg p-3 mb-3 space-y-3">
+                {cryptoAddress && (
+                  <div className="payment-qr-row">
+                    <div className="payment-qr-box" aria-label={`QR-код адреса ${cryptoLabel(cryptoType)}`}>
+                      <QRCodeSVG value={cryptoAddress} size={116} level="M" bgColor="#ffffff" fgColor="#171717" />
+                    </div>
+                    <div className="min-w-0 text-xs text-[#666]">
+                      <b className="block text-[#202020]">Сканируйте адрес</b>
+                      <span>QR содержит только адрес кошелька. Сумму и сеть проверьте перед отправкой.</span>
+                    </div>
+                  </div>
+                )}
                 <div>
                   <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">
                     {"Адрес кошелька"}
@@ -635,6 +671,13 @@ support@hypehub.vercel.app
                 <CheckCircle2 className="w-4 h-4 mr-2" />
                 Я оплатил — получить данные
               </Button>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event("open-support"))}
+                className="payment-support-link mt-3 w-full text-center text-xs font-semibold"
+              >
+                Возникла проблема с оплатой? Написать оператору{orderId ? ` · заказ ${orderId.slice(0, 8)}` : ""}
+              </button>
             </motion.div>
           )}
 

@@ -492,6 +492,31 @@ html body .product-modal-panel input {
   -webkit-text-fill-color:#202020 !important;
 }
 
+/* Checkout flow. */
+.purchase-progress { color:#6b6b6b; border-color:#e4e4e4; background:#fafafa; }
+.purchase-progress-step { position:relative; display:flex; min-width:0; flex-direction:column; align-items:center; gap:4px; text-align:center; }
+.purchase-progress-step:not(:last-child)::after { content:""; position:absolute; top:11px; left:calc(50% + 14px); width:calc(100% - 28px); height:1px; background:#d8d8d8; }
+.purchase-progress-step span { position:relative; z-index:1; display:flex; width:22px; height:22px; align-items:center; justify-content:center; border:1px solid #cfcfcf; border-radius:999px; color:#777; background:#fff; font-size:10px; font-weight:800; }
+.purchase-progress-step small { overflow:hidden; max-width:100%; color:#777; font-size:10px; font-weight:700; text-overflow:ellipsis; white-space:nowrap; }
+.purchase-progress-step.is-active span { color:#fff; border-color:#8e1537; background:#8e1537; }
+.purchase-progress-step.is-active small { color:#8e1537; }
+.purchase-progress-step.is-complete:not(:last-child)::after { background:#8e1537; }
+.payment-network-warning { color:#7b4b00 !important; border-color:#efc86c !important; background:#fff9e9 !important; }
+.payment-qr-row { display:grid; grid-template-columns:132px minmax(0,1fr); align-items:center; gap:14px; padding-bottom:12px; border-bottom:1px solid #e4e4e4; }
+.payment-qr-box { display:flex; width:132px; height:132px; align-items:center; justify-content:center; border:1px solid #dedede; border-radius:12px; background:#fff; }
+.payment-support-link { color:#8e1537 !important; }
+.payment-support-link:hover { text-decoration:underline; }
+
+/* One launcher for AI and human support. */
+.help-center-fab { color:#fff !important; border:1px solid #a82049 !important; background:#a82049 !important; box-shadow:0 16px 38px -16px rgba(142,21,55,.72); }
+.help-center-chooser { color:#202020 !important; border-color:#dedede !important; background:#fff !important; }
+.help-choice-button { color:#202020 !important; border-color:#e0e0e0 !important; background:#fafafa !important; }
+.help-choice-button:hover { border-color:rgba(142,21,55,.45) !important; background:#f8edf1 !important; }
+.help-choice-button > span:last-child { display:flex; min-width:0; flex-direction:column; }
+.help-choice-button b { color:#202020; font-size:13px; }
+.help-choice-button small { margin-top:2px; color:#707070; font-size:11px; }
+.help-choice-icon { display:flex; width:38px; height:38px; flex:0 0 auto; align-items:center; justify-content:center; border-radius:10px; color:#8e1537; background:#f3e4e9; }
+
 /* Permanent order page: white card content and dark-page actions stay legible. */
 html body .storefront-v3 .order-tracking-page .order-panel {
   color:#202020 !important;
@@ -517,4 +542,15 @@ html body .storefront-v3 .order-tracking-page .order-catalog-button:hover {
 @media (max-width:767px) {
   .wide-ad-slot { padding-inline:16px; }
   .ad-banner-wide { aspect-ratio:320/100; min-height:100px; border-radius:14px; }
+  html body .product-modal-panel { width:calc(100vw - 16px) !important; max-width:none !important; max-height:calc(100dvh - 16px) !important; }
+  html body .ai-assistant-panel,
+  html body .support-chat-panel { inset:8px !important; width:auto !important; height:auto !important; max-height:none !important; padding-bottom:env(safe-area-inset-bottom); }
+  .help-center-fab { right:16px !important; bottom:calc(16px + env(safe-area-inset-bottom)) !important; }
+  .help-center-chooser { right:16px !important; bottom:calc(84px + env(safe-area-inset-bottom)) !important; }
+  .payment-qr-row { grid-template-columns:1fr; text-align:center; }
+  .payment-qr-box { margin-inline:auto; }
+  .purchase-progress { padding-inline:10px !important; }
+  .purchase-progress-step small { font-size:9px; }
+  .order-tracking-page { overflow-x:hidden; }
+  .order-tracking-page .order-panel { padding:14px !important; }
 }

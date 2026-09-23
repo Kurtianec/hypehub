@@ -1580,33 +1580,8 @@ body,
   .prism-product-grid .product-card:hover, .prism-catalog-jump:hover { transform:none !important; }
 }
 
-/* Legacy utility neutralization across secondary pages, dialogs and auth screens. */
-body [class*="text-[#8E1537]"] { color: #8E1537 !important; }
-body [class*="bg-[#8E1537]"] { background-color: #8E1537 !important; color: #fff !important; }
-body [class*="border-[#8E1537]"] { border-color: rgba(142,21,55,.5) !important; }
-body [class*="text-[#8E1537]"] { color: #8E1537 !important; }
-body [class*="bg-[#8E1537]"] { background-color: #8E1537 !important; }
-body [class*="border-[#8E1537]"] { border-color: rgba(142,21,55,.5) !important; }
-body [class*="text-[#8E1537]"] { color: #8E1537 !important; }
-body [class*="bg-[#8E1537]"] { background-color: #8E1537 !important; }
-body [class*="border-[#8E1537]"] { border-color: rgba(142,21,55,.5) !important; }
-body [class*="text-[#8E1537]"] { color: #8E1537 !important; }
-body [class*="bg-[#8E1537]"] { background-color: #8E1537 !important; }
-body [class*="text-[#8E1537]"] { color: #8E1537 !important; }
-body [class*="bg-[#8E1537]"] { background-color: #8E1537 !important; }
-body [class*="border-[#8E1537]"] { border-color: rgba(142,21,55,.5) !important; }
-body [class*="text-[#8E1537]"] { color: #8E1537 !important; }
-body [class*="bg-[#8E1537]"] { background-color: #8E1537 !important; }
-body [class*="border-[#8E1537]"] { border-color: rgba(142,21,55,.55) !important; }
-body [class*="from-[#8E1537]"] { --tw-gradient-from: #8E1537 !important; --tw-gradient-to: rgba(142,21,55,0) !important; }
-body [class*="to-[#8E1537]"] { --tw-gradient-to: #8E1537 !important; }
-body [class*="bg-[#0A0A0A]"],
-body [class*="bg-[#0E0E0E]"],
-body [class*="bg-[#121212]"],
-body [class*="bg-[#1A1A1A]"] { background-color: #111318 !important; }
-body [class*="border-[#2A2A2A]"],
-body [class*="border-[#1F1F1F]"] { border-color: #111318 !important; }
-body [style*="clip-path"] { clip-path: none !important; border-radius: 16px; }
+/* Legacy global utility interception was removed. Components now own their
+   palette through semantic classes, so translucent utilities keep working. */
 
 /* ========================================================================== 
    HYPEHUB NOVA — full visual reset
