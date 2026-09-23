@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { consumeRateLimit, requestIp, requireAdmin } from "@/lib/security";
 import { z } from "zod";
+import { sendAdminPush } from "@/lib/admin-push";
 
 // GET — public: list approved reviews
 export async function GET(req: NextRequest) {
@@ -40,6 +41,8 @@ export async function POST(req: NextRequest) {
       status: "pending",
     },
   });
+
+  void sendAdminPush({ title: "Новый отзыв", body: `${name} · ${rating}/5: ${text.slice(0, 100)}`, tab: "reviews", entityId: review.id });
 
   return NextResponse.json({ ok: true, id: review.id });
 }

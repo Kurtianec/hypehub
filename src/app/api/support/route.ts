@@ -2,6 +2,7 @@ import { consumeRateLimit, requestIp, requireAdmin } from "@/lib/security";
 import { z } from "zod";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { sendAdminPush } from "@/lib/admin-push";
 
 // GET — list support messages (admin only)
 export async function GET(req: NextRequest) {
@@ -30,5 +31,6 @@ export async function POST(req: NextRequest) {
       status: "new",
     },
   });
+  void sendAdminPush({ title: "Новое обращение", body: `${name}: ${message.slice(0, 120)}`, tab: "support", entityId: msg.id });
   return NextResponse.json({ ok: true, id: msg.id });
 }

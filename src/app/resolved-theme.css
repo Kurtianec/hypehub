@@ -554,3 +554,11 @@ html body .storefront-v3 .order-tracking-page .order-catalog-button:hover {
   .order-tracking-page { overflow-x:hidden; }
   .order-tracking-page .order-panel { padding:14px !important; }
 }
+
+/* Native HypeHub Admin shell. */
+.hypehub-admin-app body { overscroll-behavior:none; }
+.hypehub-admin-app .admin-v3 { min-height:100dvh; padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom); }
+.hypehub-admin-app .admin-topbar { padding-top:max(12px,env(safe-area-inset-top)); }
+.admin-offline-banner { position:fixed; z-index:100; top:env(safe-area-inset-top); left:0; right:0; display:flex; align-items:center; justify-content:center; gap:8px; padding:8px 12px; color:#fff; background:#8e1537; font-size:12px; font-weight:700; }
+.hypehub-admin-app .admin-offline-banner + .admin-sidebar,
+.hypehub-admin-app .admin-offline-banner ~ .admin-main { padding-top:34px; }

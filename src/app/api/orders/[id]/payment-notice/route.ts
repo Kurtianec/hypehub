@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { consumeRateLimit, requestIp } from "@/lib/security";
+import { sendAdminPush } from "@/lib/admin-push";
 
 const schema = z.object({ txnHash: z.string().trim().max(300).optional() });
 
@@ -30,6 +31,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       },
     }),
   ]);
+
+  void sendAdminPush({ title: "Покупатель сообщил об оплате", body: `Заказ ${id.slice(0, 8)} ожидает проверки${parsed.data.txnHash ? " · TX hash указан" : ""}`, tab: "orders", entityId: id });
 
   return NextResponse.json({ ok: true });
 }

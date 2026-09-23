@@ -54,6 +54,7 @@ const FIELDS = [
 export function AdminSettings({ settings }: { settings: Record<string, string> }) {
   const [form, setForm] = useState<Record<string, string>>({ ...settings, admin_pass: "" });
   const [saving, setSaving] = useState(false);
+  const [testingPush, setTestingPush] = useState(false);
   const { toast } = useToast();
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
@@ -105,6 +106,18 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
     } finally {
       setSaving(false);
     }
+  };
+
+  const testPush = async () => {
+    setTestingPush(true);
+    try {
+      const res = await fetch("/api/admin/push", { method: "POST" });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Ошибка отправки");
+      toast({ title: data.skipped ? "Push ещё не настроен" : "Тест отправлен", description: data.skipped ? "Добавьте Firebase-конфигурацию на сервер." : `Доставлено: ${data.sent || 0}` });
+    } catch (error) {
+      toast({ title: "Ошибка push", description: error instanceof Error ? error.message : "Попробуйте ещё раз", variant: "destructive" });
+    } finally { setTestingPush(false); }
   };
 
   return (
@@ -219,6 +232,10 @@ export function AdminSettings({ settings }: { settings: Record<string, string> }
           <p>&gt; Смена пароля админа вступает в силу при следующем входе.</p>
           <p>&gt; Доступ к админке: добавьте <code className="text-[#8E1537]">?admin=1</code> к URL сайта.</p>
         </div>
+        <Button type="button" onClick={testPush} disabled={testingPush} className="mt-4 bg-[#8E1537] text-white hover:bg-[#A82049]">
+          {testingPush ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+          Проверить push-уведомление
+        </Button>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { releaseExpiredReservations, RESERVATION_MS } from "@/lib/reservations";
 import { z } from "zod";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { sendAdminPush } from "@/lib/admin-push";
 
 // GET orders (admin)
 export async function GET(req: NextRequest) {
@@ -37,6 +38,8 @@ export async function POST(req: NextRequest) {
     return tx.order.create({ data: { productId, buyerEmail: buyerEmail.toLowerCase(), buyerContact, paymentMethod, amount: product.price, currency: product.currency, status: "pending", events: { create: { type: "created", label: "Заказ создан", actor: "Покупатель" } } }, include: { events: true } });
   }).catch((e) => e instanceof Error && e.message === "UNAVAILABLE" ? null : Promise.reject(e));
   if (!order) return NextResponse.json({ error: "Product unavailable" }, { status: 409 });
+
+  void sendAdminPush({ title: "Новый заказ", body: `${order.amount.toLocaleString("ru-RU")} ${order.currency} · ${order.buyerEmail}`, tab: "orders", entityId: order.id });
 
   const session = await createCustomerSession(order.buyerEmail);
   const response = NextResponse.json({ order, reservedUntil });

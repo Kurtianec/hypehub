@@ -34,6 +34,7 @@ import { AdminHealth } from "./AdminHealth";
 import { cn } from "@/lib/utils";
 import type { Category, Product, FaqItem } from "@/lib/types";
 import { BrandMark } from "@/components/store/BrandMark";
+import { AdminMobileBridge } from "./AdminMobileBridge";
 
 interface AdminData {
   categories: Category[];
@@ -112,6 +113,18 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
 
   useEffect(() => {
     fetch("/api/admin/session").then((r) => setAuthenticated(r.ok)).catch(() => setAuthenticated(false));
+  }, []);
+
+  useEffect(() => {
+    const allowed = new Set<Tab>(TABS.map((item) => item.id));
+    const fromUrl = new URLSearchParams(window.location.search).get("tab") as Tab | null;
+    if (fromUrl && allowed.has(fromUrl)) setTab(fromUrl);
+    const handler = (event: Event) => {
+      const next = (event as CustomEvent<{ tab?: Tab }>).detail?.tab;
+      if (next && allowed.has(next)) { setTab(next); setSidebarOpen(false); }
+    };
+    window.addEventListener("hypehub-admin-tab", handler);
+    return () => window.removeEventListener("hypehub-admin-tab", handler);
   }, []);
 
   // === Real-time via SSE (Server-Sent Events) — replaces 15s polling ===
@@ -257,6 +270,7 @@ export function AdminPanel({ initialData }: { initialData: AdminData }) {
 
   return (
     <div className="admin-v3 admin-prism min-h-screen flex">
+      <AdminMobileBridge authenticated={authenticated} />
       {/* Sidebar — desktop */}
       <aside className="admin-sidebar hidden lg:flex w-64 flex-shrink-0 bg-[#0E0E0E] border-r-2 border-[#8E1537]/40 flex-col">
         <div className="p-6 border-b-2 border-[#1F1F1F]">
