@@ -16,7 +16,6 @@ import { Analytics } from "./Analytics";
 import { FavoritesBar } from "./FavoritesBar";
 import { ProductModal } from "./ProductModal";
 import { AdBanner } from "./AdBanner";
-import { AndroidAppPromo } from "./AndroidAppPromo";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useCurrency } from "@/hooks/use-currency";
 import { useTheme } from "@/hooks/use-theme";
@@ -106,7 +105,6 @@ export function Storefront({
           <div className="subtle-background-pulses" aria-hidden="true">
             {Array.from({ length: 11 }, (_, index) => <span key={index} />)}
           </div>
-          <AndroidAppPromo />
           <Catalog
             categories={categories}
             products={products}

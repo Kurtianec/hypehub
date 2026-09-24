@@ -157,12 +157,12 @@ export function AIAssistant() {
 
       {/* Hint bubble */}
       <AnimatePresence>
-        {hint && !open && (
+        {hint && !open && !chooserOpen && (
           <motion.div
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className="fixed bottom-40 right-6 z-40 max-w-[260px] bg-[#0E0E0E] border border-[#555] p-3 pr-9"
+            className="ai-context-hint fixed bottom-24 right-6 z-40 max-w-[260px] bg-[#0E0E0E] border border-[#555] p-3 pr-9"
             style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}
           >
             <button

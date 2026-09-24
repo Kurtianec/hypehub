@@ -1,8 +1,8 @@
 import { Download, ShieldCheck, Smartphone, Zap } from "lucide-react";
 
-export function AndroidAppPromo() {
+export function AndroidAppPromo({ compact = false }: { compact?: boolean }) {
   return (
-    <section className="android-download-cta container mx-auto px-4 pb-2 pt-8 md:px-6 md:pt-10" aria-label="Приложение ХайпХаб для Android">
+    <section className={`android-download-cta ${compact ? "mt-8" : "container mx-auto px-4 pb-2 pt-8 md:px-6 md:pt-10"}`} aria-label="Приложение ХайпХаб для Android">
       <div className="android-app-promo flex flex-col items-start justify-between gap-5 rounded-2xl border border-[#8E1537]/25 px-5 py-5 md:flex-row md:items-center md:px-7">
         <div className="flex min-w-0 items-center gap-4">
           <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#8E1537] text-white shadow-lg shadow-[#8E1537]/20">

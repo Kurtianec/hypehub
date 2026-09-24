@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import { MessageCircle, Plus } from "lucide-react";
 import type { FaqItem } from "@/lib/types";
+import { AndroidAppPromo } from "./AndroidAppPromo";
 
 export function FAQ({ faqs }: { faqs: FaqItem[] }) {
   return (
@@ -67,6 +68,8 @@ export function FAQ({ faqs }: { faqs: FaqItem[] }) {
             ))}
           </Accordion>
         </motion.div>
+
+        <AndroidAppPromo compact />
 
         {/* Bottom CTA */}
         <motion.div
