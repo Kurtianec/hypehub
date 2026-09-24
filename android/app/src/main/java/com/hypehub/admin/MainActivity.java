@@ -22,14 +22,14 @@ public class MainActivity extends BridgeActivity {
   }
 
   @Override
-  protected void onResume() {
+  public void onResume() {
     super.onResume();
     boolean expired = backgroundedAt > 0 && System.currentTimeMillis() - backgroundedAt >= RELOCK_AFTER_MS;
     if (!unlocked || expired) authenticate();
   }
 
   @Override
-  protected void onPause() {
+  public void onPause() {
     super.onPause();
     backgroundedAt = System.currentTimeMillis();
   }

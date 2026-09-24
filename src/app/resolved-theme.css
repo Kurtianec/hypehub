@@ -539,6 +539,44 @@ html body .storefront-v3 .order-tracking-page .order-catalog-button:hover {
   color:#fff !important;
   background:#8e1537 !important;
 }
+
+/* Favorites drawer: keep the intended dark palette in both site themes. */
+html body .storefront-v3 .favorites-panel {
+  color:#ededed !important;
+  border-color:#8e1537 !important;
+  background:#0e0e0e !important;
+}
+html body .storefront-v3 .favorites-panel-header {
+  color:#ededed !important;
+  border-color:#292929 !important;
+  background:#0a0a0a !important;
+}
+html body .storefront-v3 .favorites-panel-title,
+html body .storefront-v3 .favorite-product-title { color:#ededed !important; }
+html body .storefront-v3 .favorite-product-row {
+  color:#ededed !important;
+  border-color:#2a2a2a !important;
+  background:#151515 !important;
+}
+html body .storefront-v3 .favorite-product-row:hover { border-color:#8e1537 !important; }
+
+/* Customer account: light cards need explicit dark typography. */
+html body .storefront-v3 .customer-order-card {
+  color:#202020 !important;
+  border-color:#dedede !important;
+  background:#fff !important;
+}
+html body .storefront-v3 .customer-order-title,
+html body .storefront-v3 .customer-order-event-label { color:#202020 !important; }
+html body .storefront-v3 .customer-order-number,
+html body .storefront-v3 .customer-order-date,
+html body .storefront-v3 .customer-order-event-meta { color:#666 !important; }
+html body .storefront-v3 .customer-order-status { color:#8e1537 !important; background:#f7e9ee !important; }
+html body .storefront-v3 .customer-order-event {
+  color:#202020 !important;
+  border-color:#dedede !important;
+  background:#fafafa !important;
+}
 @media (max-width:767px) {
   .wide-ad-slot { padding-inline:16px; }
   .ad-banner-wide { aspect-ratio:320/100; min-height:100px; border-radius:14px; }

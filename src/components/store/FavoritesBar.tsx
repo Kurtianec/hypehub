@@ -41,17 +41,17 @@ export function FavoritesBar({
             animate={{ x: 0 }}
             exit={{ x: 400 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="relative bg-[#0E0E0E] border-2 border-[#8E1537] w-full max-w-md max-h-[80vh] flex flex-col overflow-hidden"
+            className="favorites-panel relative bg-[#0E0E0E] border-2 border-[#8E1537] w-full max-w-md max-h-[80vh] flex flex-col overflow-hidden"
             style={{ clipPath: "polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))" }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b-2 border-[#1F1F1F] bg-[#0A0A0A]">
+            <div className="favorites-panel-header flex items-center justify-between p-4 border-b-2 border-[#1F1F1F] bg-[#0A0A0A]">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 bg-[#8E1537] flex items-center justify-center border-2 border-[#8E1537]">
                   <Heart className="w-4 h-4 text-white" fill="white" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <div className="font-black uppercase tracking-tight text-sm">ИЗБРАННОЕ</div>
+                  <div className="favorites-panel-title font-black uppercase tracking-tight text-sm">ИЗБРАННОЕ</div>
                   <div className="text-[10px] text-[#888] font-mono uppercase">
                     {"// "}{favorites.length} ТОВАРОВ
                   </div>
@@ -93,7 +93,7 @@ export function FavoritesBar({
                     return (
                       <div
                         key={p.id}
-                        className="bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537] p-3 transition-colors group"
+                        className="favorite-product-row bg-[#121212] border-2 border-[#2A2A2A] hover:border-[#8E1537] p-3 transition-colors group"
                         style={{ clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))" }}
                       >
                         <div className="flex items-center gap-3">
@@ -113,7 +113,7 @@ export function FavoritesBar({
                             }}
                             className="flex-1 min-w-0 text-left"
                           >
-                            <div className="text-xs font-bold truncate uppercase tracking-tight group-hover:text-[#8E1537] transition-colors">
+                            <div className="favorite-product-title text-xs font-bold truncate uppercase tracking-tight group-hover:text-[#8E1537] transition-colors">
                               {p.title}
                             </div>
                             <div className="flex items-center gap-2 mt-0.5">
