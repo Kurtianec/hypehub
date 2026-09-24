@@ -598,5 +598,9 @@ html body .storefront-v3 .customer-order-event {
 .hypehub-admin-app .admin-v3 { min-height:100dvh; padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom); }
 .hypehub-admin-app .admin-topbar { padding-top:max(12px,env(safe-area-inset-top)); }
 .admin-offline-banner { position:fixed; z-index:100; top:env(safe-area-inset-top); left:0; right:0; display:flex; align-items:center; justify-content:center; gap:8px; padding:8px 12px; color:#fff; background:#8e1537; font-size:12px; font-weight:700; }
+.store-mobile-offline-banner { position:fixed; z-index:120; top:env(safe-area-inset-top); left:0; right:0; display:flex; align-items:center; justify-content:center; gap:8px; padding:9px 12px; color:#fff; background:#8e1537; font-size:12px; font-weight:750; box-shadow:0 8px 24px rgba(0,0,0,.28); }
+.hypehub-store-app .android-download-cta { display:none !important; }
+.android-download-link { text-decoration:none !important; box-shadow:0 16px 34px -20px rgba(142,21,55,.85); }
+.android-app-promo { background:linear-gradient(135deg,#fff 0%,#fbf5f7 58%,#f4e4e9 100%); box-shadow:0 22px 55px -42px rgba(73,9,29,.65); }
 .hypehub-admin-app .admin-offline-banner + .admin-sidebar,
 .hypehub-admin-app .admin-offline-banner ~ .admin-main { padding-top:34px; }

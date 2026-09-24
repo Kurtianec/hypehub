@@ -17,6 +17,8 @@
     "android:sync": "cap sync android",
     "android:open": "cap open android",
     "android:debug": "cd android && ./gradlew assembleDebug",
+    "android:client:debug": "node scripts/android-client.mjs debug",
+    "android:client:publish": "node scripts/android-client.mjs publish",
     "password:hash": "node scripts/hash-password.mjs",
     "postinstall": "prisma generate",
     "seed": "tsx scripts/seed.ts && tsx scripts/seed-content.ts"

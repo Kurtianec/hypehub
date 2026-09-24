@@ -4,6 +4,7 @@ import "./globals.css";
 import "./final-theme.css";
 import "./resolved-theme.css";
 import { Toaster } from "@/components/ui/toaster";
+import { StoreMobileBridge } from "@/components/store/StoreMobileBridge";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -216,6 +217,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} antialiased bg-background text-foreground min-h-screen flex flex-col`}
       >
+        <StoreMobileBridge />
         {children}
         <Toaster />
       </body>

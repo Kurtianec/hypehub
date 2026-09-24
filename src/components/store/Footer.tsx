@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Send, Shield, Zap, ShieldCheck, Eye } from "lucide-react";
+import { Download, Mail, Send, Shield, Smartphone, Zap, ShieldCheck, Eye } from "lucide-react";
 import type { Settings } from "@/lib/types";
 import { BrandMark } from "./BrandMark";
 
@@ -59,6 +59,18 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
                 </span>
               ))}
             </div>
+            <a
+              href="/downloads/hypehub-android.apk"
+              download
+              className="android-download-cta android-download-link mt-5 inline-flex items-center gap-3 rounded-xl border border-[#8E1537]/60 bg-[#8E1537] px-4 py-3 text-white transition hover:-translate-y-0.5 hover:bg-[#A82049]"
+            >
+              <Smartphone className="h-5 w-5" />
+              <span className="flex flex-col text-left leading-tight">
+                <b className="text-sm">Скачать приложение</b>
+                <small className="mt-1 text-[10px] font-mono uppercase text-white/75">Android · APK</small>
+              </span>
+              <Download className="ml-2 h-4 w-4" />
+            </a>
           </div>
 
           {/* Nav */}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ХайпХаб</string>
+    <string name="title_activity_main">ХайпХаб</string>
+    <string name="package_name">com.hypehub.app</string>
+    <string name="custom_url_scheme">com.hypehub.app</string>
+</resources>

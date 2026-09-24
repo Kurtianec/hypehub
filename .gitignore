@@ -61,3 +61,9 @@ android/app/google-services.json
 android/*.jks
 android/*.keystore
 android/app/release/
+android-client/.gradle/
+android-client/build/
+android-client/app/build/
+android-client/*.jks
+android-client/*.keystore
+android-client/app/release/
