@@ -22,7 +22,7 @@ export function StoreMobileBridge() {
         import("@capacitor/app"),
         import("@capacitor/status-bar"),
       ]);
-      await StatusBar.setStyle({ style: Style.Light }).catch(() => {});
+      await StatusBar.setStyle({ style: Style.Dark }).catch(() => {});
       await StatusBar.setBackgroundColor({ color: "#0A0A0A" }).catch(() => {});
       const status = await Network.getStatus();
       setOnline(status.connected);

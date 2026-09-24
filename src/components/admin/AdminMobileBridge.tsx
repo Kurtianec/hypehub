@@ -21,7 +21,7 @@ export function AdminMobileBridge({ authenticated }: { authenticated: boolean })
         import("@capacitor/status-bar"),
         import("@capacitor/preferences"),
       ]);
-      await StatusBar.setStyle({ style: Style.Light }).catch(() => {});
+      await StatusBar.setStyle({ style: Style.Dark }).catch(() => {});
       await StatusBar.setBackgroundColor({ color: "#0A0A0A" }).catch(() => {});
       const status = await Network.getStatus();
       setOnline(status.connected);

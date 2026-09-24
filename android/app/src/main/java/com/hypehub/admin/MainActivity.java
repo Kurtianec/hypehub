@@ -1,14 +1,11 @@
 package com.hypehub.admin;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 import com.getcapacitor.BridgeActivity;
 import java.util.concurrent.Executor;
 
@@ -22,24 +19,13 @@ public class MainActivity extends BridgeActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-    applySystemBars();
   }
 
   @Override
   public void onResume() {
     super.onResume();
-    applySystemBars();
     boolean expired = backgroundedAt > 0 && System.currentTimeMillis() - backgroundedAt >= RELOCK_AFTER_MS;
     if (!unlocked || expired) authenticate();
-  }
-
-  private void applySystemBars() {
-    getWindow().setStatusBarColor(Color.rgb(10, 10, 10));
-    getWindow().setNavigationBarColor(Color.rgb(10, 10, 10));
-    WindowInsetsControllerCompat controller =
-      WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
-    controller.setAppearanceLightStatusBars(false);
-    controller.setAppearanceLightNavigationBars(false);
   }
 
   @Override
