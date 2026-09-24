@@ -1,1 +1,1 @@
-После выполнения npm run android:client:publish здесь появится hypehub-android.apk.
+После выполнения npm run android:client:publish здесь появится hypehub.apk.

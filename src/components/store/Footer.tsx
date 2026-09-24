@@ -60,7 +60,7 @@ export function Footer({ settings, visitorsToday = 0, visitorsTotal = 0 }: Foote
               ))}
             </div>
             <a
-              href="/downloads/hypehub-android.apk"
+              href="/downloads/hypehub.apk"
               download
               className="android-download-cta android-download-link mt-5 inline-flex items-center gap-3 rounded-xl border border-[#8E1537]/60 bg-[#8E1537] px-4 py-3 text-white transition hover:-translate-y-0.5 hover:bg-[#A82049]"
             >

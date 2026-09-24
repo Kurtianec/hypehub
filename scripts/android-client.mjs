@@ -16,7 +16,7 @@ if (process.argv[2] === "publish") {
   if (!existsSync(source)) throw new Error(`APK не найден: ${source}`);
   const destinationDir = path.join(root, "public", "downloads");
   await mkdir(destinationDir, { recursive: true });
-  const destination = path.join(destinationDir, "hypehub-android.apk");
+  const destination = path.join(destinationDir, "hypehub.apk");
   await copyFile(source, destination);
   console.log(`APK сайта готов: ${destination}`);
 }

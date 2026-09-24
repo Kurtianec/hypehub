@@ -2,7 +2,7 @@ import { Download, ShieldCheck, Smartphone, Zap } from "lucide-react";
 
 export function AndroidAppPromo({ compact = false }: { compact?: boolean }) {
   return (
-    <section className={`android-download-cta ${compact ? "mt-8" : "container mx-auto px-4 pb-2 pt-8 md:px-6 md:pt-10"}`} aria-label="Приложение ХайпХаб для Android">
+    <section className={`android-download-cta ${compact ? "relative left-1/2 mt-8 w-[calc(100vw-2rem)] max-w-5xl -translate-x-1/2" : "container mx-auto px-4 pb-2 pt-8 md:px-6 md:pt-10"}`} aria-label="Приложение ХайпХаб для Android">
       <div className="android-app-promo flex flex-col items-start justify-between gap-5 rounded-2xl border border-[#8E1537]/25 px-5 py-5 md:flex-row md:items-center md:px-7">
         <div className="flex min-w-0 items-center gap-4">
           <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#8E1537] text-white shadow-lg shadow-[#8E1537]/20">
@@ -17,7 +17,7 @@ export function AndroidAppPromo({ compact = false }: { compact?: boolean }) {
             </div>
           </div>
         </div>
-        <a href="/downloads/hypehub-android.apk" download className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[#151515] px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#8E1537] md:w-auto">
+        <a href="/downloads/hypehub.apk" download className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[#151515] px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#8E1537] md:w-auto">
           <Download className="h-4 w-4" />Скачать APK
         </a>
       </div>

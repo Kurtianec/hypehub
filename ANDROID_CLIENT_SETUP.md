@@ -20,7 +20,7 @@ npm run android:client:publish
 Команда соберёт APK и скопирует его в:
 
 ```text
-public/downloads/hypehub-android.apk
+public/downloads/hypehub.apk
 ```
 
 После деплоя Vercel кнопка в футере сайта начнёт скачивать этот APK.
